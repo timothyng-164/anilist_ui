@@ -1,19 +1,34 @@
-query SearchAnime($page: Int, $perPage: Int, $search: String) {
-	Page(page: $page, perPage: $perPage) {
-		pageInfo {
-			total
-			currentPage
-			lastPage
-			hasNextPage
-			perPage
-		}
-		media(search: $search, type: ANIME) {
-			id
-			title {
-				romaji
-				english
-				native
-			}
-		}
-	}
+query SearchAnime($page: Int, $perPage: Int, $search: String, $isAdult: Boolean) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      currentPage
+      lastPage
+      hasNextPage
+      perPage
+    }
+    media(search: $search, isAdult: $isAdult) {
+      id
+      title {
+        userPreferred
+      }
+      type
+      startDate {
+        year
+      }
+      season
+      seasonYear
+      status
+      episodes
+      chapters    
+      volumes
+      isLicensed
+      format
+      meanScore
+      popularity
+      coverImage {
+        medium
+      }
+    }
+  }
 }

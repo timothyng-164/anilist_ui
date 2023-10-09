@@ -1,4 +1,4 @@
-import 'package:anilist_ui/pages/counter_screen.dart';
+import 'package:anilist_ui/pages/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -12,10 +12,10 @@ class PageSelector extends HookWidget {
     Widget page;
     switch (pageIndex.value) {
       case 0:
-        page = const CounterScreen(title: "Home Page");
+        page = const SearchScreen(title: "Home Page");
         break;
       case 1:
-        page = const CounterScreen(title: "Login");
+        page = const SearchScreen(title: "Login");
         break;
       default:
         throw UnimplementedError("no widget for $pageIndex");
