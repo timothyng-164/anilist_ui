@@ -35,9 +35,7 @@ class SearchScreen extends HookWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SearchWidget(
-              searchText: searchText,
-            ),
+            SearchWidget(searchText: searchText, mediaType: mediaType),
             SearchResults(readResult: readResult),
           ],
         ),
@@ -56,7 +54,10 @@ class SearchWidget extends StatelessWidget {
   const SearchWidget({
     super.key,
     required this.searchText,
+    required this.mediaType,
   });
+
+  final ValueNotifier<Enum$MediaType?> mediaType;
 
   final ValueNotifier<String> searchText;
 
@@ -73,9 +74,23 @@ class SearchWidget extends StatelessWidget {
           trailing: [
             Tooltip(
               message: 'Filter Search',
-              child: IconButton(
-                onPressed: () {},
+              child: PopupMenuButton<Enum$MediaType?>(
                 icon: const Icon(Icons.filter_list),
+                onSelected: (value) => mediaType.value = value,
+                itemBuilder: (BuildContext context) => [
+                  const PopupMenuItem(
+                    value: null,
+                    child: Text('All'),
+                  ),
+                  const PopupMenuItem(
+                    value: Enum$MediaType.ANIME,
+                    child: Text('Anime'),
+                  ),
+                  const PopupMenuItem(
+                    value: Enum$MediaType.MANGA,
+                    child: Text('Manga'),
+                  )
+                ],
               ),
             )
           ],
