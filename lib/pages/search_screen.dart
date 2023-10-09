@@ -3,9 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:pretty_json/pretty_json.dart';
 import 'package:anilist_ui/graphql/search.graphql.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key, required this.title});
@@ -17,21 +15,19 @@ class SearchScreen extends HookWidget {
     final searchText = useState('');
     QueryHookResult<Query$SearchAnime> readResult = useQuery$SearchAnime(
       Options$Query$SearchAnime(
-          variables: Variables$Query$SearchAnime(
-            perPage: 20,
-            search: searchText.value.isEmpty ? null : searchText.value,
-            // TODO: use user setting
-            isAdult: false,
-          ),
-          fetchPolicy: FetchPolicy.cacheFirst),
+        variables: Variables$Query$SearchAnime(
+          search: searchText.value.isEmpty ? null : searchText.value,
+          perPage: 30,
+          isAdult: false, // TODO: use user setting
+        ),
+        fetchPolicy: FetchPolicy.cacheFirst,
+      ),
     );
 
     return Scaffold(
       // appBar: AppBar(
-      //     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      //     title: SearchWidget(
-      //       searchText: searchText,
-      //     )),
+      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -43,6 +39,7 @@ class SearchScreen extends HookWidget {
           ],
         ),
       ),
+      // TODO: remove this button
       floatingActionButton: FloatingActionButton(
         onPressed: () => readResult.refetch(),
         tooltip: 'Increment',
@@ -64,16 +61,11 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(16.0),
-        // margin: const EdgeInsets.all(16.0),
         child: SearchBar(
           shape: const MaterialStatePropertyAll(RoundedRectangleBorder()),
           padding: const MaterialStatePropertyAll<EdgeInsets>(
               EdgeInsets.symmetric(horizontal: 16.0)),
-          // onChanged: (value) => print(value),
-          onSubmitted: (value) {
-            searchText.value = value;
-            print(value);
-          },
+          onSubmitted: (value) => searchText.value = value,
           leading: const Icon(Icons.search),
           trailing: <Widget>[
             Tooltip(
@@ -89,48 +81,96 @@ class SearchWidget extends StatelessWidget {
 }
 
 class SearchResults extends HookWidget {
-  const SearchResults({super.key, required this.readResult});
+  const SearchResults({
+    super.key,
+    required this.readResult,
+  });
 
   final QueryHookResult<Query$SearchAnime> readResult;
 
   @override
   Widget build(BuildContext context) {
     final result = readResult.result;
+    ScrollController scrollController = ScrollController();
+    scrollController.addListener(() async {
+      // Return if user has not scrolled to bottom
+      bool scrolledToBottom = scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent;
+      Query$SearchAnime$Page$pageInfo? data =
+          readResult.result.parsedData?.Page?.pageInfo;
+      bool hasNextPage = data?.hasNextPage ?? false;
+
+      if (!scrolledToBottom || !hasNextPage) {
+        return;
+      }
+
+      int currentPage = data?.currentPage ?? 0;
+      var options = FetchMoreOptions$Query$SearchAnime(
+        variables: Variables$Query$SearchAnime(
+          page: currentPage + 1,
+        ),
+        updateQuery: (previousResultData, fetchMoreResultData) {
+          final List<dynamic> combinedResults = [
+            ...previousResultData?['Page']['media'] as List<dynamic>,
+            ...fetchMoreResultData?['Page']['media'] as List<dynamic>
+          ];
+          fetchMoreResultData?['Page']['media'] = combinedResults;
+          return fetchMoreResultData;
+        },
+      );
+
+      await readResult.fetchMore(options);
+    });
 
     if (result.hasException) {
       print(result.exception);
       return const Text("Unable to search.");
     }
 
+    var gridDelegate = const SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: 600,
+      childAspectRatio: 600 / 200,
+      mainAxisSpacing: 6,
+      crossAxisSpacing: 6,
+    );
+
     if (result.isLoading) {
-      return const CircularProgressIndicator();
+      return Expanded(
+        child: GridView.builder(
+          itemCount: 50,
+          gridDelegate: gridDelegate,
+          itemBuilder: (BuildContext context, int index) {
+            return const Card();
+          },
+        ),
+      );
     }
 
     List<Query$SearchAnime$Page$media?>? mediaList =
         result.parsedData?.Page?.media ?? [];
 
     if (mediaList.isEmpty) {
-      return const Text("No results found.");
+      return const Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("No results found."),
+          ],
+        ),
+      );
     }
 
     return Expanded(
-      child:
-          // Column(children: [
-          GridView.builder(
+      child: GridView.builder(
+        key: const PageStorageKey<String>('resultGridKey'),
         itemCount: mediaList.length,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 600,
-          childAspectRatio: 600 / 200,
-          mainAxisSpacing: 6,
-          crossAxisSpacing: 6,
-        ),
+        controller: scrollController,
+        gridDelegate: gridDelegate,
         itemBuilder: (BuildContext context, int index) {
           var media = mediaList[index];
           return (media != null) ? MediaCard(media: media) : null;
         },
       ),
-      // OutlinedButton(onPressed: () {}, child: const Text("Load More")),
-      // ])
     );
   }
 }
@@ -151,8 +191,8 @@ class MediaCard extends StatelessWidget {
     var mediaStatus = media.status ?? Enum$MediaStatus.$unknown;
 
     String getMediaStart(media) {
-      var startSeason = media.season ?? Enum$MediaSeason.$unknown;
-      int? startYear = media.seasonYear ?? media.startDate?.year;
+      var startSeason = media?.season ?? Enum$MediaSeason.$unknown;
+      int? startYear = media?.seasonYear ?? media?.startDate?.year;
       String mediaStart =
           '${(startSeason == Enum$MediaSeason.$unknown) ? '' : '${toJson$Enum$MediaSeason(startSeason)} '}${startYear.toString()}';
       return mediaStart;
@@ -208,5 +248,6 @@ class MediaCard extends StatelessWidget {
 }
 
 // TODO:
-// - paginate when scrolled to bottom
-// - add user status to media
+// - add styling to MediaCard
+// - handle null values in MediaCard
+// - add user status to MediaCard
