@@ -17,7 +17,7 @@ class SearchScreen extends HookWidget {
       Options$Query$SearchAnime(
         variables: Variables$Query$SearchAnime(
           search: searchText.value.isEmpty ? null : searchText.value,
-          perPage: 30,
+          perPage: 50,
           isAdult: false, // TODO: use user setting
         ),
         fetchPolicy: FetchPolicy.cacheFirst,
@@ -69,7 +69,7 @@ class SearchWidget extends StatelessWidget {
           leading: const Icon(Icons.search),
           trailing: <Widget>[
             Tooltip(
-              message: 'Search Filters',
+              message: 'Filter Search',
               child: IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.filter_list),
