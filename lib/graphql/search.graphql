@@ -1,4 +1,10 @@
-query SearchAnime($page: Int, $perPage: Int, $search: String, $isAdult: Boolean) {
+query Search(
+  $page: Int
+  $perPage: Int
+  $search: String
+  $type: MediaType
+  $isAdult: Boolean
+) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       total
@@ -7,7 +13,7 @@ query SearchAnime($page: Int, $perPage: Int, $search: String, $isAdult: Boolean)
       hasNextPage
       perPage
     }
-    media(search: $search, isAdult: $isAdult) {
+    media(search: $search, isAdult: $isAdult, type: $type) {
       id
       title {
         userPreferred
@@ -19,10 +25,6 @@ query SearchAnime($page: Int, $perPage: Int, $search: String, $isAdult: Boolean)
       season
       seasonYear
       status
-      episodes
-      chapters    
-      volumes
-      isLicensed
       format
       meanScore
       popularity

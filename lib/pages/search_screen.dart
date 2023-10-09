@@ -12,12 +12,14 @@ class SearchScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchText = useState('');
-    QueryHookResult<Query$SearchAnime> readResult = useQuery$SearchAnime(
-      Options$Query$SearchAnime(
-        variables: Variables$Query$SearchAnime(
+    final searchText = useState<String>('');
+    final mediaType = useState<Enum$MediaType?>(null);
+    QueryHookResult<Query$Search> readResult = useQuery$Search(
+      Options$Query$Search(
+        variables: Variables$Query$Search(
           search: searchText.value.isEmpty ? null : searchText.value,
           perPage: 50,
+          type: mediaType.value,
           isAdult: false, // TODO: use user setting
         ),
         fetchPolicy: FetchPolicy.cacheFirst,
@@ -25,6 +27,7 @@ class SearchScreen extends HookWidget {
     );
 
     return Scaffold(
+      // TODO: remove or use AppBar
       // appBar: AppBar(
       //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       // ),
@@ -67,7 +70,7 @@ class SearchWidget extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: 16.0)),
           onSubmitted: (value) => searchText.value = value,
           leading: const Icon(Icons.search),
-          trailing: <Widget>[
+          trailing: [
             Tooltip(
               message: 'Filter Search',
               child: IconButton(
@@ -86,17 +89,18 @@ class SearchResults extends HookWidget {
     required this.readResult,
   });
 
-  final QueryHookResult<Query$SearchAnime> readResult;
+  final QueryHookResult<Query$Search> readResult;
 
   @override
   Widget build(BuildContext context) {
     final result = readResult.result;
     ScrollController scrollController = ScrollController();
+
+    // When user scrolls to bottom, fetch paginated results
     scrollController.addListener(() async {
-      // Return if user has not scrolled to bottom
       bool scrolledToBottom = scrollController.position.pixels ==
           scrollController.position.maxScrollExtent;
-      Query$SearchAnime$Page$pageInfo? data =
+      Query$Search$Page$pageInfo? data =
           readResult.result.parsedData?.Page?.pageInfo;
       bool hasNextPage = data?.hasNextPage ?? false;
 
@@ -105,8 +109,8 @@ class SearchResults extends HookWidget {
       }
 
       int currentPage = data?.currentPage ?? 0;
-      var options = FetchMoreOptions$Query$SearchAnime(
-        variables: Variables$Query$SearchAnime(
+      var options = FetchMoreOptions$Query$Search(
+        variables: Variables$Query$Search(
           page: currentPage + 1,
         ),
         updateQuery: (previousResultData, fetchMoreResultData) {
@@ -146,7 +150,7 @@ class SearchResults extends HookWidget {
       );
     }
 
-    List<Query$SearchAnime$Page$media?>? mediaList =
+    List<Query$Search$Page$media?>? mediaList =
         result.parsedData?.Page?.media ?? [];
 
     if (mediaList.isEmpty) {
@@ -181,7 +185,7 @@ class MediaCard extends StatelessWidget {
     required this.media,
   });
 
-  final Query$SearchAnime$Page$media media;
+  final Query$Search$Page$media media;
 
   @override
   Widget build(BuildContext context) {
@@ -220,7 +224,6 @@ class MediaCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Row(children: [
-              // TODO: use chips/tags instead of text
               Text(toJson$Enum$MediaType(mediaType)),
               const SizedBox(width: 5),
               Text(toJson$Enum$MediaFormat(mediaFormat)),
@@ -248,6 +251,7 @@ class MediaCard extends StatelessWidget {
 }
 
 // TODO:
-// - add styling to MediaCard
+// - add styling to MediaCard (use chips/tags instead of text), and add color
 // - handle null values in MediaCard
 // - add user status to MediaCard
+// - filter for all, anime, or manga

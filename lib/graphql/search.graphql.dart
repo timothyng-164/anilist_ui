@@ -5,23 +5,25 @@ import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 import 'schema.graphql.dart';
 
-class Variables$Query$SearchAnime {
-  factory Variables$Query$SearchAnime({
+class Variables$Query$Search {
+  factory Variables$Query$Search({
     int? page,
     int? perPage,
     String? search,
+    Enum$MediaType? type,
     bool? isAdult,
   }) =>
-      Variables$Query$SearchAnime._({
+      Variables$Query$Search._({
         if (page != null) r'page': page,
         if (perPage != null) r'perPage': perPage,
         if (search != null) r'search': search,
+        if (type != null) r'type': type,
         if (isAdult != null) r'isAdult': isAdult,
       });
 
-  Variables$Query$SearchAnime._(this._$data);
+  Variables$Query$Search._(this._$data);
 
-  factory Variables$Query$SearchAnime.fromJson(Map<String, dynamic> data) {
+  factory Variables$Query$Search.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('page')) {
       final l$page = data['page'];
@@ -35,11 +37,16 @@ class Variables$Query$SearchAnime {
       final l$search = data['search'];
       result$data['search'] = (l$search as String?);
     }
+    if (data.containsKey('type')) {
+      final l$type = data['type'];
+      result$data['type'] =
+          l$type == null ? null : fromJson$Enum$MediaType((l$type as String));
+    }
     if (data.containsKey('isAdult')) {
       final l$isAdult = data['isAdult'];
       result$data['isAdult'] = (l$isAdult as bool?);
     }
-    return Variables$Query$SearchAnime._(result$data);
+    return Variables$Query$Search._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -49,6 +56,8 @@ class Variables$Query$SearchAnime {
   int? get perPage => (_$data['perPage'] as int?);
 
   String? get search => (_$data['search'] as String?);
+
+  Enum$MediaType? get type => (_$data['type'] as Enum$MediaType?);
 
   bool? get isAdult => (_$data['isAdult'] as bool?);
 
@@ -66,6 +75,11 @@ class Variables$Query$SearchAnime {
       final l$search = search;
       result$data['search'] = l$search;
     }
+    if (_$data.containsKey('type')) {
+      final l$type = type;
+      result$data['type'] =
+          l$type == null ? null : toJson$Enum$MediaType(l$type);
+    }
     if (_$data.containsKey('isAdult')) {
       final l$isAdult = isAdult;
       result$data['isAdult'] = l$isAdult;
@@ -73,18 +87,18 @@ class Variables$Query$SearchAnime {
     return result$data;
   }
 
-  CopyWith$Variables$Query$SearchAnime<Variables$Query$SearchAnime>
-      get copyWith => CopyWith$Variables$Query$SearchAnime(
-            this,
-            (i) => i,
-          );
+  CopyWith$Variables$Query$Search<Variables$Query$Search> get copyWith =>
+      CopyWith$Variables$Query$Search(
+        this,
+        (i) => i,
+      );
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$SearchAnime) ||
+    if (!(other is Variables$Query$Search) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -112,6 +126,14 @@ class Variables$Query$SearchAnime {
     if (l$search != lOther$search) {
       return false;
     }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
+      return false;
+    }
+    if (l$type != lOther$type) {
+      return false;
+    }
     final l$isAdult = isAdult;
     final lOther$isAdult = other.isAdult;
     if (_$data.containsKey('isAdult') != other._$data.containsKey('isAdult')) {
@@ -128,43 +150,46 @@ class Variables$Query$SearchAnime {
     final l$page = page;
     final l$perPage = perPage;
     final l$search = search;
+    final l$type = type;
     final l$isAdult = isAdult;
     return Object.hashAll([
       _$data.containsKey('page') ? l$page : const {},
       _$data.containsKey('perPage') ? l$perPage : const {},
       _$data.containsKey('search') ? l$search : const {},
+      _$data.containsKey('type') ? l$type : const {},
       _$data.containsKey('isAdult') ? l$isAdult : const {},
     ]);
   }
 }
 
-abstract class CopyWith$Variables$Query$SearchAnime<TRes> {
-  factory CopyWith$Variables$Query$SearchAnime(
-    Variables$Query$SearchAnime instance,
-    TRes Function(Variables$Query$SearchAnime) then,
-  ) = _CopyWithImpl$Variables$Query$SearchAnime;
+abstract class CopyWith$Variables$Query$Search<TRes> {
+  factory CopyWith$Variables$Query$Search(
+    Variables$Query$Search instance,
+    TRes Function(Variables$Query$Search) then,
+  ) = _CopyWithImpl$Variables$Query$Search;
 
-  factory CopyWith$Variables$Query$SearchAnime.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$SearchAnime;
+  factory CopyWith$Variables$Query$Search.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$Search;
 
   TRes call({
     int? page,
     int? perPage,
     String? search,
+    Enum$MediaType? type,
     bool? isAdult,
   });
 }
 
-class _CopyWithImpl$Variables$Query$SearchAnime<TRes>
-    implements CopyWith$Variables$Query$SearchAnime<TRes> {
-  _CopyWithImpl$Variables$Query$SearchAnime(
+class _CopyWithImpl$Variables$Query$Search<TRes>
+    implements CopyWith$Variables$Query$Search<TRes> {
+  _CopyWithImpl$Variables$Query$Search(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$SearchAnime _instance;
+  final Variables$Query$Search _instance;
 
-  final TRes Function(Variables$Query$SearchAnime) _then;
+  final TRes Function(Variables$Query$Search) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -172,20 +197,22 @@ class _CopyWithImpl$Variables$Query$SearchAnime<TRes>
     Object? page = _undefined,
     Object? perPage = _undefined,
     Object? search = _undefined,
+    Object? type = _undefined,
     Object? isAdult = _undefined,
   }) =>
-      _then(Variables$Query$SearchAnime._({
+      _then(Variables$Query$Search._({
         ..._instance._$data,
         if (page != _undefined) 'page': (page as int?),
         if (perPage != _undefined) 'perPage': (perPage as int?),
         if (search != _undefined) 'search': (search as String?),
+        if (type != _undefined) 'type': (type as Enum$MediaType?),
         if (isAdult != _undefined) 'isAdult': (isAdult as bool?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$SearchAnime<TRes>
-    implements CopyWith$Variables$Query$SearchAnime<TRes> {
-  _CopyWithStubImpl$Variables$Query$SearchAnime(this._res);
+class _CopyWithStubImpl$Variables$Query$Search<TRes>
+    implements CopyWith$Variables$Query$Search<TRes> {
+  _CopyWithStubImpl$Variables$Query$Search(this._res);
 
   TRes _res;
 
@@ -193,29 +220,30 @@ class _CopyWithStubImpl$Variables$Query$SearchAnime<TRes>
     int? page,
     int? perPage,
     String? search,
+    Enum$MediaType? type,
     bool? isAdult,
   }) =>
       _res;
 }
 
-class Query$SearchAnime {
-  Query$SearchAnime({
+class Query$Search {
+  Query$Search({
     this.Page,
     this.$__typename = 'Query',
   });
 
-  factory Query$SearchAnime.fromJson(Map<String, dynamic> json) {
+  factory Query$Search.fromJson(Map<String, dynamic> json) {
     final l$Page = json['Page'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime(
+    return Query$Search(
       Page: l$Page == null
           ? null
-          : Query$SearchAnime$Page.fromJson((l$Page as Map<String, dynamic>)),
+          : Query$Search$Page.fromJson((l$Page as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$SearchAnime$Page? Page;
+  final Query$Search$Page? Page;
 
   final String $__typename;
 
@@ -243,7 +271,7 @@ class Query$SearchAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime) || runtimeType != other.runtimeType) {
+    if (!(other is Query$Search) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -260,40 +288,37 @@ class Query$SearchAnime {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime on Query$SearchAnime {
-  CopyWith$Query$SearchAnime<Query$SearchAnime> get copyWith =>
-      CopyWith$Query$SearchAnime(
+extension UtilityExtension$Query$Search on Query$Search {
+  CopyWith$Query$Search<Query$Search> get copyWith => CopyWith$Query$Search(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$SearchAnime<TRes> {
-  factory CopyWith$Query$SearchAnime(
-    Query$SearchAnime instance,
-    TRes Function(Query$SearchAnime) then,
-  ) = _CopyWithImpl$Query$SearchAnime;
+abstract class CopyWith$Query$Search<TRes> {
+  factory CopyWith$Query$Search(
+    Query$Search instance,
+    TRes Function(Query$Search) then,
+  ) = _CopyWithImpl$Query$Search;
 
-  factory CopyWith$Query$SearchAnime.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime;
+  factory CopyWith$Query$Search.stub(TRes res) = _CopyWithStubImpl$Query$Search;
 
   TRes call({
-    Query$SearchAnime$Page? Page,
+    Query$Search$Page? Page,
     String? $__typename,
   });
-  CopyWith$Query$SearchAnime$Page<TRes> get Page;
+  CopyWith$Query$Search$Page<TRes> get Page;
 }
 
-class _CopyWithImpl$Query$SearchAnime<TRes>
-    implements CopyWith$Query$SearchAnime<TRes> {
-  _CopyWithImpl$Query$SearchAnime(
+class _CopyWithImpl$Query$Search<TRes> implements CopyWith$Query$Search<TRes> {
+  _CopyWithImpl$Query$Search(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime _instance;
+  final Query$Search _instance;
 
-  final TRes Function(Query$SearchAnime) _then;
+  final TRes Function(Query$Search) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -301,43 +326,42 @@ class _CopyWithImpl$Query$SearchAnime<TRes>
     Object? Page = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime(
-        Page: Page == _undefined
-            ? _instance.Page
-            : (Page as Query$SearchAnime$Page?),
+      _then(Query$Search(
+        Page:
+            Page == _undefined ? _instance.Page : (Page as Query$Search$Page?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$SearchAnime$Page<TRes> get Page {
+  CopyWith$Query$Search$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
-        ? CopyWith$Query$SearchAnime$Page.stub(_then(_instance))
-        : CopyWith$Query$SearchAnime$Page(local$Page, (e) => call(Page: e));
+        ? CopyWith$Query$Search$Page.stub(_then(_instance))
+        : CopyWith$Query$Search$Page(local$Page, (e) => call(Page: e));
   }
 }
 
-class _CopyWithStubImpl$Query$SearchAnime<TRes>
-    implements CopyWith$Query$SearchAnime<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime(this._res);
+class _CopyWithStubImpl$Query$Search<TRes>
+    implements CopyWith$Query$Search<TRes> {
+  _CopyWithStubImpl$Query$Search(this._res);
 
   TRes _res;
 
   call({
-    Query$SearchAnime$Page? Page,
+    Query$Search$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$SearchAnime$Page<TRes> get Page =>
-      CopyWith$Query$SearchAnime$Page.stub(_res);
+  CopyWith$Query$Search$Page<TRes> get Page =>
+      CopyWith$Query$Search$Page.stub(_res);
 }
 
-const documentNodeQuerySearchAnime = DocumentNode(definitions: [
+const documentNodeQuerySearch = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'SearchAnime'),
+    name: NameNode(value: 'Search'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'page')),
@@ -361,6 +385,15 @@ const documentNodeQuerySearchAnime = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'search')),
         type: NamedTypeNode(
           name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'type')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'MediaType'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -455,6 +488,10 @@ const documentNodeQuerySearchAnime = DocumentNode(definitions: [
                 name: NameNode(value: 'isAdult'),
                 value: VariableNode(name: NameNode(value: 'isAdult')),
               ),
+              ArgumentNode(
+                name: NameNode(value: 'type'),
+                value: VariableNode(name: NameNode(value: 'type')),
+              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
@@ -538,34 +575,6 @@ const documentNodeQuerySearchAnime = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
-                name: NameNode(value: 'episodes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'chapters'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'volumes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'isLicensed'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
                 name: NameNode(value: 'format'),
                 alias: null,
                 arguments: [],
@@ -636,26 +645,25 @@ const documentNodeQuerySearchAnime = DocumentNode(definitions: [
     ]),
   ),
 ]);
-Query$SearchAnime _parserFn$Query$SearchAnime(Map<String, dynamic> data) =>
-    Query$SearchAnime.fromJson(data);
-typedef OnQueryComplete$Query$SearchAnime = FutureOr<void> Function(
+Query$Search _parserFn$Query$Search(Map<String, dynamic> data) =>
+    Query$Search.fromJson(data);
+typedef OnQueryComplete$Query$Search = FutureOr<void> Function(
   Map<String, dynamic>?,
-  Query$SearchAnime?,
+  Query$Search?,
 );
 
-class Options$Query$SearchAnime
-    extends graphql.QueryOptions<Query$SearchAnime> {
-  Options$Query$SearchAnime({
+class Options$Query$Search extends graphql.QueryOptions<Query$Search> {
+  Options$Query$Search({
     String? operationName,
-    Variables$Query$SearchAnime? variables,
+    Variables$Query$Search? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$SearchAnime? typedOptimisticResult,
+    Query$Search? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-    OnQueryComplete$Query$SearchAnime? onComplete,
+    OnQueryComplete$Query$Search? onComplete,
     graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
@@ -671,14 +679,14 @@ class Options$Query$SearchAnime
               ? null
               : (data) => onComplete(
                     data,
-                    data == null ? null : _parserFn$Query$SearchAnime(data),
+                    data == null ? null : _parserFn$Query$Search(data),
                   ),
           onError: onError,
-          document: documentNodeQuerySearchAnime,
-          parserFn: _parserFn$Query$SearchAnime,
+          document: documentNodeQuerySearch,
+          parserFn: _parserFn$Query$Search,
         );
 
-  final OnQueryComplete$Query$SearchAnime? onCompleteWithParsed;
+  final OnQueryComplete$Query$Search? onCompleteWithParsed;
 
   @override
   List<Object?> get properties => [
@@ -689,16 +697,16 @@ class Options$Query$SearchAnime
       ];
 }
 
-class WatchOptions$Query$SearchAnime
-    extends graphql.WatchQueryOptions<Query$SearchAnime> {
-  WatchOptions$Query$SearchAnime({
+class WatchOptions$Query$Search
+    extends graphql.WatchQueryOptions<Query$Search> {
+  WatchOptions$Query$Search({
     String? operationName,
-    Variables$Query$SearchAnime? variables,
+    Variables$Query$Search? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$SearchAnime? typedOptimisticResult,
+    Query$Search? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -712,110 +720,108 @@ class WatchOptions$Query$SearchAnime
           cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
-          document: documentNodeQuerySearchAnime,
+          document: documentNodeQuerySearch,
           pollInterval: pollInterval,
           eagerlyFetchResults: eagerlyFetchResults,
           carryForwardDataOnException: carryForwardDataOnException,
           fetchResults: fetchResults,
-          parserFn: _parserFn$Query$SearchAnime,
+          parserFn: _parserFn$Query$Search,
         );
 }
 
-class FetchMoreOptions$Query$SearchAnime extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$SearchAnime({
+class FetchMoreOptions$Query$Search extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$Search({
     required graphql.UpdateQuery updateQuery,
-    Variables$Query$SearchAnime? variables,
+    Variables$Query$Search? variables,
   }) : super(
           updateQuery: updateQuery,
           variables: variables?.toJson() ?? {},
-          document: documentNodeQuerySearchAnime,
+          document: documentNodeQuerySearch,
         );
 }
 
-extension ClientExtension$Query$SearchAnime on graphql.GraphQLClient {
-  Future<graphql.QueryResult<Query$SearchAnime>> query$SearchAnime(
-          [Options$Query$SearchAnime? options]) async =>
-      await this.query(options ?? Options$Query$SearchAnime());
-  graphql.ObservableQuery<Query$SearchAnime> watchQuery$SearchAnime(
-          [WatchOptions$Query$SearchAnime? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$SearchAnime());
-  void writeQuery$SearchAnime({
-    required Query$SearchAnime data,
-    Variables$Query$SearchAnime? variables,
+extension ClientExtension$Query$Search on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$Search>> query$Search(
+          [Options$Query$Search? options]) async =>
+      await this.query(options ?? Options$Query$Search());
+  graphql.ObservableQuery<Query$Search> watchQuery$Search(
+          [WatchOptions$Query$Search? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$Search());
+  void writeQuery$Search({
+    required Query$Search data,
+    Variables$Query$Search? variables,
     bool broadcast = true,
   }) =>
       this.writeQuery(
         graphql.Request(
-          operation: graphql.Operation(document: documentNodeQuerySearchAnime),
+          operation: graphql.Operation(document: documentNodeQuerySearch),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Query$SearchAnime? readQuery$SearchAnime({
-    Variables$Query$SearchAnime? variables,
+  Query$Search? readQuery$Search({
+    Variables$Query$Search? variables,
     bool optimistic = true,
   }) {
     final result = this.readQuery(
       graphql.Request(
-        operation: graphql.Operation(document: documentNodeQuerySearchAnime),
+        operation: graphql.Operation(document: documentNodeQuerySearch),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Query$SearchAnime.fromJson(result);
+    return result == null ? null : Query$Search.fromJson(result);
   }
 }
 
-graphql_flutter.QueryHookResult<Query$SearchAnime> useQuery$SearchAnime(
-        [Options$Query$SearchAnime? options]) =>
-    graphql_flutter.useQuery(options ?? Options$Query$SearchAnime());
-graphql.ObservableQuery<Query$SearchAnime> useWatchQuery$SearchAnime(
-        [WatchOptions$Query$SearchAnime? options]) =>
-    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$SearchAnime());
+graphql_flutter.QueryHookResult<Query$Search> useQuery$Search(
+        [Options$Query$Search? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$Search());
+graphql.ObservableQuery<Query$Search> useWatchQuery$Search(
+        [WatchOptions$Query$Search? options]) =>
+    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$Search());
 
-class Query$SearchAnime$Widget
-    extends graphql_flutter.Query<Query$SearchAnime> {
-  Query$SearchAnime$Widget({
+class Query$Search$Widget extends graphql_flutter.Query<Query$Search> {
+  Query$Search$Widget({
     widgets.Key? key,
-    Options$Query$SearchAnime? options,
-    required graphql_flutter.QueryBuilder<Query$SearchAnime> builder,
+    Options$Query$Search? options,
+    required graphql_flutter.QueryBuilder<Query$Search> builder,
   }) : super(
           key: key,
-          options: options ?? Options$Query$SearchAnime(),
+          options: options ?? Options$Query$Search(),
           builder: builder,
         );
 }
 
-class Query$SearchAnime$Page {
-  Query$SearchAnime$Page({
+class Query$Search$Page {
+  Query$Search$Page({
     this.pageInfo,
     this.media,
     this.$__typename = 'Page',
   });
 
-  factory Query$SearchAnime$Page.fromJson(Map<String, dynamic> json) {
+  factory Query$Search$Page.fromJson(Map<String, dynamic> json) {
     final l$pageInfo = json['pageInfo'];
     final l$media = json['media'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime$Page(
+    return Query$Search$Page(
       pageInfo: l$pageInfo == null
           ? null
-          : Query$SearchAnime$Page$pageInfo.fromJson(
+          : Query$Search$Page$pageInfo.fromJson(
               (l$pageInfo as Map<String, dynamic>)),
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$SearchAnime$Page$media.fromJson(
-                  (e as Map<String, dynamic>)))
+              : Query$Search$Page$media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$SearchAnime$Page$pageInfo? pageInfo;
+  final Query$Search$Page$pageInfo? pageInfo;
 
-  final List<Query$SearchAnime$Page$media?>? media;
+  final List<Query$Search$Page$media?>? media;
 
   final String $__typename;
 
@@ -847,8 +853,7 @@ class Query$SearchAnime$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime$Page) ||
-        runtimeType != other.runtimeType) {
+    if (!(other is Query$Search$Page) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -881,47 +886,46 @@ class Query$SearchAnime$Page {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime$Page on Query$SearchAnime$Page {
-  CopyWith$Query$SearchAnime$Page<Query$SearchAnime$Page> get copyWith =>
-      CopyWith$Query$SearchAnime$Page(
+extension UtilityExtension$Query$Search$Page on Query$Search$Page {
+  CopyWith$Query$Search$Page<Query$Search$Page> get copyWith =>
+      CopyWith$Query$Search$Page(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$SearchAnime$Page<TRes> {
-  factory CopyWith$Query$SearchAnime$Page(
-    Query$SearchAnime$Page instance,
-    TRes Function(Query$SearchAnime$Page) then,
-  ) = _CopyWithImpl$Query$SearchAnime$Page;
+abstract class CopyWith$Query$Search$Page<TRes> {
+  factory CopyWith$Query$Search$Page(
+    Query$Search$Page instance,
+    TRes Function(Query$Search$Page) then,
+  ) = _CopyWithImpl$Query$Search$Page;
 
-  factory CopyWith$Query$SearchAnime$Page.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime$Page;
+  factory CopyWith$Query$Search$Page.stub(TRes res) =
+      _CopyWithStubImpl$Query$Search$Page;
 
   TRes call({
-    Query$SearchAnime$Page$pageInfo? pageInfo,
-    List<Query$SearchAnime$Page$media?>? media,
+    Query$Search$Page$pageInfo? pageInfo,
+    List<Query$Search$Page$media?>? media,
     String? $__typename,
   });
-  CopyWith$Query$SearchAnime$Page$pageInfo<TRes> get pageInfo;
+  CopyWith$Query$Search$Page$pageInfo<TRes> get pageInfo;
   TRes media(
-      Iterable<Query$SearchAnime$Page$media?>? Function(
+      Iterable<Query$Search$Page$media?>? Function(
               Iterable<
-                  CopyWith$Query$SearchAnime$Page$media<
-                      Query$SearchAnime$Page$media>?>?)
+                  CopyWith$Query$Search$Page$media<Query$Search$Page$media>?>?)
           _fn);
 }
 
-class _CopyWithImpl$Query$SearchAnime$Page<TRes>
-    implements CopyWith$Query$SearchAnime$Page<TRes> {
-  _CopyWithImpl$Query$SearchAnime$Page(
+class _CopyWithImpl$Query$Search$Page<TRes>
+    implements CopyWith$Query$Search$Page<TRes> {
+  _CopyWithImpl$Query$Search$Page(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime$Page _instance;
+  final Query$Search$Page _instance;
 
-  final TRes Function(Query$SearchAnime$Page) _then;
+  final TRes Function(Query$Search$Page) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -930,62 +934,62 @@ class _CopyWithImpl$Query$SearchAnime$Page<TRes>
     Object? media = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime$Page(
+      _then(Query$Search$Page(
         pageInfo: pageInfo == _undefined
             ? _instance.pageInfo
-            : (pageInfo as Query$SearchAnime$Page$pageInfo?),
+            : (pageInfo as Query$Search$Page$pageInfo?),
         media: media == _undefined
             ? _instance.media
-            : (media as List<Query$SearchAnime$Page$media?>?),
+            : (media as List<Query$Search$Page$media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$SearchAnime$Page$pageInfo<TRes> get pageInfo {
+  CopyWith$Query$Search$Page$pageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
-        ? CopyWith$Query$SearchAnime$Page$pageInfo.stub(_then(_instance))
-        : CopyWith$Query$SearchAnime$Page$pageInfo(
+        ? CopyWith$Query$Search$Page$pageInfo.stub(_then(_instance))
+        : CopyWith$Query$Search$Page$pageInfo(
             local$pageInfo, (e) => call(pageInfo: e));
   }
 
   TRes media(
-          Iterable<Query$SearchAnime$Page$media?>? Function(
+          Iterable<Query$Search$Page$media?>? Function(
                   Iterable<
-                      CopyWith$Query$SearchAnime$Page$media<
-                          Query$SearchAnime$Page$media>?>?)
+                      CopyWith$Query$Search$Page$media<
+                          Query$Search$Page$media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Query$SearchAnime$Page$media(
+              : CopyWith$Query$Search$Page$media(
                   e,
                   (i) => i,
                 )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$SearchAnime$Page<TRes>
-    implements CopyWith$Query$SearchAnime$Page<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime$Page(this._res);
+class _CopyWithStubImpl$Query$Search$Page<TRes>
+    implements CopyWith$Query$Search$Page<TRes> {
+  _CopyWithStubImpl$Query$Search$Page(this._res);
 
   TRes _res;
 
   call({
-    Query$SearchAnime$Page$pageInfo? pageInfo,
-    List<Query$SearchAnime$Page$media?>? media,
+    Query$Search$Page$pageInfo? pageInfo,
+    List<Query$Search$Page$media?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$SearchAnime$Page$pageInfo<TRes> get pageInfo =>
-      CopyWith$Query$SearchAnime$Page$pageInfo.stub(_res);
+  CopyWith$Query$Search$Page$pageInfo<TRes> get pageInfo =>
+      CopyWith$Query$Search$Page$pageInfo.stub(_res);
 
   media(_fn) => _res;
 }
 
-class Query$SearchAnime$Page$pageInfo {
-  Query$SearchAnime$Page$pageInfo({
+class Query$Search$Page$pageInfo {
+  Query$Search$Page$pageInfo({
     this.total,
     this.currentPage,
     this.lastPage,
@@ -994,14 +998,14 @@ class Query$SearchAnime$Page$pageInfo {
     this.$__typename = 'PageInfo',
   });
 
-  factory Query$SearchAnime$Page$pageInfo.fromJson(Map<String, dynamic> json) {
+  factory Query$Search$Page$pageInfo.fromJson(Map<String, dynamic> json) {
     final l$total = json['total'];
     final l$currentPage = json['currentPage'];
     final l$lastPage = json['lastPage'];
     final l$hasNextPage = json['hasNextPage'];
     final l$perPage = json['perPage'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime$Page$pageInfo(
+    return Query$Search$Page$pageInfo(
       total: (l$total as int?),
       currentPage: (l$currentPage as int?),
       lastPage: (l$lastPage as int?),
@@ -1063,7 +1067,7 @@ class Query$SearchAnime$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime$Page$pageInfo) ||
+    if (!(other is Query$Search$Page$pageInfo) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1101,23 +1105,23 @@ class Query$SearchAnime$Page$pageInfo {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime$Page$pageInfo
-    on Query$SearchAnime$Page$pageInfo {
-  CopyWith$Query$SearchAnime$Page$pageInfo<Query$SearchAnime$Page$pageInfo>
-      get copyWith => CopyWith$Query$SearchAnime$Page$pageInfo(
+extension UtilityExtension$Query$Search$Page$pageInfo
+    on Query$Search$Page$pageInfo {
+  CopyWith$Query$Search$Page$pageInfo<Query$Search$Page$pageInfo>
+      get copyWith => CopyWith$Query$Search$Page$pageInfo(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$SearchAnime$Page$pageInfo<TRes> {
-  factory CopyWith$Query$SearchAnime$Page$pageInfo(
-    Query$SearchAnime$Page$pageInfo instance,
-    TRes Function(Query$SearchAnime$Page$pageInfo) then,
-  ) = _CopyWithImpl$Query$SearchAnime$Page$pageInfo;
+abstract class CopyWith$Query$Search$Page$pageInfo<TRes> {
+  factory CopyWith$Query$Search$Page$pageInfo(
+    Query$Search$Page$pageInfo instance,
+    TRes Function(Query$Search$Page$pageInfo) then,
+  ) = _CopyWithImpl$Query$Search$Page$pageInfo;
 
-  factory CopyWith$Query$SearchAnime$Page$pageInfo.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime$Page$pageInfo;
+  factory CopyWith$Query$Search$Page$pageInfo.stub(TRes res) =
+      _CopyWithStubImpl$Query$Search$Page$pageInfo;
 
   TRes call({
     int? total,
@@ -1129,16 +1133,16 @@ abstract class CopyWith$Query$SearchAnime$Page$pageInfo<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$SearchAnime$Page$pageInfo<TRes>
-    implements CopyWith$Query$SearchAnime$Page$pageInfo<TRes> {
-  _CopyWithImpl$Query$SearchAnime$Page$pageInfo(
+class _CopyWithImpl$Query$Search$Page$pageInfo<TRes>
+    implements CopyWith$Query$Search$Page$pageInfo<TRes> {
+  _CopyWithImpl$Query$Search$Page$pageInfo(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime$Page$pageInfo _instance;
+  final Query$Search$Page$pageInfo _instance;
 
-  final TRes Function(Query$SearchAnime$Page$pageInfo) _then;
+  final TRes Function(Query$Search$Page$pageInfo) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1150,7 +1154,7 @@ class _CopyWithImpl$Query$SearchAnime$Page$pageInfo<TRes>
     Object? perPage = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime$Page$pageInfo(
+      _then(Query$Search$Page$pageInfo(
         total: total == _undefined ? _instance.total : (total as int?),
         currentPage: currentPage == _undefined
             ? _instance.currentPage
@@ -1167,9 +1171,9 @@ class _CopyWithImpl$Query$SearchAnime$Page$pageInfo<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$SearchAnime$Page$pageInfo<TRes>
-    implements CopyWith$Query$SearchAnime$Page$pageInfo<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime$Page$pageInfo(this._res);
+class _CopyWithStubImpl$Query$Search$Page$pageInfo<TRes>
+    implements CopyWith$Query$Search$Page$pageInfo<TRes> {
+  _CopyWithStubImpl$Query$Search$Page$pageInfo(this._res);
 
   TRes _res;
 
@@ -1184,8 +1188,8 @@ class _CopyWithStubImpl$Query$SearchAnime$Page$pageInfo<TRes>
       _res;
 }
 
-class Query$SearchAnime$Page$media {
-  Query$SearchAnime$Page$media({
+class Query$Search$Page$media {
+  Query$Search$Page$media({
     required this.id,
     this.title,
     this.type,
@@ -1193,10 +1197,6 @@ class Query$SearchAnime$Page$media {
     this.season,
     this.seasonYear,
     this.status,
-    this.episodes,
-    this.chapters,
-    this.volumes,
-    this.isLicensed,
     this.format,
     this.meanScore,
     this.popularity,
@@ -1204,7 +1204,7 @@ class Query$SearchAnime$Page$media {
     this.$__typename = 'Media',
   });
 
-  factory Query$SearchAnime$Page$media.fromJson(Map<String, dynamic> json) {
+  factory Query$Search$Page$media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$title = json['title'];
     final l$type = json['type'];
@@ -1212,25 +1212,21 @@ class Query$SearchAnime$Page$media {
     final l$season = json['season'];
     final l$seasonYear = json['seasonYear'];
     final l$status = json['status'];
-    final l$episodes = json['episodes'];
-    final l$chapters = json['chapters'];
-    final l$volumes = json['volumes'];
-    final l$isLicensed = json['isLicensed'];
     final l$format = json['format'];
     final l$meanScore = json['meanScore'];
     final l$popularity = json['popularity'];
     final l$coverImage = json['coverImage'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime$Page$media(
+    return Query$Search$Page$media(
       id: (l$id as int),
       title: l$title == null
           ? null
-          : Query$SearchAnime$Page$media$title.fromJson(
+          : Query$Search$Page$media$title.fromJson(
               (l$title as Map<String, dynamic>)),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
       startDate: l$startDate == null
           ? null
-          : Query$SearchAnime$Page$media$startDate.fromJson(
+          : Query$Search$Page$media$startDate.fromJson(
               (l$startDate as Map<String, dynamic>)),
       season: l$season == null
           ? null
@@ -1239,10 +1235,6 @@ class Query$SearchAnime$Page$media {
       status: l$status == null
           ? null
           : fromJson$Enum$MediaStatus((l$status as String)),
-      episodes: (l$episodes as int?),
-      chapters: (l$chapters as int?),
-      volumes: (l$volumes as int?),
-      isLicensed: (l$isLicensed as bool?),
       format: l$format == null
           ? null
           : fromJson$Enum$MediaFormat((l$format as String)),
@@ -1250,7 +1242,7 @@ class Query$SearchAnime$Page$media {
       popularity: (l$popularity as int?),
       coverImage: l$coverImage == null
           ? null
-          : Query$SearchAnime$Page$media$coverImage.fromJson(
+          : Query$Search$Page$media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -1258,11 +1250,11 @@ class Query$SearchAnime$Page$media {
 
   final int id;
 
-  final Query$SearchAnime$Page$media$title? title;
+  final Query$Search$Page$media$title? title;
 
   final Enum$MediaType? type;
 
-  final Query$SearchAnime$Page$media$startDate? startDate;
+  final Query$Search$Page$media$startDate? startDate;
 
   final Enum$MediaSeason? season;
 
@@ -1270,21 +1262,13 @@ class Query$SearchAnime$Page$media {
 
   final Enum$MediaStatus? status;
 
-  final int? episodes;
-
-  final int? chapters;
-
-  final int? volumes;
-
-  final bool? isLicensed;
-
   final Enum$MediaFormat? format;
 
   final int? meanScore;
 
   final int? popularity;
 
-  final Query$SearchAnime$Page$media$coverImage? coverImage;
+  final Query$Search$Page$media$coverImage? coverImage;
 
   final String $__typename;
 
@@ -1306,14 +1290,6 @@ class Query$SearchAnime$Page$media {
     final l$status = status;
     _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaStatus(l$status);
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
-    final l$volumes = volumes;
-    _resultData['volumes'] = l$volumes;
-    final l$isLicensed = isLicensed;
-    _resultData['isLicensed'] = l$isLicensed;
     final l$format = format;
     _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
@@ -1337,10 +1313,6 @@ class Query$SearchAnime$Page$media {
     final l$season = season;
     final l$seasonYear = seasonYear;
     final l$status = status;
-    final l$episodes = episodes;
-    final l$chapters = chapters;
-    final l$volumes = volumes;
-    final l$isLicensed = isLicensed;
     final l$format = format;
     final l$meanScore = meanScore;
     final l$popularity = popularity;
@@ -1354,10 +1326,6 @@ class Query$SearchAnime$Page$media {
       l$season,
       l$seasonYear,
       l$status,
-      l$episodes,
-      l$chapters,
-      l$volumes,
-      l$isLicensed,
       l$format,
       l$meanScore,
       l$popularity,
@@ -1371,7 +1339,7 @@ class Query$SearchAnime$Page$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime$Page$media) ||
+    if (!(other is Query$Search$Page$media) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1410,26 +1378,6 @@ class Query$SearchAnime$Page$media {
     if (l$status != lOther$status) {
       return false;
     }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
-      return false;
-    }
-    final l$volumes = volumes;
-    final lOther$volumes = other.volumes;
-    if (l$volumes != lOther$volumes) {
-      return false;
-    }
-    final l$isLicensed = isLicensed;
-    final lOther$isLicensed = other.isLicensed;
-    if (l$isLicensed != lOther$isLicensed) {
-      return false;
-    }
     final l$format = format;
     final lOther$format = other.format;
     if (l$format != lOther$format) {
@@ -1459,57 +1407,52 @@ class Query$SearchAnime$Page$media {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime$Page$media
-    on Query$SearchAnime$Page$media {
-  CopyWith$Query$SearchAnime$Page$media<Query$SearchAnime$Page$media>
-      get copyWith => CopyWith$Query$SearchAnime$Page$media(
-            this,
-            (i) => i,
-          );
+extension UtilityExtension$Query$Search$Page$media on Query$Search$Page$media {
+  CopyWith$Query$Search$Page$media<Query$Search$Page$media> get copyWith =>
+      CopyWith$Query$Search$Page$media(
+        this,
+        (i) => i,
+      );
 }
 
-abstract class CopyWith$Query$SearchAnime$Page$media<TRes> {
-  factory CopyWith$Query$SearchAnime$Page$media(
-    Query$SearchAnime$Page$media instance,
-    TRes Function(Query$SearchAnime$Page$media) then,
-  ) = _CopyWithImpl$Query$SearchAnime$Page$media;
+abstract class CopyWith$Query$Search$Page$media<TRes> {
+  factory CopyWith$Query$Search$Page$media(
+    Query$Search$Page$media instance,
+    TRes Function(Query$Search$Page$media) then,
+  ) = _CopyWithImpl$Query$Search$Page$media;
 
-  factory CopyWith$Query$SearchAnime$Page$media.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime$Page$media;
+  factory CopyWith$Query$Search$Page$media.stub(TRes res) =
+      _CopyWithStubImpl$Query$Search$Page$media;
 
   TRes call({
     int? id,
-    Query$SearchAnime$Page$media$title? title,
+    Query$Search$Page$media$title? title,
     Enum$MediaType? type,
-    Query$SearchAnime$Page$media$startDate? startDate,
+    Query$Search$Page$media$startDate? startDate,
     Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaStatus? status,
-    int? episodes,
-    int? chapters,
-    int? volumes,
-    bool? isLicensed,
     Enum$MediaFormat? format,
     int? meanScore,
     int? popularity,
-    Query$SearchAnime$Page$media$coverImage? coverImage,
+    Query$Search$Page$media$coverImage? coverImage,
     String? $__typename,
   });
-  CopyWith$Query$SearchAnime$Page$media$title<TRes> get title;
-  CopyWith$Query$SearchAnime$Page$media$startDate<TRes> get startDate;
-  CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> get coverImage;
+  CopyWith$Query$Search$Page$media$title<TRes> get title;
+  CopyWith$Query$Search$Page$media$startDate<TRes> get startDate;
+  CopyWith$Query$Search$Page$media$coverImage<TRes> get coverImage;
 }
 
-class _CopyWithImpl$Query$SearchAnime$Page$media<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media<TRes> {
-  _CopyWithImpl$Query$SearchAnime$Page$media(
+class _CopyWithImpl$Query$Search$Page$media<TRes>
+    implements CopyWith$Query$Search$Page$media<TRes> {
+  _CopyWithImpl$Query$Search$Page$media(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime$Page$media _instance;
+  final Query$Search$Page$media _instance;
 
-  final TRes Function(Query$SearchAnime$Page$media) _then;
+  final TRes Function(Query$Search$Page$media) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1521,25 +1464,21 @@ class _CopyWithImpl$Query$SearchAnime$Page$media<TRes>
     Object? season = _undefined,
     Object? seasonYear = _undefined,
     Object? status = _undefined,
-    Object? episodes = _undefined,
-    Object? chapters = _undefined,
-    Object? volumes = _undefined,
-    Object? isLicensed = _undefined,
     Object? format = _undefined,
     Object? meanScore = _undefined,
     Object? popularity = _undefined,
     Object? coverImage = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime$Page$media(
+      _then(Query$Search$Page$media(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         title: title == _undefined
             ? _instance.title
-            : (title as Query$SearchAnime$Page$media$title?),
+            : (title as Query$Search$Page$media$title?),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
         startDate: startDate == _undefined
             ? _instance.startDate
-            : (startDate as Query$SearchAnime$Page$media$startDate?),
+            : (startDate as Query$Search$Page$media$startDate?),
         season: season == _undefined
             ? _instance.season
             : (season as Enum$MediaSeason?),
@@ -1549,14 +1488,6 @@ class _CopyWithImpl$Query$SearchAnime$Page$media<TRes>
         status: status == _undefined
             ? _instance.status
             : (status as Enum$MediaStatus?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
-        volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
-        isLicensed: isLicensed == _undefined
-            ? _instance.isLicensed
-            : (isLicensed as bool?),
         format: format == _undefined
             ? _instance.format
             : (format as Enum$MediaFormat?),
@@ -1567,85 +1498,79 @@ class _CopyWithImpl$Query$SearchAnime$Page$media<TRes>
             : (popularity as int?),
         coverImage: coverImage == _undefined
             ? _instance.coverImage
-            : (coverImage as Query$SearchAnime$Page$media$coverImage?),
+            : (coverImage as Query$Search$Page$media$coverImage?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$SearchAnime$Page$media$title<TRes> get title {
+  CopyWith$Query$Search$Page$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
-        ? CopyWith$Query$SearchAnime$Page$media$title.stub(_then(_instance))
-        : CopyWith$Query$SearchAnime$Page$media$title(
+        ? CopyWith$Query$Search$Page$media$title.stub(_then(_instance))
+        : CopyWith$Query$Search$Page$media$title(
             local$title, (e) => call(title: e));
   }
 
-  CopyWith$Query$SearchAnime$Page$media$startDate<TRes> get startDate {
+  CopyWith$Query$Search$Page$media$startDate<TRes> get startDate {
     final local$startDate = _instance.startDate;
     return local$startDate == null
-        ? CopyWith$Query$SearchAnime$Page$media$startDate.stub(_then(_instance))
-        : CopyWith$Query$SearchAnime$Page$media$startDate(
+        ? CopyWith$Query$Search$Page$media$startDate.stub(_then(_instance))
+        : CopyWith$Query$Search$Page$media$startDate(
             local$startDate, (e) => call(startDate: e));
   }
 
-  CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> get coverImage {
+  CopyWith$Query$Search$Page$media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
-        ? CopyWith$Query$SearchAnime$Page$media$coverImage.stub(
-            _then(_instance))
-        : CopyWith$Query$SearchAnime$Page$media$coverImage(
+        ? CopyWith$Query$Search$Page$media$coverImage.stub(_then(_instance))
+        : CopyWith$Query$Search$Page$media$coverImage(
             local$coverImage, (e) => call(coverImage: e));
   }
 }
 
-class _CopyWithStubImpl$Query$SearchAnime$Page$media<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime$Page$media(this._res);
+class _CopyWithStubImpl$Query$Search$Page$media<TRes>
+    implements CopyWith$Query$Search$Page$media<TRes> {
+  _CopyWithStubImpl$Query$Search$Page$media(this._res);
 
   TRes _res;
 
   call({
     int? id,
-    Query$SearchAnime$Page$media$title? title,
+    Query$Search$Page$media$title? title,
     Enum$MediaType? type,
-    Query$SearchAnime$Page$media$startDate? startDate,
+    Query$Search$Page$media$startDate? startDate,
     Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaStatus? status,
-    int? episodes,
-    int? chapters,
-    int? volumes,
-    bool? isLicensed,
     Enum$MediaFormat? format,
     int? meanScore,
     int? popularity,
-    Query$SearchAnime$Page$media$coverImage? coverImage,
+    Query$Search$Page$media$coverImage? coverImage,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$SearchAnime$Page$media$title<TRes> get title =>
-      CopyWith$Query$SearchAnime$Page$media$title.stub(_res);
+  CopyWith$Query$Search$Page$media$title<TRes> get title =>
+      CopyWith$Query$Search$Page$media$title.stub(_res);
 
-  CopyWith$Query$SearchAnime$Page$media$startDate<TRes> get startDate =>
-      CopyWith$Query$SearchAnime$Page$media$startDate.stub(_res);
+  CopyWith$Query$Search$Page$media$startDate<TRes> get startDate =>
+      CopyWith$Query$Search$Page$media$startDate.stub(_res);
 
-  CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> get coverImage =>
-      CopyWith$Query$SearchAnime$Page$media$coverImage.stub(_res);
+  CopyWith$Query$Search$Page$media$coverImage<TRes> get coverImage =>
+      CopyWith$Query$Search$Page$media$coverImage.stub(_res);
 }
 
-class Query$SearchAnime$Page$media$title {
-  Query$SearchAnime$Page$media$title({
+class Query$Search$Page$media$title {
+  Query$Search$Page$media$title({
     this.userPreferred,
     this.$__typename = 'MediaTitle',
   });
 
-  factory Query$SearchAnime$Page$media$title.fromJson(
-      Map<String, dynamic> json) {
+  factory Query$Search$Page$media$title.fromJson(Map<String, dynamic> json) {
     final l$userPreferred = json['userPreferred'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime$Page$media$title(
+    return Query$Search$Page$media$title(
       userPreferred: (l$userPreferred as String?),
       $__typename: (l$$__typename as String),
     );
@@ -1679,7 +1604,7 @@ class Query$SearchAnime$Page$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime$Page$media$title) ||
+    if (!(other is Query$Search$Page$media$title) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1697,24 +1622,23 @@ class Query$SearchAnime$Page$media$title {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime$Page$media$title
-    on Query$SearchAnime$Page$media$title {
-  CopyWith$Query$SearchAnime$Page$media$title<
-          Query$SearchAnime$Page$media$title>
-      get copyWith => CopyWith$Query$SearchAnime$Page$media$title(
+extension UtilityExtension$Query$Search$Page$media$title
+    on Query$Search$Page$media$title {
+  CopyWith$Query$Search$Page$media$title<Query$Search$Page$media$title>
+      get copyWith => CopyWith$Query$Search$Page$media$title(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$SearchAnime$Page$media$title<TRes> {
-  factory CopyWith$Query$SearchAnime$Page$media$title(
-    Query$SearchAnime$Page$media$title instance,
-    TRes Function(Query$SearchAnime$Page$media$title) then,
-  ) = _CopyWithImpl$Query$SearchAnime$Page$media$title;
+abstract class CopyWith$Query$Search$Page$media$title<TRes> {
+  factory CopyWith$Query$Search$Page$media$title(
+    Query$Search$Page$media$title instance,
+    TRes Function(Query$Search$Page$media$title) then,
+  ) = _CopyWithImpl$Query$Search$Page$media$title;
 
-  factory CopyWith$Query$SearchAnime$Page$media$title.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime$Page$media$title;
+  factory CopyWith$Query$Search$Page$media$title.stub(TRes res) =
+      _CopyWithStubImpl$Query$Search$Page$media$title;
 
   TRes call({
     String? userPreferred,
@@ -1722,16 +1646,16 @@ abstract class CopyWith$Query$SearchAnime$Page$media$title<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$SearchAnime$Page$media$title<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media$title<TRes> {
-  _CopyWithImpl$Query$SearchAnime$Page$media$title(
+class _CopyWithImpl$Query$Search$Page$media$title<TRes>
+    implements CopyWith$Query$Search$Page$media$title<TRes> {
+  _CopyWithImpl$Query$Search$Page$media$title(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime$Page$media$title _instance;
+  final Query$Search$Page$media$title _instance;
 
-  final TRes Function(Query$SearchAnime$Page$media$title) _then;
+  final TRes Function(Query$Search$Page$media$title) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1739,7 +1663,7 @@ class _CopyWithImpl$Query$SearchAnime$Page$media$title<TRes>
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime$Page$media$title(
+      _then(Query$Search$Page$media$title(
         userPreferred: userPreferred == _undefined
             ? _instance.userPreferred
             : (userPreferred as String?),
@@ -1749,9 +1673,9 @@ class _CopyWithImpl$Query$SearchAnime$Page$media$title<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$SearchAnime$Page$media$title<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media$title<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime$Page$media$title(this._res);
+class _CopyWithStubImpl$Query$Search$Page$media$title<TRes>
+    implements CopyWith$Query$Search$Page$media$title<TRes> {
+  _CopyWithStubImpl$Query$Search$Page$media$title(this._res);
 
   TRes _res;
 
@@ -1762,17 +1686,17 @@ class _CopyWithStubImpl$Query$SearchAnime$Page$media$title<TRes>
       _res;
 }
 
-class Query$SearchAnime$Page$media$startDate {
-  Query$SearchAnime$Page$media$startDate({
+class Query$Search$Page$media$startDate {
+  Query$Search$Page$media$startDate({
     this.year,
     this.$__typename = 'FuzzyDate',
   });
 
-  factory Query$SearchAnime$Page$media$startDate.fromJson(
+  factory Query$Search$Page$media$startDate.fromJson(
       Map<String, dynamic> json) {
     final l$year = json['year'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime$Page$media$startDate(
+    return Query$Search$Page$media$startDate(
       year: (l$year as int?),
       $__typename: (l$$__typename as String),
     );
@@ -1806,7 +1730,7 @@ class Query$SearchAnime$Page$media$startDate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime$Page$media$startDate) ||
+    if (!(other is Query$Search$Page$media$startDate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1824,24 +1748,23 @@ class Query$SearchAnime$Page$media$startDate {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime$Page$media$startDate
-    on Query$SearchAnime$Page$media$startDate {
-  CopyWith$Query$SearchAnime$Page$media$startDate<
-          Query$SearchAnime$Page$media$startDate>
-      get copyWith => CopyWith$Query$SearchAnime$Page$media$startDate(
+extension UtilityExtension$Query$Search$Page$media$startDate
+    on Query$Search$Page$media$startDate {
+  CopyWith$Query$Search$Page$media$startDate<Query$Search$Page$media$startDate>
+      get copyWith => CopyWith$Query$Search$Page$media$startDate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$SearchAnime$Page$media$startDate<TRes> {
-  factory CopyWith$Query$SearchAnime$Page$media$startDate(
-    Query$SearchAnime$Page$media$startDate instance,
-    TRes Function(Query$SearchAnime$Page$media$startDate) then,
-  ) = _CopyWithImpl$Query$SearchAnime$Page$media$startDate;
+abstract class CopyWith$Query$Search$Page$media$startDate<TRes> {
+  factory CopyWith$Query$Search$Page$media$startDate(
+    Query$Search$Page$media$startDate instance,
+    TRes Function(Query$Search$Page$media$startDate) then,
+  ) = _CopyWithImpl$Query$Search$Page$media$startDate;
 
-  factory CopyWith$Query$SearchAnime$Page$media$startDate.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime$Page$media$startDate;
+  factory CopyWith$Query$Search$Page$media$startDate.stub(TRes res) =
+      _CopyWithStubImpl$Query$Search$Page$media$startDate;
 
   TRes call({
     int? year,
@@ -1849,16 +1772,16 @@ abstract class CopyWith$Query$SearchAnime$Page$media$startDate<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$SearchAnime$Page$media$startDate<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media$startDate<TRes> {
-  _CopyWithImpl$Query$SearchAnime$Page$media$startDate(
+class _CopyWithImpl$Query$Search$Page$media$startDate<TRes>
+    implements CopyWith$Query$Search$Page$media$startDate<TRes> {
+  _CopyWithImpl$Query$Search$Page$media$startDate(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime$Page$media$startDate _instance;
+  final Query$Search$Page$media$startDate _instance;
 
-  final TRes Function(Query$SearchAnime$Page$media$startDate) _then;
+  final TRes Function(Query$Search$Page$media$startDate) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1866,7 +1789,7 @@ class _CopyWithImpl$Query$SearchAnime$Page$media$startDate<TRes>
     Object? year = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime$Page$media$startDate(
+      _then(Query$Search$Page$media$startDate(
         year: year == _undefined ? _instance.year : (year as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -1874,9 +1797,9 @@ class _CopyWithImpl$Query$SearchAnime$Page$media$startDate<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$SearchAnime$Page$media$startDate<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media$startDate<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime$Page$media$startDate(this._res);
+class _CopyWithStubImpl$Query$Search$Page$media$startDate<TRes>
+    implements CopyWith$Query$Search$Page$media$startDate<TRes> {
+  _CopyWithStubImpl$Query$Search$Page$media$startDate(this._res);
 
   TRes _res;
 
@@ -1887,17 +1810,17 @@ class _CopyWithStubImpl$Query$SearchAnime$Page$media$startDate<TRes>
       _res;
 }
 
-class Query$SearchAnime$Page$media$coverImage {
-  Query$SearchAnime$Page$media$coverImage({
+class Query$Search$Page$media$coverImage {
+  Query$Search$Page$media$coverImage({
     this.medium,
     this.$__typename = 'MediaCoverImage',
   });
 
-  factory Query$SearchAnime$Page$media$coverImage.fromJson(
+  factory Query$Search$Page$media$coverImage.fromJson(
       Map<String, dynamic> json) {
     final l$medium = json['medium'];
     final l$$__typename = json['__typename'];
-    return Query$SearchAnime$Page$media$coverImage(
+    return Query$Search$Page$media$coverImage(
       medium: (l$medium as String?),
       $__typename: (l$$__typename as String),
     );
@@ -1931,7 +1854,7 @@ class Query$SearchAnime$Page$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchAnime$Page$media$coverImage) ||
+    if (!(other is Query$Search$Page$media$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1949,24 +1872,24 @@ class Query$SearchAnime$Page$media$coverImage {
   }
 }
 
-extension UtilityExtension$Query$SearchAnime$Page$media$coverImage
-    on Query$SearchAnime$Page$media$coverImage {
-  CopyWith$Query$SearchAnime$Page$media$coverImage<
-          Query$SearchAnime$Page$media$coverImage>
-      get copyWith => CopyWith$Query$SearchAnime$Page$media$coverImage(
+extension UtilityExtension$Query$Search$Page$media$coverImage
+    on Query$Search$Page$media$coverImage {
+  CopyWith$Query$Search$Page$media$coverImage<
+          Query$Search$Page$media$coverImage>
+      get copyWith => CopyWith$Query$Search$Page$media$coverImage(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> {
-  factory CopyWith$Query$SearchAnime$Page$media$coverImage(
-    Query$SearchAnime$Page$media$coverImage instance,
-    TRes Function(Query$SearchAnime$Page$media$coverImage) then,
-  ) = _CopyWithImpl$Query$SearchAnime$Page$media$coverImage;
+abstract class CopyWith$Query$Search$Page$media$coverImage<TRes> {
+  factory CopyWith$Query$Search$Page$media$coverImage(
+    Query$Search$Page$media$coverImage instance,
+    TRes Function(Query$Search$Page$media$coverImage) then,
+  ) = _CopyWithImpl$Query$Search$Page$media$coverImage;
 
-  factory CopyWith$Query$SearchAnime$Page$media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Query$SearchAnime$Page$media$coverImage;
+  factory CopyWith$Query$Search$Page$media$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Query$Search$Page$media$coverImage;
 
   TRes call({
     String? medium,
@@ -1974,16 +1897,16 @@ abstract class CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$SearchAnime$Page$media$coverImage<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> {
-  _CopyWithImpl$Query$SearchAnime$Page$media$coverImage(
+class _CopyWithImpl$Query$Search$Page$media$coverImage<TRes>
+    implements CopyWith$Query$Search$Page$media$coverImage<TRes> {
+  _CopyWithImpl$Query$Search$Page$media$coverImage(
     this._instance,
     this._then,
   );
 
-  final Query$SearchAnime$Page$media$coverImage _instance;
+  final Query$Search$Page$media$coverImage _instance;
 
-  final TRes Function(Query$SearchAnime$Page$media$coverImage) _then;
+  final TRes Function(Query$Search$Page$media$coverImage) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1991,7 +1914,7 @@ class _CopyWithImpl$Query$SearchAnime$Page$media$coverImage<TRes>
     Object? medium = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$SearchAnime$Page$media$coverImage(
+      _then(Query$Search$Page$media$coverImage(
         medium: medium == _undefined ? _instance.medium : (medium as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -1999,9 +1922,9 @@ class _CopyWithImpl$Query$SearchAnime$Page$media$coverImage<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$SearchAnime$Page$media$coverImage<TRes>
-    implements CopyWith$Query$SearchAnime$Page$media$coverImage<TRes> {
-  _CopyWithStubImpl$Query$SearchAnime$Page$media$coverImage(this._res);
+class _CopyWithStubImpl$Query$Search$Page$media$coverImage<TRes>
+    implements CopyWith$Query$Search$Page$media$coverImage<TRes> {
+  _CopyWithStubImpl$Query$Search$Page$media$coverImage(this._res);
 
   TRes _res;
 
