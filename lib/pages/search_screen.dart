@@ -13,17 +13,17 @@ class SearchScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final searchText = useState<String>('');
-    final mediaType = useState<Enum$MediaType?>(null);
+    final mediaType = useState<Enum$MediaType>(Enum$MediaType.$unknown);
     QueryHookResult<Query$Search> readResult = useQuery$Search(
       Options$Query$Search(
-        variables: Variables$Query$Search(
-          search: searchText.value.isEmpty ? null : searchText.value,
-          perPage: 50,
-          type: mediaType.value,
-          isAdult: false, // TODO: use user setting
-        ),
-        fetchPolicy: FetchPolicy.cacheFirst,
-      ),
+          variables: Variables$Query$Search(
+        search: searchText.value.isEmpty ? null : searchText.value,
+        perPage: 50,
+        page: 1,
+        type:
+            mediaType.value == Enum$MediaType.$unknown ? null : mediaType.value,
+        isAdult: false, // TODO: use user setting
+      )),
     );
 
     return Scaffold(
@@ -79,7 +79,7 @@ class SearchWidget extends StatelessWidget {
                 onSelected: (value) => mediaType.value = value,
                 itemBuilder: (BuildContext context) => [
                   const PopupMenuItem(
-                    value: null,
+                    value: Enum$MediaType.$unknown,
                     child: Text('All'),
                   ),
                   const PopupMenuItem(
@@ -180,15 +180,22 @@ class SearchResults extends HookWidget {
     }
 
     return Expanded(
-      child: GridView.builder(
+      child: GridView.extent(
         key: const PageStorageKey<String>('resultGridKey'),
-        itemCount: mediaList.length,
+        maxCrossAxisExtent: 600,
+        childAspectRatio: 600 / 200,
+        mainAxisSpacing: 6,
+        crossAxisSpacing: 6,
         controller: scrollController,
-        gridDelegate: gridDelegate,
-        itemBuilder: (BuildContext context, int index) {
-          var media = mediaList[index];
-          return (media != null) ? MediaCard(media: media) : null;
-        },
+        children: mediaList
+            .map((media) => media == null
+                ? const SizedBox.shrink()
+                : MediaCard(media: media))
+            .toList(),
+        // (BuildContext context, int index) {
+        //   var media = mediaList[index];
+        //   return (media != null) ? MediaCard(media: media) : null;
+        // },
       ),
     );
   }
@@ -269,4 +276,3 @@ class MediaCard extends StatelessWidget {
 // - add styling to MediaCard (use chips/tags instead of text), and add color
 // - handle null values in MediaCard
 // - add user status to MediaCard
-// - filter for all, anime, or manga
