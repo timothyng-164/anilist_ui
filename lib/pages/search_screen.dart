@@ -27,24 +27,25 @@ class SearchScreen extends HookWidget {
     final client = useGraphQLClient();
     const pageSize = 20;
 
+    Options$Query$Search queryOptions({required int page}) {
+      var variables = Variables$Query$Search(
+        search: searchText.value.isEmpty ? null : searchText.value,
+        perPage: pageSize,
+        page: page,
+        type:
+            mediaType.value == Enum$MediaType.$unknown ? null : mediaType.value,
+        isAdult: false, // TODO: use user setting
+      );
+
+      return Options$Query$Search(
+        variables: variables,
+      );
+    }
+
     useEffect(() {
       loadingSearch.value = true;
 
-      client
-          .query$Search(
-        Options$Query$Search(
-          variables: Variables$Query$Search(
-            search: searchText.value.isEmpty ? null : searchText.value,
-            perPage: pageSize,
-            page: 1,
-            type: mediaType.value == Enum$MediaType.$unknown
-                ? null
-                : mediaType.value,
-            isAdult: false, // TODO: use user setting
-          ),
-        ),
-      )
-          .then((result) {
+      client.query$Search(queryOptions(page: 1)).then((result) {
         if (result.hasException) {
           print('Result exception occurred: ${result.exception}');
           return;
@@ -63,17 +64,7 @@ class SearchScreen extends HookWidget {
       loadingPage.value = true;
 
       client
-          .query$Search(Options$Query$Search(
-        variables: Variables$Query$Search(
-          search: searchText.value.isEmpty ? null : searchText.value,
-          perPage: pageSize,
-          page: currentPage.value + 1,
-          type: mediaType.value == Enum$MediaType.$unknown
-              ? null
-              : mediaType.value,
-          isAdult: false, // TODO: use user setting
-        ),
-      ))
+          .query$Search(queryOptions(page: currentPage.value + 1))
           .then((result) {
         if (result.hasException) {
           print('Result exception occurred: ${result.exception}');
