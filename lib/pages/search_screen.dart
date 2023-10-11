@@ -17,8 +17,8 @@ class SearchScreen extends HookWidget {
     final mediaType = useState<Enum$MediaType>(Enum$MediaType.$unknown);
 
     // Query State
-    final loadingSearch = useState<bool>(true);
-    final loadingPage = useState<bool>(false);
+    final isLoading = useState<bool>(true);
+    final isLoadingMore = useState<bool>(false);
     final hasError = useState<bool>(false);
     final currentPage = useState<int>(1);
     final hasNextpage = useState<bool>(false);
@@ -48,7 +48,7 @@ class SearchScreen extends HookWidget {
     }
 
     useEffect(() {
-      loadingSearch.value = true;
+      isLoading.value = true;
 
       client.query$Search(queryOptions(page: 1)).then((result) {
         if (result.hasException) {
@@ -60,13 +60,13 @@ class SearchScreen extends HookWidget {
         currentPage.value = data?.pageInfo?.currentPage ?? 1;
         hasNextpage.value = data?.pageInfo?.hasNextPage ?? false;
         hasError.value = false;
-        loadingSearch.value = false;
+        isLoading.value = false;
       }).catchError(handleError);
       return null;
     }, [searchText.value, mediaType.value]);
 
     void fetchPage() {
-      loadingPage.value = true;
+      isLoadingMore.value = true;
 
       client
           .query$Search(queryOptions(page: currentPage.value + 1))
@@ -82,7 +82,7 @@ class SearchScreen extends HookWidget {
         currentPage.value++;
         hasNextpage.value = data?.pageInfo?.hasNextPage ?? false;
         hasError.value = false;
-        loadingPage.value = false;
+        isLoadingMore.value = false;
       }).catchError(handleError);
     }
 
@@ -90,7 +90,7 @@ class SearchScreen extends HookWidget {
     scrollController.addListener(() async {
       bool scrolledToBottom = scrollController.position.pixels ==
           scrollController.position.maxScrollExtent;
-      if (scrolledToBottom && !loadingPage.value && hasNextpage.value) {
+      if (scrolledToBottom && !isLoadingMore.value && hasNextpage.value) {
         fetchPage();
       }
     });
@@ -103,7 +103,7 @@ class SearchScreen extends HookWidget {
         );
       }
 
-      if (loadingSearch.value) {
+      if (isLoading.value) {
         return const CenteredItem(
           flex: true,
           item: CircularProgressIndicator(),
@@ -113,7 +113,7 @@ class SearchScreen extends HookWidget {
       return SearchResults(
         mediaList: mediaList,
         scrollController: scrollController,
-        loadingPage: loadingPage,
+        isLoadingMore: isLoadingMore,
       );
     }
 
@@ -222,12 +222,12 @@ class SearchResults extends HookWidget {
     super.key,
     required this.mediaList,
     required this.scrollController,
-    required this.loadingPage,
+    required this.isLoadingMore,
   });
 
   final ValueNotifier<List<Query$Search$Page$media?>> mediaList;
   final ScrollController scrollController;
-  final ValueNotifier<bool> loadingPage;
+  final ValueNotifier<bool> isLoadingMore;
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +244,7 @@ class SearchResults extends HookWidget {
           crossAxisSpacing: 6,
         ),
         controller: scrollController,
-        itemCount: loadingPage.value
+        itemCount: isLoadingMore.value
             ? mediaList.value.length + 1
             : mediaList.value.length,
         itemBuilder: (BuildContext context, int index) {
