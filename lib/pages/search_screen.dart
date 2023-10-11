@@ -19,6 +19,7 @@ class SearchScreen extends HookWidget {
     // Query State
     final loadingSearch = useState<bool>(true);
     final loadingPage = useState<bool>(false);
+    final hasError = useState<bool>(false);
     final currentPage = useState<int>(1);
     final hasNextpage = useState<bool>(false);
     final mediaList = useState<List<Query$Search$Page$media?>>([]);
@@ -29,7 +30,7 @@ class SearchScreen extends HookWidget {
     Options$Query$Search queryOptions({required int page}) {
       var variables = Variables$Query$Search(
         search: searchText.value.isEmpty ? null : searchText.value,
-        perPage: 20,
+        perPage: 25,
         page: page,
         type:
             mediaType.value == Enum$MediaType.$unknown ? null : mediaType.value,
@@ -41,21 +42,26 @@ class SearchScreen extends HookWidget {
       );
     }
 
+    void handleError(dynamic error) {
+      hasError.value = true;
+      print('Unknown error occurred: $error');
+    }
+
     useEffect(() {
       loadingSearch.value = true;
 
       client.query$Search(queryOptions(page: 1)).then((result) {
         if (result.hasException) {
-          print('Result exception occurred: ${result.exception}');
-          return;
+          throw result.exception ?? Exception('Empty exception.');
         }
         print('fetching first page');
         var data = result.parsedData?.Page;
         mediaList.value = data?.media ?? [];
         currentPage.value = data?.pageInfo?.currentPage ?? 1;
         hasNextpage.value = data?.pageInfo?.hasNextPage ?? false;
+        hasError.value = false;
         loadingSearch.value = false;
-      });
+      }).catchError(handleError);
       return null;
     }, [searchText.value, mediaType.value]);
 
@@ -66,8 +72,7 @@ class SearchScreen extends HookWidget {
           .query$Search(queryOptions(page: currentPage.value + 1))
           .then((result) {
         if (result.hasException) {
-          print('Result exception occurred: ${result.exception}');
-          return;
+          throw result.exception ?? Exception('Empty exception.');
         }
         print('finished fetching page ${currentPage.value + 1}');
         var data = result.parsedData?.Page;
@@ -76,8 +81,9 @@ class SearchScreen extends HookWidget {
         mediaList.value.addAll(newMedia);
         currentPage.value++;
         hasNextpage.value = data?.pageInfo?.hasNextPage ?? false;
+        hasError.value = false;
         loadingPage.value = false;
-      });
+      }).catchError(handleError);
     }
 
     // When user scrolls to bottom, fetch paginated results
@@ -89,6 +95,28 @@ class SearchScreen extends HookWidget {
       }
     });
 
+    Widget displayContent() {
+      if (hasError.value) {
+        return const CenteredItem(
+          flex: true,
+          item: Text('An error has occured. Please try again.'),
+        );
+      }
+
+      if (loadingSearch.value) {
+        return const CenteredItem(
+          flex: true,
+          item: CircularProgressIndicator(),
+        );
+      }
+
+      return SearchResults(
+        mediaList: mediaList,
+        scrollController: scrollController,
+        loadingPage: loadingPage,
+      );
+    }
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -98,13 +126,7 @@ class SearchScreen extends HookWidget {
               searchText: searchText,
               mediaType: mediaType,
             ),
-            loadingSearch.value
-                ? const CenteredItem(
-                    item: CircularProgressIndicator(), flex: true)
-                : SearchResults(
-                    mediaList: mediaList,
-                    scrollController: scrollController,
-                    loadingPage: loadingPage)
+            displayContent(),
           ],
         ),
       ),
