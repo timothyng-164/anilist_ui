@@ -25,17 +25,17 @@ class SearchScreen extends HookWidget {
 
     final scrollController = ScrollController();
     final client = useGraphQLClient();
+    const pageSize = 20;
 
     useEffect(() {
       loadingSearch.value = true;
-      // mediaList.value = []; // set empty array to reset scroll position
 
       client
           .query$Search(
         Options$Query$Search(
           variables: Variables$Query$Search(
             search: searchText.value.isEmpty ? null : searchText.value,
-            perPage: 20,
+            perPage: pageSize,
             page: 1,
             type: mediaType.value == Enum$MediaType.$unknown
                 ? null
@@ -66,7 +66,7 @@ class SearchScreen extends HookWidget {
           .query$Search(Options$Query$Search(
         variables: Variables$Query$Search(
           search: searchText.value.isEmpty ? null : searchText.value,
-          perPage: 20,
+          perPage: pageSize,
           page: currentPage.value + 1,
           type: mediaType.value == Enum$MediaType.$unknown
               ? null
@@ -109,7 +109,8 @@ class SearchScreen extends HookWidget {
               mediaType: mediaType,
             ),
             loadingSearch.value
-                ? const CenteredItem(item: CircularProgressIndicator())
+                ? const CenteredItem(
+                    item: CircularProgressIndicator(), flex: true)
                 : SearchResults(
                     mediaList: mediaList,
                     scrollController: scrollController,
@@ -122,17 +123,25 @@ class SearchScreen extends HookWidget {
 }
 
 class CenteredItem extends StatelessWidget {
-  const CenteredItem({super.key, required this.item});
+  const CenteredItem({
+    super.key,
+    required this.item,
+    this.flex = false,
+  });
+
   final Widget item;
+  final bool flex;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [item],
-    ));
+    var widget = Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [item],
+      ),
+    );
+    return flex ? Flexible(child: widget) : Center(child: widget);
   }
 }
 
@@ -211,7 +220,7 @@ class SearchResults extends HookWidget {
   @override
   Widget build(BuildContext context) {
     if (mediaList.value.isEmpty) {
-      return const CenteredItem(item: Text("No results found."));
+      return const CenteredItem(item: Text("No results found."), flex: true);
     }
 
     return Expanded(
