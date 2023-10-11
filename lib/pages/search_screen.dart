@@ -12,41 +12,127 @@ class SearchScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Filter State
     final searchText = useState<String>('');
     final mediaType = useState<Enum$MediaType>(Enum$MediaType.$unknown);
-    QueryHookResult<Query$Search> readResult = useQuery$Search(
-      Options$Query$Search(
+
+    // Query State
+    final loadingSearch = useState<bool>(true);
+    final loadingPage = useState<bool>(false);
+    final currentPage = useState<int>(1);
+    final hasNextpage = useState<bool>(false);
+    final mediaList = useState<List<Query$Search$Page$media?>>([]);
+
+    final scrollController = ScrollController();
+    final client = useGraphQLClient();
+
+    useEffect(() {
+      loadingSearch.value = true;
+      // mediaList.value = []; // set empty array to reset scroll position
+
+      client
+          .query$Search(
+        Options$Query$Search(
           variables: Variables$Query$Search(
-        search: searchText.value.isEmpty ? null : searchText.value,
-        perPage: 50,
-        page: 1,
-        type:
-            mediaType.value == Enum$MediaType.$unknown ? null : mediaType.value,
-        isAdult: false, // TODO: use user setting
-      )),
-    );
+            search: searchText.value.isEmpty ? null : searchText.value,
+            perPage: 20,
+            page: 1,
+            type: mediaType.value == Enum$MediaType.$unknown
+                ? null
+                : mediaType.value,
+            isAdult: false, // TODO: use user setting
+          ),
+        ),
+      )
+          .then((result) {
+        if (result.hasException) {
+          print('Result exception occurred: ${result.exception}');
+          return;
+        }
+        print('fetching first page');
+        var data = result.parsedData?.Page;
+        mediaList.value = data?.media ?? [];
+        currentPage.value = data?.pageInfo?.currentPage ?? 1;
+        hasNextpage.value = data?.pageInfo?.hasNextPage ?? false;
+        loadingSearch.value = false;
+      });
+      return null;
+    }, [searchText.value, mediaType.value]);
+
+    void fetchPage() {
+      loadingPage.value = true;
+
+      client
+          .query$Search(Options$Query$Search(
+        variables: Variables$Query$Search(
+          search: searchText.value.isEmpty ? null : searchText.value,
+          perPage: 20,
+          page: currentPage.value + 1,
+          type: mediaType.value == Enum$MediaType.$unknown
+              ? null
+              : mediaType.value,
+          isAdult: false, // TODO: use user setting
+        ),
+      ))
+          .then((result) {
+        if (result.hasException) {
+          print('Result exception occurred: ${result.exception}');
+          return;
+        }
+        print('finished fetching page ${currentPage.value + 1}');
+        var data = result.parsedData?.Page;
+        var newMedia = data?.media ?? [];
+
+        mediaList.value.addAll(newMedia);
+        currentPage.value++;
+        hasNextpage.value = data?.pageInfo?.hasNextPage ?? false;
+        loadingPage.value = false;
+      });
+    }
+
+    // When user scrolls to bottom, fetch paginated results
+    scrollController.addListener(() async {
+      bool scrolledToBottom = scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent;
+      if (scrolledToBottom && !loadingPage.value && hasNextpage.value) {
+        fetchPage();
+      }
+    });
 
     return Scaffold(
-      // TODO: remove or use AppBar
-      // appBar: AppBar(
-      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SearchWidget(searchText: searchText, mediaType: mediaType),
-            SearchResults(readResult: readResult),
+            SearchWidget(
+              searchText: searchText,
+              mediaType: mediaType,
+            ),
+            loadingSearch.value
+                ? const CenteredItem(item: CircularProgressIndicator())
+                : SearchResults(
+                    mediaList: mediaList,
+                    scrollController: scrollController,
+                    loadingPage: loadingPage)
           ],
         ),
       ),
-      // TODO: remove this button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => readResult.refetch(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+}
+
+class CenteredItem extends StatelessWidget {
+  const CenteredItem({super.key, required this.item});
+  final Widget item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [item],
+    ));
   }
 }
 
@@ -57,9 +143,19 @@ class SearchWidget extends StatelessWidget {
     required this.mediaType,
   });
 
-  final ValueNotifier<Enum$MediaType?> mediaType;
-
+  final ValueNotifier<Enum$MediaType> mediaType;
   final ValueNotifier<String> searchText;
+
+  String placeholderText() {
+    switch (mediaType.value) {
+      case (Enum$MediaType.ANIME):
+        return 'Search Anime';
+      case (Enum$MediaType.MANGA):
+        return 'Search Manga';
+      default:
+        return 'Search Anime and Manga';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +163,18 @@ class SearchWidget extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: SearchBar(
           shape: const MaterialStatePropertyAll(RoundedRectangleBorder()),
-          padding: const MaterialStatePropertyAll<EdgeInsets>(
+          padding: const MaterialStatePropertyAll(
               EdgeInsets.symmetric(horizontal: 16.0)),
           onSubmitted: (value) => searchText.value = value,
           leading: const Icon(Icons.search),
+          hintText: placeholderText(),
           trailing: [
             Tooltip(
               message: 'Filter Search',
               child: PopupMenuButton<Enum$MediaType?>(
                 icon: const Icon(Icons.filter_list),
-                onSelected: (value) => mediaType.value = value,
+                onSelected: (value) =>
+                    mediaType.value = value ?? Enum$MediaType.$unknown,
                 itemBuilder: (BuildContext context) => [
                   const PopupMenuItem(
                     value: Enum$MediaType.$unknown,
@@ -101,101 +199,41 @@ class SearchWidget extends StatelessWidget {
 class SearchResults extends HookWidget {
   const SearchResults({
     super.key,
-    required this.readResult,
+    required this.mediaList,
+    required this.scrollController,
+    required this.loadingPage,
   });
 
-  final QueryHookResult<Query$Search> readResult;
+  final ValueNotifier<List<Query$Search$Page$media?>> mediaList;
+  final ScrollController scrollController;
+  final ValueNotifier<bool> loadingPage;
 
   @override
   Widget build(BuildContext context) {
-    final result = readResult.result;
-    ScrollController scrollController = ScrollController();
-
-    // When user scrolls to bottom, fetch paginated results
-    scrollController.addListener(() async {
-      bool scrolledToBottom = scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent;
-      Query$Search$Page$pageInfo? data =
-          readResult.result.parsedData?.Page?.pageInfo;
-      bool hasNextPage = data?.hasNextPage ?? false;
-
-      if (!scrolledToBottom || !hasNextPage) {
-        return;
-      }
-
-      int currentPage = data?.currentPage ?? 0;
-      var options = FetchMoreOptions$Query$Search(
-        variables: Variables$Query$Search(
-          page: currentPage + 1,
-        ),
-        updateQuery: (previousResultData, fetchMoreResultData) {
-          final List<dynamic> combinedResults = [
-            ...previousResultData?['Page']['media'] as List<dynamic>,
-            ...fetchMoreResultData?['Page']['media'] as List<dynamic>
-          ];
-          fetchMoreResultData?['Page']['media'] = combinedResults;
-          return fetchMoreResultData;
-        },
-      );
-
-      await readResult.fetchMore(options);
-    });
-
-    if (result.hasException) {
-      print(result.exception);
-      return const Text("Unable to search.");
-    }
-
-    var gridDelegate = const SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: 600,
-      childAspectRatio: 600 / 200,
-      mainAxisSpacing: 6,
-      crossAxisSpacing: 6,
-    );
-
-    if (result.isLoading) {
-      return Expanded(
-        child: GridView.builder(
-          itemCount: 50,
-          gridDelegate: gridDelegate,
-          itemBuilder: (BuildContext context, int index) {
-            return const Card();
-          },
-        ),
-      );
-    }
-
-    List<Query$Search$Page$media?>? mediaList =
-        result.parsedData?.Page?.media ?? [];
-
-    if (mediaList.isEmpty) {
-      return const Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("No results found."),
-          ],
-        ),
-      );
+    if (mediaList.value.isEmpty) {
+      return const CenteredItem(item: Text("No results found."));
     }
 
     return Expanded(
-      child: GridView.extent(
-        key: const PageStorageKey<String>('resultGridKey'),
-        maxCrossAxisExtent: 600,
-        childAspectRatio: 600 / 200,
-        mainAxisSpacing: 6,
-        crossAxisSpacing: 6,
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 600,
+          childAspectRatio: 600 / 200,
+          mainAxisSpacing: 6,
+          crossAxisSpacing: 6,
+        ),
         controller: scrollController,
-        children: mediaList
-            .map((media) => media == null
-                ? const SizedBox.shrink()
-                : MediaCard(media: media))
-            .toList(),
-        // (BuildContext context, int index) {
-        //   var media = mediaList[index];
-        //   return (media != null) ? MediaCard(media: media) : null;
-        // },
+        itemCount: loadingPage.value
+            ? mediaList.value.length + 1
+            : mediaList.value.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (index == mediaList.value.length) {
+            return const Card(
+                child: CenteredItem(item: CircularProgressIndicator()));
+          }
+          var media = mediaList.value[index];
+          return (media != null) ? MediaCard(media: media) : null;
+        },
       ),
     );
   }
@@ -276,3 +314,13 @@ class MediaCard extends StatelessWidget {
 // - add styling to MediaCard (use chips/tags instead of text), and add color
 // - handle null values in MediaCard
 // - add user status to MediaCard
+// - test out error on graphql client
+
+
+// TODO: refactor search_screen to other files. 
+// /screens
+//   /scearch_screen    
+//     - search_screen.dart
+//     /components
+//       - media_card.dart
+//       - etc.dart
