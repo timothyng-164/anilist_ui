@@ -17,6 +17,7 @@ class SearchLandingView extends HookWidget {
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchLandingPage(
           // TODO: create utility functions to calculate these
+          perPage: 6,
           season: Enum$MediaSeason.FALL,
           seasonYear: 2023,
           nextSeason: Enum$MediaSeason.WINTER,
@@ -34,7 +35,7 @@ class SearchLandingView extends HookWidget {
     if (result.hasException) {
       var exception = result.exception;
       if (exception?.linkException is CacheMissException) {
-        // TODO: look into why this error occurs. Possibly from fragments?
+        // TODO: Look into why this error occurs. Possibly from fragments?
         print('Unable to read cache.');
       } else {
         print('Unknown exception occurred: ${result.exception}');
@@ -59,32 +60,37 @@ class LandingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AnimeSection(
-            title: 'Trending',
-            mediaList: data.trending?.media ?? [],
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Wrap(
+            spacing: 60,
+            runSpacing: 16,
+            children: [
+              AnimeSection(
+                title: 'Trending',
+                mediaList: data.trending?.media ?? [],
+              ),
+              AnimeSection(
+                title: 'Popular This Season',
+                mediaList: data.season?.media ?? [],
+              ),
+              AnimeSection(
+                title: 'Upcoming Next Season',
+                mediaList: data.nextSeason?.media ?? [],
+              ),
+              AnimeSection(
+                title: 'All Time Popular',
+                mediaList: data.popular?.media ?? [],
+              ),
+              AnimeSection(
+                title: 'Top Scoring Anime',
+                mediaList: data.top?.media ?? [],
+              ),
+            ],
           ),
-          AnimeSection(
-            title: 'Popular This Season',
-            mediaList: data.season?.media ?? [],
-          ),
-          AnimeSection(
-            title: 'Upcoming Next Season',
-            mediaList: data.nextSeason?.media ?? [],
-          ),
-          AnimeSection(
-            title: 'All Time Popular',
-            mediaList: data.popular?.media ?? [],
-          ),
-          AnimeSection(
-            title: 'Top Scoring Anime',
-            mediaList: data.top?.media ?? [],
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -98,46 +104,37 @@ class AnimeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var scrollController = ScrollController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
+        Text(title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
         SizedBox(
-          height: cardHeight,
-          child: ListView.separated(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: mediaList.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 16),
-            itemBuilder: (_, i) => AnimeCard(media: mediaList[i]),
+          height: _cardHeight,
+          child: Scrollbar(
+            controller: scrollController,
+            child: ListView.separated(
+              shrinkWrap: true,
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              itemCount: mediaList.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 16),
+              itemBuilder: (_, i) => AnimeCard(media: mediaList[i]),
+            ),
           ),
-        ),
-      ],
-    );
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(title),
-        ListView.separated(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: mediaList.length,
-          separatorBuilder: (context, index) => const SizedBox(width: 8),
-          itemBuilder: (context, index) {
-            var media = mediaList[index];
-            return (media == null)
-                ? const SizedBox.shrink()
-                : AnimeCard(media: media);
-          },
         ),
       ],
     );
   }
 }
 
-double cardHeight = 240;
-double cardWidth = 120;
+double _cardHeight = 240;
+double _cardWidth = 120;
 
 class AnimeCard extends StatelessWidget {
   const AnimeCard({super.key, required this.media});
@@ -149,8 +146,8 @@ class AnimeCard extends StatelessWidget {
     if (media == null) return SizedBox.shrink();
 
     return SizedBox(
-      height: cardHeight,
-      width: cardWidth,
+      height: _cardHeight,
+      width: _cardWidth,
       child: Column(
         children: [
           CachedNetworkImage(
@@ -158,7 +155,7 @@ class AnimeCard extends StatelessWidget {
             placeholder: (context, url) => const Center(child: SizedBox()),
             // TODO: use 230x345 for web view
             height: 180,
-            width: 120,
+            width: _cardWidth,
             fit: BoxFit.contain,
           ),
           Text(

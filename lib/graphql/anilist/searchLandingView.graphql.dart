@@ -239,13 +239,6 @@ const fragmentDefinitionmedia = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
-          name: NameNode(value: 'extraLarge'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
           name: NameNode(value: 'large'),
           alias: null,
           arguments: [],
@@ -254,13 +247,6 @@ const fragmentDefinitionmedia = FragmentDefinitionNode(
         ),
         FieldNode(
           name: NameNode(value: 'medium'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'color'),
           alias: null,
           arguments: [],
           directives: [],
@@ -448,48 +434,34 @@ class _CopyWithStubImpl$Fragment$media$title<TRes>
 
 class Fragment$media$coverImage {
   Fragment$media$coverImage({
-    this.extraLarge,
     this.large,
     this.medium,
-    this.color,
     this.$__typename = 'MediaCoverImage',
   });
 
   factory Fragment$media$coverImage.fromJson(Map<String, dynamic> json) {
-    final l$extraLarge = json['extraLarge'];
     final l$large = json['large'];
     final l$medium = json['medium'];
-    final l$color = json['color'];
     final l$$__typename = json['__typename'];
     return Fragment$media$coverImage(
-      extraLarge: (l$extraLarge as String?),
       large: (l$large as String?),
       medium: (l$medium as String?),
-      color: (l$color as String?),
       $__typename: (l$$__typename as String),
     );
   }
-
-  final String? extraLarge;
 
   final String? large;
 
   final String? medium;
 
-  final String? color;
-
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$extraLarge = extraLarge;
-    _resultData['extraLarge'] = l$extraLarge;
     final l$large = large;
     _resultData['large'] = l$large;
     final l$medium = medium;
     _resultData['medium'] = l$medium;
-    final l$color = color;
-    _resultData['color'] = l$color;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -497,16 +469,12 @@ class Fragment$media$coverImage {
 
   @override
   int get hashCode {
-    final l$extraLarge = extraLarge;
     final l$large = large;
     final l$medium = medium;
-    final l$color = color;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$extraLarge,
       l$large,
       l$medium,
-      l$color,
       l$$__typename,
     ]);
   }
@@ -520,11 +488,6 @@ class Fragment$media$coverImage {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$extraLarge = extraLarge;
-    final lOther$extraLarge = other.extraLarge;
-    if (l$extraLarge != lOther$extraLarge) {
-      return false;
-    }
     final l$large = large;
     final lOther$large = other.large;
     if (l$large != lOther$large) {
@@ -533,11 +496,6 @@ class Fragment$media$coverImage {
     final l$medium = medium;
     final lOther$medium = other.medium;
     if (l$medium != lOther$medium) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (l$color != lOther$color) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -568,10 +526,8 @@ abstract class CopyWith$Fragment$media$coverImage<TRes> {
       _CopyWithStubImpl$Fragment$media$coverImage;
 
   TRes call({
-    String? extraLarge,
     String? large,
     String? medium,
-    String? color,
     String? $__typename,
   });
 }
@@ -590,19 +546,13 @@ class _CopyWithImpl$Fragment$media$coverImage<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? extraLarge = _undefined,
     Object? large = _undefined,
     Object? medium = _undefined,
-    Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$media$coverImage(
-        extraLarge: extraLarge == _undefined
-            ? _instance.extraLarge
-            : (extraLarge as String?),
         large: large == _undefined ? _instance.large : (large as String?),
         medium: medium == _undefined ? _instance.medium : (medium as String?),
-        color: color == _undefined ? _instance.color : (color as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -616,10 +566,8 @@ class _CopyWithStubImpl$Fragment$media$coverImage<TRes>
   TRes _res;
 
   call({
-    String? extraLarge,
     String? large,
     String? medium,
-    String? color,
     String? $__typename,
   }) =>
       _res;
@@ -627,12 +575,14 @@ class _CopyWithStubImpl$Fragment$media$coverImage<TRes>
 
 class Variables$Query$SearchLandingPage {
   factory Variables$Query$SearchLandingPage({
+    int? perPage,
     Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaSeason? nextSeason,
     int? nextYear,
   }) =>
       Variables$Query$SearchLandingPage._({
+        if (perPage != null) r'perPage': perPage,
         if (season != null) r'season': season,
         if (seasonYear != null) r'seasonYear': seasonYear,
         if (nextSeason != null) r'nextSeason': nextSeason,
@@ -644,6 +594,10 @@ class Variables$Query$SearchLandingPage {
   factory Variables$Query$SearchLandingPage.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('perPage')) {
+      final l$perPage = data['perPage'];
+      result$data['perPage'] = (l$perPage as int?);
+    }
     if (data.containsKey('season')) {
       final l$season = data['season'];
       result$data['season'] = l$season == null
@@ -669,6 +623,8 @@ class Variables$Query$SearchLandingPage {
 
   Map<String, dynamic> _$data;
 
+  int? get perPage => (_$data['perPage'] as int?);
+
   Enum$MediaSeason? get season => (_$data['season'] as Enum$MediaSeason?);
 
   int? get seasonYear => (_$data['seasonYear'] as int?);
@@ -680,6 +636,10 @@ class Variables$Query$SearchLandingPage {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('perPage')) {
+      final l$perPage = perPage;
+      result$data['perPage'] = l$perPage;
+    }
     if (_$data.containsKey('season')) {
       final l$season = season;
       result$data['season'] =
@@ -714,6 +674,14 @@ class Variables$Query$SearchLandingPage {
     }
     if (!(other is Variables$Query$SearchLandingPage) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$perPage = perPage;
+    final lOther$perPage = other.perPage;
+    if (_$data.containsKey('perPage') != other._$data.containsKey('perPage')) {
+      return false;
+    }
+    if (l$perPage != lOther$perPage) {
       return false;
     }
     final l$season = season;
@@ -756,11 +724,13 @@ class Variables$Query$SearchLandingPage {
 
   @override
   int get hashCode {
+    final l$perPage = perPage;
     final l$season = season;
     final l$seasonYear = seasonYear;
     final l$nextSeason = nextSeason;
     final l$nextYear = nextYear;
     return Object.hashAll([
+      _$data.containsKey('perPage') ? l$perPage : const {},
       _$data.containsKey('season') ? l$season : const {},
       _$data.containsKey('seasonYear') ? l$seasonYear : const {},
       _$data.containsKey('nextSeason') ? l$nextSeason : const {},
@@ -779,6 +749,7 @@ abstract class CopyWith$Variables$Query$SearchLandingPage<TRes> {
       _CopyWithStubImpl$Variables$Query$SearchLandingPage;
 
   TRes call({
+    int? perPage,
     Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaSeason? nextSeason,
@@ -800,6 +771,7 @@ class _CopyWithImpl$Variables$Query$SearchLandingPage<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? perPage = _undefined,
     Object? season = _undefined,
     Object? seasonYear = _undefined,
     Object? nextSeason = _undefined,
@@ -807,6 +779,7 @@ class _CopyWithImpl$Variables$Query$SearchLandingPage<TRes>
   }) =>
       _then(Variables$Query$SearchLandingPage._({
         ..._instance._$data,
+        if (perPage != _undefined) 'perPage': (perPage as int?),
         if (season != _undefined) 'season': (season as Enum$MediaSeason?),
         if (seasonYear != _undefined) 'seasonYear': (seasonYear as int?),
         if (nextSeason != _undefined)
@@ -822,6 +795,7 @@ class _CopyWithStubImpl$Variables$Query$SearchLandingPage<TRes>
   TRes _res;
 
   call({
+    int? perPage,
     Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaSeason? nextSeason,
@@ -1114,6 +1088,15 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
     name: NameNode(value: 'SearchLandingPage'),
     variableDefinitions: [
       VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'perPage')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'season')),
         type: NamedTypeNode(
           name: NameNode(value: 'MediaSeason'),
@@ -1162,7 +1145,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'perPage'),
-            value: IntValueNode(value: '6'),
+            value: VariableNode(name: NameNode(value: 'perPage')),
           ),
         ],
         directives: [],
@@ -1218,7 +1201,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'perPage'),
-            value: IntValueNode(value: '6'),
+            value: VariableNode(name: NameNode(value: 'perPage')),
           ),
         ],
         directives: [],
@@ -1282,7 +1265,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'perPage'),
-            value: IntValueNode(value: '6'),
+            value: VariableNode(name: NameNode(value: 'perPage')),
           ),
         ],
         directives: [],
@@ -1346,7 +1329,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'perPage'),
-            value: IntValueNode(value: '6'),
+            value: VariableNode(name: NameNode(value: 'perPage')),
           ),
         ],
         directives: [],
@@ -1402,7 +1385,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'perPage'),
-            value: IntValueNode(value: '6'),
+            value: VariableNode(name: NameNode(value: 'perPage')),
           ),
         ],
         directives: [],

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
+import 'package:pretty_json/pretty_json.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key, required this.title});
@@ -14,8 +15,8 @@ class SearchScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     // Filter State
-    final searchText = useState<String>('');
-    final mediaType = useState<Enum$MediaType>(Enum$MediaType.$unknown);
+    final searchText = useState<String?>(null);
+    final mediaType = useState<Enum$MediaType?>(null);
 
     // Query State
     final searchEnabled = useState<bool>(false);
@@ -31,11 +32,15 @@ class SearchScreen extends HookWidget {
 
     Options$Query$Search queryOptions({required int page}) {
       var variables = Variables$Query$Search(
-        search: searchText.value.isEmpty ? null : searchText.value,
+        search: searchText.value == null || searchText.value!.isEmpty
+            ? null
+            : searchText.value,
         perPage: 25,
         page: page,
-        type:
-            mediaType.value == Enum$MediaType.$unknown ? null : mediaType.value,
+        type: (mediaType.value == Enum$MediaType.$unknown ||
+                mediaType.value == null)
+            ? null
+            : mediaType.value,
         isAdult: false, // TODO: use user setting
       );
 
@@ -92,8 +97,9 @@ class SearchScreen extends HookWidget {
 
     // When user scrolls to bottom, fetch paginated results
     scrollController.addListener(() async {
-      bool scrolledToBottom = scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent;
+      bool scrolledToBottom = scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 50;
+
       if (scrolledToBottom &&
           !isLoadingMore.value &&
           hasNextpage.value &&
@@ -177,8 +183,8 @@ class SearchFilters extends StatelessWidget {
     required this.searchEnabled,
   });
 
-  final ValueNotifier<Enum$MediaType> mediaType;
-  final ValueNotifier<String> searchText;
+  final ValueNotifier<Enum$MediaType?> mediaType;
+  final ValueNotifier<String?> searchText;
   final ValueNotifier<bool> searchEnabled;
 
   String placeholderText() {
@@ -356,18 +362,15 @@ class MediaCard extends StatelessWidget {
 // - add user status to MediaCard
 // - test out error on graphql client
 
-
-// TODO: refactor search_screen to other files. 
+// TODO: refactor search_screen to other files.
 // /screens
-//   /scearch_screen    
+//   /scearch_screen
 //     - search_screen.dart
 //     /components
 //       - media_card.dart
 //       - etc.dart
 
-
 // TODO: overall project
 // 1. manga/anime page by ID
 // 2. signin funtionality
 // 3. My List page
-
