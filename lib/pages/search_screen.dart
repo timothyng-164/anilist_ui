@@ -165,7 +165,7 @@ class CenteredItem extends StatelessWidget {
         children: [item],
       ),
     );
-    return flex ? Flexible(child: widget) : Center(child: widget);
+    return flex ? Flexible(child: widget) : widget;
   }
 }
 

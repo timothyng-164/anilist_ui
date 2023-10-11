@@ -51,6 +51,7 @@ fragment media on Media {
   coverImage {
     extraLarge
     large
+    medium
     color
   }
   # startDate {

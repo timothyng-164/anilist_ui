@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/searchLandingView.graphql.dart';
 import 'package:anilist_ui/pages/search_screen.dart';
@@ -36,6 +34,7 @@ class SearchLandingView extends HookWidget {
     if (result.hasException) {
       var exception = result.exception;
       if (exception?.linkException is CacheMissException) {
+        // TODO: look into why this error occurs. Possibly from fragments?
         print('Unable to read cache.');
       } else {
         print('Unknown exception occurred: ${result.exception}');
@@ -43,6 +42,9 @@ class SearchLandingView extends HookWidget {
             flex: true, item: Text('An error has occurred.'));
       }
     }
+
+    var items = result.parsedData?.trending?.media ?? [];
+    print(items.length);
 
     return LandingContent(
       data: result.parsedData ?? Query$SearchLandingPage(),
@@ -57,29 +59,33 @@ class LandingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AnimeSection(
-          title: 'Trending',
-          mediaList: data.trending?.media ?? [],
-        ),
-        AnimeSection(
-          title: 'Popular This Season',
-          mediaList: data.season?.media ?? [],
-        ),
-        AnimeSection(
-          title: 'Upcoming Next Season',
-          mediaList: data.nextSeason?.media ?? [],
-        ),
-        AnimeSection(
-          title: 'All Time Popular',
-          mediaList: data.popular?.media ?? [],
-        ),
-        AnimeSection(
-          title: 'Top Scoring Anime',
-          mediaList: data.top?.media ?? [],
-        ),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AnimeSection(
+            title: 'Trending',
+            mediaList: data.trending?.media ?? [],
+          ),
+          AnimeSection(
+            title: 'Popular This Season',
+            mediaList: data.season?.media ?? [],
+          ),
+          AnimeSection(
+            title: 'Upcoming Next Season',
+            mediaList: data.nextSeason?.media ?? [],
+          ),
+          AnimeSection(
+            title: 'All Time Popular',
+            mediaList: data.popular?.media ?? [],
+          ),
+          AnimeSection(
+            title: 'Top Scoring Anime',
+            mediaList: data.top?.media ?? [],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -93,46 +99,76 @@ class AnimeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
         SizedBox(
-          height: 400,
-          width: 400,
-          child: ListView.builder(
+          height: cardHeight,
+          child: ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: mediaList.length,
-            itemBuilder: (context, index) {
-              var media = mediaList[index];
-              return (media == null)
-                  ? const SizedBox.shrink()
-                  : AnimeCard(media: media);
-            },
+            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            itemBuilder: (_, i) => AnimeCard(media: mediaList[i]),
           ),
+        ),
+      ],
+    );
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(title),
+        ListView.separated(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: mediaList.length,
+          separatorBuilder: (context, index) => const SizedBox(width: 8),
+          itemBuilder: (context, index) {
+            var media = mediaList[index];
+            return (media == null)
+                ? const SizedBox.shrink()
+                : AnimeCard(media: media);
+          },
         ),
       ],
     );
   }
 }
 
+double cardHeight = 240;
+double cardWidth = 120;
+
 class AnimeCard extends StatelessWidget {
   const AnimeCard({super.key, required this.media});
 
-  final Fragment$media media;
+  final Fragment$media? media;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // CachedNetworkImage(
-        //   imageUrl: media.coverImage?.large ?? '',
-        //   placeholder: (context, url) => const Center(child: SizedBox()),
-        //   // height: 400,
-        //   // width: 100,
-        //   // fit: BoxFit.fitHeight,
-        // ),
-        Text(media.title?.userPreferred ?? ''),
-      ],
+    if (media == null) return SizedBox.shrink();
+
+    return SizedBox(
+      height: cardHeight,
+      width: cardWidth,
+      child: Column(
+        children: [
+          CachedNetworkImage(
+            imageUrl: media?.coverImage?.large ?? '',
+            placeholder: (context, url) => const Center(child: SizedBox()),
+            // TODO: use 230x345 for web view
+            height: 180,
+            width: 120,
+            fit: BoxFit.contain,
+          ),
+          Text(
+            textAlign: TextAlign.start,
+            media?.title?.userPreferred ?? '',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+        ],
+      ),
     );
   }
 }
