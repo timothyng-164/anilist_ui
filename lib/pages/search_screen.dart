@@ -25,12 +25,11 @@ class SearchScreen extends HookWidget {
 
     final scrollController = ScrollController();
     final client = useGraphQLClient();
-    const pageSize = 20;
 
     Options$Query$Search queryOptions({required int page}) {
       var variables = Variables$Query$Search(
         search: searchText.value.isEmpty ? null : searchText.value,
-        perPage: pageSize,
+        perPage: 20,
         page: page,
         type:
             mediaType.value == Enum$MediaType.$unknown ? null : mediaType.value,
