@@ -681,7 +681,7 @@ packages:
     source: hosted
     version: "1.5.1"
   pretty_json:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: pretty_json
       sha256: f1e9395d2c4c2bafacbcac0aedc77dbc25a29f80b690438e5f0cb5be8d8626c2

@@ -1,9 +1,10 @@
-import 'package:anilist_ui/graphql/schema.graphql.dart';
+import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
+import 'package:anilist_ui/pages/search_landing_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:anilist_ui/graphql/search.graphql.dart';
+import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key, required this.title});
@@ -17,6 +18,7 @@ class SearchScreen extends HookWidget {
     final mediaType = useState<Enum$MediaType>(Enum$MediaType.$unknown);
 
     // Query State
+    final searchEnabled = useState<bool>(false);
     final isLoading = useState<bool>(true);
     final isLoadingMore = useState<bool>(false);
     final hasError = useState<bool>(false);
@@ -44,10 +46,12 @@ class SearchScreen extends HookWidget {
 
     void handleError(dynamic error) {
       hasError.value = true;
-      print('Unknown error occurred: $error');
+      print('Unknown exception occurred: $error');
     }
 
     useEffect(() {
+      if (!searchEnabled.value) return;
+
       isLoading.value = true;
 
       client.query$Search(queryOptions(page: 1)).then((result) {
@@ -90,7 +94,10 @@ class SearchScreen extends HookWidget {
     scrollController.addListener(() async {
       bool scrolledToBottom = scrollController.position.pixels ==
           scrollController.position.maxScrollExtent;
-      if (scrolledToBottom && !isLoadingMore.value && hasNextpage.value) {
+      if (scrolledToBottom &&
+          !isLoadingMore.value &&
+          hasNextpage.value &&
+          searchEnabled.value) {
         fetchPage();
       }
     });
@@ -101,6 +108,10 @@ class SearchScreen extends HookWidget {
           flex: true,
           item: Text('An error has occured. Please try again.'),
         );
+      }
+
+      if (!searchEnabled.value) {
+        return const SearchLandingView();
       }
 
       if (isLoading.value) {
@@ -122,9 +133,10 @@ class SearchScreen extends HookWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SearchWidget(
+            SearchFilters(
               searchText: searchText,
               mediaType: mediaType,
+              searchEnabled: searchEnabled,
             ),
             displayContent(),
           ],
@@ -157,15 +169,17 @@ class CenteredItem extends StatelessWidget {
   }
 }
 
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({
+class SearchFilters extends StatelessWidget {
+  const SearchFilters({
     super.key,
     required this.searchText,
     required this.mediaType,
+    required this.searchEnabled,
   });
 
   final ValueNotifier<Enum$MediaType> mediaType;
   final ValueNotifier<String> searchText;
+  final ValueNotifier<bool> searchEnabled;
 
   String placeholderText() {
     switch (mediaType.value) {
@@ -186,7 +200,10 @@ class SearchWidget extends StatelessWidget {
           shape: const MaterialStatePropertyAll(RoundedRectangleBorder()),
           padding: const MaterialStatePropertyAll(
               EdgeInsets.symmetric(horizontal: 16.0)),
-          onSubmitted: (value) => searchText.value = value,
+          onSubmitted: (value) {
+            searchEnabled.value = true;
+            searchText.value = value;
+          },
           leading: const Icon(Icons.search),
           hintText: placeholderText(),
           trailing: [
@@ -194,8 +211,10 @@ class SearchWidget extends StatelessWidget {
               message: 'Filter Search',
               child: PopupMenuButton<Enum$MediaType?>(
                 icon: const Icon(Icons.filter_list),
-                onSelected: (value) =>
-                    mediaType.value = value ?? Enum$MediaType.$unknown,
+                onSelected: (value) {
+                  searchEnabled.value = true;
+                  mediaType.value = value ?? Enum$MediaType.$unknown;
+                },
                 itemBuilder: (BuildContext context) => [
                   const PopupMenuItem(
                     value: Enum$MediaType.$unknown,
@@ -331,7 +350,7 @@ class MediaCard extends StatelessWidget {
   }
 }
 
-// TODO:
+// TODO: on this page
 // - add styling to MediaCard (use chips/tags instead of text), and add color
 // - handle null values in MediaCard
 // - add user status to MediaCard
@@ -345,3 +364,10 @@ class MediaCard extends StatelessWidget {
 //     /components
 //       - media_card.dart
 //       - etc.dart
+
+
+// TODO: overall project
+// 1. manga/anime page by ID
+// 2. signin funtionality
+// 3. My List page
+
