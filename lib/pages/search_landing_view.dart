@@ -61,6 +61,7 @@ class LandingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      // TODO: hide this scrollbar
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -104,16 +105,13 @@ class AnimeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var scrollController = ScrollController();
+    ScrollController scrollController = ScrollController();
+    TextTheme textTheme = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
+        Text(title, style: textTheme.titleLarge),
         SizedBox(
           height: _cardHeight,
           child: Scrollbar(
@@ -169,3 +167,7 @@ class AnimeCard extends StatelessWidget {
     );
   }
 }
+
+
+// cardWidth = (boxWidth / perPage) - boxPadding - cardSpaceBetween
+// cardHeight = cardWidth * (3/2)

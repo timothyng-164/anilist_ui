@@ -1,6 +1,7 @@
 import 'package:anilist_ui/pages/page_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -38,15 +39,32 @@ class AnilistApp extends StatelessWidget {
     final link = authLink.concat(httpLink);
 
     return GraphQLProvider(
-        client: ValueNotifier(
-            GraphQLClient(link: link, cache: GraphQLCache(store: HiveStore()))),
-        child: MaterialApp(
-          title: 'Anilist UI',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const PageSelector(),
-        ));
+      client: ValueNotifier(
+          GraphQLClient(link: link, cache: GraphQLCache(store: HiveStore()))),
+      child: MaterialApp(
+        title: 'Anilist UI',
+        theme: _buildTheme(context),
+        home: const PageSelector(),
+      ),
+    );
+  }
+
+  ThemeData _buildTheme(context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    var baseTheme = ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    );
+
+    return baseTheme.copyWith(
+      textTheme: GoogleFonts.manropeTextTheme(baseTheme.textTheme).copyWith(
+        // default style for Text widget
+        bodyMedium: GoogleFonts.manrope(
+          textStyle: textTheme.labelLarge,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
   }
 }

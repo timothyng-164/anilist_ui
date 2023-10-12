@@ -327,6 +327,7 @@ class MediaCard extends StatelessWidget {
             Text(
               media.title?.userPreferred ?? '',
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 4),
             Row(children: [
