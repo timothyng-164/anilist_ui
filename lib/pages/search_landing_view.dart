@@ -61,7 +61,6 @@ class LandingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      // TODO: hide this scrollbar
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
