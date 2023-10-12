@@ -7,6 +7,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
 import 'package:pretty_json/pretty_json.dart';
 
+import '../common_widgets/centered_item.dart';
+
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key, required this.title});
 
@@ -149,29 +151,6 @@ class SearchScreen extends HookWidget {
         ),
       ),
     );
-  }
-}
-
-class CenteredItem extends StatelessWidget {
-  const CenteredItem({
-    super.key,
-    required this.item,
-    this.flex = false,
-  });
-
-  final Widget item;
-  final bool flex;
-
-  @override
-  Widget build(BuildContext context) {
-    var widget = Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [item],
-      ),
-    );
-    return flex ? Flexible(child: widget) : widget;
   }
 }
 
