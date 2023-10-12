@@ -17,7 +17,7 @@ class SearchLandingView extends HookWidget {
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchLandingPage(
           // TODO: create utility functions to calculate these
-          perPage: 6,
+          perPage: 10,
           season: Enum$MediaSeason.FALL,
           seasonYear: 2023,
           nextSeason: Enum$MediaSeason.WINTER,
@@ -85,13 +85,16 @@ class LandingContent extends StatelessWidget {
 
     return Expanded(
       child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: Row(
           children: [
             const Spacer(flex: 1),
             Expanded(
-              flex: 30,
-              child: Column(children: animeSections),
+              flex: 25,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 50,
+                children: animeSections,
+              ),
             ),
             const Spacer(flex: 1),
           ],
@@ -115,6 +118,7 @@ class AnimeSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 15),
         Text(title, style: textTheme.titleLarge),
         SizedBox(
           height: _cardHeight,
@@ -125,7 +129,7 @@ class AnimeSection extends StatelessWidget {
               controller: scrollController,
               scrollDirection: Axis.horizontal,
               itemCount: mediaList.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 16),
+              separatorBuilder: (_, __) => const SizedBox(width: 20),
               itemBuilder: (_, i) => AnimeCard(media: mediaList[i]),
             ),
           ),
@@ -145,7 +149,9 @@ class AnimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (media == null) return SizedBox.shrink();
+    if (media == null) {
+      return const SizedBox.shrink();
+    }
 
     return SizedBox(
       height: _cardHeight,
@@ -171,7 +177,3 @@ class AnimeCard extends StatelessWidget {
     );
   }
 }
-
-
-// cardWidth = (boxWidth / perPage) - boxPadding - cardSpaceBetween
-// cardHeight = cardWidth * (3/2)
