@@ -60,36 +60,41 @@ class LandingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var animeSections = [
+      AnimeSection(
+        title: 'Trending',
+        mediaList: data.trending?.media ?? [],
+      ),
+      AnimeSection(
+        title: 'Popular This Season',
+        mediaList: data.season?.media ?? [],
+      ),
+      AnimeSection(
+        title: 'Upcoming Next Season',
+        mediaList: data.nextSeason?.media ?? [],
+      ),
+      AnimeSection(
+        title: 'All Time Popular',
+        mediaList: data.popular?.media ?? [],
+      ),
+      AnimeSection(
+        title: 'Top Scoring Anime',
+        mediaList: data.top?.media ?? [],
+      ),
+    ];
+
     return Expanded(
       child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Wrap(
-            spacing: 60,
-            runSpacing: 16,
-            children: [
-              AnimeSection(
-                title: 'Trending',
-                mediaList: data.trending?.media ?? [],
-              ),
-              AnimeSection(
-                title: 'Popular This Season',
-                mediaList: data.season?.media ?? [],
-              ),
-              AnimeSection(
-                title: 'Upcoming Next Season',
-                mediaList: data.nextSeason?.media ?? [],
-              ),
-              AnimeSection(
-                title: 'All Time Popular',
-                mediaList: data.popular?.media ?? [],
-              ),
-              AnimeSection(
-                title: 'Top Scoring Anime',
-                mediaList: data.top?.media ?? [],
-              ),
-            ],
-          ),
+        scrollDirection: Axis.vertical,
+        child: Row(
+          children: [
+            const Spacer(flex: 1),
+            Expanded(
+              flex: 30,
+              child: Column(children: animeSections),
+            ),
+            const Spacer(flex: 1),
+          ],
         ),
       ),
     );
