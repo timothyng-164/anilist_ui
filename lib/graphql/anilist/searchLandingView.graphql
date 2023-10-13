@@ -53,4 +53,9 @@ fragment media on Media {
     large
     medium
   }
+  nextAiringEpisode {
+    episode
+    airingAt
+    timeUntilAiring
+  }
 }

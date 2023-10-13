@@ -21,7 +21,7 @@ class SearchLandingView extends HookWidget {
       Options$Query$SearchLandingPage(
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchLandingPage(
-          perPage: 10,
+          perPage: 8,
           season: currentSeason,
           seasonYear: currentDate.year,
           nextSeason: nextSeason,
@@ -155,8 +155,47 @@ class AnimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     if (media == null) {
       return const SizedBox.shrink();
+    }
+
+    Widget recentAiringTag() {
+      if (media?.nextAiringEpisode?.episode == null ||
+          media?.nextAiringEpisode?.airingAt == null) {
+        return const SizedBox.shrink();
+      }
+
+      DateTime airingDate = DateTime.fromMillisecondsSinceEpoch(
+          media!.nextAiringEpisode!.airingAt * 1000);
+      var airingDifference = airingDate.difference(DateTime.now());
+      if (airingDifference.inDays > 7 || airingDifference.inMicroseconds < 0) {
+        return const SizedBox.shrink();
+      }
+
+      String text = 'ep. ${media?.nextAiringEpisode?.episode} in ';
+      if (airingDifference.inMinutes < 60) {
+        text += '${airingDifference.inMinutes} mins';
+      }
+      if (airingDifference.inHours < 24) {
+        text += '${airingDifference.inHours} hours';
+      } else {
+        text += '${airingDifference.inDays} days';
+      }
+
+      return Padding(
+        padding: const EdgeInsets.only(top: 8, left: 2),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(0, 0, 0, 0.7),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(text,
+              style: textTheme.labelMedium!.copyWith(color: Colors.white)),
+        ),
+      );
     }
 
     return SizedBox(
@@ -164,16 +203,22 @@ class AnimeCard extends StatelessWidget {
       width: _cardWidth,
       child: Column(
         children: [
-          CachedNetworkImage(
-            imageUrl: media?.coverImage?.large ?? '',
-            placeholder: (context, url) => const Center(child: SizedBox()),
-            height: _cardWidth * 3/2, 
-            width: _cardWidth,
-            fit: BoxFit.contain,
+          Stack(
+            alignment: Alignment.topLeft,
+            children: [
+              CachedNetworkImage(
+                imageUrl: media?.coverImage?.large ?? '',
+                placeholder: (context, url) => const Center(child: SizedBox()),
+                height: _cardWidth * 3 / 2,
+                width: _cardWidth,
+                fit: BoxFit.contain,
+              ),
+              recentAiringTag(),
+            ],
           ),
           Text(
-            textAlign: TextAlign.start,
             media?.title?.userPreferred ?? '',
+            textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
