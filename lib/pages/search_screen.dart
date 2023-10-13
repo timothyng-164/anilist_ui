@@ -7,7 +7,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
 import 'package:pretty_json/pretty_json.dart';
 
-import '../common_widgets/centered_item.dart';
+import '../common/widgets/centered_item.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key, required this.title});
@@ -292,6 +292,7 @@ class MediaCard extends StatelessWidget {
       if (imageUrl != null)
         CachedNetworkImage(
           imageUrl: imageUrl,
+          // TODO: get height from LayoutBuilder
           height: 400,
           width: 100,
           fit: BoxFit.fitHeight,

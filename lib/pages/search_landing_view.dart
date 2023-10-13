@@ -5,23 +5,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../common_widgets/centered_item.dart';
+import '../common/util/date_util.dart';
+import '../common/widgets/centered_item.dart';
 
 class SearchLandingView extends HookWidget {
   const SearchLandingView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    DateTime currentDate = DateTime.now();
+    var currentSeason = getSeason(currentDate);
+    var nextSeason = getNextSeason(currentSeason);
+
     var query = useQuery$SearchLandingPage(
       Options$Query$SearchLandingPage(
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchLandingPage(
-          // TODO: create utility functions to calculate these
           perPage: 10,
-          season: Enum$MediaSeason.FALL,
-          seasonYear: 2023,
-          nextSeason: Enum$MediaSeason.WINTER,
-          nextYear: 2023,
+          season: currentSeason,
+          seasonYear: currentDate.year,
+          nextSeason: nextSeason,
+          nextYear: nextSeason == Enum$MediaSeason.WINTER
+              ? currentDate.year + 1
+              : currentDate.year,
         ),
       ),
     );
@@ -161,8 +167,8 @@ class AnimeCard extends StatelessWidget {
           CachedNetworkImage(
             imageUrl: media?.coverImage?.large ?? '',
             placeholder: (context, url) => const Center(child: SizedBox()),
-            // TODO: use 230x345 for web view
-            height: 180,
+            // 
+            height: _cardWidth * 3/2, 
             width: _cardWidth,
             fit: BoxFit.contain,
           ),
