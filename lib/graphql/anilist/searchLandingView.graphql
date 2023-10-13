@@ -55,7 +55,6 @@ fragment media on Media {
   }
   nextAiringEpisode {
     episode
-    airingAt
     timeUntilAiring
   }
 }

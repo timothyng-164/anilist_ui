@@ -310,13 +310,6 @@ const fragmentDefinitionmedia = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
-          name: NameNode(value: 'airingAt'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
           name: NameNode(value: 'timeUntilAiring'),
           alias: null,
           arguments: [],
@@ -647,27 +640,22 @@ class _CopyWithStubImpl$Fragment$media$coverImage<TRes>
 class Fragment$media$nextAiringEpisode {
   Fragment$media$nextAiringEpisode({
     required this.episode,
-    required this.airingAt,
     required this.timeUntilAiring,
     this.$__typename = 'AiringSchedule',
   });
 
   factory Fragment$media$nextAiringEpisode.fromJson(Map<String, dynamic> json) {
     final l$episode = json['episode'];
-    final l$airingAt = json['airingAt'];
     final l$timeUntilAiring = json['timeUntilAiring'];
     final l$$__typename = json['__typename'];
     return Fragment$media$nextAiringEpisode(
       episode: (l$episode as int),
-      airingAt: (l$airingAt as int),
       timeUntilAiring: (l$timeUntilAiring as int),
       $__typename: (l$$__typename as String),
     );
   }
 
   final int episode;
-
-  final int airingAt;
 
   final int timeUntilAiring;
 
@@ -677,8 +665,6 @@ class Fragment$media$nextAiringEpisode {
     final _resultData = <String, dynamic>{};
     final l$episode = episode;
     _resultData['episode'] = l$episode;
-    final l$airingAt = airingAt;
-    _resultData['airingAt'] = l$airingAt;
     final l$timeUntilAiring = timeUntilAiring;
     _resultData['timeUntilAiring'] = l$timeUntilAiring;
     final l$$__typename = $__typename;
@@ -689,12 +675,10 @@ class Fragment$media$nextAiringEpisode {
   @override
   int get hashCode {
     final l$episode = episode;
-    final l$airingAt = airingAt;
     final l$timeUntilAiring = timeUntilAiring;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$episode,
-      l$airingAt,
       l$timeUntilAiring,
       l$$__typename,
     ]);
@@ -712,11 +696,6 @@ class Fragment$media$nextAiringEpisode {
     final l$episode = episode;
     final lOther$episode = other.episode;
     if (l$episode != lOther$episode) {
-      return false;
-    }
-    final l$airingAt = airingAt;
-    final lOther$airingAt = other.airingAt;
-    if (l$airingAt != lOther$airingAt) {
       return false;
     }
     final l$timeUntilAiring = timeUntilAiring;
@@ -753,7 +732,6 @@ abstract class CopyWith$Fragment$media$nextAiringEpisode<TRes> {
 
   TRes call({
     int? episode,
-    int? airingAt,
     int? timeUntilAiring,
     String? $__typename,
   });
@@ -774,7 +752,6 @@ class _CopyWithImpl$Fragment$media$nextAiringEpisode<TRes>
 
   TRes call({
     Object? episode = _undefined,
-    Object? airingAt = _undefined,
     Object? timeUntilAiring = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -782,9 +759,6 @@ class _CopyWithImpl$Fragment$media$nextAiringEpisode<TRes>
         episode: episode == _undefined || episode == null
             ? _instance.episode
             : (episode as int),
-        airingAt: airingAt == _undefined || airingAt == null
-            ? _instance.airingAt
-            : (airingAt as int),
         timeUntilAiring:
             timeUntilAiring == _undefined || timeUntilAiring == null
                 ? _instance.timeUntilAiring
@@ -803,7 +777,6 @@ class _CopyWithStubImpl$Fragment$media$nextAiringEpisode<TRes>
 
   call({
     int? episode,
-    int? airingAt,
     int? timeUntilAiring,
     String? $__typename,
   }) =>

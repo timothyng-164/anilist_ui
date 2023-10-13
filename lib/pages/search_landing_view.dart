@@ -163,25 +163,27 @@ class AnimeCard extends StatelessWidget {
 
     Widget recentAiringTag() {
       if (media?.nextAiringEpisode?.episode == null ||
-          media?.nextAiringEpisode?.airingAt == null) {
+          media?.nextAiringEpisode?.timeUntilAiring == null) {
         return const SizedBox.shrink();
       }
 
-      DateTime airingDate = DateTime.fromMillisecondsSinceEpoch(
-          media!.nextAiringEpisode!.airingAt * 1000);
-      var airingDifference = airingDate.difference(DateTime.now());
-      if (airingDifference.inDays > 7 || airingDifference.inMicroseconds < 0) {
+      Duration timeUntilAiring =
+          Duration(seconds: media!.nextAiringEpisode!.timeUntilAiring);
+      if (timeUntilAiring.inDays > 7 || timeUntilAiring.inMicroseconds < 0) {
         return const SizedBox.shrink();
       }
 
-      String text = 'ep. ${media?.nextAiringEpisode?.episode} in ';
-      if (airingDifference.inMinutes < 60) {
-        text += '${airingDifference.inMinutes} mins';
+      String text = 'ep. ${media?.nextAiringEpisode?.episode} ';
+      if (timeUntilAiring.inSeconds < 60) {
+        text += 'on now';
       }
-      if (airingDifference.inHours < 24) {
-        text += '${airingDifference.inHours} hours';
+      if (timeUntilAiring.inMinutes < 60) {
+        text += 'in ${timeUntilAiring.inMinutes} mins';
+      }
+      if (timeUntilAiring.inHours < 24) {
+        text += 'in ${timeUntilAiring.inHours} hours';
       } else {
-        text += '${airingDifference.inDays} days';
+        text += 'in ${timeUntilAiring.inDays} days';
       }
 
       return Padding(
