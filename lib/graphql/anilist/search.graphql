@@ -22,7 +22,6 @@ query Search(
       startDate {
         year
       }
-      season
       seasonYear
       status
       format
@@ -31,6 +30,9 @@ query Search(
       coverImage {
         medium
       }
+      episodes
+      chapters
+      volumes
     }
   }
 }

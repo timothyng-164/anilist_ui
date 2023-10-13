@@ -1,3 +1,4 @@
+import 'package:anilist_ui/common/util/label_util.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/search_landing_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -275,31 +276,65 @@ class MediaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? imageUrl = media.coverImage?.medium;
-    var mediaType = media.type ?? Enum$MediaType.$unknown;
-    var mediaFormat = media.format ?? Enum$MediaFormat.$unknown;
-    var mediaStatus = media.status ?? Enum$MediaStatus.$unknown;
 
-    String getMediaStart(media) {
-      var startSeason = media?.season ?? Enum$MediaSeason.$unknown;
-      int? startYear = media?.seasonYear ?? media?.startDate?.year;
-      String mediaStart =
-          '${(startSeason == Enum$MediaSeason.$unknown) ? '' : '${toJson$Enum$MediaSeason(startSeason)} '}${startYear.toString()}';
-      return mediaStart;
+    Widget mediaImage(String imageUrl, BoxConstraints constraints) {
+      Radius radius = const Radius.circular(8.0);
+      return ClipRRect(
+        borderRadius: BorderRadius.only(topLeft: radius, bottomLeft: radius),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          height: constraints.maxHeight,
+          width: constraints.maxHeight * 2 / 3,
+          fit: BoxFit.fill,
+          placeholder: (context, url) => const SizedBox(),
+        ),
+      );
     }
 
-    return Card(
-        child: Row(children: [
-      if (imageUrl != null)
-        CachedNetworkImage(
-          imageUrl: imageUrl,
-          // TODO: get height from LayoutBuilder
-          height: 400,
-          width: 100,
-          fit: BoxFit.fitHeight,
-          placeholder: (context, url) => const Center(child: SizedBox()),
-        ),
-      Expanded(
-          child: Container(
+    Widget infoRow() {
+      String? mediaFormat = mediaFormatLabel(media.format);
+      int? startYear = media.seasonYear ?? media.startDate?.year;
+
+      var items = [mediaFormat, startYear];
+      items.removeWhere((item) => item == null);
+
+      return Text(items.join(", "));
+    }
+
+    Widget statusRow() {
+      String? mediaStatus = mediaStatusLabel(media.status);
+
+      String progress = '';
+      if (media.chapters != null) progress = '(${media.chapters} ch)';
+      if (media.volumes != null) progress = '(${media.volumes} vol)';
+      if (media.episodes != null) progress = '(${media.episodes} ep)';
+
+      return Text('$mediaStatus $progress');
+    }
+
+    Row engagementRow() {
+      List<Widget> rowChildren = [];
+      if (media.meanScore != null) {
+        rowChildren.addAll([
+          const Icon(Icons.star_rate_rounded, size: 21),
+          Text('${media.meanScore}'),
+          const SizedBox(width: 15),
+        ]);
+      }
+      if (media.popularity != null) {
+        rowChildren.addAll([
+          const Icon(Icons.favorite, size: 17),
+          const SizedBox(width: 4),
+          Text('${media.popularity}'),
+        ]);
+      }
+      return Row(
+        children: rowChildren,
+      );
+    }
+
+    Widget cardContent = Expanded(
+      child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -307,49 +342,35 @@ class MediaCard extends StatelessWidget {
             Text(
               media.title?.userPreferred ?? '',
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.w800),
+              style: const TextStyle(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 4),
-            Row(children: [
-              Text(toJson$Enum$MediaType(mediaType)),
-              const SizedBox(width: 5),
-              Text(toJson$Enum$MediaFormat(mediaFormat)),
-              const SizedBox(width: 5),
-              Text(getMediaStart(media)),
-            ]),
+            infoRow(),
             const SizedBox(height: 4),
-            Text(toJson$Enum$MediaStatus(mediaStatus)),
+            statusRow(),
             const Spacer(),
-            Row(
-              children: [
-                const Icon(Icons.star_rate_rounded, size: 21),
-                Text('${media.meanScore}'),
-                const SizedBox(width: 15),
-                const Icon(Icons.favorite, size: 17),
-                const SizedBox(width: 4),
-                Text('${media.popularity}'),
-              ],
-            ),
+            engagementRow(),
           ],
         ),
-      ))
-    ]));
+      ),
+    );
+
+    return LayoutBuilder(builder: (_, constraints) {
+      return Card(
+        child: Row(
+          children: [
+            if (imageUrl != null) mediaImage(imageUrl, constraints),
+            cardContent
+          ],
+        ),
+      );
+    });
   }
 }
 
 // TODO: on this page
-// - add styling to MediaCard (use chips/tags instead of text), and add color
-// - handle null values in MediaCard
 // - add user status to MediaCard
 // - test out error on graphql client
-
-// TODO: refactor search_screen to other files.
-// /screens
-//   /scearch_screen
-//     - search_screen.dart
-//     /components
-//       - media_card.dart
-//       - etc.dart
 
 // TODO: overall project
 // 1. manga/anime page by ID

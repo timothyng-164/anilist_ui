@@ -554,13 +554,6 @@ const documentNodeQuerySearch = DocumentNode(definitions: [
                 ]),
               ),
               FieldNode(
-                name: NameNode(value: 'season'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
                 name: NameNode(value: 'seasonYear'),
                 alias: null,
                 arguments: [],
@@ -616,6 +609,27 @@ const documentNodeQuerySearch = DocumentNode(definitions: [
                     selectionSet: null,
                   ),
                 ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'episodes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'chapters'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'volumes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -1194,13 +1208,15 @@ class Query$Search$Page$media {
     this.title,
     this.type,
     this.startDate,
-    this.season,
     this.seasonYear,
     this.status,
     this.format,
     this.meanScore,
     this.popularity,
     this.coverImage,
+    this.episodes,
+    this.chapters,
+    this.volumes,
     this.$__typename = 'Media',
   });
 
@@ -1209,13 +1225,15 @@ class Query$Search$Page$media {
     final l$title = json['title'];
     final l$type = json['type'];
     final l$startDate = json['startDate'];
-    final l$season = json['season'];
     final l$seasonYear = json['seasonYear'];
     final l$status = json['status'];
     final l$format = json['format'];
     final l$meanScore = json['meanScore'];
     final l$popularity = json['popularity'];
     final l$coverImage = json['coverImage'];
+    final l$episodes = json['episodes'];
+    final l$chapters = json['chapters'];
+    final l$volumes = json['volumes'];
     final l$$__typename = json['__typename'];
     return Query$Search$Page$media(
       id: (l$id as int),
@@ -1228,9 +1246,6 @@ class Query$Search$Page$media {
           ? null
           : Query$Search$Page$media$startDate.fromJson(
               (l$startDate as Map<String, dynamic>)),
-      season: l$season == null
-          ? null
-          : fromJson$Enum$MediaSeason((l$season as String)),
       seasonYear: (l$seasonYear as int?),
       status: l$status == null
           ? null
@@ -1244,6 +1259,9 @@ class Query$Search$Page$media {
           ? null
           : Query$Search$Page$media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
+      episodes: (l$episodes as int?),
+      chapters: (l$chapters as int?),
+      volumes: (l$volumes as int?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1255,8 +1273,6 @@ class Query$Search$Page$media {
   final Enum$MediaType? type;
 
   final Query$Search$Page$media$startDate? startDate;
-
-  final Enum$MediaSeason? season;
 
   final int? seasonYear;
 
@@ -1270,6 +1286,12 @@ class Query$Search$Page$media {
 
   final Query$Search$Page$media$coverImage? coverImage;
 
+  final int? episodes;
+
+  final int? chapters;
+
+  final int? volumes;
+
   final String $__typename;
 
   Map<String, dynamic> toJson() {
@@ -1282,9 +1304,6 @@ class Query$Search$Page$media {
     _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$startDate = startDate;
     _resultData['startDate'] = l$startDate?.toJson();
-    final l$season = season;
-    _resultData['season'] =
-        l$season == null ? null : toJson$Enum$MediaSeason(l$season);
     final l$seasonYear = seasonYear;
     _resultData['seasonYear'] = l$seasonYear;
     final l$status = status;
@@ -1299,6 +1318,12 @@ class Query$Search$Page$media {
     _resultData['popularity'] = l$popularity;
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$episodes = episodes;
+    _resultData['episodes'] = l$episodes;
+    final l$chapters = chapters;
+    _resultData['chapters'] = l$chapters;
+    final l$volumes = volumes;
+    _resultData['volumes'] = l$volumes;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1310,26 +1335,30 @@ class Query$Search$Page$media {
     final l$title = title;
     final l$type = type;
     final l$startDate = startDate;
-    final l$season = season;
     final l$seasonYear = seasonYear;
     final l$status = status;
     final l$format = format;
     final l$meanScore = meanScore;
     final l$popularity = popularity;
     final l$coverImage = coverImage;
+    final l$episodes = episodes;
+    final l$chapters = chapters;
+    final l$volumes = volumes;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$title,
       l$type,
       l$startDate,
-      l$season,
       l$seasonYear,
       l$status,
       l$format,
       l$meanScore,
       l$popularity,
       l$coverImage,
+      l$episodes,
+      l$chapters,
+      l$volumes,
       l$$__typename,
     ]);
   }
@@ -1363,11 +1392,6 @@ class Query$Search$Page$media {
     if (l$startDate != lOther$startDate) {
       return false;
     }
-    final l$season = season;
-    final lOther$season = other.season;
-    if (l$season != lOther$season) {
-      return false;
-    }
     final l$seasonYear = seasonYear;
     final lOther$seasonYear = other.seasonYear;
     if (l$seasonYear != lOther$seasonYear) {
@@ -1396,6 +1420,21 @@ class Query$Search$Page$media {
     final l$coverImage = coverImage;
     final lOther$coverImage = other.coverImage;
     if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$episodes = episodes;
+    final lOther$episodes = other.episodes;
+    if (l$episodes != lOther$episodes) {
+      return false;
+    }
+    final l$chapters = chapters;
+    final lOther$chapters = other.chapters;
+    if (l$chapters != lOther$chapters) {
+      return false;
+    }
+    final l$volumes = volumes;
+    final lOther$volumes = other.volumes;
+    if (l$volumes != lOther$volumes) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1429,13 +1468,15 @@ abstract class CopyWith$Query$Search$Page$media<TRes> {
     Query$Search$Page$media$title? title,
     Enum$MediaType? type,
     Query$Search$Page$media$startDate? startDate,
-    Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaStatus? status,
     Enum$MediaFormat? format,
     int? meanScore,
     int? popularity,
     Query$Search$Page$media$coverImage? coverImage,
+    int? episodes,
+    int? chapters,
+    int? volumes,
     String? $__typename,
   });
   CopyWith$Query$Search$Page$media$title<TRes> get title;
@@ -1461,13 +1502,15 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
     Object? title = _undefined,
     Object? type = _undefined,
     Object? startDate = _undefined,
-    Object? season = _undefined,
     Object? seasonYear = _undefined,
     Object? status = _undefined,
     Object? format = _undefined,
     Object? meanScore = _undefined,
     Object? popularity = _undefined,
     Object? coverImage = _undefined,
+    Object? episodes = _undefined,
+    Object? chapters = _undefined,
+    Object? volumes = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Search$Page$media(
@@ -1479,9 +1522,6 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
         startDate: startDate == _undefined
             ? _instance.startDate
             : (startDate as Query$Search$Page$media$startDate?),
-        season: season == _undefined
-            ? _instance.season
-            : (season as Enum$MediaSeason?),
         seasonYear: seasonYear == _undefined
             ? _instance.seasonYear
             : (seasonYear as int?),
@@ -1499,6 +1539,11 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Query$Search$Page$media$coverImage?),
+        episodes:
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
+        chapters:
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
+        volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1540,13 +1585,15 @@ class _CopyWithStubImpl$Query$Search$Page$media<TRes>
     Query$Search$Page$media$title? title,
     Enum$MediaType? type,
     Query$Search$Page$media$startDate? startDate,
-    Enum$MediaSeason? season,
     int? seasonYear,
     Enum$MediaStatus? status,
     Enum$MediaFormat? format,
     int? meanScore,
     int? popularity,
     Query$Search$Page$media$coverImage? coverImage,
+    int? episodes,
+    int? chapters,
+    int? volumes,
     String? $__typename,
   }) =>
       _res;

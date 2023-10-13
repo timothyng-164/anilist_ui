@@ -167,7 +167,6 @@ class AnimeCard extends StatelessWidget {
           CachedNetworkImage(
             imageUrl: media?.coverImage?.large ?? '',
             placeholder: (context, url) => const Center(child: SizedBox()),
-            // 
             height: _cardWidth * 3/2, 
             width: _cardWidth,
             fit: BoxFit.contain,
