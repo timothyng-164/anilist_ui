@@ -50,9 +50,6 @@ class SearchLandingView extends HookWidget {
       }
     }
 
-    var items = result.parsedData?.trending?.media ?? [];
-    print(items.length);
-
     return LandingContent(
       data: result.parsedData ?? Query$SearchLandingPage(),
     );
@@ -67,23 +64,23 @@ class LandingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var animeSections = [
-      AnimeSection(
+      ScrollingAnimeSection(
         title: 'Trending',
         mediaList: data.trending?.media ?? [],
       ),
-      AnimeSection(
+      ScrollingAnimeSection(
         title: 'Popular This Season',
         mediaList: data.season?.media ?? [],
       ),
-      AnimeSection(
+      ScrollingAnimeSection(
         title: 'Upcoming Next Season',
         mediaList: data.nextSeason?.media ?? [],
       ),
-      AnimeSection(
+      ScrollingAnimeSection(
         title: 'All Time Popular',
         mediaList: data.popular?.media ?? [],
       ),
-      AnimeSection(
+      ScrollingAnimeSection(
         title: 'Top Scoring Anime',
         mediaList: data.top?.media ?? [],
       ),
@@ -110,8 +107,9 @@ class LandingContent extends StatelessWidget {
   }
 }
 
-class AnimeSection extends StatelessWidget {
-  const AnimeSection({super.key, required this.mediaList, required this.title});
+class ScrollingAnimeSection extends StatelessWidget {
+  const ScrollingAnimeSection(
+      {super.key, required this.mediaList, required this.title});
 
   final String title;
   final List<Fragment$media?> mediaList;
@@ -121,13 +119,17 @@ class AnimeSection extends StatelessWidget {
     ScrollController scrollController = ScrollController();
     TextTheme textTheme = Theme.of(context).textTheme;
 
+    double cardHeight = 240;
+    double cardWidth = 120;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 15),
         Text(title, style: textTheme.titleLarge),
+        const SizedBox(height: 8),
         SizedBox(
-          height: _cardHeight,
+          height: cardHeight,
           child: Scrollbar(
             controller: scrollController,
             child: ListView.separated(
@@ -136,7 +138,11 @@ class AnimeSection extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: mediaList.length,
               separatorBuilder: (_, __) => const SizedBox(width: 20),
-              itemBuilder: (_, i) => AnimeCard(media: mediaList[i]),
+              itemBuilder: (_, i) => SizedBox(
+                height: cardHeight,
+                width: cardWidth,
+                child: AnimeCard(media: mediaList[i], cardWidth: cardWidth),
+              ),
             ),
           ),
         ),
@@ -145,13 +151,11 @@ class AnimeSection extends StatelessWidget {
   }
 }
 
-double _cardHeight = 240;
-double _cardWidth = 120;
-
 class AnimeCard extends StatelessWidget {
-  const AnimeCard({super.key, required this.media});
+  const AnimeCard({super.key, required this.media, required this.cardWidth});
 
   final Fragment$media? media;
+  final double cardWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +191,7 @@ class AnimeCard extends StatelessWidget {
       }
 
       return Padding(
-        padding: const EdgeInsets.only(top: 8, left: 2),
+        padding: const EdgeInsets.only(top: 4, left: 2),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(
@@ -200,32 +204,29 @@ class AnimeCard extends StatelessWidget {
       );
     }
 
-    return SizedBox(
-      height: _cardHeight,
-      width: _cardWidth,
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.topLeft,
-            children: [
-              CachedNetworkImage(
-                imageUrl: media?.coverImage?.large ?? '',
-                placeholder: (context, url) => const Center(child: SizedBox()),
-                height: _cardWidth * 3 / 2,
-                width: _cardWidth,
-                fit: BoxFit.contain,
-              ),
-              recentAiringTag(),
-            ],
-          ),
-          Text(
-            media?.title?.userPreferred ?? '',
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.topLeft,
+          children: [
+            CachedNetworkImage(
+              imageUrl: media?.coverImage?.large ?? '',
+              placeholder: (context, url) => const Center(child: SizedBox()),
+              height: cardWidth * 3 / 2,
+              width: cardWidth,
+              fit: BoxFit.fitHeight,
+            ),
+            recentAiringTag(),
+          ],
+        ),
+        const SizedBox(height: 2),
+        Text(
+          media?.title?.userPreferred ?? '',
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        ),
+      ],
     );
   }
 }
