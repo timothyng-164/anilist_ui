@@ -120,35 +120,37 @@ class ScrollingAnimeSection extends StatelessWidget {
     ScrollController scrollController = ScrollController();
     TextTheme textTheme = Theme.of(context).textTheme;
 
-    double cardHeight = 230;
-    double cardWidth = 120;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 15),
-        Text(title, style: textTheme.titleLarge),
-        const SizedBox(height: 8),
-        SizedBox(
-          height: cardHeight,
-          child: Scrollbar(
-            controller: scrollController,
-            child: ListView.separated(
-              shrinkWrap: true,
+    return LayoutBuilder(builder: (_, constraints) {
+      bool isLargeScreen = constraints.maxWidth > 1450;
+      double cardHeight = isLargeScreen ? 300 : 230;
+      double cardWidth = isLargeScreen ? 160 : 120;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 15),
+          Text(title, style: textTheme.titleLarge),
+          const SizedBox(height: 8),
+          SizedBox(
+            height: cardHeight,
+            child: Scrollbar(
               controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              itemCount: mediaList.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 20),
-              itemBuilder: (_, i) => SizedBox(
-                height: cardHeight,
-                width: cardWidth,
-                child: AnimeCard(media: mediaList[i], cardWidth: cardWidth),
+              child: ListView.separated(
+                shrinkWrap: true,
+                controller: scrollController,
+                scrollDirection: Axis.horizontal,
+                itemCount: mediaList.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 20),
+                itemBuilder: (_, i) => SizedBox(
+                  height: cardHeight,
+                  width: cardWidth,
+                  child: AnimeCard(media: mediaList[i], cardWidth: cardWidth),
+                ),
               ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
 
