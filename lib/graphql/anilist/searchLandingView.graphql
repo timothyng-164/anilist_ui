@@ -52,6 +52,7 @@ fragment media on Media {
   coverImage {
     large
     medium
+    color
   }
   nextAiringEpisode {
     episode

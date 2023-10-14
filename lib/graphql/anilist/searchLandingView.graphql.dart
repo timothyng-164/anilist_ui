@@ -288,6 +288,13 @@ const fragmentDefinitionmedia = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
+          name: NameNode(value: 'color'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -500,16 +507,19 @@ class Fragment$media$coverImage {
   Fragment$media$coverImage({
     this.large,
     this.medium,
+    this.color,
     this.$__typename = 'MediaCoverImage',
   });
 
   factory Fragment$media$coverImage.fromJson(Map<String, dynamic> json) {
     final l$large = json['large'];
     final l$medium = json['medium'];
+    final l$color = json['color'];
     final l$$__typename = json['__typename'];
     return Fragment$media$coverImage(
       large: (l$large as String?),
       medium: (l$medium as String?),
+      color: (l$color as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -517,6 +527,8 @@ class Fragment$media$coverImage {
   final String? large;
 
   final String? medium;
+
+  final String? color;
 
   final String $__typename;
 
@@ -526,6 +538,8 @@ class Fragment$media$coverImage {
     _resultData['large'] = l$large;
     final l$medium = medium;
     _resultData['medium'] = l$medium;
+    final l$color = color;
+    _resultData['color'] = l$color;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -535,10 +549,12 @@ class Fragment$media$coverImage {
   int get hashCode {
     final l$large = large;
     final l$medium = medium;
+    final l$color = color;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$large,
       l$medium,
+      l$color,
       l$$__typename,
     ]);
   }
@@ -560,6 +576,11 @@ class Fragment$media$coverImage {
     final l$medium = medium;
     final lOther$medium = other.medium;
     if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -592,6 +613,7 @@ abstract class CopyWith$Fragment$media$coverImage<TRes> {
   TRes call({
     String? large,
     String? medium,
+    String? color,
     String? $__typename,
   });
 }
@@ -612,11 +634,13 @@ class _CopyWithImpl$Fragment$media$coverImage<TRes>
   TRes call({
     Object? large = _undefined,
     Object? medium = _undefined,
+    Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$media$coverImage(
         large: large == _undefined ? _instance.large : (large as String?),
         medium: medium == _undefined ? _instance.medium : (medium as String?),
+        color: color == _undefined ? _instance.color : (color as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -632,6 +656,7 @@ class _CopyWithStubImpl$Fragment$media$coverImage<TRes>
   call({
     String? large,
     String? medium,
+    String? color,
     String? $__typename,
   }) =>
       _res;

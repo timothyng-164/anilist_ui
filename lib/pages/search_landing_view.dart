@@ -1,3 +1,4 @@
+import 'package:anilist_ui/common/util/hex_color.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/searchLandingView.graphql.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -119,7 +120,7 @@ class ScrollingAnimeSection extends StatelessWidget {
     ScrollController scrollController = ScrollController();
     TextTheme textTheme = Theme.of(context).textTheme;
 
-    double cardHeight = 240;
+    double cardHeight = 230;
     double cardWidth = 120;
 
     return Column(
@@ -151,7 +152,7 @@ class ScrollingAnimeSection extends StatelessWidget {
   }
 }
 
-class AnimeCard extends StatelessWidget {
+class AnimeCard extends HookWidget {
   const AnimeCard({super.key, required this.media, required this.cardWidth});
 
   final Fragment$media? media;
@@ -159,7 +160,12 @@ class AnimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var hovering = useState<bool>(false);
+
     final textTheme = Theme.of(context).textTheme;
+    Color? mediaColor = media?.coverImage?.color == null
+        ? null
+        : HexColor(media!.coverImage!.color!);
 
     if (media == null) {
       return const SizedBox.shrink();
@@ -204,29 +210,41 @@ class AnimeCard extends StatelessWidget {
       );
     }
 
-    return Column(
-      children: [
-        Stack(
-          alignment: Alignment.topLeft,
-          children: [
-            CachedNetworkImage(
-              imageUrl: media?.coverImage?.large ?? '',
-              placeholder: (context, url) => const Center(child: SizedBox()),
-              height: cardWidth * 3 / 2,
-              width: cardWidth,
-              fit: BoxFit.fitHeight,
-            ),
-            recentAiringTag(),
-          ],
-        ),
-        const SizedBox(height: 2),
-        Text(
-          media?.title?.userPreferred ?? '',
-          textAlign: TextAlign.start,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
-      ],
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      onTap: () {
+        print('tapped ${media?.title?.userPreferred}');
+      },
+      onHover: (isHovering) => hovering.value = isHovering,
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.topLeft,
+            children: [
+              CachedNetworkImage(
+                imageUrl: media?.coverImage?.large ?? '',
+                placeholder: (context, url) => const Center(child: SizedBox()),
+                height: cardWidth * 3 / 2,
+                width: cardWidth,
+                fit: BoxFit.fitHeight,
+              ),
+              recentAiringTag(),
+            ],
+          ),
+          const SizedBox(height: 2),
+          Text(
+            media?.title?.userPreferred ?? '',
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            style: hovering.value
+                ? TextStyle(color: mediaColor ?? Colors.deepPurple)
+                : const TextStyle(),
+            maxLines: 2,
+          ),
+        ],
+      ),
     );
   }
 }
