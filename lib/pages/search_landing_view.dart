@@ -215,7 +215,8 @@ class AnimeCard extends HookWidget {
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
       onTap: () {
-        print('tapped ${media?.title?.userPreferred}');
+        // TODO: navigate to anime_by_id
+        print('tapped ${media?.id} ${media?.title?.userPreferred}');
       },
       onHover: (isHovering) => hovering.value = isHovering,
       child: Column(
