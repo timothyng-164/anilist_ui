@@ -143,7 +143,10 @@ class ScrollingAnimeSection extends StatelessWidget {
                 itemBuilder: (_, i) => SizedBox(
                   height: cardHeight,
                   width: cardWidth,
-                  child: AnimeCard(media: mediaList[i], cardWidth: cardWidth),
+                  child: AnimeCard(
+                      media: mediaList[i],
+                      cardWidth: cardWidth,
+                      isLargeScreen: isLargeScreen),
                 ),
               ),
             ),
@@ -155,10 +158,16 @@ class ScrollingAnimeSection extends StatelessWidget {
 }
 
 class AnimeCard extends HookWidget {
-  const AnimeCard({super.key, required this.media, required this.cardWidth});
+  const AnimeCard({
+    super.key,
+    required this.media,
+    required this.cardWidth,
+    required this.isLargeScreen,
+  });
 
   final Fragment$media? media;
   final double cardWidth;
+  final bool isLargeScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -198,6 +207,9 @@ class AnimeCard extends HookWidget {
         text += 'in ${timeUntilAiring.inDays} days';
       }
 
+      TextStyle textStyle =
+          isLargeScreen ? textTheme.labelLarge! : textTheme.labelMedium!;
+
       return Padding(
         padding: const EdgeInsets.only(top: 4, left: 2),
         child: Container(
@@ -206,11 +218,15 @@ class AnimeCard extends HookWidget {
             color: const Color.fromRGBO(0, 0, 0, 0.7),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Text(text,
-              style: textTheme.labelMedium!.copyWith(color: Colors.white)),
+          child: Text(text, style: textStyle.copyWith(color: Colors.white)),
         ),
       );
     }
+
+    TextStyle titleStyle =
+        isLargeScreen ? textTheme.titleMedium! : textTheme.labelLarge!;
+    titleStyle = titleStyle.copyWith(
+        color: hovering.value ? mediaColor ?? Colors.deepPurple : null);
 
     return InkWell(
       splashColor: Colors.transparent,
@@ -222,6 +238,7 @@ class AnimeCard extends HookWidget {
       },
       onHover: (isHovering) => hovering.value = isHovering,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             alignment: Alignment.topLeft,
@@ -239,11 +256,9 @@ class AnimeCard extends HookWidget {
           const SizedBox(height: 2),
           Text(
             media?.title?.userPreferred ?? '',
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
-            style: hovering.value
-                ? TextStyle(color: mediaColor ?? Colors.deepPurple)
-                : const TextStyle(),
+            style: titleStyle,
             maxLines: 2,
           ),
         ],
