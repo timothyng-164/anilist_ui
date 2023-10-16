@@ -1,6 +1,5 @@
-import 'package:anilist_ui/routing/page_selector.dart';
+import 'package:anilist_ui/routing/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +40,10 @@ class AnilistApp extends StatelessWidget {
     return GraphQLProvider(
       client: ValueNotifier(
           GraphQLClient(link: link, cache: GraphQLCache(store: HiveStore()))),
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Anilist UI',
         theme: _buildTheme(context),
-        home: const PageSelector(),
+        routerConfig: goRouter,
       ),
     );
   }
@@ -68,3 +67,5 @@ class AnilistApp extends StatelessWidget {
     );
   }
 }
+
+

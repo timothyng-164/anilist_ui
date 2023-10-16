@@ -1,6 +1,7 @@
 import 'package:anilist_ui/common/util/hex_color.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/searchLandingView.graphql.dart';
+import 'package:anilist_ui/routing/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -233,8 +234,10 @@ class AnimeCard extends HookWidget {
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
       onTap: () {
-        // TODO: navigate to anime_by_id
-        print('tapped ${media?.id} ${media?.title?.userPreferred}');
+        print(
+            'navigating to anime ${media?.id} ${media?.title?.userPreferred}');
+        if (media?.id == null) return;
+        AnimeByIDRoute(media!.id).go(context);
       },
       onHover: (isHovering) => hovering.value = isHovering,
       child: Column(

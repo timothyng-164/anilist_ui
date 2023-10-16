@@ -11,9 +11,7 @@ import 'package:pretty_json/pretty_json.dart';
 import '../common/widgets/centered_item.dart';
 
 class SearchScreen extends HookWidget {
-  const SearchScreen({super.key, required this.title});
-
-  final String title;
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -195,6 +193,7 @@ class SearchFilters extends StatelessWidget {
           trailing: [
             Tooltip(
               message: 'Filter Search',
+              // TODO: use Flutter Dialog for complex search filters
               child: PopupMenuButton<Enum$MediaType?>(
                 icon: const Icon(Icons.filter_list),
                 onSelected: (value) {
