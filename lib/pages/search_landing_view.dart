@@ -79,6 +79,10 @@ class LandingContent extends StatelessWidget {
         mediaList: data.nextSeason?.media ?? [],
       ),
       ScrollingAnimeSection(
+        title: 'Recently Updated',
+        mediaList: data.updated?.media ?? [],
+      ),
+      ScrollingAnimeSection(
         title: 'All Time Popular',
         mediaList: data.popular?.media ?? [],
       ),
@@ -200,12 +204,15 @@ class AnimeCard extends HookWidget {
         text += 'on now';
       }
       if (timeUntilAiring.inMinutes < 60) {
-        text += 'in ${timeUntilAiring.inMinutes} mins';
+        text += 'in ${timeUntilAiring.inMinutes} min';
+        if (timeUntilAiring.inMinutes > 1) text += 's';
       }
       if (timeUntilAiring.inHours < 24) {
-        text += 'in ${timeUntilAiring.inHours} hours';
+        text += 'in ${timeUntilAiring.inHours} hour';
+        if (timeUntilAiring.inHours > 1) text += 's';
       } else {
-        text += 'in ${timeUntilAiring.inDays} days';
+        text += 'in ${timeUntilAiring.inDays} day';
+        if (timeUntilAiring.inDays > 1) text += 's';
       }
 
       TextStyle textStyle =
