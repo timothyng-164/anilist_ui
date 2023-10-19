@@ -1,13 +1,14 @@
 import 'dart:math';
 
+import 'package:anilist_ui/common/util/html_util.dart';
 import 'package:anilist_ui/common/util/label_util.dart';
 import 'package:anilist_ui/common/util/scale_size.dart';
+import 'package:anilist_ui/common/widgets/overflow_detector_text.dart';
 import 'package:anilist_ui/graphql/anilist/mediaById.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class MediaByIdPage extends HookWidget {
@@ -73,7 +74,8 @@ class PageContent extends StatelessWidget {
                   InfoSection(media: media),
                   const SizedBox(height: 20),
                   TagsSection(mediaTags: media.tags)
-                  // Tags
+                  // TODO:
+                  // favorite/add to list (if user is authenticated)
                   // Relations
                   // Recommendations
                   // Nice-to-haves: characters, staff, reviews, discussions, links, theme songs
@@ -270,24 +272,32 @@ class DescriptionSection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isExpanded = useState<bool>(false);
+    if (description == null || description!.isEmpty) {
+      return const SizedBox.shrink();
+    }
 
-    if (description == null) return const SizedBox.shrink();
+    final isExpanded = useState<bool>(false);
+    final isOverflowing = useState<bool>(false);
+
+    String parsedDescription = HtmlUtil.parseHtmlString(description!);
+
     return Column(
       children: [
-        Html(
-          data: description,
-          style: {
-            'html': Style(
-              textOverflow: isExpanded.value ? null : TextOverflow.ellipsis,
-              maxLines: isExpanded.value ? null : 4,
-            )
-          },
+        OverflowDetectorText(
+          isOverflowing: isOverflowing,
+          child: Text(
+            parsedDescription,
+            overflow: isExpanded.value ? null : TextOverflow.ellipsis,
+            maxLines: isExpanded.value ? null : 4,
+          ),
         ),
-        IconButton(
-          onPressed: () => isExpanded.value = !isExpanded.value,
-          icon: Icon(isExpanded.value ? Icons.expand_less : Icons.expand_more),
-        )
+        isOverflowing.value || isExpanded.value
+            ? IconButton(
+                onPressed: () => isExpanded.value = !isExpanded.value,
+                icon: Icon(
+                    isExpanded.value ? Icons.expand_less : Icons.expand_more),
+              )
+            : const SizedBox(height: 20),
       ],
     );
   }
