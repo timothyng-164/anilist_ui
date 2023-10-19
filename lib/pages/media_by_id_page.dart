@@ -115,8 +115,8 @@ class TagsSection extends HookWidget {
     for (int i = 0; i < filteredTags.length; i++) {
       if (filteredTags[i] == null) continue;
       i % 2 == 0
-          ? leftTags.add(filteredTags![i]!)
-          : rightTags.add(filteredTags![i]!);
+          ? leftTags.add(filteredTags[i]!)
+          : rightTags.add(filteredTags[i]!);
     }
 
     TextStyle getTagStyle(Query$GetMediaById$Media$tags tag) {

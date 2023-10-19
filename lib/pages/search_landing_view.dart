@@ -46,7 +46,7 @@ class SearchLandingView extends HookWidget {
         // TODO: Look into why this error occurs. Possibly from fragments?
         print('Unable to read cache.');
       } else {
-        print('Unknown exception occurred: ${exception}');
+        print('Unknown exception occurred: $exception');
         return const CenteredItem(
             flex: true, item: Text('An error has occurred.'));
       }
