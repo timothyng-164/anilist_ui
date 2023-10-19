@@ -373,12 +373,3 @@ class MediaCard extends StatelessWidget {
     });
   }
 }
-
-// TODO: on this page
-// - add user status to MediaCard
-// - test out error on graphql client
-
-// TODO: overall project
-// 1. manga/anime page by ID
-// 2. signin funtionality
-// 3. My List page
