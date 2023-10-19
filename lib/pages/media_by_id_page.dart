@@ -130,12 +130,20 @@ class TagsSection extends HookWidget {
       return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
           flex: 8,
-          child: Text(tag.name,
-              overflow: TextOverflow.ellipsis, style: getTagStyle(tag)),
+          child: Text(
+            tag.name,
+            overflow: TextOverflow.ellipsis,
+            style: getTagStyle(tag),
+            textScaleFactor: ScaleSize.textScaleFactor(context),
+          ),
         ),
         Expanded(
           flex: 2,
-          child: Text('${tag.rank}%', style: getTagStyle(tag)),
+          child: Text(
+            '${tag.rank}%',
+            style: getTagStyle(tag),
+            textScaleFactor: ScaleSize.textScaleFactor(context),
+          ),
         ),
       ]);
     }
@@ -195,9 +203,21 @@ class InfoSection extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(flex: 5, child: Text(title, textAlign: TextAlign.left)),
+          Expanded(
+              flex: 5,
+              child: Text(
+                title,
+                textAlign: TextAlign.left,
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+              )),
           const Spacer(flex: 1),
-          Expanded(flex: 6, child: Text(value, textAlign: TextAlign.left)),
+          Expanded(
+              flex: 6,
+              child: Text(
+                value,
+                textAlign: TextAlign.left,
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+              )),
         ],
       );
     }
