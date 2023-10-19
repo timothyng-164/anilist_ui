@@ -22,6 +22,10 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
               path: 'anime/:id',
               factory: $AnimeByIDRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'manga/:id',
+              factory: $MangaByIDRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -61,6 +65,25 @@ extension $AnimeByIDRouteExtension on AnimeByIDRoute {
 
   String get location => GoRouteData.$location(
         '/browse/anime/${Uri.encodeComponent(id.toString())}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $MangaByIDRouteExtension on MangaByIDRoute {
+  static MangaByIDRoute _fromState(GoRouterState state) => MangaByIDRoute(
+        int.parse(state.pathParameters['id']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/browse/manga/${Uri.encodeComponent(id.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);

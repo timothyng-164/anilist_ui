@@ -1,4 +1,9 @@
+import 'dart:core';
+
+import 'package:anilist_ui/graphql/anilist/mediaById.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
+import 'package:basic_utils/basic_utils.dart';
+import 'package:intl/intl.dart';
 
 String? mediaFormatLabel(Enum$MediaFormat? e) {
   switch (e) {
@@ -28,18 +33,33 @@ String? mediaFormatLabel(Enum$MediaFormat? e) {
 }
 
 String? mediaStatusLabel(Enum$MediaStatus? e) {
-  switch (e) {
-    case Enum$MediaStatus.FINISHED:
-      return 'Finished';
-    case Enum$MediaStatus.RELEASING:
-      return 'Releasing';
-    case Enum$MediaStatus.NOT_YET_RELEASED:
-      return 'Not Yet Released';
-    case Enum$MediaStatus.CANCELLED:
-      return 'Cancelled';
-    case Enum$MediaStatus.HIATUS:
-      return 'Hiatus';
-    default:
-      return null;
-  }
+  if (e == null) return null;
+  return _capitalizeAndReplace(toJson$Enum$MediaStatus(e));
+}
+
+String? mediaSeasonLabel(Enum$MediaSeason? e) {
+  if (e == null) return null;
+  return _capitalizeAndReplace(toJson$Enum$MediaSeason(e));
+}
+
+String? mediaSourceLabel(Enum$MediaSource? e) {
+  if (e == null) return null;
+  return _capitalizeAndReplace(toJson$Enum$MediaSource(e));
+}
+
+String _capitalizeAndReplace(String s) {
+  return StringUtils.capitalize(
+    s.replaceAll('_', ' '),
+    allWords: true,
+  );
+}
+
+String? dateLabel(int? day, int? month, int? year) {
+  if (year == null || month == null || day == null) return null;
+  return DateFormat.yMMMd().format(DateTime(year, month, day));
+}
+
+String? seasonYearLabel(Enum$MediaSeason? season, int? seasonYear) {
+  if (season == null && seasonYear == null) return null;
+  return '${mediaSeasonLabel(season) ?? ''} ${seasonYear ?? ''}';
 }

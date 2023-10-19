@@ -1,12 +1,12 @@
 import 'package:anilist_ui/common/util/label_util.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/search_landing_view.dart';
+import 'package:anilist_ui/routing/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
-import 'package:pretty_json/pretty_json.dart';
 
 import '../common/widgets/centered_item.dart';
 
@@ -308,7 +308,7 @@ class MediaCard extends StatelessWidget {
       if (media.volumes != null) progress = '(${media.volumes} vol)';
       if (media.episodes != null) progress = '(${media.episodes} ep)';
 
-      return Text('$mediaStatus $progress');
+      return Text('${mediaStatus ?? ''} $progress');
     }
 
     Row engagementRow() {
@@ -355,12 +355,24 @@ class MediaCard extends StatelessWidget {
     );
 
     return LayoutBuilder(builder: (_, constraints) {
-      return Card(
-        child: Row(
-          children: [
-            if (imageUrl != null) mediaImage(imageUrl, constraints),
-            cardContent
-          ],
+      return InkWell(
+        onTap: () {
+          if (media.type == Enum$MediaType.ANIME) {
+            AnimeByIDRoute(media.id).go(context);
+          } else if (media.type == Enum$MediaType.MANGA) {
+            MangaByIDRoute(media.id).go(context);
+          } else {
+            // TODO: display error
+            print("Unable to route media type: ${media.type}");
+          }
+        },
+        child: Card(
+          child: Row(
+            children: [
+              if (imageUrl != null) mediaImage(imageUrl, constraints),
+              cardContent
+            ],
+          ),
         ),
       );
     });

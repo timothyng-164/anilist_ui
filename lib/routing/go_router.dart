@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
+const homeRoute = '/browse';
+
 final goRouter = GoRouter(
   routes: $appRoutes,
   errorBuilder: (context, state) => RouteErrorPage(goException: state.error),
-  initialLocation: '/browse',
+  initialLocation: homeRoute,
   debugLogDiagnostics: true,
   navigatorKey: _rootNavigatorKey,
 );

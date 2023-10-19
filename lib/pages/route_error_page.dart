@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:anilist_ui/routing/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +15,7 @@ class RouteErrorPage extends StatelessWidget {
     print(goException);
 
     void redirectToHome() {
-      if (context.mounted) context.go('/');
+      if (context.mounted) context.go(homeRoute);
     }
 
     Timer(const Duration(seconds: 2), redirectToHome);

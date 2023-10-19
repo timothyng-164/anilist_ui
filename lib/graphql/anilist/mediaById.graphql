@@ -1,0 +1,50 @@
+query GetMediaById($id: Int, $type: MediaType) {
+  Media(id: $id, type: $type) {
+    id
+    title {
+      romaji
+      english
+      native
+      userPreferred
+    }
+    type
+    format
+    status
+    description(asHtml: false)
+    startDate {
+      day
+      month
+      year
+    }
+    endDate {
+      day
+      month
+      year
+    }
+    season
+    seasonYear
+    episodes
+    duration
+    chapters
+    volumes
+    source
+    hashtag
+    coverImage {
+      large
+      extraLarge
+    }
+    genres
+    synonyms
+    meanScore
+    popularity
+    favourites
+    isLocked
+    tags {
+      name
+      category
+      rank
+      isMediaSpoiler
+      isGeneralSpoiler
+    }
+  }
+}

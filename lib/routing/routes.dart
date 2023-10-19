@@ -1,3 +1,4 @@
+import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/media_by_id_page.dart';
 import 'package:anilist_ui/pages/login_page.dart';
 import 'package:anilist_ui/pages/search_screen.dart';
@@ -51,7 +52,7 @@ class AnimeByIDRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      MediaByIdPage(id: id);
+      MediaByIdPage(id: id, mediaType: Enum$MediaType.ANIME);
 }
 
 class MangaByIDRoute extends GoRouteData {
@@ -61,7 +62,7 @@ class MangaByIDRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      MediaByIdPage(id: id);
+      MediaByIdPage(id: id, mediaType: Enum$MediaType.MANGA);
 }
 
 class LoginRouteData extends GoRouteData {

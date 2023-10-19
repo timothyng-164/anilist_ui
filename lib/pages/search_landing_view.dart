@@ -46,7 +46,7 @@ class SearchLandingView extends HookWidget {
         // TODO: Look into why this error occurs. Possibly from fragments?
         print('Unable to read cache.');
       } else {
-        print('Unknown exception occurred: ${result.exception}');
+        print('Unknown exception occurred: ${exception}');
         return const CenteredItem(
             flex: true, item: Text('An error has occurred.'));
       }
@@ -241,9 +241,7 @@ class AnimeCard extends HookWidget {
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
       onTap: () {
-        print(
-            'navigating to anime ${media?.id} ${media?.title?.userPreferred}');
-        if (media?.id == null) return;
+        if (media?.id == null) return; // TODO: error message in snackbar
         AnimeByIDRoute(media!.id).go(context);
       },
       onHover: (isHovering) => hovering.value = isHovering,
