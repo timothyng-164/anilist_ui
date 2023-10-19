@@ -16,8 +16,8 @@ class SearchLandingView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     DateTime currentDate = DateTime.now();
-    var currentSeason = getSeason(currentDate);
-    var nextSeason = getNextSeason(currentSeason);
+    var currentSeason = DateUtil.getSeason(currentDate);
+    var nextSeason = DateUtil.getNextSeason(currentSeason);
 
     var query = useQuery$SearchLandingPage(
       Options$Query$SearchLandingPage(

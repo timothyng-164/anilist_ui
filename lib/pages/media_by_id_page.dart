@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:anilist_ui/common/util/label_util.dart';
-import 'package:anilist_ui/common/util/scale_util.dart';
+import 'package:anilist_ui/common/util/scale_size.dart';
 import 'package:anilist_ui/graphql/anilist/mediaById.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -134,7 +134,7 @@ class TagsSection extends HookWidget {
             tag.name,
             overflow: TextOverflow.ellipsis,
             style: getTagStyle(tag),
-            textScaleFactor: ScaleSize.textScaleFactor(context),
+            textScaleFactor: ScaleSize.scaleFactor(context),
           ),
         ),
         Expanded(
@@ -142,7 +142,7 @@ class TagsSection extends HookWidget {
           child: Text(
             '${tag.rank}%',
             style: getTagStyle(tag),
-            textScaleFactor: ScaleSize.textScaleFactor(context),
+            textScaleFactor: ScaleSize.scaleFactor(context),
           ),
         ),
       ]);
@@ -176,7 +176,7 @@ class TagsSection extends HookWidget {
           onPressed: () => showSpoilers.value = !showSpoilers.value,
           style: TextButton.styleFrom(padding: EdgeInsets.zero),
           child: Text(
-            '${showSpoilers.value ? 'Hide' : 'Show'} tag spoilers',
+            '${showSpoilers.value ? 'Hide' : 'Show'} spoiler tags',
             style: const TextStyle(fontSize: 10),
             textAlign: TextAlign.left,
           ),
@@ -208,7 +208,7 @@ class InfoSection extends StatelessWidget {
               child: Text(
                 title,
                 textAlign: TextAlign.left,
-                textScaleFactor: ScaleSize.textScaleFactor(context),
+                textScaleFactor: ScaleSize.scaleFactor(context),
               )),
           const Spacer(flex: 1),
           Expanded(
@@ -216,7 +216,7 @@ class InfoSection extends StatelessWidget {
               child: Text(
                 value,
                 textAlign: TextAlign.left,
-                textScaleFactor: ScaleSize.textScaleFactor(context),
+                textScaleFactor: ScaleSize.scaleFactor(context),
               )),
         ],
       );
@@ -241,23 +241,24 @@ class InfoSection extends StatelessWidget {
                 ? null
                 : media.synonyms!.join('\n')),
         const Divider(),
-        buildRow('Format', mediaFormatLabel(media.format)),
+        buildRow('Format', LabelUtil.mediaFormatLabel(media.format)),
         buildRowFromInt('Episodes', media.episodes),
         buildRow('Duration',
             media.duration == null ? null : '${media.duration} mins'),
         buildRowFromInt('Chapters', media.chapters),
         buildRowFromInt('Volumes', media.volumes),
-        buildRow('Status', mediaStatusLabel(media.status)),
-        buildRow('Source', mediaSourceLabel(media.source)),
+        buildRow('Status', LabelUtil.mediaStatusLabel(media.status)),
+        buildRow('Source', LabelUtil.mediaSourceLabel(media.source)),
         buildRow(
             'Start Date',
-            dateLabel(media.startDate?.day, media.startDate?.month,
+            LabelUtil.dateLabel(media.startDate?.day, media.startDate?.month,
                 media.startDate?.year)),
         buildRow(
             'End Date',
-            dateLabel(
+            LabelUtil.dateLabel(
                 media.endDate?.day, media.endDate?.month, media.endDate?.year)),
-        buildRow('Season', seasonYearLabel(media.season, media.seasonYear)),
+        buildRow('Season',
+            LabelUtil.seasonYearLabel(media.season, media.seasonYear)),
       ],
     );
   }
@@ -350,22 +351,24 @@ class TitleSection extends StatelessWidget {
                 textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 4,
-                textScaleFactor: ScaleSize.textScaleFactor(context),
+                textScaleFactor: ScaleSize.scaleFactor(context),
               ),
               const SizedBox(height: 4),
               Text(
                 media.type == Enum$MediaType.ANIME
-                    ? seasonYearLabel(media.season, media.seasonYear) ?? ''
+                    ? LabelUtil.seasonYearLabel(
+                            media.season, media.seasonYear) ??
+                        ''
                     : '${media.startDate?.year ?? ''}',
                 style: textTheme.titleMedium,
-                textScaleFactor: ScaleSize.textScaleFactor(context),
+                textScaleFactor: ScaleSize.scaleFactor(context),
               ),
               const SizedBox(height: 10),
               if (media.format != null)
                 Chip(
                   label: Text(
-                    mediaFormatLabel(media.format) ?? '',
-                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                    LabelUtil.mediaFormatLabel(media.format) ?? '',
+                    textScaleFactor: ScaleSize.scaleFactor(context),
                   ),
                   padding: const EdgeInsets.all(0),
                 ),

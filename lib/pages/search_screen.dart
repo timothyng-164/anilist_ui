@@ -291,7 +291,7 @@ class MediaCard extends StatelessWidget {
     }
 
     Widget infoRow() {
-      String? mediaFormat = mediaFormatLabel(media.format);
+      String? mediaFormat = LabelUtil.mediaFormatLabel(media.format);
       int? startYear = media.seasonYear ?? media.startDate?.year;
 
       var items = [mediaFormat, startYear];
@@ -301,7 +301,7 @@ class MediaCard extends StatelessWidget {
     }
 
     Widget statusRow() {
-      String? mediaStatus = mediaStatusLabel(media.status);
+      String? mediaStatus = LabelUtil.mediaStatusLabel(media.status);
 
       String progress = '';
       if (media.chapters != null) progress = '(${media.chapters} ch)';
@@ -362,7 +362,7 @@ class MediaCard extends StatelessWidget {
           } else if (media.type == Enum$MediaType.MANGA) {
             MangaByIDRoute(media.id).go(context);
           } else {
-            // TODO: display error
+            // TODO: display error in snackbar
             print("Unable to route media type: ${media.type}");
           }
         },
