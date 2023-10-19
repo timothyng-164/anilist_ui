@@ -8,8 +8,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
 
-import '../common/widgets/centered_item.dart';
-
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key});
 
@@ -99,7 +97,7 @@ class SearchScreen extends HookWidget {
     // When user scrolls to bottom, fetch paginated results
     scrollController.addListener(() async {
       bool scrolledToBottom = scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent - 50;
+          scrollController.position.maxScrollExtent - 100;
 
       if (scrolledToBottom &&
           !isLoadingMore.value &&
@@ -111,9 +109,8 @@ class SearchScreen extends HookWidget {
 
     Widget displayContent() {
       if (hasError.value) {
-        return const CenteredItem(
-          flex: true,
-          item: Text('An error has occured. Please try again.'),
+        return const Expanded(
+          child: Center(child: Text('An error has occured. Please try again.')),
         );
       }
 
@@ -122,10 +119,8 @@ class SearchScreen extends HookWidget {
       }
 
       if (isLoading.value) {
-        return const CenteredItem(
-          flex: true,
-          item: CircularProgressIndicator(),
-        );
+        return const Expanded(
+            child: Center(child: CircularProgressIndicator()));
       }
 
       return SearchResults(
@@ -236,7 +231,7 @@ class SearchResults extends HookWidget {
   @override
   Widget build(BuildContext context) {
     if (mediaList.value.isEmpty) {
-      return const CenteredItem(item: Text("No results found."), flex: true);
+      return const Expanded(child: Center(child: Text('No results found.')));
     }
 
     return Expanded(
@@ -254,7 +249,7 @@ class SearchResults extends HookWidget {
         itemBuilder: (BuildContext context, int index) {
           if (index == mediaList.value.length) {
             return const Card(
-                child: CenteredItem(item: CircularProgressIndicator()));
+                child: Center(child: CircularProgressIndicator()));
           }
           var media = mediaList.value[index];
           return (media != null) ? MediaCard(media: media) : null;

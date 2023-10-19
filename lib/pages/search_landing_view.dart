@@ -8,7 +8,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/util/date_util.dart';
-import '../common/widgets/centered_item.dart';
 
 class SearchLandingView extends HookWidget {
   const SearchLandingView({super.key});
@@ -37,7 +36,7 @@ class SearchLandingView extends HookWidget {
     var result = query.result;
 
     if (result.isLoading) {
-      return const CenteredItem(flex: true, item: CircularProgressIndicator());
+      return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
 
     if (result.hasException) {
@@ -47,8 +46,8 @@ class SearchLandingView extends HookWidget {
         print('Unable to read cache.');
       } else {
         print('Unknown exception occurred: $exception');
-        return const CenteredItem(
-            flex: true, item: Text('An error has occurred.'));
+        return const Expanded(
+            child: Center(child: Text('An error has occurred.')));
       }
     }
 
