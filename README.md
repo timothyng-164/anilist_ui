@@ -34,7 +34,7 @@ To generate route code, the `part` directive for the generated file needs to be 
 Example: https://github.com/flutter/packages/tree/main/packages/go_router_builder#source-code
 
 
-### TODO
+## TODO
 TODO: on search_screen.dart
 - add user status to MediaCard
 - test out error on graphql client
@@ -43,3 +43,4 @@ TODO: overall project
 1. manga/anime page by ID
 2. signin funtionality
 3. My List page
+4. get new font

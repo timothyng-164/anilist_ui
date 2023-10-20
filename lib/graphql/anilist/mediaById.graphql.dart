@@ -524,20 +524,6 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'countryOfOrigin'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'isLicensed'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
             name: NameNode(value: 'source'),
             alias: null,
             arguments: [],
@@ -550,42 +536,6 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'trailer'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'site'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'thumbnail'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
           ),
           FieldNode(
             name: NameNode(value: 'coverImage'),
@@ -672,13 +622,6 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
-                name: NameNode(value: 'category'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
                 name: NameNode(value: 'rank'),
                 alias: null,
                 arguments: [],
@@ -698,6 +641,72 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
                 arguments: [],
                 directives: [],
                 selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'studios'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'edges'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'isMain'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'node'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -894,11 +903,8 @@ class Query$GetMediaById$Media {
     this.duration,
     this.chapters,
     this.volumes,
-    this.countryOfOrigin,
-    this.isLicensed,
     this.source,
     this.hashtag,
-    this.trailer,
     this.coverImage,
     this.genres,
     this.synonyms,
@@ -907,6 +913,7 @@ class Query$GetMediaById$Media {
     this.favourites,
     this.isLocked,
     this.tags,
+    this.studios,
     this.$__typename = 'Media',
   });
 
@@ -925,11 +932,8 @@ class Query$GetMediaById$Media {
     final l$duration = json['duration'];
     final l$chapters = json['chapters'];
     final l$volumes = json['volumes'];
-    final l$countryOfOrigin = json['countryOfOrigin'];
-    final l$isLicensed = json['isLicensed'];
     final l$source = json['source'];
     final l$hashtag = json['hashtag'];
-    final l$trailer = json['trailer'];
     final l$coverImage = json['coverImage'];
     final l$genres = json['genres'];
     final l$synonyms = json['synonyms'];
@@ -938,6 +942,7 @@ class Query$GetMediaById$Media {
     final l$favourites = json['favourites'];
     final l$isLocked = json['isLocked'];
     final l$tags = json['tags'];
+    final l$studios = json['studios'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaById$Media(
       id: (l$id as int),
@@ -969,16 +974,10 @@ class Query$GetMediaById$Media {
       duration: (l$duration as int?),
       chapters: (l$chapters as int?),
       volumes: (l$volumes as int?),
-      countryOfOrigin: (l$countryOfOrigin as String?),
-      isLicensed: (l$isLicensed as bool?),
       source: l$source == null
           ? null
           : fromJson$Enum$MediaSource((l$source as String)),
       hashtag: (l$hashtag as String?),
-      trailer: l$trailer == null
-          ? null
-          : Query$GetMediaById$Media$trailer.fromJson(
-              (l$trailer as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
           : Query$GetMediaById$Media$coverImage.fromJson(
@@ -996,6 +995,10 @@ class Query$GetMediaById$Media {
               : Query$GetMediaById$Media$tags.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
+      studios: l$studios == null
+          ? null
+          : Query$GetMediaById$Media$studios.fromJson(
+              (l$studios as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1028,15 +1031,9 @@ class Query$GetMediaById$Media {
 
   final int? volumes;
 
-  final String? countryOfOrigin;
-
-  final bool? isLicensed;
-
   final Enum$MediaSource? source;
 
   final String? hashtag;
-
-  final Query$GetMediaById$Media$trailer? trailer;
 
   final Query$GetMediaById$Media$coverImage? coverImage;
 
@@ -1053,6 +1050,8 @@ class Query$GetMediaById$Media {
   final bool? isLocked;
 
   final List<Query$GetMediaById$Media$tags?>? tags;
+
+  final Query$GetMediaById$Media$studios? studios;
 
   final String $__typename;
 
@@ -1089,17 +1088,11 @@ class Query$GetMediaById$Media {
     _resultData['chapters'] = l$chapters;
     final l$volumes = volumes;
     _resultData['volumes'] = l$volumes;
-    final l$countryOfOrigin = countryOfOrigin;
-    _resultData['countryOfOrigin'] = l$countryOfOrigin;
-    final l$isLicensed = isLicensed;
-    _resultData['isLicensed'] = l$isLicensed;
     final l$source = source;
     _resultData['source'] =
         l$source == null ? null : toJson$Enum$MediaSource(l$source);
     final l$hashtag = hashtag;
     _resultData['hashtag'] = l$hashtag;
-    final l$trailer = trailer;
-    _resultData['trailer'] = l$trailer?.toJson();
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
     final l$genres = genres;
@@ -1116,6 +1109,8 @@ class Query$GetMediaById$Media {
     _resultData['isLocked'] = l$isLocked;
     final l$tags = tags;
     _resultData['tags'] = l$tags?.map((e) => e?.toJson()).toList();
+    final l$studios = studios;
+    _resultData['studios'] = l$studios?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1137,11 +1132,8 @@ class Query$GetMediaById$Media {
     final l$duration = duration;
     final l$chapters = chapters;
     final l$volumes = volumes;
-    final l$countryOfOrigin = countryOfOrigin;
-    final l$isLicensed = isLicensed;
     final l$source = source;
     final l$hashtag = hashtag;
-    final l$trailer = trailer;
     final l$coverImage = coverImage;
     final l$genres = genres;
     final l$synonyms = synonyms;
@@ -1150,6 +1142,7 @@ class Query$GetMediaById$Media {
     final l$favourites = favourites;
     final l$isLocked = isLocked;
     final l$tags = tags;
+    final l$studios = studios;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -1166,11 +1159,8 @@ class Query$GetMediaById$Media {
       l$duration,
       l$chapters,
       l$volumes,
-      l$countryOfOrigin,
-      l$isLicensed,
       l$source,
       l$hashtag,
-      l$trailer,
       l$coverImage,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$synonyms == null ? null : Object.hashAll(l$synonyms.map((v) => v)),
@@ -1179,6 +1169,7 @@ class Query$GetMediaById$Media {
       l$favourites,
       l$isLocked,
       l$tags == null ? null : Object.hashAll(l$tags.map((v) => v)),
+      l$studios,
       l$$__typename,
     ]);
   }
@@ -1262,16 +1253,6 @@ class Query$GetMediaById$Media {
     if (l$volumes != lOther$volumes) {
       return false;
     }
-    final l$countryOfOrigin = countryOfOrigin;
-    final lOther$countryOfOrigin = other.countryOfOrigin;
-    if (l$countryOfOrigin != lOther$countryOfOrigin) {
-      return false;
-    }
-    final l$isLicensed = isLicensed;
-    final lOther$isLicensed = other.isLicensed;
-    if (l$isLicensed != lOther$isLicensed) {
-      return false;
-    }
     final l$source = source;
     final lOther$source = other.source;
     if (l$source != lOther$source) {
@@ -1280,11 +1261,6 @@ class Query$GetMediaById$Media {
     final l$hashtag = hashtag;
     final lOther$hashtag = other.hashtag;
     if (l$hashtag != lOther$hashtag) {
-      return false;
-    }
-    final l$trailer = trailer;
-    final lOther$trailer = other.trailer;
-    if (l$trailer != lOther$trailer) {
       return false;
     }
     final l$coverImage = coverImage;
@@ -1360,6 +1336,11 @@ class Query$GetMediaById$Media {
     } else if (l$tags != lOther$tags) {
       return false;
     }
+    final l$studios = studios;
+    final lOther$studios = other.studios;
+    if (l$studios != lOther$studios) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1402,11 +1383,8 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     int? duration,
     int? chapters,
     int? volumes,
-    String? countryOfOrigin,
-    bool? isLicensed,
     Enum$MediaSource? source,
     String? hashtag,
-    Query$GetMediaById$Media$trailer? trailer,
     Query$GetMediaById$Media$coverImage? coverImage,
     List<String?>? genres,
     List<String?>? synonyms,
@@ -1415,12 +1393,12 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     int? favourites,
     bool? isLocked,
     List<Query$GetMediaById$Media$tags?>? tags,
+    Query$GetMediaById$Media$studios? studios,
     String? $__typename,
   });
   CopyWith$Query$GetMediaById$Media$title<TRes> get title;
   CopyWith$Query$GetMediaById$Media$startDate<TRes> get startDate;
   CopyWith$Query$GetMediaById$Media$endDate<TRes> get endDate;
-  CopyWith$Query$GetMediaById$Media$trailer<TRes> get trailer;
   CopyWith$Query$GetMediaById$Media$coverImage<TRes> get coverImage;
   TRes tags(
       Iterable<Query$GetMediaById$Media$tags?>? Function(
@@ -1428,6 +1406,7 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
                   CopyWith$Query$GetMediaById$Media$tags<
                       Query$GetMediaById$Media$tags>?>?)
           _fn);
+  CopyWith$Query$GetMediaById$Media$studios<TRes> get studios;
 }
 
 class _CopyWithImpl$Query$GetMediaById$Media<TRes>
@@ -1458,11 +1437,8 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
     Object? duration = _undefined,
     Object? chapters = _undefined,
     Object? volumes = _undefined,
-    Object? countryOfOrigin = _undefined,
-    Object? isLicensed = _undefined,
     Object? source = _undefined,
     Object? hashtag = _undefined,
-    Object? trailer = _undefined,
     Object? coverImage = _undefined,
     Object? genres = _undefined,
     Object? synonyms = _undefined,
@@ -1471,6 +1447,7 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
     Object? favourites = _undefined,
     Object? isLocked = _undefined,
     Object? tags = _undefined,
+    Object? studios = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaById$Media(
@@ -1507,20 +1484,11 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         chapters:
             chapters == _undefined ? _instance.chapters : (chapters as int?),
         volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
-        countryOfOrigin: countryOfOrigin == _undefined
-            ? _instance.countryOfOrigin
-            : (countryOfOrigin as String?),
-        isLicensed: isLicensed == _undefined
-            ? _instance.isLicensed
-            : (isLicensed as bool?),
         source: source == _undefined
             ? _instance.source
             : (source as Enum$MediaSource?),
         hashtag:
             hashtag == _undefined ? _instance.hashtag : (hashtag as String?),
-        trailer: trailer == _undefined
-            ? _instance.trailer
-            : (trailer as Query$GetMediaById$Media$trailer?),
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Query$GetMediaById$Media$coverImage?),
@@ -1543,6 +1511,9 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         tags: tags == _undefined
             ? _instance.tags
             : (tags as List<Query$GetMediaById$Media$tags?>?),
+        studios: studios == _undefined
+            ? _instance.studios
+            : (studios as Query$GetMediaById$Media$studios?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1572,14 +1543,6 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
             local$endDate, (e) => call(endDate: e));
   }
 
-  CopyWith$Query$GetMediaById$Media$trailer<TRes> get trailer {
-    final local$trailer = _instance.trailer;
-    return local$trailer == null
-        ? CopyWith$Query$GetMediaById$Media$trailer.stub(_then(_instance))
-        : CopyWith$Query$GetMediaById$Media$trailer(
-            local$trailer, (e) => call(trailer: e));
-  }
-
   CopyWith$Query$GetMediaById$Media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
@@ -1601,6 +1564,14 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
+  CopyWith$Query$GetMediaById$Media$studios<TRes> get studios {
+    final local$studios = _instance.studios;
+    return local$studios == null
+        ? CopyWith$Query$GetMediaById$Media$studios.stub(_then(_instance))
+        : CopyWith$Query$GetMediaById$Media$studios(
+            local$studios, (e) => call(studios: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
@@ -1624,11 +1595,8 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
     int? duration,
     int? chapters,
     int? volumes,
-    String? countryOfOrigin,
-    bool? isLicensed,
     Enum$MediaSource? source,
     String? hashtag,
-    Query$GetMediaById$Media$trailer? trailer,
     Query$GetMediaById$Media$coverImage? coverImage,
     List<String?>? genres,
     List<String?>? synonyms,
@@ -1637,6 +1605,7 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
     int? favourites,
     bool? isLocked,
     List<Query$GetMediaById$Media$tags?>? tags,
+    Query$GetMediaById$Media$studios? studios,
     String? $__typename,
   }) =>
       _res;
@@ -1650,13 +1619,13 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
   CopyWith$Query$GetMediaById$Media$endDate<TRes> get endDate =>
       CopyWith$Query$GetMediaById$Media$endDate.stub(_res);
 
-  CopyWith$Query$GetMediaById$Media$trailer<TRes> get trailer =>
-      CopyWith$Query$GetMediaById$Media$trailer.stub(_res);
-
   CopyWith$Query$GetMediaById$Media$coverImage<TRes> get coverImage =>
       CopyWith$Query$GetMediaById$Media$coverImage.stub(_res);
 
   tags(_fn) => _res;
+
+  CopyWith$Query$GetMediaById$Media$studios<TRes> get studios =>
+      CopyWith$Query$GetMediaById$Media$studios.stub(_res);
 }
 
 class Query$GetMediaById$Media$title {
@@ -2159,167 +2128,6 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$endDate<TRes>
       _res;
 }
 
-class Query$GetMediaById$Media$trailer {
-  Query$GetMediaById$Media$trailer({
-    this.id,
-    this.site,
-    this.thumbnail,
-    this.$__typename = 'MediaTrailer',
-  });
-
-  factory Query$GetMediaById$Media$trailer.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$site = json['site'];
-    final l$thumbnail = json['thumbnail'];
-    final l$$__typename = json['__typename'];
-    return Query$GetMediaById$Media$trailer(
-      id: (l$id as String?),
-      site: (l$site as String?),
-      thumbnail: (l$thumbnail as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? id;
-
-  final String? site;
-
-  final String? thumbnail;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$site = site;
-    _resultData['site'] = l$site;
-    final l$thumbnail = thumbnail;
-    _resultData['thumbnail'] = l$thumbnail;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$site = site;
-    final l$thumbnail = thumbnail;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$site,
-      l$thumbnail,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetMediaById$Media$trailer) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$site = site;
-    final lOther$site = other.site;
-    if (l$site != lOther$site) {
-      return false;
-    }
-    final l$thumbnail = thumbnail;
-    final lOther$thumbnail = other.thumbnail;
-    if (l$thumbnail != lOther$thumbnail) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetMediaById$Media$trailer
-    on Query$GetMediaById$Media$trailer {
-  CopyWith$Query$GetMediaById$Media$trailer<Query$GetMediaById$Media$trailer>
-      get copyWith => CopyWith$Query$GetMediaById$Media$trailer(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetMediaById$Media$trailer<TRes> {
-  factory CopyWith$Query$GetMediaById$Media$trailer(
-    Query$GetMediaById$Media$trailer instance,
-    TRes Function(Query$GetMediaById$Media$trailer) then,
-  ) = _CopyWithImpl$Query$GetMediaById$Media$trailer;
-
-  factory CopyWith$Query$GetMediaById$Media$trailer.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetMediaById$Media$trailer;
-
-  TRes call({
-    String? id,
-    String? site,
-    String? thumbnail,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetMediaById$Media$trailer<TRes>
-    implements CopyWith$Query$GetMediaById$Media$trailer<TRes> {
-  _CopyWithImpl$Query$GetMediaById$Media$trailer(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetMediaById$Media$trailer _instance;
-
-  final TRes Function(Query$GetMediaById$Media$trailer) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? site = _undefined,
-    Object? thumbnail = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetMediaById$Media$trailer(
-        id: id == _undefined ? _instance.id : (id as String?),
-        site: site == _undefined ? _instance.site : (site as String?),
-        thumbnail: thumbnail == _undefined
-            ? _instance.thumbnail
-            : (thumbnail as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetMediaById$Media$trailer<TRes>
-    implements CopyWith$Query$GetMediaById$Media$trailer<TRes> {
-  _CopyWithStubImpl$Query$GetMediaById$Media$trailer(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? site,
-    String? thumbnail,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
 class Query$GetMediaById$Media$coverImage {
   Query$GetMediaById$Media$coverImage({
     this.large,
@@ -2468,7 +2276,6 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$coverImage<TRes>
 class Query$GetMediaById$Media$tags {
   Query$GetMediaById$Media$tags({
     required this.name,
-    this.category,
     this.rank,
     this.isMediaSpoiler,
     this.isGeneralSpoiler,
@@ -2477,14 +2284,12 @@ class Query$GetMediaById$Media$tags {
 
   factory Query$GetMediaById$Media$tags.fromJson(Map<String, dynamic> json) {
     final l$name = json['name'];
-    final l$category = json['category'];
     final l$rank = json['rank'];
     final l$isMediaSpoiler = json['isMediaSpoiler'];
     final l$isGeneralSpoiler = json['isGeneralSpoiler'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaById$Media$tags(
       name: (l$name as String),
-      category: (l$category as String?),
       rank: (l$rank as int?),
       isMediaSpoiler: (l$isMediaSpoiler as bool?),
       isGeneralSpoiler: (l$isGeneralSpoiler as bool?),
@@ -2493,8 +2298,6 @@ class Query$GetMediaById$Media$tags {
   }
 
   final String name;
-
-  final String? category;
 
   final int? rank;
 
@@ -2508,8 +2311,6 @@ class Query$GetMediaById$Media$tags {
     final _resultData = <String, dynamic>{};
     final l$name = name;
     _resultData['name'] = l$name;
-    final l$category = category;
-    _resultData['category'] = l$category;
     final l$rank = rank;
     _resultData['rank'] = l$rank;
     final l$isMediaSpoiler = isMediaSpoiler;
@@ -2524,14 +2325,12 @@ class Query$GetMediaById$Media$tags {
   @override
   int get hashCode {
     final l$name = name;
-    final l$category = category;
     final l$rank = rank;
     final l$isMediaSpoiler = isMediaSpoiler;
     final l$isGeneralSpoiler = isGeneralSpoiler;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$name,
-      l$category,
       l$rank,
       l$isMediaSpoiler,
       l$isGeneralSpoiler,
@@ -2551,11 +2350,6 @@ class Query$GetMediaById$Media$tags {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
-      return false;
-    }
-    final l$category = category;
-    final lOther$category = other.category;
-    if (l$category != lOther$category) {
       return false;
     }
     final l$rank = rank;
@@ -2602,7 +2396,6 @@ abstract class CopyWith$Query$GetMediaById$Media$tags<TRes> {
 
   TRes call({
     String? name,
-    String? category,
     int? rank,
     bool? isMediaSpoiler,
     bool? isGeneralSpoiler,
@@ -2625,7 +2418,6 @@ class _CopyWithImpl$Query$GetMediaById$Media$tags<TRes>
 
   TRes call({
     Object? name = _undefined,
-    Object? category = _undefined,
     Object? rank = _undefined,
     Object? isMediaSpoiler = _undefined,
     Object? isGeneralSpoiler = _undefined,
@@ -2635,8 +2427,6 @@ class _CopyWithImpl$Query$GetMediaById$Media$tags<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
-        category:
-            category == _undefined ? _instance.category : (category as String?),
         rank: rank == _undefined ? _instance.rank : (rank as int?),
         isMediaSpoiler: isMediaSpoiler == _undefined
             ? _instance.isMediaSpoiler
@@ -2658,10 +2448,480 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$tags<TRes>
 
   call({
     String? name,
-    String? category,
     int? rank,
     bool? isMediaSpoiler,
     bool? isGeneralSpoiler,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetMediaById$Media$studios {
+  Query$GetMediaById$Media$studios({
+    this.edges,
+    this.$__typename = 'StudioConnection',
+  });
+
+  factory Query$GetMediaById$Media$studios.fromJson(Map<String, dynamic> json) {
+    final l$edges = json['edges'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$studios(
+      edges: (l$edges as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$GetMediaById$Media$studios$edges.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetMediaById$Media$studios$edges?>? edges;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$edges = edges;
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$edges = edges;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$edges == null ? null : Object.hashAll(l$edges.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$studios) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$edges = edges;
+    final lOther$edges = other.edges;
+    if (l$edges != null && lOther$edges != null) {
+      if (l$edges.length != lOther$edges.length) {
+        return false;
+      }
+      for (int i = 0; i < l$edges.length; i++) {
+        final l$edges$entry = l$edges[i];
+        final lOther$edges$entry = lOther$edges[i];
+        if (l$edges$entry != lOther$edges$entry) {
+          return false;
+        }
+      }
+    } else if (l$edges != lOther$edges) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$studios
+    on Query$GetMediaById$Media$studios {
+  CopyWith$Query$GetMediaById$Media$studios<Query$GetMediaById$Media$studios>
+      get copyWith => CopyWith$Query$GetMediaById$Media$studios(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$studios<TRes> {
+  factory CopyWith$Query$GetMediaById$Media$studios(
+    Query$GetMediaById$Media$studios instance,
+    TRes Function(Query$GetMediaById$Media$studios) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$studios;
+
+  factory CopyWith$Query$GetMediaById$Media$studios.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$studios;
+
+  TRes call({
+    List<Query$GetMediaById$Media$studios$edges?>? edges,
+    String? $__typename,
+  });
+  TRes edges(
+      Iterable<Query$GetMediaById$Media$studios$edges?>? Function(
+              Iterable<
+                  CopyWith$Query$GetMediaById$Media$studios$edges<
+                      Query$GetMediaById$Media$studios$edges>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$studios<TRes>
+    implements CopyWith$Query$GetMediaById$Media$studios<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$studios(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$studios _instance;
+
+  final TRes Function(Query$GetMediaById$Media$studios) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? edges = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$studios(
+        edges: edges == _undefined
+            ? _instance.edges
+            : (edges as List<Query$GetMediaById$Media$studios$edges?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes edges(
+          Iterable<Query$GetMediaById$Media$studios$edges?>? Function(
+                  Iterable<
+                      CopyWith$Query$GetMediaById$Media$studios$edges<
+                          Query$GetMediaById$Media$studios$edges>?>?)
+              _fn) =>
+      call(
+          edges: _fn(_instance.edges?.map((e) => e == null
+              ? null
+              : CopyWith$Query$GetMediaById$Media$studios$edges(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$studios<TRes>
+    implements CopyWith$Query$GetMediaById$Media$studios<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$studios(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetMediaById$Media$studios$edges?>? edges,
+    String? $__typename,
+  }) =>
+      _res;
+
+  edges(_fn) => _res;
+}
+
+class Query$GetMediaById$Media$studios$edges {
+  Query$GetMediaById$Media$studios$edges({
+    required this.isMain,
+    this.node,
+    this.$__typename = 'StudioEdge',
+  });
+
+  factory Query$GetMediaById$Media$studios$edges.fromJson(
+      Map<String, dynamic> json) {
+    final l$isMain = json['isMain'];
+    final l$node = json['node'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$studios$edges(
+      isMain: (l$isMain as bool),
+      node: l$node == null
+          ? null
+          : Query$GetMediaById$Media$studios$edges$node.fromJson(
+              (l$node as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final bool isMain;
+
+  final Query$GetMediaById$Media$studios$edges$node? node;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$isMain = isMain;
+    _resultData['isMain'] = l$isMain;
+    final l$node = node;
+    _resultData['node'] = l$node?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$isMain = isMain;
+    final l$node = node;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$isMain,
+      l$node,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$studios$edges) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isMain = isMain;
+    final lOther$isMain = other.isMain;
+    if (l$isMain != lOther$isMain) {
+      return false;
+    }
+    final l$node = node;
+    final lOther$node = other.node;
+    if (l$node != lOther$node) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$studios$edges
+    on Query$GetMediaById$Media$studios$edges {
+  CopyWith$Query$GetMediaById$Media$studios$edges<
+          Query$GetMediaById$Media$studios$edges>
+      get copyWith => CopyWith$Query$GetMediaById$Media$studios$edges(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$studios$edges<TRes> {
+  factory CopyWith$Query$GetMediaById$Media$studios$edges(
+    Query$GetMediaById$Media$studios$edges instance,
+    TRes Function(Query$GetMediaById$Media$studios$edges) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$studios$edges;
+
+  factory CopyWith$Query$GetMediaById$Media$studios$edges.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$studios$edges;
+
+  TRes call({
+    bool? isMain,
+    Query$GetMediaById$Media$studios$edges$node? node,
+    String? $__typename,
+  });
+  CopyWith$Query$GetMediaById$Media$studios$edges$node<TRes> get node;
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$studios$edges<TRes>
+    implements CopyWith$Query$GetMediaById$Media$studios$edges<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$studios$edges(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$studios$edges _instance;
+
+  final TRes Function(Query$GetMediaById$Media$studios$edges) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isMain = _undefined,
+    Object? node = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$studios$edges(
+        isMain: isMain == _undefined || isMain == null
+            ? _instance.isMain
+            : (isMain as bool),
+        node: node == _undefined
+            ? _instance.node
+            : (node as Query$GetMediaById$Media$studios$edges$node?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetMediaById$Media$studios$edges$node<TRes> get node {
+    final local$node = _instance.node;
+    return local$node == null
+        ? CopyWith$Query$GetMediaById$Media$studios$edges$node.stub(
+            _then(_instance))
+        : CopyWith$Query$GetMediaById$Media$studios$edges$node(
+            local$node, (e) => call(node: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$studios$edges<TRes>
+    implements CopyWith$Query$GetMediaById$Media$studios$edges<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$studios$edges(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isMain,
+    Query$GetMediaById$Media$studios$edges$node? node,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetMediaById$Media$studios$edges$node<TRes> get node =>
+      CopyWith$Query$GetMediaById$Media$studios$edges$node.stub(_res);
+}
+
+class Query$GetMediaById$Media$studios$edges$node {
+  Query$GetMediaById$Media$studios$edges$node({
+    required this.id,
+    required this.name,
+    this.$__typename = 'Studio',
+  });
+
+  factory Query$GetMediaById$Media$studios$edges$node.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$studios$edges$node(
+      id: (l$id as int),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$studios$edges$node) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$studios$edges$node
+    on Query$GetMediaById$Media$studios$edges$node {
+  CopyWith$Query$GetMediaById$Media$studios$edges$node<
+          Query$GetMediaById$Media$studios$edges$node>
+      get copyWith => CopyWith$Query$GetMediaById$Media$studios$edges$node(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$studios$edges$node<TRes> {
+  factory CopyWith$Query$GetMediaById$Media$studios$edges$node(
+    Query$GetMediaById$Media$studios$edges$node instance,
+    TRes Function(Query$GetMediaById$Media$studios$edges$node) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$studios$edges$node;
+
+  factory CopyWith$Query$GetMediaById$Media$studios$edges$node.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$studios$edges$node;
+
+  TRes call({
+    int? id,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$studios$edges$node<TRes>
+    implements CopyWith$Query$GetMediaById$Media$studios$edges$node<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$studios$edges$node(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$studios$edges$node _instance;
+
+  final TRes Function(Query$GetMediaById$Media$studios$edges$node) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$studios$edges$node(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$studios$edges$node<TRes>
+    implements CopyWith$Query$GetMediaById$Media$studios$edges$node<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$studios$edges$node(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
     String? $__typename,
   }) =>
       _res;

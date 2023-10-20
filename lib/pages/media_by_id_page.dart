@@ -228,6 +228,12 @@ class InfoSection extends StatelessWidget {
       return buildRow(title, value == null ? null : '$value');
     }
 
+    Widget buildRowFromList(String title, List<String?>? values) {
+      if (values == null) return const SizedBox.shrink();
+      values.removeWhere((v) => v == null);
+      return buildRow(title, values.isEmpty ? null : values.join('\n'));
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -237,11 +243,7 @@ class InfoSection extends StatelessWidget {
         buildRow('Romanji', media.title?.romaji),
         buildRow('English', media.title?.english),
         buildRow('Native', media.title?.native),
-        buildRow(
-            'Also known as',
-            media.synonyms == null && media.synonyms!.isEmpty
-                ? null
-                : media.synonyms!.join('\n')),
+        buildRowFromList('Also known as', media.synonyms),
         const Divider(),
         buildRow('Format', LabelUtil.mediaFormatLabel(media.format)),
         buildRowFromInt('Episodes', media.episodes),
@@ -261,6 +263,23 @@ class InfoSection extends StatelessWidget {
                 media.endDate?.day, media.endDate?.month, media.endDate?.year)),
         buildRow('Season',
             LabelUtil.seasonYearLabel(media.season, media.seasonYear)),
+        buildRowFromList(
+            'Studios',
+            media.studios?.edges!
+                .where((edge) => edge?.isMain == true)
+                .map((e) => e?.node?.name)
+                .toList()),
+        buildRowFromList(
+            'Producers',
+            media.studios?.edges!
+                .where((edge) => edge?.isMain == false)
+                .map((e) => e?.node?.name)
+                .toList()),
+        const Divider(),
+        buildRow('Mean Score',
+            media.meanScore == null ? null : '${media.meanScore}%'),
+        buildRowFromInt('Popularity', media.popularity),
+        buildRowFromInt('Favorites', media.favourites),
       ],
     );
   }
