@@ -1,12 +1,12 @@
 import 'package:anilist_ui/common/util/label_util.dart';
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/search_landing_view.dart';
-import 'package:anilist_ui/routing/routes.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
+
+import '../common/widgets/media_card.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key});
@@ -252,36 +252,20 @@ class SearchResults extends HookWidget {
                 child: Center(child: CircularProgressIndicator()));
           }
           var media = mediaList.value[index];
-          return (media != null) ? MediaCard(media: media) : null;
+          return (media != null) ? ResultCard(media: media) : null;
         },
       ),
     );
   }
 }
 
-class MediaCard extends StatelessWidget {
-  const MediaCard({super.key, required this.media});
+class ResultCard extends StatelessWidget {
+  const ResultCard({super.key, required this.media});
 
   final Query$Search$Page$media media;
 
   @override
   Widget build(BuildContext context) {
-    String? imageUrl = media.coverImage?.medium;
-
-    Widget mediaImage(String imageUrl, BoxConstraints constraints) {
-      Radius radius = const Radius.circular(8.0);
-      return ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: radius, bottomLeft: radius),
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          height: constraints.maxHeight,
-          width: constraints.maxHeight * 2 / 3,
-          fit: BoxFit.fill,
-          placeholder: (context, url) => const SizedBox(),
-        ),
-      );
-    }
-
     Widget infoRow() {
       String? mediaFormat = LabelUtil.mediaFormatLabel(media.format);
       int? startYear = media.seasonYear ?? media.startDate?.year;
@@ -324,50 +308,28 @@ class MediaCard extends StatelessWidget {
       );
     }
 
-    Widget cardContent = Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              media.title?.userPreferred ?? '',
-              overflow: TextOverflow.ellipsis,
-              // TODO: check why fontWeight does not work
-              style: const TextStyle(fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 4),
-            infoRow(),
-            const SizedBox(height: 4),
-            statusRow(),
-            const Spacer(),
-            engagementRow(),
-          ],
+    Widget topLeftContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          media.title?.userPreferred ?? '',
+          overflow: TextOverflow.ellipsis,
+          // TODO: check why fontWeight does not work
+          style: const TextStyle(fontWeight: FontWeight.w800),
         ),
-      ),
+        const SizedBox(height: 4),
+        infoRow(),
+        const SizedBox(height: 4),
+        statusRow(),
+      ],
     );
 
-    return LayoutBuilder(builder: (_, constraints) {
-      return InkWell(
-        onTap: () {
-          if (media.type == Enum$MediaType.ANIME) {
-            AnimeByIDRoute(media.id).go(context);
-          } else if (media.type == Enum$MediaType.MANGA) {
-            MangaByIDRoute(media.id).go(context);
-          } else {
-            // TODO: display error in snackbar
-            print("Unable to route media type: ${media.type}");
-          }
-        },
-        child: Card(
-          child: Row(
-            children: [
-              if (imageUrl != null) mediaImage(imageUrl, constraints),
-              cardContent
-            ],
-          ),
-        ),
-      );
-    });
+    return MediaCard(
+      mediaType: media.type ?? Enum$MediaType.$unknown,
+      mediaId: media.id,
+      imageUrl: media.coverImage?.medium,
+      topLeftContent: topLeftContent,
+      bottomLeftContent: engagementRow(),
+    );
   }
 }

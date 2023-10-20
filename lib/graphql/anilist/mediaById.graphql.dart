@@ -772,6 +772,13 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
                         ]),
                       ),
                       FieldNode(
+                        name: NameNode(value: 'type'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'format'),
                         alias: null,
                         arguments: [],
@@ -3415,6 +3422,7 @@ class Query$GetMediaById$Media$relations$edges$node {
   Query$GetMediaById$Media$relations$edges$node({
     required this.id,
     this.title,
+    this.type,
     this.format,
     this.status,
     this.coverImage,
@@ -3425,6 +3433,7 @@ class Query$GetMediaById$Media$relations$edges$node {
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$title = json['title'];
+    final l$type = json['type'];
     final l$format = json['format'];
     final l$status = json['status'];
     final l$coverImage = json['coverImage'];
@@ -3435,6 +3444,7 @@ class Query$GetMediaById$Media$relations$edges$node {
           ? null
           : Query$GetMediaById$Media$relations$edges$node$title.fromJson(
               (l$title as Map<String, dynamic>)),
+      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
       format: l$format == null
           ? null
           : fromJson$Enum$MediaFormat((l$format as String)),
@@ -3453,6 +3463,8 @@ class Query$GetMediaById$Media$relations$edges$node {
 
   final Query$GetMediaById$Media$relations$edges$node$title? title;
 
+  final Enum$MediaType? type;
+
   final Enum$MediaFormat? format;
 
   final Enum$MediaStatus? status;
@@ -3467,6 +3479,8 @@ class Query$GetMediaById$Media$relations$edges$node {
     _resultData['id'] = l$id;
     final l$title = title;
     _resultData['title'] = l$title?.toJson();
+    final l$type = type;
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$format = format;
     _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
@@ -3484,6 +3498,7 @@ class Query$GetMediaById$Media$relations$edges$node {
   int get hashCode {
     final l$id = id;
     final l$title = title;
+    final l$type = type;
     final l$format = format;
     final l$status = status;
     final l$coverImage = coverImage;
@@ -3491,6 +3506,7 @@ class Query$GetMediaById$Media$relations$edges$node {
     return Object.hashAll([
       l$id,
       l$title,
+      l$type,
       l$format,
       l$status,
       l$coverImage,
@@ -3515,6 +3531,11 @@ class Query$GetMediaById$Media$relations$edges$node {
     final l$title = title;
     final lOther$title = other.title;
     if (l$title != lOther$title) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
       return false;
     }
     final l$format = format;
@@ -3564,6 +3585,7 @@ abstract class CopyWith$Query$GetMediaById$Media$relations$edges$node<TRes> {
   TRes call({
     int? id,
     Query$GetMediaById$Media$relations$edges$node$title? title,
+    Enum$MediaType? type,
     Enum$MediaFormat? format,
     Enum$MediaStatus? status,
     Query$GetMediaById$Media$relations$edges$node$coverImage? coverImage,
@@ -3590,6 +3612,7 @@ class _CopyWithImpl$Query$GetMediaById$Media$relations$edges$node<TRes>
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
+    Object? type = _undefined,
     Object? format = _undefined,
     Object? status = _undefined,
     Object? coverImage = _undefined,
@@ -3600,6 +3623,7 @@ class _CopyWithImpl$Query$GetMediaById$Media$relations$edges$node<TRes>
         title: title == _undefined
             ? _instance.title
             : (title as Query$GetMediaById$Media$relations$edges$node$title?),
+        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
         format: format == _undefined
             ? _instance.format
             : (format as Enum$MediaFormat?),
@@ -3644,6 +3668,7 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$relations$edges$node<TRes>
   call({
     int? id,
     Query$GetMediaById$Media$relations$edges$node$title? title,
+    Enum$MediaType? type,
     Enum$MediaFormat? format,
     Enum$MediaStatus? status,
     Query$GetMediaById$Media$relations$edges$node$coverImage? coverImage,

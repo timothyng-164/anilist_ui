@@ -62,6 +62,7 @@ query GetMediaById($id: Int, $type: MediaType) {
           title {
             userPreferred
           }
+          type
           format
           status
           coverImage {

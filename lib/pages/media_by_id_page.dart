@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import '../common/widgets/media_card.dart';
+
 class MediaByIdPage extends HookWidget {
   const MediaByIdPage({super.key, required this.id, required this.mediaType});
 
@@ -105,73 +107,8 @@ class RelationSection extends StatelessWidget {
     }
 
     final textTheme = Theme.of(context).textTheme;
-
-    ScrollController scrollController = ScrollController();
-    double cardHeight = 140;
-
-    // TODO: create shared widget with search_screen
-    Widget mediaImage(String imageUrl, double maxHeight) {
-      Radius radius = const Radius.circular(8.0);
-      return ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: radius, bottomLeft: radius),
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          height: maxHeight,
-          width: maxHeight * 2 / 3,
-          fit: BoxFit.fill,
-        ),
-      );
-    }
-
-    Widget cardContent(Query$GetMediaById$Media$relations$edges? relation) {
-      List<String?> details = [
-        LabelUtil.mediaFormatLabel(relation?.node?.format),
-        LabelUtil.mediaStatusLabel(relation?.node?.status),
-      ];
-      details.remove(null);
-
-      return Expanded(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                LabelUtil.mediaRelationLabel(relation?.relationType) ?? '',
-                style:
-                    textTheme.labelLarge!.copyWith(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                relation?.node?.title?.userPreferred ?? '',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              const Spacer(),
-              Text(details.join(' · ')),
-            ],
-          ),
-        ),
-      );
-    }
-
-    Widget relationCard(Query$GetMediaById$Media$relations$edges? relation) {
-      return SizedBox(
-        height: cardHeight,
-        width: cardHeight * 2,
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Card(
-            child: Row(
-              children: [
-                if (relation?.node?.coverImage?.medium != null)
-                  mediaImage(relation!.node!.coverImage!.medium!,
-                      constraints.maxHeight),
-                cardContent(relation)
-              ],
-            ),
-          );
-        }),
-      );
-    }
+    final ScrollController scrollController = ScrollController();
+    const double cardHeight = 140;
 
     return Scrollbar(
       controller: scrollController,
@@ -184,7 +121,7 @@ class RelationSection extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 8),
             height: cardHeight,
             child: ListView.separated(
               controller: scrollController,
@@ -194,12 +131,60 @@ class RelationSection extends StatelessWidget {
               separatorBuilder: (_, __) => const SizedBox(width: 10),
               itemBuilder: (context, i) {
                 var relation = relations!.edges![i];
-                return relationCard(relation);
+                return RelationCard(relation: relation, cardHeight: cardHeight);
               },
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class RelationCard extends StatelessWidget {
+  const RelationCard({super.key, this.relation, required this.cardHeight});
+  final Query$GetMediaById$Media$relations$edges? relation;
+  final double cardHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    if (relation?.node?.type == null || relation?.node?.id == null) {
+      return const SizedBox.shrink();
+    }
+    final textTheme = Theme.of(context).textTheme;
+
+    Widget topLeftContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          LabelUtil.mediaRelationLabel(relation?.relationType) ?? '',
+          style: textTheme.labelLarge!.copyWith(fontWeight: FontWeight.bold),
+        ),
+        Text(
+          relation?.node?.title?.userPreferred ?? '',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        ),
+      ],
+    );
+
+    Widget bottomLeftContent() {
+      List<String?> details = [
+        LabelUtil.mediaFormatLabel(relation?.node?.format),
+        LabelUtil.mediaStatusLabel(relation?.node?.status),
+      ];
+      details.removeWhere((e) => e == null);
+      return Text(details.join(' · '));
+    }
+
+    return MediaCard(
+      mediaType: relation!.node!.type!,
+      mediaId: relation!.node!.id,
+      height: cardHeight,
+      width: cardHeight * 2,
+      imageUrl: relation?.node?.coverImage?.medium,
+      topLeftContent: topLeftContent,
+      bottomLeftContent: bottomLeftContent(),
     );
   }
 }
