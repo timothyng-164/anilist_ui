@@ -252,7 +252,7 @@ class AnimeCard extends HookWidget {
             children: [
               CachedNetworkImage(
                 imageUrl: media?.coverImage?.large ?? '',
-                placeholder: (context, url) => const Center(child: SizedBox()),
+                placeholder: (_, __) => const Center(child: SizedBox()),
                 height: cardWidth * 3 / 2,
                 width: cardWidth,
                 fit: BoxFit.fitHeight,

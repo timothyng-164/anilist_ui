@@ -67,14 +67,17 @@ class PageContent extends StatelessWidget {
                 children: [
                   TitleSection(media: media, maxWidth: constraints.maxWidth),
                   const SizedBox(height: 20),
+                  RelationSection(relations: media.relations),
                   GenreSection(genres: media.genres),
                   const SizedBox(height: 10),
                   DescriptionSection(description: media.description),
                   const SizedBox(height: 10),
                   InfoSection(media: media),
                   const SizedBox(height: 20),
-                  TagsSection(mediaTags: media.tags)
+                  TagsSection(mediaTags: media.tags),
+
                   // TODO:
+                  // move sections to separate files
                   // favorite/add to list (if user is authenticated)
                   // Relations
                   // Recommendations
@@ -84,6 +87,117 @@ class PageContent extends StatelessWidget {
             }),
           ),
           const Spacer(flex: 1)
+        ],
+      ),
+    );
+  }
+}
+
+class RelationSection extends StatelessWidget {
+  const RelationSection({super.key, required this.relations});
+
+  final Query$GetMediaById$Media$relations? relations;
+
+  @override
+  Widget build(BuildContext context) {
+    if (relations?.edges == null || relations!.edges!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final textTheme = Theme.of(context).textTheme;
+
+    ScrollController scrollController = ScrollController();
+    double cardHeight = 140;
+
+    // TODO: create shared widget with search_screen
+    Widget mediaImage(String imageUrl, double maxHeight) {
+      Radius radius = const Radius.circular(8.0);
+      return ClipRRect(
+        borderRadius: BorderRadius.only(topLeft: radius, bottomLeft: radius),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          height: maxHeight,
+          width: maxHeight * 2 / 3,
+          fit: BoxFit.fill,
+        ),
+      );
+    }
+
+    Widget cardContent(Query$GetMediaById$Media$relations$edges? relation) {
+      List<String?> details = [
+        LabelUtil.mediaFormatLabel(relation?.node?.format),
+        LabelUtil.mediaStatusLabel(relation?.node?.status),
+      ];
+      details.remove(null);
+
+      return Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                LabelUtil.mediaRelationLabel(relation?.relationType) ?? '',
+                style:
+                    textTheme.labelLarge!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                relation?.node?.title?.userPreferred ?? '',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              const Spacer(),
+              Text(details.join(' · ')),
+            ],
+          ),
+        ),
+      );
+    }
+
+    Widget relationCard(Query$GetMediaById$Media$relations$edges? relation) {
+      return SizedBox(
+        height: cardHeight,
+        width: cardHeight * 2,
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Card(
+            child: Row(
+              children: [
+                if (relation?.node?.coverImage?.medium != null)
+                  mediaImage(relation!.node!.coverImage!.medium!,
+                      constraints.maxHeight),
+                cardContent(relation)
+              ],
+            ),
+          );
+        }),
+      );
+    }
+
+    return Scrollbar(
+      controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Related Media',
+            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            height: cardHeight,
+            child: ListView.separated(
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: relations!.edges!.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 10),
+              itemBuilder: (context, i) {
+                var relation = relations!.edges![i];
+                return relationCard(relation);
+              },
+            ),
+          ),
         ],
       ),
     );

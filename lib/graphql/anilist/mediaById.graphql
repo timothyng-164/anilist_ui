@@ -54,5 +54,21 @@ query GetMediaById($id: Int, $type: MediaType) {
         }
       }
     }
+    relations {
+      edges {
+        relationType
+        node {
+          id
+          title {
+            userPreferred
+          }
+          format
+          status
+          coverImage {
+            medium
+          }
+        }
+      }
+    }
   }
 }

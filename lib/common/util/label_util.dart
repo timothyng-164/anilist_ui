@@ -47,6 +47,11 @@ class LabelUtil {
     return _capitalizeAndReplace(toJson$Enum$MediaSource(e));
   }
 
+  static String? mediaRelationLabel(Enum$MediaRelation? e) {
+    if (e == null) return null;
+    return _capitalizeAndReplace(toJson$Enum$MediaRelation(e));
+  }
+
   static String? dateLabel(int? day, int? month, int? year) {
     if (year == null || month == null || day == null) return null;
     return DateFormat.yMMMd().format(DateTime(year, month, day));
