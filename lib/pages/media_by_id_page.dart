@@ -69,7 +69,6 @@ class PageContent extends StatelessWidget {
                 children: [
                   TitleSection(media: media, maxWidth: constraints.maxWidth),
                   const SizedBox(height: 20),
-                  RelationSection(relations: media.relations),
                   GenreSection(genres: media.genres),
                   const SizedBox(height: 10),
                   DescriptionSection(description: media.description),
@@ -77,11 +76,12 @@ class PageContent extends StatelessWidget {
                   InfoSection(media: media),
                   const SizedBox(height: 20),
                   TagsSection(mediaTags: media.tags),
+                  const SizedBox(height: 20),
+                  RelationSection(relations: media.relations),
 
                   // TODO:
                   // move sections to separate files
                   // favorite/add to list (if user is authenticated)
-                  // Relations
                   // Recommendations
                   // Nice-to-haves: characters, staff, reviews, discussions, links, theme songs
                 ],

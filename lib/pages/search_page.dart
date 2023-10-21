@@ -8,8 +8,8 @@ import 'package:anilist_ui/graphql/anilist/search.graphql.dart';
 
 import '../common/widgets/media_card.dart';
 
-class SearchScreen extends HookWidget {
-  const SearchScreen({super.key});
+class SearchPage extends HookWidget {
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -314,7 +314,6 @@ class ResultCard extends StatelessWidget {
         Text(
           media.title?.userPreferred ?? '',
           overflow: TextOverflow.ellipsis,
-          // TODO: check why fontWeight does not work
           style: const TextStyle(fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 4),

@@ -1,7 +1,7 @@
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/media_by_id_page.dart';
 import 'package:anilist_ui/pages/login_page.dart';
-import 'package:anilist_ui/pages/search_screen.dart';
+import 'package:anilist_ui/pages/search_page.dart';
 import 'package:anilist_ui/routing/page_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +42,7 @@ class BrowseRouteDate extends GoRouteData {
   const BrowseRouteDate();
 
   @override
-  Widget build(context, state) => const SearchScreen();
+  Widget build(context, state) => const SearchPage();
 }
 
 class AnimeByIDRoute extends GoRouteData {
