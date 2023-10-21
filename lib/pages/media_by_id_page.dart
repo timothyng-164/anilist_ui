@@ -196,14 +196,19 @@ class TagsSection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (mediaTags == null && mediaTags!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    bool containsSpoilers = mediaTags!.firstWhere(
+            (tag) =>
+                tag?.isGeneralSpoiler == true || tag?.isMediaSpoiler == true,
+            orElse: () => null) !=
+        null;
     var showSpoilers = useState<bool>(false);
 
     var textTheme = Theme.of(context).textTheme;
     var colorScheme = Theme.of(context).colorScheme;
-
-    if (mediaTags == null && mediaTags!.isEmpty) {
-      return const SizedBox.shrink();
-    }
 
     var filteredTags = mediaTags!.where((tag) {
       if (tag == null) return false;
@@ -273,15 +278,16 @@ class TagsSection extends HookWidget {
             Expanded(flex: 8, child: buildTagColumn(rightTags)),
           ],
         ),
-        TextButton(
-          onPressed: () => showSpoilers.value = !showSpoilers.value,
-          style: TextButton.styleFrom(padding: EdgeInsets.zero),
-          child: Text(
-            '${showSpoilers.value ? 'Hide' : 'Show'} spoiler tags',
-            style: const TextStyle(fontSize: 10),
-            textAlign: TextAlign.left,
-          ),
-        )
+        if (containsSpoilers)
+          TextButton(
+            onPressed: () => showSpoilers.value = !showSpoilers.value,
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
+            child: Text(
+              '${showSpoilers.value ? 'Hide' : 'Show'} spoiler tags',
+              style: const TextStyle(fontSize: 10),
+              textAlign: TextAlign.left,
+            ),
+          )
       ],
     );
   }
@@ -462,7 +468,7 @@ class TitleSection extends StatelessWidget {
     return Row(
       children: [
         CachedNetworkImage(
-          imageUrl: media.coverImage?.extraLarge ?? '',
+          imageUrl: media.coverImage?.large ?? '',
           height: imgHeight,
           width: imgWidth,
           fit: BoxFit.fitHeight,
