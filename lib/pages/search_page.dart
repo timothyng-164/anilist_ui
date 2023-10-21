@@ -308,7 +308,7 @@ class ResultCard extends StatelessWidget {
       );
     }
 
-    Widget topLeftContent = Column(
+    Widget topContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -327,8 +327,8 @@ class ResultCard extends StatelessWidget {
       mediaType: media.type ?? Enum$MediaType.$unknown,
       mediaId: media.id,
       imageUrl: media.coverImage?.medium,
-      topLeftContent: topLeftContent,
-      bottomLeftContent: engagementRow(),
+      topContent: topContent,
+      bottomContent: engagementRow(),
     );
   }
 }

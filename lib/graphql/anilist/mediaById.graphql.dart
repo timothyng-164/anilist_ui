@@ -842,6 +842,135 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'recommendations'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'sort'),
+                value: EnumValueNode(name: NameNode(value: 'RATING_DESC')),
+              )
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'nodes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'rating'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'mediaRecommendation'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'title'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'userPreferred'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'coverImage'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'medium'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'format'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'type'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'status'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -1039,6 +1168,7 @@ class Query$GetMediaById$Media {
     this.tags,
     this.studios,
     this.relations,
+    this.recommendations,
     this.$__typename = 'Media',
   });
 
@@ -1069,6 +1199,7 @@ class Query$GetMediaById$Media {
     final l$tags = json['tags'];
     final l$studios = json['studios'];
     final l$relations = json['relations'];
+    final l$recommendations = json['recommendations'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaById$Media(
       id: (l$id as int),
@@ -1129,6 +1260,10 @@ class Query$GetMediaById$Media {
           ? null
           : Query$GetMediaById$Media$relations.fromJson(
               (l$relations as Map<String, dynamic>)),
+      recommendations: l$recommendations == null
+          ? null
+          : Query$GetMediaById$Media$recommendations.fromJson(
+              (l$recommendations as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1184,6 +1319,8 @@ class Query$GetMediaById$Media {
   final Query$GetMediaById$Media$studios? studios;
 
   final Query$GetMediaById$Media$relations? relations;
+
+  final Query$GetMediaById$Media$recommendations? recommendations;
 
   final String $__typename;
 
@@ -1245,6 +1382,8 @@ class Query$GetMediaById$Media {
     _resultData['studios'] = l$studios?.toJson();
     final l$relations = relations;
     _resultData['relations'] = l$relations?.toJson();
+    final l$recommendations = recommendations;
+    _resultData['recommendations'] = l$recommendations?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1278,6 +1417,7 @@ class Query$GetMediaById$Media {
     final l$tags = tags;
     final l$studios = studios;
     final l$relations = relations;
+    final l$recommendations = recommendations;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -1306,6 +1446,7 @@ class Query$GetMediaById$Media {
       l$tags == null ? null : Object.hashAll(l$tags.map((v) => v)),
       l$studios,
       l$relations,
+      l$recommendations,
       l$$__typename,
     ]);
   }
@@ -1482,6 +1623,11 @@ class Query$GetMediaById$Media {
     if (l$relations != lOther$relations) {
       return false;
     }
+    final l$recommendations = recommendations;
+    final lOther$recommendations = other.recommendations;
+    if (l$recommendations != lOther$recommendations) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1536,6 +1682,7 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     List<Query$GetMediaById$Media$tags?>? tags,
     Query$GetMediaById$Media$studios? studios,
     Query$GetMediaById$Media$relations? relations,
+    Query$GetMediaById$Media$recommendations? recommendations,
     String? $__typename,
   });
   CopyWith$Query$GetMediaById$Media$title<TRes> get title;
@@ -1550,6 +1697,7 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
           _fn);
   CopyWith$Query$GetMediaById$Media$studios<TRes> get studios;
   CopyWith$Query$GetMediaById$Media$relations<TRes> get relations;
+  CopyWith$Query$GetMediaById$Media$recommendations<TRes> get recommendations;
 }
 
 class _CopyWithImpl$Query$GetMediaById$Media<TRes>
@@ -1592,6 +1740,7 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
     Object? tags = _undefined,
     Object? studios = _undefined,
     Object? relations = _undefined,
+    Object? recommendations = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaById$Media(
@@ -1661,6 +1810,9 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         relations: relations == _undefined
             ? _instance.relations
             : (relations as Query$GetMediaById$Media$relations?),
+        recommendations: recommendations == _undefined
+            ? _instance.recommendations
+            : (recommendations as Query$GetMediaById$Media$recommendations?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1727,6 +1879,15 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         : CopyWith$Query$GetMediaById$Media$relations(
             local$relations, (e) => call(relations: e));
   }
+
+  CopyWith$Query$GetMediaById$Media$recommendations<TRes> get recommendations {
+    final local$recommendations = _instance.recommendations;
+    return local$recommendations == null
+        ? CopyWith$Query$GetMediaById$Media$recommendations.stub(
+            _then(_instance))
+        : CopyWith$Query$GetMediaById$Media$recommendations(
+            local$recommendations, (e) => call(recommendations: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
@@ -1762,6 +1923,7 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
     List<Query$GetMediaById$Media$tags?>? tags,
     Query$GetMediaById$Media$studios? studios,
     Query$GetMediaById$Media$relations? relations,
+    Query$GetMediaById$Media$recommendations? recommendations,
     String? $__typename,
   }) =>
       _res;
@@ -1785,6 +1947,9 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
 
   CopyWith$Query$GetMediaById$Media$relations<TRes> get relations =>
       CopyWith$Query$GetMediaById$Media$relations.stub(_res);
+
+  CopyWith$Query$GetMediaById$Media$recommendations<TRes> get recommendations =>
+      CopyWith$Query$GetMediaById$Media$recommendations.stub(_res);
 }
 
 class Query$GetMediaById$Media$title {
@@ -3948,6 +4113,924 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$relations$edges$node$coverImage
         CopyWith$Query$GetMediaById$Media$relations$edges$node$coverImage<
             TRes> {
   _CopyWithStubImpl$Query$GetMediaById$Media$relations$edges$node$coverImage(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetMediaById$Media$recommendations {
+  Query$GetMediaById$Media$recommendations({
+    this.nodes,
+    this.$__typename = 'RecommendationConnection',
+  });
+
+  factory Query$GetMediaById$Media$recommendations.fromJson(
+      Map<String, dynamic> json) {
+    final l$nodes = json['nodes'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$recommendations(
+      nodes: (l$nodes as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$GetMediaById$Media$recommendations$nodes.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetMediaById$Media$recommendations$nodes?>? nodes;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$nodes = nodes;
+    _resultData['nodes'] = l$nodes?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$nodes = nodes;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$nodes == null ? null : Object.hashAll(l$nodes.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$recommendations) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$nodes = nodes;
+    final lOther$nodes = other.nodes;
+    if (l$nodes != null && lOther$nodes != null) {
+      if (l$nodes.length != lOther$nodes.length) {
+        return false;
+      }
+      for (int i = 0; i < l$nodes.length; i++) {
+        final l$nodes$entry = l$nodes[i];
+        final lOther$nodes$entry = lOther$nodes[i];
+        if (l$nodes$entry != lOther$nodes$entry) {
+          return false;
+        }
+      }
+    } else if (l$nodes != lOther$nodes) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$recommendations
+    on Query$GetMediaById$Media$recommendations {
+  CopyWith$Query$GetMediaById$Media$recommendations<
+          Query$GetMediaById$Media$recommendations>
+      get copyWith => CopyWith$Query$GetMediaById$Media$recommendations(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$recommendations<TRes> {
+  factory CopyWith$Query$GetMediaById$Media$recommendations(
+    Query$GetMediaById$Media$recommendations instance,
+    TRes Function(Query$GetMediaById$Media$recommendations) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$recommendations;
+
+  factory CopyWith$Query$GetMediaById$Media$recommendations.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$recommendations;
+
+  TRes call({
+    List<Query$GetMediaById$Media$recommendations$nodes?>? nodes,
+    String? $__typename,
+  });
+  TRes nodes(
+      Iterable<Query$GetMediaById$Media$recommendations$nodes?>? Function(
+              Iterable<
+                  CopyWith$Query$GetMediaById$Media$recommendations$nodes<
+                      Query$GetMediaById$Media$recommendations$nodes>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$recommendations<TRes>
+    implements CopyWith$Query$GetMediaById$Media$recommendations<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$recommendations(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$recommendations _instance;
+
+  final TRes Function(Query$GetMediaById$Media$recommendations) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? nodes = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$recommendations(
+        nodes: nodes == _undefined
+            ? _instance.nodes
+            : (nodes as List<Query$GetMediaById$Media$recommendations$nodes?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes nodes(
+          Iterable<Query$GetMediaById$Media$recommendations$nodes?>? Function(
+                  Iterable<
+                      CopyWith$Query$GetMediaById$Media$recommendations$nodes<
+                          Query$GetMediaById$Media$recommendations$nodes>?>?)
+              _fn) =>
+      call(
+          nodes: _fn(_instance.nodes?.map((e) => e == null
+              ? null
+              : CopyWith$Query$GetMediaById$Media$recommendations$nodes(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations<TRes>
+    implements CopyWith$Query$GetMediaById$Media$recommendations<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$recommendations(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetMediaById$Media$recommendations$nodes?>? nodes,
+    String? $__typename,
+  }) =>
+      _res;
+
+  nodes(_fn) => _res;
+}
+
+class Query$GetMediaById$Media$recommendations$nodes {
+  Query$GetMediaById$Media$recommendations$nodes({
+    this.rating,
+    this.mediaRecommendation,
+    this.$__typename = 'Recommendation',
+  });
+
+  factory Query$GetMediaById$Media$recommendations$nodes.fromJson(
+      Map<String, dynamic> json) {
+    final l$rating = json['rating'];
+    final l$mediaRecommendation = json['mediaRecommendation'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$recommendations$nodes(
+      rating: (l$rating as int?),
+      mediaRecommendation: l$mediaRecommendation == null
+          ? null
+          : Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation
+              .fromJson((l$mediaRecommendation as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? rating;
+
+  final Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation?
+      mediaRecommendation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$rating = rating;
+    _resultData['rating'] = l$rating;
+    final l$mediaRecommendation = mediaRecommendation;
+    _resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$rating = rating;
+    final l$mediaRecommendation = mediaRecommendation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$rating,
+      l$mediaRecommendation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$recommendations$nodes) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$rating = rating;
+    final lOther$rating = other.rating;
+    if (l$rating != lOther$rating) {
+      return false;
+    }
+    final l$mediaRecommendation = mediaRecommendation;
+    final lOther$mediaRecommendation = other.mediaRecommendation;
+    if (l$mediaRecommendation != lOther$mediaRecommendation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$recommendations$nodes
+    on Query$GetMediaById$Media$recommendations$nodes {
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes<
+          Query$GetMediaById$Media$recommendations$nodes>
+      get copyWith => CopyWith$Query$GetMediaById$Media$recommendations$nodes(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$recommendations$nodes<TRes> {
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes(
+    Query$GetMediaById$Media$recommendations$nodes instance,
+    TRes Function(Query$GetMediaById$Media$recommendations$nodes) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes;
+
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes;
+
+  TRes call({
+    int? rating,
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation?
+        mediaRecommendation,
+    String? $__typename,
+  });
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+      TRes> get mediaRecommendation;
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes<TRes>
+    implements CopyWith$Query$GetMediaById$Media$recommendations$nodes<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$recommendations$nodes _instance;
+
+  final TRes Function(Query$GetMediaById$Media$recommendations$nodes) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? rating = _undefined,
+    Object? mediaRecommendation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$recommendations$nodes(
+        rating: rating == _undefined ? _instance.rating : (rating as int?),
+        mediaRecommendation: mediaRecommendation == _undefined
+            ? _instance.mediaRecommendation
+            : (mediaRecommendation
+                as Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+      TRes> get mediaRecommendation {
+    final local$mediaRecommendation = _instance.mediaRecommendation;
+    return local$mediaRecommendation == null
+        ? CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation
+            .stub(_then(_instance))
+        : CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+            local$mediaRecommendation, (e) => call(mediaRecommendation: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes<TRes>
+    implements CopyWith$Query$GetMediaById$Media$recommendations$nodes<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes(this._res);
+
+  TRes _res;
+
+  call({
+    int? rating,
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation?
+        mediaRecommendation,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+          TRes>
+      get mediaRecommendation =>
+          CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation
+              .stub(_res);
+}
+
+class Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation {
+  Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation({
+    required this.id,
+    this.title,
+    this.coverImage,
+    this.format,
+    this.type,
+    this.status,
+    this.$__typename = 'Media',
+  });
+
+  factory Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$title = json['title'];
+    final l$coverImage = json['coverImage'];
+    final l$format = json['format'];
+    final l$type = json['type'];
+    final l$status = json['status'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+      id: (l$id as int),
+      title: l$title == null
+          ? null
+          : Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title
+              .fromJson((l$title as Map<String, dynamic>)),
+      coverImage: l$coverImage == null
+          ? null
+          : Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage
+              .fromJson((l$coverImage as Map<String, dynamic>)),
+      format: l$format == null
+          ? null
+          : fromJson$Enum$MediaFormat((l$format as String)),
+      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaStatus((l$status as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title?
+      title;
+
+  final Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage?
+      coverImage;
+
+  final Enum$MediaFormat? format;
+
+  final Enum$MediaType? type;
+
+  final Enum$MediaStatus? status;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$format = format;
+    _resultData['format'] =
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+    final l$type = type;
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaStatus(l$status);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$title = title;
+    final l$coverImage = coverImage;
+    final l$format = format;
+    final l$type = type;
+    final l$status = status;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$title,
+      l$coverImage,
+      l$format,
+      l$type,
+      l$status,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$format = format;
+    final lOther$format = other.format;
+    if (l$format != lOther$format) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation
+    on Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation {
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation>
+      get copyWith =>
+          CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+    TRes> {
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation instance,
+    TRes Function(
+            Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation)
+        then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation;
+
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation;
+
+  TRes call({
+    int? id,
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title?
+        title,
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage?
+        coverImage,
+    Enum$MediaFormat? format,
+    Enum$MediaType? type,
+    Enum$MediaStatus? status,
+    String? $__typename,
+  });
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+      TRes> get title;
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+      TRes> get coverImage;
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+            TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation
+      _instance;
+
+  final TRes Function(
+      Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? title = _undefined,
+    Object? coverImage = _undefined,
+    Object? format = _undefined,
+    Object? type = _undefined,
+    Object? status = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        title: title == _undefined
+            ? _instance.title
+            : (title
+                as Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage
+                as Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage?),
+        format: format == _undefined
+            ? _instance.format
+            : (format as Enum$MediaFormat?),
+        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaStatus?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+      TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title
+            .stub(_then(_instance))
+        : CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+      TRes> get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage
+            .stub(_then(_instance))
+        : CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation<
+            TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title?
+        title,
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage?
+        coverImage,
+    Enum$MediaFormat? format,
+    Enum$MediaType? type,
+    Enum$MediaStatus? status,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+          TRes>
+      get title =>
+          CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title
+              .stub(_res);
+
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+          TRes>
+      get coverImage =>
+          CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage
+              .stub(_res);
+}
+
+class Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title {
+  Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title({
+    this.userPreferred,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title
+    on Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title {
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title>
+      get copyWith =>
+          CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+    TRes> {
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title
+        instance,
+    TRes Function(
+            Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title)
+        then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title;
+
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+            TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title
+      _instance;
+
+  final TRes Function(
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title<
+            TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$title(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage {
+  Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage({
+    this.medium,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage
+    on Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage {
+  CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage>
+      get copyWith =>
+          CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+    TRes> {
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
+    Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage
+        instance,
+    TRes Function(
+            Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage)
+        then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage;
+
+  factory CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+            TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage
+      _instance;
+
+  final TRes Function(
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage<
+            TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaRecommendation$coverImage(
       this._res);
 
   TRes _res;

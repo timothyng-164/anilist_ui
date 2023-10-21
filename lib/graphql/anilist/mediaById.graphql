@@ -71,5 +71,22 @@ query GetMediaById($id: Int, $type: MediaType) {
         }
       }
     }
+    recommendations(sort: RATING_DESC) {
+      nodes {
+        rating
+        mediaRecommendation {
+          id
+          title {
+            userPreferred
+          }
+          coverImage {
+            medium
+          }
+          format
+          type
+          status
+        }
+      }
+    }
   }
 }

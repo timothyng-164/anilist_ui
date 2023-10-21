@@ -75,14 +75,16 @@ class PageContent extends StatelessWidget {
                   const SizedBox(height: 10),
                   InfoSection(media: media),
                   const SizedBox(height: 20),
+                  RelationSection(relations: media.relations),
+                  const SizedBox(height: 20),
                   TagsSection(mediaTags: media.tags),
                   const SizedBox(height: 20),
-                  RelationSection(relations: media.relations),
+                  RecommendationSection(
+                      recommendations: media.recommendations?.nodes),
 
                   // TODO:
                   // move sections to separate files
                   // favorite/add to list (if user is authenticated)
-                  // Recommendations
                   // Nice-to-haves: characters, staff, reviews, discussions, links, theme songs
                 ],
               );
@@ -95,6 +97,144 @@ class PageContent extends StatelessWidget {
   }
 }
 
+class HorizontalScrollingSection extends StatelessWidget {
+  const HorizontalScrollingSection({
+    super.key,
+    this.title,
+    this.items,
+    this.itemHeight = 140,
+    required this.itemBuilder,
+  });
+
+  final String? title;
+  final List<Object?>? items;
+  final double? itemHeight;
+  final Widget? Function(BuildContext, int) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    if (items == null || items!.isEmpty) return const SizedBox.shrink();
+    final textTheme = Theme.of(context).textTheme;
+    final ScrollController scrollController = ScrollController();
+
+    return Scrollbar(
+      controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (title != null)
+            Text(
+              title!,
+              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
+            ),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            height: itemHeight,
+            child: ListView.separated(
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: items!.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 10),
+              itemBuilder: itemBuilder,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RecommendationSection extends StatelessWidget {
+  const RecommendationSection({super.key, this.recommendations});
+
+  final List<Query$GetMediaById$Media$recommendations$nodes?>? recommendations;
+
+  @override
+  Widget build(BuildContext context) {
+    double cardHeight = 140;
+    if (recommendations != null) {
+      recommendations!.removeWhere(
+        (rec) => rec!.rating == null || rec.rating! <= 0,
+      );
+    }
+
+    return HorizontalScrollingSection(
+      title: 'Recommended Media',
+      items: recommendations,
+      itemHeight: cardHeight,
+      itemBuilder: (_, i) {
+        var recommendation = recommendations![i];
+        return RecommendationCard(
+          recommendation: recommendation,
+          cardHeight: cardHeight,
+        );
+      },
+    );
+  }
+}
+
+class RecommendationCard extends StatelessWidget {
+  const RecommendationCard({
+    super.key,
+    this.recommendation,
+    required this.cardHeight,
+  });
+  final Query$GetMediaById$Media$recommendations$nodes? recommendation;
+  final double cardHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    if (recommendation == null) return const SizedBox.shrink();
+
+    final textTheme = Theme.of(context).textTheme;
+
+    Widget topContent() {
+      List<String?> details = [
+        LabelUtil.mediaFormatLabel(recommendation?.mediaRecommendation?.format),
+        LabelUtil.mediaStatusLabel(recommendation?.mediaRecommendation?.status),
+      ];
+      details.removeWhere((e) => e == null);
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            recommendation?.mediaRecommendation?.title?.userPreferred ?? '',
+            style: textTheme.labelLarge!.copyWith(fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+          Text(details.join(' · '))
+        ],
+      );
+    }
+
+    Widget bottomContent() {
+      if (recommendation?.rating == null) return const SizedBox.shrink();
+      return Row(
+        children: [
+          const Icon(Icons.thumb_up),
+          const SizedBox(width: 8),
+          Text('${recommendation!.rating!}'),
+        ],
+      );
+    }
+
+    return MediaCard(
+      mediaType:
+          recommendation?.mediaRecommendation?.type ?? Enum$MediaType.$unknown,
+      mediaId: recommendation?.mediaRecommendation?.id ?? -1,
+      height: cardHeight,
+      width: cardHeight * 2,
+      imageUrl: recommendation?.mediaRecommendation?.coverImage?.medium,
+      topContent: topContent(),
+      bottomContent: bottomContent(),
+    );
+  }
+}
+
 class RelationSection extends StatelessWidget {
   const RelationSection({super.key, required this.relations});
 
@@ -102,41 +242,16 @@ class RelationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (relations?.edges == null || relations!.edges!.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    final textTheme = Theme.of(context).textTheme;
-    final ScrollController scrollController = ScrollController();
     const double cardHeight = 140;
 
-    return Scrollbar(
-      controller: scrollController,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Related Media',
-            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            height: cardHeight,
-            child: ListView.separated(
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: relations!.edges!.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 10),
-              itemBuilder: (context, i) {
-                var relation = relations!.edges![i];
-                return RelationCard(relation: relation, cardHeight: cardHeight);
-              },
-            ),
-          ),
-        ],
-      ),
+    return HorizontalScrollingSection(
+      title: 'Related Media',
+      items: relations?.edges,
+      itemHeight: cardHeight,
+      itemBuilder: (_, i) {
+        var relation = relations!.edges![i];
+        return RelationCard(relation: relation, cardHeight: cardHeight);
+      },
     );
   }
 }
@@ -153,7 +268,7 @@ class RelationCard extends StatelessWidget {
     }
     final textTheme = Theme.of(context).textTheme;
 
-    Widget topLeftContent = Column(
+    Widget topContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -168,7 +283,7 @@ class RelationCard extends StatelessWidget {
       ],
     );
 
-    Widget bottomLeftContent() {
+    Widget bottomContent() {
       List<String?> details = [
         LabelUtil.mediaFormatLabel(relation?.node?.format),
         LabelUtil.mediaStatusLabel(relation?.node?.status),
@@ -183,8 +298,8 @@ class RelationCard extends StatelessWidget {
       height: cardHeight,
       width: cardHeight * 2,
       imageUrl: relation?.node?.coverImage?.medium,
-      topLeftContent: topLeftContent,
-      bottomLeftContent: bottomLeftContent(),
+      topContent: topContent,
+      bottomContent: bottomContent(),
     );
   }
 }

@@ -12,8 +12,8 @@ class MediaCard extends StatelessWidget {
     this.height,
     this.width,
     this.imageUrl,
-    this.topLeftContent,
-    this.bottomLeftContent,
+    this.topContent,
+    this.bottomContent,
   });
 
   final Enum$MediaType mediaType;
@@ -21,8 +21,8 @@ class MediaCard extends StatelessWidget {
   final double? height;
   final double? width;
   final String? imageUrl;
-  final Widget? topLeftContent;
-  final Widget? bottomLeftContent;
+  final Widget? topContent;
+  final Widget? bottomContent;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +43,8 @@ class MediaCard extends StatelessWidget {
         height: height,
         width: width,
         imageUrl: imageUrl,
-        topLeftContent: topLeftContent,
-        bottomLeftContent: bottomLeftContent,
+        topContent: topContent,
+        bottomContent: bottomContent,
       ),
     );
   }
