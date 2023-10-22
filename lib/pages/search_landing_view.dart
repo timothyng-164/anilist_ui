@@ -241,7 +241,7 @@ class AnimeCard extends HookWidget {
       hoverColor: Colors.transparent,
       onTap: () {
         if (media?.id == null) return; // TODO: error message in snackbar
-        AnimeByIDRoute(media!.id).go(context);
+        AnimeByIDRoute(media!.id).push(context);
       },
       onHover: (isHovering) => hovering.value = isHovering,
       child: Column(

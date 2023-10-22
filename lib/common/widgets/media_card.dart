@@ -28,9 +28,9 @@ class MediaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     void navigateToMedia() {
       if (mediaType == Enum$MediaType.ANIME) {
-        AnimeByIDRoute(mediaId).go(context);
+        AnimeByIDRoute(mediaId).push(context);
       } else if (mediaType == Enum$MediaType.MANGA) {
-        MangaByIDRoute(mediaId).go(context);
+        MangaByIDRoute(mediaId).push(context);
       } else {
         // TODO: display error in snackbar
         print("Unable to route media type: $mediaType");
