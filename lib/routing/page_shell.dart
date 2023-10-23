@@ -41,10 +41,10 @@ class PageShell extends HookWidget {
               onTap: (index) {
                 switch (index) {
                   case 0:
-                    const BrowseRouteDate().go(context);
+                    const BrowseRoute().go(context);
                     break;
                   case 1:
-                    const LoginRouteData().go(context);
+                    const LoginRoute().go(context);
                     break;
                   default:
                     throw UnimplementedError("no widget for index $index");

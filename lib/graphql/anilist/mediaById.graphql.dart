@@ -531,13 +531,6 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'hashtag'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
             name: NameNode(value: 'coverImage'),
             alias: null,
             arguments: [],
@@ -1157,7 +1150,6 @@ class Query$GetMediaById$Media {
     this.chapters,
     this.volumes,
     this.source,
-    this.hashtag,
     this.coverImage,
     this.genres,
     this.synonyms,
@@ -1188,7 +1180,6 @@ class Query$GetMediaById$Media {
     final l$chapters = json['chapters'];
     final l$volumes = json['volumes'];
     final l$source = json['source'];
-    final l$hashtag = json['hashtag'];
     final l$coverImage = json['coverImage'];
     final l$genres = json['genres'];
     final l$synonyms = json['synonyms'];
@@ -1234,7 +1225,6 @@ class Query$GetMediaById$Media {
       source: l$source == null
           ? null
           : fromJson$Enum$MediaSource((l$source as String)),
-      hashtag: (l$hashtag as String?),
       coverImage: l$coverImage == null
           ? null
           : Query$GetMediaById$Media$coverImage.fromJson(
@@ -1298,8 +1288,6 @@ class Query$GetMediaById$Media {
 
   final Enum$MediaSource? source;
 
-  final String? hashtag;
-
   final Query$GetMediaById$Media$coverImage? coverImage;
 
   final List<String?>? genres;
@@ -1360,8 +1348,6 @@ class Query$GetMediaById$Media {
     final l$source = source;
     _resultData['source'] =
         l$source == null ? null : toJson$Enum$MediaSource(l$source);
-    final l$hashtag = hashtag;
-    _resultData['hashtag'] = l$hashtag;
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
     final l$genres = genres;
@@ -1406,7 +1392,6 @@ class Query$GetMediaById$Media {
     final l$chapters = chapters;
     final l$volumes = volumes;
     final l$source = source;
-    final l$hashtag = hashtag;
     final l$coverImage = coverImage;
     final l$genres = genres;
     final l$synonyms = synonyms;
@@ -1435,7 +1420,6 @@ class Query$GetMediaById$Media {
       l$chapters,
       l$volumes,
       l$source,
-      l$hashtag,
       l$coverImage,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$synonyms == null ? null : Object.hashAll(l$synonyms.map((v) => v)),
@@ -1533,11 +1517,6 @@ class Query$GetMediaById$Media {
     final l$source = source;
     final lOther$source = other.source;
     if (l$source != lOther$source) {
-      return false;
-    }
-    final l$hashtag = hashtag;
-    final lOther$hashtag = other.hashtag;
-    if (l$hashtag != lOther$hashtag) {
       return false;
     }
     final l$coverImage = coverImage;
@@ -1671,7 +1650,6 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     int? chapters,
     int? volumes,
     Enum$MediaSource? source,
-    String? hashtag,
     Query$GetMediaById$Media$coverImage? coverImage,
     List<String?>? genres,
     List<String?>? synonyms,
@@ -1729,7 +1707,6 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
     Object? chapters = _undefined,
     Object? volumes = _undefined,
     Object? source = _undefined,
-    Object? hashtag = _undefined,
     Object? coverImage = _undefined,
     Object? genres = _undefined,
     Object? synonyms = _undefined,
@@ -1780,8 +1757,6 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         source: source == _undefined
             ? _instance.source
             : (source as Enum$MediaSource?),
-        hashtag:
-            hashtag == _undefined ? _instance.hashtag : (hashtag as String?),
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Query$GetMediaById$Media$coverImage?),
@@ -1912,7 +1887,6 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
     int? chapters,
     int? volumes,
     Enum$MediaSource? source,
-    String? hashtag,
     Query$GetMediaById$Media$coverImage? coverImage,
     List<String?>? genres,
     List<String?>? synonyms,

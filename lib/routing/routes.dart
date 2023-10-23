@@ -12,7 +12,7 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
 
 @TypedShellRoute<MainShellRouteData>(
   routes: <TypedRoute<RouteData>>[
-    TypedGoRoute<BrowseRouteDate>(
+    TypedGoRoute<BrowseRoute>(
       path: '/browse',
       routes: [
         TypedGoRoute<AnimeByIDRoute>(
@@ -23,7 +23,7 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
         ),
       ],
     ),
-    TypedGoRoute<LoginRouteData>(
+    TypedGoRoute<LoginRoute>(
       path: '/login',
     ),
   ],
@@ -38,8 +38,8 @@ class MainShellRouteData extends ShellRouteData {
       PageShell(selectedPage: navigator);
 }
 
-class BrowseRouteDate extends GoRouteData {
-  const BrowseRouteDate();
+class BrowseRoute extends GoRouteData {
+  const BrowseRoute();
 
   @override
   Widget build(context, state) => const SearchPage();
@@ -65,8 +65,8 @@ class MangaByIDRoute extends GoRouteData {
       MediaByIdPage(id: id, mediaType: Enum$MediaType.MANGA);
 }
 
-class LoginRouteData extends GoRouteData {
-  const LoginRouteData();
+class LoginRoute extends GoRouteData {
+  const LoginRoute();
 
   @override
   Widget build(context, state) => const LoginPage();

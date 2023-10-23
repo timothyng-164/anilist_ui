@@ -16,7 +16,7 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
       routes: [
         GoRouteData.$route(
           path: '/browse',
-          factory: $BrowseRouteDateExtension._fromState,
+          factory: $BrowseRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
               path: 'anime/:id',
@@ -30,7 +30,7 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
         ),
         GoRouteData.$route(
           path: '/login',
-          factory: $LoginRouteDataExtension._fromState,
+          factory: $LoginRouteExtension._fromState,
         ),
       ],
     );
@@ -40,9 +40,8 @@ extension $MainShellRouteDataExtension on MainShellRouteData {
       const MainShellRouteData();
 }
 
-extension $BrowseRouteDateExtension on BrowseRouteDate {
-  static BrowseRouteDate _fromState(GoRouterState state) =>
-      const BrowseRouteDate();
+extension $BrowseRouteExtension on BrowseRoute {
+  static BrowseRoute _fromState(GoRouterState state) => const BrowseRoute();
 
   String get location => GoRouteData.$location(
         '/browse',
@@ -96,9 +95,8 @@ extension $MangaByIDRouteExtension on MangaByIDRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $LoginRouteDataExtension on LoginRouteData {
-  static LoginRouteData _fromState(GoRouterState state) =>
-      const LoginRouteData();
+extension $LoginRouteExtension on LoginRoute {
+  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   String get location => GoRouteData.$location(
         '/login',

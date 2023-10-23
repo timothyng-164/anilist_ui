@@ -33,14 +33,17 @@ The [go_router_builder](https://pub.dev/documentation/go_router/latest/topics/Ty
 To generate route code, the `part` directive for the generated file needs to be added first.
 Example: https://github.com/flutter/packages/tree/main/packages/go_router_builder#source-code
 
-
 ## TODO
+
 TODO: on search_screen.dart
+
 - add user status to MediaCard
 - test out error on graphql client
 
 TODO: overall project
-1. manga/anime page by ID
-2. signin funtionality
+1. page_selector routing with authenticated pages
+2. Profile page (favorites, stats, user info)
 3. My List page
 4. get new font
+5. replace print statements with logging
+6. ctrl+F for all TODOs

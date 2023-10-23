@@ -28,7 +28,6 @@ query GetMediaById($id: Int, $type: MediaType) {
     chapters
     volumes
     source
-    hashtag
     coverImage {
       large
       extraLarge
