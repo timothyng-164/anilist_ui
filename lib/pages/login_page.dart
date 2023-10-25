@@ -1,12 +1,6 @@
-import 'dart:math';
-
-import 'package:anilist_ui/common/model/server_response.dart';
-import 'package:anilist_ui/common/util/server_response_util.dart';
-import 'package:anilist_ui/graphql/anilist/getAuthenticatedUser.graphql.dart';
 import 'package:anilist_ui/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -22,13 +16,39 @@ class LoginPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: const Column(children: [
+        Expanded(
+          child: Row(children: [
+            Spacer(flex: 1),
+            Expanded(
+              flex: 5,
+              child: Column(children: [
+                Spacer(flex: 8),
+                SizedBox(width: 400, child: PageContent()),
+                Spacer(flex: 10),
+              ]),
+            ),
+            Spacer(flex: 1),
+          ]),
+        ),
+      ]),
+    );
+  }
+}
+
+class PageContent extends HookWidget {
+  const PageContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     final loginSelected = useState<bool>(false);
     final authToken = useState<String>('');
     final isCheckingAuth = useState<bool>(false);
     final errorText = useState<String?>(null);
 
     var authState = context.watch<AuthState>();
-    final textTheme = Theme.of(context).textTheme;
 
     TextSpan anilistText = const TextSpan(
         text: "anilist.co",
@@ -124,32 +144,10 @@ class LoginPage extends HookWidget {
       ],
     );
 
-    Widget selectView() {
-      if (loginSelected.value == false) return initialView;
-      return isCheckingAuth.value
-          ? const CircularProgressIndicator()
-          : promptView;
-    }
-
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(children: [
-        Expanded(
-          child: Row(children: [
-            const Spacer(flex: 1),
-            Expanded(
-              flex: 5,
-              child: Column(children: [
-                const Spacer(flex: 8),
-                SizedBox(width: 400, child: selectView()),
-                const Spacer(flex: 10),
-              ]),
-            ),
-            const Spacer(flex: 1),
-          ]),
-        ),
-      ]),
-    );
+    if (loginSelected.value == false) return initialView;
+    return isCheckingAuth.value
+        ? const Center(child: CircularProgressIndicator())
+        : promptView;
   }
 }
 

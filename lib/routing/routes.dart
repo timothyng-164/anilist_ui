@@ -1,6 +1,8 @@
 import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/media_by_id_page.dart';
 import 'package:anilist_ui/pages/login_page.dart';
+import 'package:anilist_ui/pages/my_list_page.dart';
+import 'package:anilist_ui/pages/profile_page.dart';
 import 'package:anilist_ui/pages/search_page.dart';
 import 'package:anilist_ui/routing/page_shell.dart';
 import 'package:flutter/material.dart';
@@ -15,17 +17,13 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
     TypedGoRoute<BrowseRoute>(
       path: '/browse',
       routes: [
-        TypedGoRoute<AnimeByIDRoute>(
-          path: 'anime/:id',
-        ),
-        TypedGoRoute<MangaByIDRoute>(
-          path: 'manga/:id',
-        ),
+        TypedGoRoute<AnimeByIDRoute>(path: 'anime/:id'),
+        TypedGoRoute<MangaByIDRoute>(path: 'manga/:id'),
       ],
     ),
-    TypedGoRoute<LoginRoute>(
-      path: '/login',
-    ),
+    TypedGoRoute<LoginRoute>(path: '/login'),
+    TypedGoRoute<ProfileRoute>(path: '/profile'),
+    TypedGoRoute<MyListRoute>(path: '/my-list'),
   ],
 )
 class MainShellRouteData extends ShellRouteData {
@@ -70,4 +68,18 @@ class LoginRoute extends GoRouteData {
 
   @override
   Widget build(context, state) => const LoginPage();
+}
+
+class ProfileRoute extends GoRouteData {
+  const ProfileRoute();
+
+  @override
+  Widget build(context, state) => const ProfilePage();
+}
+
+class MyListRoute extends GoRouteData {
+  const MyListRoute();
+
+  @override
+  Widget build(context, state) => const MyListPage();
 }

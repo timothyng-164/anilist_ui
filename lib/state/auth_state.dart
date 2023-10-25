@@ -48,18 +48,17 @@ class AuthState extends ChangeNotifier {
   }
 }
 
-GraphQLClient _buildGraphQLClient(String token) {
-  return GraphQLClient(
-    cache: GraphQLCache(),
-    link: HttpLink(
-      'https://graphql.anilist.co',
-      defaultHeaders: {'Authorization': 'Bearer $token'},
-    ),
-  );
+GraphQLClient buildGraphQLClient(String? token, GraphQLCache? cache) {
+  HttpLink httpLink = HttpLink('https://graphql.anilist.co');
+  final authLink =
+      AuthLink(getToken: () => token == null ? null : 'Bearer $token');
+  final link = authLink.concat(httpLink);
+
+  return GraphQLClient(link: link, cache: cache ?? GraphQLCache());
 }
 
 Future<bool> _isValidToken(String token) async {
-  var graphQLClient = _buildGraphQLClient(token);
+  var graphQLClient = buildGraphQLClient(token, null);
   var result = await graphQLClient
       .query$GetAuthenticatedUser(Options$Query$GetAuthenticatedUser(
     fetchPolicy: FetchPolicy.networkOnly,

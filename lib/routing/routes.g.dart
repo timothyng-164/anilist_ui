@@ -32,6 +32,14 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
           path: '/login',
           factory: $LoginRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: '/profile',
+          factory: $ProfileRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: '/my-list',
+          factory: $MyListRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -100,6 +108,40 @@ extension $LoginRouteExtension on LoginRoute {
 
   String get location => GoRouteData.$location(
         '/login',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProfileRouteExtension on ProfileRoute {
+  static ProfileRoute _fromState(GoRouterState state) => const ProfileRoute();
+
+  String get location => GoRouteData.$location(
+        '/profile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $MyListRouteExtension on MyListRoute {
+  static MyListRoute _fromState(GoRouterState state) => const MyListRoute();
+
+  String get location => GoRouteData.$location(
+        '/my-list',
       );
 
   void go(BuildContext context) => context.go(location);

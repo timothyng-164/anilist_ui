@@ -31,15 +31,10 @@ class AnilistApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var authState = context.watch<AuthState>();
     String? token = authState.anilistToken;
-
-    HttpLink httpLink = HttpLink('https://graphql.anilist.co');
-    final authLink =
-        AuthLink(getToken: () => token == null ? null : 'Bearer $token');
-    final link = authLink.concat(httpLink);
+    var client = buildGraphQLClient(token, GraphQLCache(store: HiveStore()));
 
     return GraphQLProvider(
-      client: ValueNotifier(
-          GraphQLClient(link: link, cache: GraphQLCache(store: HiveStore()))),
+      client: ValueNotifier(client),
       child: MaterialApp.router(
         title: 'Anilist UI',
         theme: _buildTheme(context),
@@ -47,25 +42,23 @@ class AnilistApp extends StatelessWidget {
       ),
     );
   }
-
-  ThemeData _buildTheme(context) {
-    final textTheme = Theme.of(context).textTheme;
-
-    var baseTheme = ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
-    );
-
-    return baseTheme.copyWith(
-      textTheme: GoogleFonts.manropeTextTheme(baseTheme.textTheme).copyWith(
-        // default style for Text widget
-        bodyMedium: GoogleFonts.manrope(
-          textStyle: textTheme.labelLarge,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
 }
 
+ThemeData _buildTheme(context) {
+  final textTheme = Theme.of(context).textTheme;
 
+  var baseTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    useMaterial3: true,
+  );
+
+  return baseTheme.copyWith(
+    textTheme: GoogleFonts.manropeTextTheme(baseTheme.textTheme).copyWith(
+      // default style for Text widget
+      bodyMedium: GoogleFonts.manrope(
+        textStyle: textTheme.labelLarge,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  );
+}
