@@ -316,7 +316,6 @@ class TagsSection extends HookWidget {
     if (mediaTags == null || mediaTags!.isEmpty) {
       return const SizedBox.shrink();
     }
-    mediaTags!.forEach((element) => print(element?.name));
 
     bool containsSpoilers = mediaTags!.firstWhere(
             (tag) =>
