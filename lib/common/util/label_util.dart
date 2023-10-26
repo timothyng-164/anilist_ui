@@ -37,6 +37,11 @@ class LabelUtil {
     return _capitalizeAndReplace(toJson$Enum$MediaStatus(e));
   }
 
+  static String? mediaTypeLabel(Enum$MediaType? e) {
+    if (e == null) return null;
+    return _capitalizeAndReplace(toJson$Enum$MediaType(e));
+  }
+
   static String? mediaSeasonLabel(Enum$MediaSeason? e) {
     if (e == null) return null;
     return _capitalizeAndReplace(toJson$Enum$MediaSeason(e));

@@ -12,3 +12,10 @@ class MyListPage extends StatelessWidget {
     );
   }
 }
+
+
+// TODO
+// appbar - search, filters
+// filters - bottom sheet like tachiyomi
+//   - sort
+//   - filters - media type, status, etc

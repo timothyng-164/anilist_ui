@@ -29,3 +29,10 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
+
+// TODO
+// profile picture
+// username
+// user stats
+// favorite manga/anime
+

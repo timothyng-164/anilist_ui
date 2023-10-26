@@ -17,7 +17,9 @@ class LoginPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
       body: const Column(children: [
         Expanded(
           child: Row(children: [

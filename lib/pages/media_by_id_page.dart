@@ -42,7 +42,9 @@ class MediaByIdPage extends HookWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(LabelUtil.mediaTypeLabel(mediaType)!),
+      ),
       body: SafeArea(
         child: pageBody,
       ),
@@ -311,9 +313,10 @@ class TagsSection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (mediaTags == null && mediaTags!.isEmpty) {
+    if (mediaTags == null || mediaTags!.isEmpty) {
       return const SizedBox.shrink();
     }
+    mediaTags!.forEach((element) => print(element?.name));
 
     bool containsSpoilers = mediaTags!.firstWhere(
             (tag) =>
