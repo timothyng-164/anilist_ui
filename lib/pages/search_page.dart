@@ -173,6 +173,26 @@ class SearchFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PopupMenuItem<Enum$MediaType?> menuItem(
+        Enum$MediaType option, String text) {
+      bool isSelected = mediaType.value == option ||
+          (mediaType.value == null && option == Enum$MediaType.$unknown);
+
+      return PopupMenuItem(
+        value: option,
+        child: Row(
+          children: [
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              size: 18,
+            ),
+            const SizedBox(width: 8),
+            Text(text),
+          ],
+        ),
+      );
+    }
+
     return Container(
         padding: const EdgeInsets.all(16.0),
         child: SearchBar(
@@ -196,18 +216,9 @@ class SearchFilters extends StatelessWidget {
                   mediaType.value = value ?? Enum$MediaType.$unknown;
                 },
                 itemBuilder: (BuildContext context) => [
-                  const PopupMenuItem(
-                    value: Enum$MediaType.$unknown,
-                    child: Text('All'),
-                  ),
-                  const PopupMenuItem(
-                    value: Enum$MediaType.ANIME,
-                    child: Text('Anime'),
-                  ),
-                  const PopupMenuItem(
-                    value: Enum$MediaType.MANGA,
-                    child: Text('Manga'),
-                  )
+                  menuItem(Enum$MediaType.$unknown, 'All'),
+                  menuItem(Enum$MediaType.ANIME, 'Anime'),
+                  menuItem(Enum$MediaType.MANGA, 'Manga'),
                 ],
               ),
             )
