@@ -4,14 +4,14 @@ import 'package:anilist_ui/common/util/html_util.dart';
 import 'package:anilist_ui/common/util/label_util.dart';
 import 'package:anilist_ui/common/util/scale_size.dart';
 import 'package:anilist_ui/common/widgets/overflow_detector_text.dart';
-import 'package:anilist_ui/graphql/anilist/mediaById.graphql.dart';
-import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/widgets/media_card.dart';
+import '../graphql/anilist/query/mediaById.graphql.dart';
+import '../graphql/anilist/query/schema.graphql.dart';
 
 class MediaByIdPage extends HookWidget {
   const MediaByIdPage({super.key, required this.id, required this.mediaType});

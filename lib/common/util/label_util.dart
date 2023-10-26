@@ -1,8 +1,9 @@
 import 'dart:core';
 
-import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:basic_utils/basic_utils.dart';
 import 'package:intl/intl.dart';
+
+import '../../graphql/anilist/query/schema.graphql.dart';
 
 class LabelUtil {
   static String? mediaFormatLabel(Enum$MediaFormat? e) {

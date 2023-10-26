@@ -1,4 +1,3 @@
-import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/pages/media_by_id_page.dart';
 import 'package:anilist_ui/pages/login_page.dart';
 import 'package:anilist_ui/pages/my_list_page.dart';
@@ -7,6 +6,8 @@ import 'package:anilist_ui/pages/search_page.dart';
 import 'package:anilist_ui/routing/page_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../graphql/anilist/query/schema.graphql.dart';
 
 part 'routes.g.dart';
 

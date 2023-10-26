@@ -1,7 +1,8 @@
-import 'package:anilist_ui/graphql/anilist/getAuthenticatedUser.graphql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+
+import '../graphql/anilist/query/getAuthenticatedUser.graphql.dart';
 
 String tokenKey = 'anilistToken';
 

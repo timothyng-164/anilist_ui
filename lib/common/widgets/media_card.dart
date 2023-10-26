@@ -1,7 +1,7 @@
-import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
 import 'package:anilist_ui/routing/routes.dart';
 import 'package:flutter/material.dart';
 
+import '../../graphql/anilist/query/schema.graphql.dart';
 import 'image_card.dart';
 
 class MediaCard extends StatelessWidget {

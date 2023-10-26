@@ -1,6 +1,4 @@
 import 'package:anilist_ui/common/util/hex_color.dart';
-import 'package:anilist_ui/graphql/anilist/schema.graphql.dart';
-import 'package:anilist_ui/graphql/anilist/searchLandingView.graphql.dart';
 import 'package:anilist_ui/routing/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/util/date_util.dart';
+import '../graphql/anilist/query/schema.graphql.dart';
+import '../graphql/anilist/query/searchLandingView.graphql.dart';
 
 class SearchLandingView extends HookWidget {
   const SearchLandingView({super.key});
