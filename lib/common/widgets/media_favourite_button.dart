@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../../graphql/anilist/query/schema.graphql.dart';
+import '../../graphql/anilist/schema.graphql.dart';
 
 class MediaFavouriteButton extends HookWidget {
   const MediaFavouriteButton({

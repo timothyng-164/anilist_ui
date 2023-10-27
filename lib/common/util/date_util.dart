@@ -1,5 +1,5 @@
 
-import '../../graphql/anilist/query/schema.graphql.dart';
+import '../../graphql/anilist/schema.graphql.dart';
 
 class DateUtil {
   static Enum$MediaSeason getSeason(DateTime dt) {

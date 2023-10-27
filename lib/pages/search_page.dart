@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/widgets/media_card.dart';
-import '../graphql/anilist/query/schema.graphql.dart';
+import '../graphql/anilist/schema.graphql.dart';
 import '../graphql/anilist/query/search.graphql.dart';
 
 class SearchPage extends HookWidget {

@@ -7,7 +7,7 @@ import 'package:anilist_ui/routing/page_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../graphql/anilist/query/schema.graphql.dart';
+import '../graphql/anilist/schema.graphql.dart';
 
 part 'routes.g.dart';
 

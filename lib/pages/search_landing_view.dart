@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/util/date_util.dart';
-import '../graphql/anilist/query/schema.graphql.dart';
+import '../graphql/anilist/schema.graphql.dart';
 import '../graphql/anilist/query/searchLandingView.graphql.dart';
 
 class SearchLandingView extends HookWidget {
