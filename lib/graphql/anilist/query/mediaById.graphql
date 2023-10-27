@@ -87,5 +87,25 @@ query GetMediaById($id: Int, $type: MediaType) {
         }
       }
     }
+    mediaListEntry {
+      status
+      score
+      notes
+      progress
+      progressVolumes
+      startedAt {
+        year
+        month
+        day
+      }
+      completedAt {
+        year
+        month
+        day
+      }
+    }
+    isFavourite
+    isLocked
+    isFavouriteBlocked
   }
 }

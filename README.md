@@ -35,14 +35,7 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 
 ## TODO
 
-TODO: on search_screen.dart
-
-- add user status to MediaCard
-- test out error on graphql client
-
-TODO: overall project
-
-1. page_selector routing with authenticated pages
+1. check if authentication persists in local storage
 2. Profile page (favorites, stats, user info)
 3. My List page
 4. get new font

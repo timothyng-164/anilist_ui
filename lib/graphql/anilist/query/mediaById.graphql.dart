@@ -964,6 +964,149 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'mediaListEntry'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'status'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'score'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'notes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'progress'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'progressVolumes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'startedAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'year'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'month'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'day'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'completedAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'year'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'month'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'day'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'isFavourite'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'isLocked'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'isFavouriteBlocked'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -1161,6 +1304,9 @@ class Query$GetMediaById$Media {
     this.studios,
     this.relations,
     this.recommendations,
+    this.mediaListEntry,
+    required this.isFavourite,
+    required this.isFavouriteBlocked,
     this.$__typename = 'Media',
   });
 
@@ -1191,6 +1337,9 @@ class Query$GetMediaById$Media {
     final l$studios = json['studios'];
     final l$relations = json['relations'];
     final l$recommendations = json['recommendations'];
+    final l$mediaListEntry = json['mediaListEntry'];
+    final l$isFavourite = json['isFavourite'];
+    final l$isFavouriteBlocked = json['isFavouriteBlocked'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaById$Media(
       id: (l$id as int),
@@ -1254,6 +1403,12 @@ class Query$GetMediaById$Media {
           ? null
           : Query$GetMediaById$Media$recommendations.fromJson(
               (l$recommendations as Map<String, dynamic>)),
+      mediaListEntry: l$mediaListEntry == null
+          ? null
+          : Query$GetMediaById$Media$mediaListEntry.fromJson(
+              (l$mediaListEntry as Map<String, dynamic>)),
+      isFavourite: (l$isFavourite as bool),
+      isFavouriteBlocked: (l$isFavouriteBlocked as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1309,6 +1464,12 @@ class Query$GetMediaById$Media {
   final Query$GetMediaById$Media$relations? relations;
 
   final Query$GetMediaById$Media$recommendations? recommendations;
+
+  final Query$GetMediaById$Media$mediaListEntry? mediaListEntry;
+
+  final bool isFavourite;
+
+  final bool isFavouriteBlocked;
 
   final String $__typename;
 
@@ -1370,6 +1531,12 @@ class Query$GetMediaById$Media {
     _resultData['relations'] = l$relations?.toJson();
     final l$recommendations = recommendations;
     _resultData['recommendations'] = l$recommendations?.toJson();
+    final l$mediaListEntry = mediaListEntry;
+    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$isFavourite = isFavourite;
+    _resultData['isFavourite'] = l$isFavourite;
+    final l$isFavouriteBlocked = isFavouriteBlocked;
+    _resultData['isFavouriteBlocked'] = l$isFavouriteBlocked;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1403,6 +1570,9 @@ class Query$GetMediaById$Media {
     final l$studios = studios;
     final l$relations = relations;
     final l$recommendations = recommendations;
+    final l$mediaListEntry = mediaListEntry;
+    final l$isFavourite = isFavourite;
+    final l$isFavouriteBlocked = isFavouriteBlocked;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -1431,6 +1601,9 @@ class Query$GetMediaById$Media {
       l$studios,
       l$relations,
       l$recommendations,
+      l$mediaListEntry,
+      l$isFavourite,
+      l$isFavouriteBlocked,
       l$$__typename,
     ]);
   }
@@ -1607,6 +1780,21 @@ class Query$GetMediaById$Media {
     if (l$recommendations != lOther$recommendations) {
       return false;
     }
+    final l$mediaListEntry = mediaListEntry;
+    final lOther$mediaListEntry = other.mediaListEntry;
+    if (l$mediaListEntry != lOther$mediaListEntry) {
+      return false;
+    }
+    final l$isFavourite = isFavourite;
+    final lOther$isFavourite = other.isFavourite;
+    if (l$isFavourite != lOther$isFavourite) {
+      return false;
+    }
+    final l$isFavouriteBlocked = isFavouriteBlocked;
+    final lOther$isFavouriteBlocked = other.isFavouriteBlocked;
+    if (l$isFavouriteBlocked != lOther$isFavouriteBlocked) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1661,6 +1849,9 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     Query$GetMediaById$Media$studios? studios,
     Query$GetMediaById$Media$relations? relations,
     Query$GetMediaById$Media$recommendations? recommendations,
+    Query$GetMediaById$Media$mediaListEntry? mediaListEntry,
+    bool? isFavourite,
+    bool? isFavouriteBlocked,
     String? $__typename,
   });
   CopyWith$Query$GetMediaById$Media$title<TRes> get title;
@@ -1676,6 +1867,7 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
   CopyWith$Query$GetMediaById$Media$studios<TRes> get studios;
   CopyWith$Query$GetMediaById$Media$relations<TRes> get relations;
   CopyWith$Query$GetMediaById$Media$recommendations<TRes> get recommendations;
+  CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> get mediaListEntry;
 }
 
 class _CopyWithImpl$Query$GetMediaById$Media<TRes>
@@ -1718,6 +1910,9 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
     Object? studios = _undefined,
     Object? relations = _undefined,
     Object? recommendations = _undefined,
+    Object? mediaListEntry = _undefined,
+    Object? isFavourite = _undefined,
+    Object? isFavouriteBlocked = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaById$Media(
@@ -1788,6 +1983,16 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         recommendations: recommendations == _undefined
             ? _instance.recommendations
             : (recommendations as Query$GetMediaById$Media$recommendations?),
+        mediaListEntry: mediaListEntry == _undefined
+            ? _instance.mediaListEntry
+            : (mediaListEntry as Query$GetMediaById$Media$mediaListEntry?),
+        isFavourite: isFavourite == _undefined || isFavourite == null
+            ? _instance.isFavourite
+            : (isFavourite as bool),
+        isFavouriteBlocked:
+            isFavouriteBlocked == _undefined || isFavouriteBlocked == null
+                ? _instance.isFavouriteBlocked
+                : (isFavouriteBlocked as bool),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1863,6 +2068,15 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
         : CopyWith$Query$GetMediaById$Media$recommendations(
             local$recommendations, (e) => call(recommendations: e));
   }
+
+  CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> get mediaListEntry {
+    final local$mediaListEntry = _instance.mediaListEntry;
+    return local$mediaListEntry == null
+        ? CopyWith$Query$GetMediaById$Media$mediaListEntry.stub(
+            _then(_instance))
+        : CopyWith$Query$GetMediaById$Media$mediaListEntry(
+            local$mediaListEntry, (e) => call(mediaListEntry: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
@@ -1898,6 +2112,9 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
     Query$GetMediaById$Media$studios? studios,
     Query$GetMediaById$Media$relations? relations,
     Query$GetMediaById$Media$recommendations? recommendations,
+    Query$GetMediaById$Media$mediaListEntry? mediaListEntry,
+    bool? isFavourite,
+    bool? isFavouriteBlocked,
     String? $__typename,
   }) =>
       _res;
@@ -1924,6 +2141,9 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
 
   CopyWith$Query$GetMediaById$Media$recommendations<TRes> get recommendations =>
       CopyWith$Query$GetMediaById$Media$recommendations.stub(_res);
+
+  CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> get mediaListEntry =>
+      CopyWith$Query$GetMediaById$Media$mediaListEntry.stub(_res);
 }
 
 class Query$GetMediaById$Media$title {
@@ -5011,6 +5231,627 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaReco
 
   call({
     String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetMediaById$Media$mediaListEntry {
+  Query$GetMediaById$Media$mediaListEntry({
+    this.status,
+    this.score,
+    this.notes,
+    this.progress,
+    this.progressVolumes,
+    this.startedAt,
+    this.completedAt,
+    this.$__typename = 'MediaList',
+  });
+
+  factory Query$GetMediaById$Media$mediaListEntry.fromJson(
+      Map<String, dynamic> json) {
+    final l$status = json['status'];
+    final l$score = json['score'];
+    final l$notes = json['notes'];
+    final l$progress = json['progress'];
+    final l$progressVolumes = json['progressVolumes'];
+    final l$startedAt = json['startedAt'];
+    final l$completedAt = json['completedAt'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$mediaListEntry(
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaListStatus((l$status as String)),
+      score: (l$score as num?)?.toDouble(),
+      notes: (l$notes as String?),
+      progress: (l$progress as int?),
+      progressVolumes: (l$progressVolumes as int?),
+      startedAt: l$startedAt == null
+          ? null
+          : Query$GetMediaById$Media$mediaListEntry$startedAt.fromJson(
+              (l$startedAt as Map<String, dynamic>)),
+      completedAt: l$completedAt == null
+          ? null
+          : Query$GetMediaById$Media$mediaListEntry$completedAt.fromJson(
+              (l$completedAt as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$MediaListStatus? status;
+
+  final double? score;
+
+  final String? notes;
+
+  final int? progress;
+
+  final int? progressVolumes;
+
+  final Query$GetMediaById$Media$mediaListEntry$startedAt? startedAt;
+
+  final Query$GetMediaById$Media$mediaListEntry$completedAt? completedAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+    final l$score = score;
+    _resultData['score'] = l$score;
+    final l$notes = notes;
+    _resultData['notes'] = l$notes;
+    final l$progress = progress;
+    _resultData['progress'] = l$progress;
+    final l$progressVolumes = progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
+    final l$startedAt = startedAt;
+    _resultData['startedAt'] = l$startedAt?.toJson();
+    final l$completedAt = completedAt;
+    _resultData['completedAt'] = l$completedAt?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$status = status;
+    final l$score = score;
+    final l$notes = notes;
+    final l$progress = progress;
+    final l$progressVolumes = progressVolumes;
+    final l$startedAt = startedAt;
+    final l$completedAt = completedAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$status,
+      l$score,
+      l$notes,
+      l$progress,
+      l$progressVolumes,
+      l$startedAt,
+      l$completedAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$mediaListEntry) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$score = score;
+    final lOther$score = other.score;
+    if (l$score != lOther$score) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$progress = progress;
+    final lOther$progress = other.progress;
+    if (l$progress != lOther$progress) {
+      return false;
+    }
+    final l$progressVolumes = progressVolumes;
+    final lOther$progressVolumes = other.progressVolumes;
+    if (l$progressVolumes != lOther$progressVolumes) {
+      return false;
+    }
+    final l$startedAt = startedAt;
+    final lOther$startedAt = other.startedAt;
+    if (l$startedAt != lOther$startedAt) {
+      return false;
+    }
+    final l$completedAt = completedAt;
+    final lOther$completedAt = other.completedAt;
+    if (l$completedAt != lOther$completedAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$mediaListEntry
+    on Query$GetMediaById$Media$mediaListEntry {
+  CopyWith$Query$GetMediaById$Media$mediaListEntry<
+          Query$GetMediaById$Media$mediaListEntry>
+      get copyWith => CopyWith$Query$GetMediaById$Media$mediaListEntry(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> {
+  factory CopyWith$Query$GetMediaById$Media$mediaListEntry(
+    Query$GetMediaById$Media$mediaListEntry instance,
+    TRes Function(Query$GetMediaById$Media$mediaListEntry) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry;
+
+  factory CopyWith$Query$GetMediaById$Media$mediaListEntry.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry;
+
+  TRes call({
+    Enum$MediaListStatus? status,
+    double? score,
+    String? notes,
+    int? progress,
+    int? progressVolumes,
+    Query$GetMediaById$Media$mediaListEntry$startedAt? startedAt,
+    Query$GetMediaById$Media$mediaListEntry$completedAt? completedAt,
+    String? $__typename,
+  });
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
+      get startedAt;
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
+      get completedAt;
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
+    implements CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$mediaListEntry _instance;
+
+  final TRes Function(Query$GetMediaById$Media$mediaListEntry) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? status = _undefined,
+    Object? score = _undefined,
+    Object? notes = _undefined,
+    Object? progress = _undefined,
+    Object? progressVolumes = _undefined,
+    Object? startedAt = _undefined,
+    Object? completedAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$mediaListEntry(
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaListStatus?),
+        score: score == _undefined ? _instance.score : (score as double?),
+        notes: notes == _undefined ? _instance.notes : (notes as String?),
+        progress:
+            progress == _undefined ? _instance.progress : (progress as int?),
+        progressVolumes: progressVolumes == _undefined
+            ? _instance.progressVolumes
+            : (progressVolumes as int?),
+        startedAt: startedAt == _undefined
+            ? _instance.startedAt
+            : (startedAt as Query$GetMediaById$Media$mediaListEntry$startedAt?),
+        completedAt: completedAt == _undefined
+            ? _instance.completedAt
+            : (completedAt
+                as Query$GetMediaById$Media$mediaListEntry$completedAt?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
+      get startedAt {
+    final local$startedAt = _instance.startedAt;
+    return local$startedAt == null
+        ? CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt.stub(
+            _then(_instance))
+        : CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt(
+            local$startedAt, (e) => call(startedAt: e));
+  }
+
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
+      get completedAt {
+    final local$completedAt = _instance.completedAt;
+    return local$completedAt == null
+        ? CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt.stub(
+            _then(_instance))
+        : CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt(
+            local$completedAt, (e) => call(completedAt: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
+    implements CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$MediaListStatus? status,
+    double? score,
+    String? notes,
+    int? progress,
+    int? progressVolumes,
+    Query$GetMediaById$Media$mediaListEntry$startedAt? startedAt,
+    Query$GetMediaById$Media$mediaListEntry$completedAt? completedAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
+      get startedAt =>
+          CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt.stub(_res);
+
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
+      get completedAt =>
+          CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt.stub(
+              _res);
+}
+
+class Query$GetMediaById$Media$mediaListEntry$startedAt {
+  Query$GetMediaById$Media$mediaListEntry$startedAt({
+    this.year,
+    this.month,
+    this.day,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Query$GetMediaById$Media$mediaListEntry$startedAt.fromJson(
+      Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$month = json['month'];
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$mediaListEntry$startedAt(
+      year: (l$year as int?),
+      month: (l$month as int?),
+      day: (l$day as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final int? month;
+
+  final int? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$month = month;
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$month,
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$mediaListEntry$startedAt) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$mediaListEntry$startedAt
+    on Query$GetMediaById$Media$mediaListEntry$startedAt {
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<
+          Query$GetMediaById$Media$mediaListEntry$startedAt>
+      get copyWith =>
+          CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<
+    TRes> {
+  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt(
+    Query$GetMediaById$Media$mediaListEntry$startedAt instance,
+    TRes Function(Query$GetMediaById$Media$mediaListEntry$startedAt) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$startedAt;
+
+  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$startedAt;
+
+  TRes call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$startedAt(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$mediaListEntry$startedAt _instance;
+
+  final TRes Function(Query$GetMediaById$Media$mediaListEntry$startedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? month = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$mediaListEntry$startedAt(
+        year: year == _undefined ? _instance.year : (year as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        day: day == _undefined ? _instance.day : (day as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$startedAt(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetMediaById$Media$mediaListEntry$completedAt {
+  Query$GetMediaById$Media$mediaListEntry$completedAt({
+    this.year,
+    this.month,
+    this.day,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Query$GetMediaById$Media$mediaListEntry$completedAt.fromJson(
+      Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$month = json['month'];
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaById$Media$mediaListEntry$completedAt(
+      year: (l$year as int?),
+      month: (l$month as int?),
+      day: (l$day as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final int? month;
+
+  final int? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$month = month;
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$month,
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetMediaById$Media$mediaListEntry$completedAt) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaById$Media$mediaListEntry$completedAt
+    on Query$GetMediaById$Media$mediaListEntry$completedAt {
+  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<
+          Query$GetMediaById$Media$mediaListEntry$completedAt>
+      get copyWith =>
+          CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<
+    TRes> {
+  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt(
+    Query$GetMediaById$Media$mediaListEntry$completedAt instance,
+    TRes Function(Query$GetMediaById$Media$mediaListEntry$completedAt) then,
+  ) = _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$completedAt;
+
+  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$completedAt;
+
+  TRes call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes> {
+  _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$completedAt(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaById$Media$mediaListEntry$completedAt _instance;
+
+  final TRes Function(Query$GetMediaById$Media$mediaListEntry$completedAt)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? month = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaById$Media$mediaListEntry$completedAt(
+        year: year == _undefined ? _instance.year : (year as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        day: day == _undefined ? _instance.day : (day as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$completedAt<
+        TRes>
+    implements
+        CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes> {
+  _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$completedAt(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    int? month,
+    int? day,
     String? $__typename,
   }) =>
       _res;

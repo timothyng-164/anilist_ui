@@ -16,7 +16,6 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   graphql_flutter: ^5.1.2
   provider: ^6.0.5
-  pretty_json: ^2.0.0
   google_fonts: ^4.0.4
   go_router: ^11.1.4
   basic_utils: ^5.5.4

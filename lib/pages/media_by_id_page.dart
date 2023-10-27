@@ -1,17 +1,22 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:anilist_ui/common/util/html_util.dart';
 import 'package:anilist_ui/common/util/label_util.dart';
 import 'package:anilist_ui/common/util/scale_size.dart';
+import 'package:anilist_ui/common/widgets/media_favourite_button.dart';
 import 'package:anilist_ui/common/widgets/overflow_detector_text.dart';
+import 'package:anilist_ui/graphql/anilist/mutation/toggleFavourite.graphql.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../common/widgets/media_card.dart';
 import '../graphql/anilist/query/mediaById.graphql.dart';
 import '../graphql/anilist/query/schema.graphql.dart';
+import '../state/auth_state.dart';
 
 class MediaByIdPage extends HookWidget {
   const MediaByIdPage({super.key, required this.id, required this.mediaType});
@@ -21,6 +26,9 @@ class MediaByIdPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authState = context.read<AuthState>();
+    bool isAuthenticated = authState.isAuthenticated();
+
     var query = useQuery$GetMediaById(
       Options$Query$GetMediaById(
         variables: Variables$Query$GetMediaById(id: id, type: mediaType),
@@ -29,6 +37,7 @@ class MediaByIdPage extends HookWidget {
     );
 
     var result = query.result;
+    var media = result.parsedData?.Media;
 
     Widget pageBody;
 
@@ -38,16 +47,51 @@ class MediaByIdPage extends HookWidget {
       print('Unknown exception occurred: ${result.exception}');
       pageBody = const Center(child: Text("An error has occurred."));
     } else {
-      pageBody = PageContent(id: id, media: result.parsedData!.Media!);
+      pageBody = PageContent(id: id, media: media!);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(LabelUtil.mediaTypeLabel(mediaType)!),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(LabelUtil.mediaTypeLabel(mediaType)!),
+            if (isAuthenticated && !result.isLoading)
+              UserUpdateButtons(media: media)
+          ],
+        ),
       ),
-      body: SafeArea(
-        child: pageBody,
-      ),
+      body: SafeArea(child: pageBody),
+    );
+  }
+}
+
+class UserUpdateButtons extends HookWidget {
+  const UserUpdateButtons({super.key, this.media});
+
+  final Query$GetMediaById$Media? media;
+
+  @override
+  Widget build(BuildContext context) {
+    Query$GetMediaById$Media$mediaListEntry? listEntry = media?.mediaListEntry;
+
+    return Row(
+      children: [
+        MediaFavouriteButton(
+          isFavourite: media?.isFavourite ?? false,
+          isFavouriteBlocked: media?.isFavouriteBlocked ?? false,
+          isLocked: media?.isLocked ?? false,
+          mediaType: media!.type!,
+          mediaId: media!.id,
+        ),
+        IconButton(
+          // TODO: route to UpdateMediaList page
+          onPressed: () {},
+          icon: Icon(listEntry == null
+              ? Icons.playlist_add
+              : Icons.playlist_add_check),
+        ),
+      ],
     );
   }
 }
@@ -83,6 +127,7 @@ class PageContent extends StatelessWidget {
                   const SizedBox(height: 20),
                   RecommendationSection(
                       recommendations: media.recommendations?.nodes),
+                  const SizedBox(height: 20),
 
                   // TODO:
                   // move sections to separate files
