@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/util/date_util.dart';
+import '../common/widgets/query_result_handler.dart';
 import '../graphql/anilist/schema.graphql.dart';
 import '../graphql/anilist/query/searchLandingView.graphql.dart';
 
@@ -20,7 +21,7 @@ class SearchLandingView extends HookWidget {
 
     var query = useQuery$SearchLandingPage(
       Options$Query$SearchLandingPage(
-        fetchPolicy: FetchPolicy.networkOnly,
+        fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Query$SearchLandingPage(
           perPage: 8,
           season: currentSeason,
@@ -35,24 +36,14 @@ class SearchLandingView extends HookWidget {
 
     var result = query.result;
 
-    if (result.isLoading) {
-      return const Expanded(child: Center(child: CircularProgressIndicator()));
-    }
-
-    if (result.hasException) {
-      var exception = result.exception;
-      if (exception?.linkException is CacheMissException) {
-        // TODO: Look into why this error occurs. Possibly from fragments?
-        print('Unable to read cache.');
-      } else {
-        print('Unknown exception occurred: $exception');
-        return const Expanded(
-            child: Center(child: Text('An error has occurred.')));
-      }
-    }
-
-    return LandingContent(
-      data: result.parsedData ?? Query$SearchLandingPage(),
+    return Expanded(
+      child: QueryResultHandler(
+        refetch: query.refetch,
+        result: query.result,
+        child: LandingContent(
+          data: result.parsedData ?? Query$SearchLandingPage(),
+        ),
+      ),
     );
   }
 }
@@ -91,22 +82,20 @@ class LandingContent extends StatelessWidget {
       ),
     ];
 
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Row(
-          children: [
-            const Spacer(flex: 1),
-            Expanded(
-              flex: 25,
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 50,
-                children: animeSections,
-              ),
+    return SingleChildScrollView(
+      child: Row(
+        children: [
+          const Spacer(flex: 1),
+          Expanded(
+            flex: 25,
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 50,
+              children: animeSections,
             ),
-            const Spacer(flex: 1),
-          ],
-        ),
+          ),
+          const Spacer(flex: 1),
+        ],
       ),
     );
   }
