@@ -1,3 +1,4 @@
+import 'package:anilist_ui/routing/routes.dart';
 import 'package:flutter/material.dart';
 
 class MyListPage extends StatelessWidget {
@@ -5,14 +6,50 @@ class MyListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    void showFilterSheet() {
+      showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 200,
+            color: Colors.amber,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Text('Modal BottomSheet'),
+                  ElevatedButton(
+                    child: const Text('Close BottomSheet'),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('My List'),
+            IconButton(
+              icon: const Icon(Icons.filter_list),
+              onPressed: () => showFilterSheet(),
+            )
+          ],
+        ),
+      ),
+      body: const Center(
         child: Text('My List Page.'),
       ),
     );
   }
 }
-
 
 // TODO
 // appbar - search, filters
