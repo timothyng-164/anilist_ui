@@ -39,6 +39,16 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
         GoRouteData.$route(
           path: '/my-list',
           factory: $MyListRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'anime/:id/edit',
+              factory: $AnimeListEditorRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'manga/:id/edit',
+              factory: $MangaListEditorRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     );
@@ -142,6 +152,46 @@ extension $MyListRouteExtension on MyListRoute {
 
   String get location => GoRouteData.$location(
         '/my-list',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AnimeListEditorRouteExtension on AnimeListEditorRoute {
+  static AnimeListEditorRoute _fromState(GoRouterState state) =>
+      AnimeListEditorRoute(
+        int.parse(state.pathParameters['id']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/my-list/anime/${Uri.encodeComponent(id.toString())}/edit',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $MangaListEditorRouteExtension on MangaListEditorRoute {
+  static MangaListEditorRoute _fromState(GoRouterState state) =>
+      MangaListEditorRoute(
+        int.parse(state.pathParameters['id']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/my-list/manga/${Uri.encodeComponent(id.toString())}/edit',
       );
 
   void go(BuildContext context) => context.go(location);

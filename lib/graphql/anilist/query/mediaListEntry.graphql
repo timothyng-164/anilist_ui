@@ -1,0 +1,35 @@
+query GetMediaListEntry($id: Int, $type: MediaType) {
+  Media(id: $id, type: $type) {
+    id
+    type
+    title {
+      userPreferred
+    }
+    episodes
+    chapters
+    volumes
+    mediaListEntry {
+      ...MediaListEntry
+    }
+  }
+}
+
+fragment MediaListEntry on MediaList {
+  status
+  score
+  notes
+  progress
+  progressVolumes
+  startedAt {
+    ...Date
+  }
+  completedAt {
+    ...Date
+  }
+}
+
+fragment Date on FuzzyDate {
+  year
+  month
+  day
+}

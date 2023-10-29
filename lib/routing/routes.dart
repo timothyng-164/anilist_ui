@@ -1,13 +1,14 @@
-import 'package:anilist_ui/pages/media_by_id_page.dart';
-import 'package:anilist_ui/pages/login_page.dart';
-import 'package:anilist_ui/pages/my_list_page.dart';
-import 'package:anilist_ui/pages/profile_page.dart';
-import 'package:anilist_ui/pages/search_page.dart';
-import 'package:anilist_ui/routing/page_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../graphql/anilist/schema.graphql.dart';
+import '../pages/list_editor_page.dart';
+import '../pages/login_page.dart';
+import '../pages/media_by_id_page.dart';
+import '../pages/my_list_page.dart';
+import '../pages/profile_page.dart';
+import '../pages/search_page.dart';
+import 'page_shell.dart';
 
 part 'routes.g.dart';
 
@@ -24,7 +25,13 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
     ),
     TypedGoRoute<LoginRoute>(path: '/login'),
     TypedGoRoute<ProfileRoute>(path: '/profile'),
-    TypedGoRoute<MyListRoute>(path: '/my-list'),
+    TypedGoRoute<MyListRoute>(
+      path: '/my-list',
+      routes: [
+        TypedGoRoute<AnimeListEditorRoute>(path: 'anime/:id/edit'),
+        TypedGoRoute<MangaListEditorRoute>(path: 'manga/:id/edit'),
+      ],
+    ),
   ],
 )
 class MainShellRouteData extends ShellRouteData {
@@ -62,6 +69,26 @@ class MangaByIDRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       MediaByIdPage(id: id, mediaType: Enum$MediaType.MANGA);
+}
+
+class AnimeListEditorRoute extends GoRouteData {
+  const AnimeListEditorRoute(this.id);
+
+  final int id;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      ListEditorPage(mediaId: id, mediaType: Enum$MediaType.ANIME);
+}
+
+class MangaListEditorRoute extends GoRouteData {
+  const MangaListEditorRoute(this.id);
+
+  final int id;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      ListEditorPage(mediaId: id, mediaType: Enum$MediaType.MANGA);
 }
 
 class LoginRoute extends GoRouteData {

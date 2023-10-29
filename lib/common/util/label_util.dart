@@ -38,6 +38,63 @@ class LabelUtil {
     return _capitalizeAndReplace(toJson$Enum$MediaStatus(e));
   }
 
+  static String? listStatusLabel(Enum$MediaListStatus? e) {
+    if (e == null) return null;
+    return _capitalizeAndReplace(toJson$Enum$MediaListStatus(e));
+  }
+
+  // TODO: refactor this ugly function
+  static String? listStatusLabelByMedia(
+    Enum$MediaListStatus? listStatus,
+    Enum$MediaType? mediaType,
+  ) {
+    if (listStatus == null || listStatus == Enum$MediaListStatus.$unknown) {
+      return null;
+    }
+    if (mediaType == null || mediaType == Enum$MediaType.$unknown) {
+      return _capitalizeAndReplace(
+        toJson$Enum$MediaListStatus(listStatus),
+      );
+    }
+    if (mediaType == Enum$MediaType.ANIME) {
+      switch (listStatus) {
+        case Enum$MediaListStatus.CURRENT:
+          return 'Watching';
+        case Enum$MediaListStatus.PLANNING:
+          return 'Planning';
+        case Enum$MediaListStatus.COMPLETED:
+          return 'Finished';
+        case Enum$MediaListStatus.DROPPED:
+          return 'Dropped';
+        case Enum$MediaListStatus.PAUSED:
+          return 'Paused';
+        case Enum$MediaListStatus.REPEATING:
+          return 'Rewatching';
+        default:
+          throw _listStatusError(listStatus, mediaType);
+      }
+    }
+    if (mediaType == Enum$MediaType.MANGA) {
+      switch (listStatus) {
+        case Enum$MediaListStatus.CURRENT:
+          return 'Reading';
+        case Enum$MediaListStatus.PLANNING:
+          return 'Planning';
+        case Enum$MediaListStatus.COMPLETED:
+          return 'Finished';
+        case Enum$MediaListStatus.DROPPED:
+          return 'Dropped';
+        case Enum$MediaListStatus.PAUSED:
+          return 'Paused';
+        case Enum$MediaListStatus.REPEATING:
+          return 'Rereading';
+        default:
+          throw _listStatusError(listStatus, mediaType);
+      }
+    }
+    throw _listStatusError(listStatus, mediaType);
+  }
+
   static String? mediaTypeLabel(Enum$MediaType? e) {
     if (e == null) return null;
     return _capitalizeAndReplace(toJson$Enum$MediaType(e));
@@ -74,4 +131,12 @@ String _capitalizeAndReplace(String s) {
     s.replaceAll('_', ' '),
     allWords: true,
   );
+}
+
+UnimplementedError _listStatusError(
+  Enum$MediaListStatus? listStatus,
+  Enum$MediaType? mediaType,
+) {
+  return UnimplementedError(
+      'List status label not implemented for label $listStatus, mediaType $mediaType');
 }

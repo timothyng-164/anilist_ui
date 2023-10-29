@@ -7,7 +7,7 @@ class MyListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void showFilterSheet() {
-      showModalBottomSheet<void>(
+      showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return Container(

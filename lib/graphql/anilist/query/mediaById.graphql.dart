@@ -1,9 +1,243 @@
+import '../schema.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
-import '../schema.graphql.dart';
+
+class Fragment$Date {
+  Fragment$Date({
+    this.year,
+    this.month,
+    this.day,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Fragment$Date.fromJson(Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$month = json['month'];
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Date(
+      year: (l$year as int?),
+      month: (l$month as int?),
+      day: (l$day as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final int? month;
+
+  final int? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$month = month;
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$month,
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$Date) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Date on Fragment$Date {
+  CopyWith$Fragment$Date<Fragment$Date> get copyWith => CopyWith$Fragment$Date(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$Date<TRes> {
+  factory CopyWith$Fragment$Date(
+    Fragment$Date instance,
+    TRes Function(Fragment$Date) then,
+  ) = _CopyWithImpl$Fragment$Date;
+
+  factory CopyWith$Fragment$Date.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Date;
+
+  TRes call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$Date<TRes>
+    implements CopyWith$Fragment$Date<TRes> {
+  _CopyWithImpl$Fragment$Date(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Date _instance;
+
+  final TRes Function(Fragment$Date) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? month = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Date(
+        year: year == _undefined ? _instance.year : (year as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        day: day == _undefined ? _instance.day : (day as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$Date<TRes>
+    implements CopyWith$Fragment$Date<TRes> {
+  _CopyWithStubImpl$Fragment$Date(this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const fragmentDefinitionDate = FragmentDefinitionNode(
+  name: NameNode(value: 'Date'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'FuzzyDate'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'year'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'month'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'day'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentDate = DocumentNode(definitions: [
+  fragmentDefinitionDate,
+]);
+
+extension ClientExtension$Fragment$Date on graphql.GraphQLClient {
+  void writeFragment$Date({
+    required Fragment$Date data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'Date',
+            document: documentNodeFragmentDate,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$Date? readFragment$Date({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'Date',
+          document: documentNodeFragmentDate,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$Date.fromJson(result);
+  }
+}
 
 class Variables$Query$GetMediaById {
   factory Variables$Query$GetMediaById({
@@ -415,26 +649,9 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'day'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'Date'),
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'month'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'year'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -451,26 +668,9 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'day'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'Date'),
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'month'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'year'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -977,106 +1177,6 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
-                name: NameNode(value: 'score'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'notes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'progress'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'progressVolumes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'startedAt'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'year'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'month'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'day'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: 'completedAt'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'year'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'month'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'day'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
-              ),
-              FieldNode(
                 name: NameNode(value: '__typename'),
                 alias: null,
                 arguments: [],
@@ -1124,6 +1224,7 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
       ),
     ]),
   ),
+  fragmentDefinitionDate,
 ]);
 Query$GetMediaById _parserFn$Query$GetMediaById(Map<String, dynamic> data) =>
     Query$GetMediaById.fromJson(data);
@@ -1357,12 +1458,10 @@ class Query$GetMediaById$Media {
       description: (l$description as String?),
       startDate: l$startDate == null
           ? null
-          : Query$GetMediaById$Media$startDate.fromJson(
-              (l$startDate as Map<String, dynamic>)),
+          : Fragment$Date.fromJson((l$startDate as Map<String, dynamic>)),
       endDate: l$endDate == null
           ? null
-          : Query$GetMediaById$Media$endDate.fromJson(
-              (l$endDate as Map<String, dynamic>)),
+          : Fragment$Date.fromJson((l$endDate as Map<String, dynamic>)),
       season: l$season == null
           ? null
           : fromJson$Enum$MediaSeason((l$season as String)),
@@ -1425,9 +1524,9 @@ class Query$GetMediaById$Media {
 
   final String? description;
 
-  final Query$GetMediaById$Media$startDate? startDate;
+  final Fragment$Date? startDate;
 
-  final Query$GetMediaById$Media$endDate? endDate;
+  final Fragment$Date? endDate;
 
   final Enum$MediaSeason? season;
 
@@ -1829,8 +1928,8 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     Enum$MediaFormat? format,
     Enum$MediaStatus? status,
     String? description,
-    Query$GetMediaById$Media$startDate? startDate,
-    Query$GetMediaById$Media$endDate? endDate,
+    Fragment$Date? startDate,
+    Fragment$Date? endDate,
     Enum$MediaSeason? season,
     int? seasonYear,
     int? episodes,
@@ -1855,8 +1954,8 @@ abstract class CopyWith$Query$GetMediaById$Media<TRes> {
     String? $__typename,
   });
   CopyWith$Query$GetMediaById$Media$title<TRes> get title;
-  CopyWith$Query$GetMediaById$Media$startDate<TRes> get startDate;
-  CopyWith$Query$GetMediaById$Media$endDate<TRes> get endDate;
+  CopyWith$Fragment$Date<TRes> get startDate;
+  CopyWith$Fragment$Date<TRes> get endDate;
   CopyWith$Query$GetMediaById$Media$coverImage<TRes> get coverImage;
   TRes tags(
       Iterable<Query$GetMediaById$Media$tags?>? Function(
@@ -1932,10 +2031,10 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
             : (description as String?),
         startDate: startDate == _undefined
             ? _instance.startDate
-            : (startDate as Query$GetMediaById$Media$startDate?),
+            : (startDate as Fragment$Date?),
         endDate: endDate == _undefined
             ? _instance.endDate
-            : (endDate as Query$GetMediaById$Media$endDate?),
+            : (endDate as Fragment$Date?),
         season: season == _undefined
             ? _instance.season
             : (season as Enum$MediaSeason?),
@@ -2006,20 +2105,18 @@ class _CopyWithImpl$Query$GetMediaById$Media<TRes>
             local$title, (e) => call(title: e));
   }
 
-  CopyWith$Query$GetMediaById$Media$startDate<TRes> get startDate {
+  CopyWith$Fragment$Date<TRes> get startDate {
     final local$startDate = _instance.startDate;
     return local$startDate == null
-        ? CopyWith$Query$GetMediaById$Media$startDate.stub(_then(_instance))
-        : CopyWith$Query$GetMediaById$Media$startDate(
-            local$startDate, (e) => call(startDate: e));
+        ? CopyWith$Fragment$Date.stub(_then(_instance))
+        : CopyWith$Fragment$Date(local$startDate, (e) => call(startDate: e));
   }
 
-  CopyWith$Query$GetMediaById$Media$endDate<TRes> get endDate {
+  CopyWith$Fragment$Date<TRes> get endDate {
     final local$endDate = _instance.endDate;
     return local$endDate == null
-        ? CopyWith$Query$GetMediaById$Media$endDate.stub(_then(_instance))
-        : CopyWith$Query$GetMediaById$Media$endDate(
-            local$endDate, (e) => call(endDate: e));
+        ? CopyWith$Fragment$Date.stub(_then(_instance))
+        : CopyWith$Fragment$Date(local$endDate, (e) => call(endDate: e));
   }
 
   CopyWith$Query$GetMediaById$Media$coverImage<TRes> get coverImage {
@@ -2092,8 +2189,8 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
     Enum$MediaFormat? format,
     Enum$MediaStatus? status,
     String? description,
-    Query$GetMediaById$Media$startDate? startDate,
-    Query$GetMediaById$Media$endDate? endDate,
+    Fragment$Date? startDate,
+    Fragment$Date? endDate,
     Enum$MediaSeason? season,
     int? seasonYear,
     int? episodes,
@@ -2122,11 +2219,10 @@ class _CopyWithStubImpl$Query$GetMediaById$Media<TRes>
   CopyWith$Query$GetMediaById$Media$title<TRes> get title =>
       CopyWith$Query$GetMediaById$Media$title.stub(_res);
 
-  CopyWith$Query$GetMediaById$Media$startDate<TRes> get startDate =>
-      CopyWith$Query$GetMediaById$Media$startDate.stub(_res);
+  CopyWith$Fragment$Date<TRes> get startDate =>
+      CopyWith$Fragment$Date.stub(_res);
 
-  CopyWith$Query$GetMediaById$Media$endDate<TRes> get endDate =>
-      CopyWith$Query$GetMediaById$Media$endDate.stub(_res);
+  CopyWith$Fragment$Date<TRes> get endDate => CopyWith$Fragment$Date.stub(_res);
 
   CopyWith$Query$GetMediaById$Media$coverImage<TRes> get coverImage =>
       CopyWith$Query$GetMediaById$Media$coverImage.stub(_res);
@@ -2321,326 +2417,6 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$title<TRes>
     String? english,
     String? native,
     String? userPreferred,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetMediaById$Media$startDate {
-  Query$GetMediaById$Media$startDate({
-    this.day,
-    this.month,
-    this.year,
-    this.$__typename = 'FuzzyDate',
-  });
-
-  factory Query$GetMediaById$Media$startDate.fromJson(
-      Map<String, dynamic> json) {
-    final l$day = json['day'];
-    final l$month = json['month'];
-    final l$year = json['year'];
-    final l$$__typename = json['__typename'];
-    return Query$GetMediaById$Media$startDate(
-      day: (l$day as int?),
-      month: (l$month as int?),
-      year: (l$year as int?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int? day;
-
-  final int? month;
-
-  final int? year;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$day = day;
-    _resultData['day'] = l$day;
-    final l$month = month;
-    _resultData['month'] = l$month;
-    final l$year = year;
-    _resultData['year'] = l$year;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$day = day;
-    final l$month = month;
-    final l$year = year;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$day,
-      l$month,
-      l$year,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetMediaById$Media$startDate) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$month = month;
-    final lOther$month = other.month;
-    if (l$month != lOther$month) {
-      return false;
-    }
-    final l$year = year;
-    final lOther$year = other.year;
-    if (l$year != lOther$year) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetMediaById$Media$startDate
-    on Query$GetMediaById$Media$startDate {
-  CopyWith$Query$GetMediaById$Media$startDate<
-          Query$GetMediaById$Media$startDate>
-      get copyWith => CopyWith$Query$GetMediaById$Media$startDate(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetMediaById$Media$startDate<TRes> {
-  factory CopyWith$Query$GetMediaById$Media$startDate(
-    Query$GetMediaById$Media$startDate instance,
-    TRes Function(Query$GetMediaById$Media$startDate) then,
-  ) = _CopyWithImpl$Query$GetMediaById$Media$startDate;
-
-  factory CopyWith$Query$GetMediaById$Media$startDate.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetMediaById$Media$startDate;
-
-  TRes call({
-    int? day,
-    int? month,
-    int? year,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetMediaById$Media$startDate<TRes>
-    implements CopyWith$Query$GetMediaById$Media$startDate<TRes> {
-  _CopyWithImpl$Query$GetMediaById$Media$startDate(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetMediaById$Media$startDate _instance;
-
-  final TRes Function(Query$GetMediaById$Media$startDate) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? day = _undefined,
-    Object? month = _undefined,
-    Object? year = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetMediaById$Media$startDate(
-        day: day == _undefined ? _instance.day : (day as int?),
-        month: month == _undefined ? _instance.month : (month as int?),
-        year: year == _undefined ? _instance.year : (year as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetMediaById$Media$startDate<TRes>
-    implements CopyWith$Query$GetMediaById$Media$startDate<TRes> {
-  _CopyWithStubImpl$Query$GetMediaById$Media$startDate(this._res);
-
-  TRes _res;
-
-  call({
-    int? day,
-    int? month,
-    int? year,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetMediaById$Media$endDate {
-  Query$GetMediaById$Media$endDate({
-    this.day,
-    this.month,
-    this.year,
-    this.$__typename = 'FuzzyDate',
-  });
-
-  factory Query$GetMediaById$Media$endDate.fromJson(Map<String, dynamic> json) {
-    final l$day = json['day'];
-    final l$month = json['month'];
-    final l$year = json['year'];
-    final l$$__typename = json['__typename'];
-    return Query$GetMediaById$Media$endDate(
-      day: (l$day as int?),
-      month: (l$month as int?),
-      year: (l$year as int?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int? day;
-
-  final int? month;
-
-  final int? year;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$day = day;
-    _resultData['day'] = l$day;
-    final l$month = month;
-    _resultData['month'] = l$month;
-    final l$year = year;
-    _resultData['year'] = l$year;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$day = day;
-    final l$month = month;
-    final l$year = year;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$day,
-      l$month,
-      l$year,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetMediaById$Media$endDate) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$month = month;
-    final lOther$month = other.month;
-    if (l$month != lOther$month) {
-      return false;
-    }
-    final l$year = year;
-    final lOther$year = other.year;
-    if (l$year != lOther$year) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetMediaById$Media$endDate
-    on Query$GetMediaById$Media$endDate {
-  CopyWith$Query$GetMediaById$Media$endDate<Query$GetMediaById$Media$endDate>
-      get copyWith => CopyWith$Query$GetMediaById$Media$endDate(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetMediaById$Media$endDate<TRes> {
-  factory CopyWith$Query$GetMediaById$Media$endDate(
-    Query$GetMediaById$Media$endDate instance,
-    TRes Function(Query$GetMediaById$Media$endDate) then,
-  ) = _CopyWithImpl$Query$GetMediaById$Media$endDate;
-
-  factory CopyWith$Query$GetMediaById$Media$endDate.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetMediaById$Media$endDate;
-
-  TRes call({
-    int? day,
-    int? month,
-    int? year,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetMediaById$Media$endDate<TRes>
-    implements CopyWith$Query$GetMediaById$Media$endDate<TRes> {
-  _CopyWithImpl$Query$GetMediaById$Media$endDate(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetMediaById$Media$endDate _instance;
-
-  final TRes Function(Query$GetMediaById$Media$endDate) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? day = _undefined,
-    Object? month = _undefined,
-    Object? year = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetMediaById$Media$endDate(
-        day: day == _undefined ? _instance.day : (day as int?),
-        month: month == _undefined ? _instance.month : (month as int?),
-        year: year == _undefined ? _instance.year : (year as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetMediaById$Media$endDate<TRes>
-    implements CopyWith$Query$GetMediaById$Media$endDate<TRes> {
-  _CopyWithStubImpl$Query$GetMediaById$Media$endDate(this._res);
-
-  TRes _res;
-
-  call({
-    int? day,
-    int? month,
-    int? year,
     String? $__typename,
   }) =>
       _res;
@@ -5239,58 +5015,22 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaReco
 class Query$GetMediaById$Media$mediaListEntry {
   Query$GetMediaById$Media$mediaListEntry({
     this.status,
-    this.score,
-    this.notes,
-    this.progress,
-    this.progressVolumes,
-    this.startedAt,
-    this.completedAt,
     this.$__typename = 'MediaList',
   });
 
   factory Query$GetMediaById$Media$mediaListEntry.fromJson(
       Map<String, dynamic> json) {
     final l$status = json['status'];
-    final l$score = json['score'];
-    final l$notes = json['notes'];
-    final l$progress = json['progress'];
-    final l$progressVolumes = json['progressVolumes'];
-    final l$startedAt = json['startedAt'];
-    final l$completedAt = json['completedAt'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaById$Media$mediaListEntry(
       status: l$status == null
           ? null
           : fromJson$Enum$MediaListStatus((l$status as String)),
-      score: (l$score as num?)?.toDouble(),
-      notes: (l$notes as String?),
-      progress: (l$progress as int?),
-      progressVolumes: (l$progressVolumes as int?),
-      startedAt: l$startedAt == null
-          ? null
-          : Query$GetMediaById$Media$mediaListEntry$startedAt.fromJson(
-              (l$startedAt as Map<String, dynamic>)),
-      completedAt: l$completedAt == null
-          ? null
-          : Query$GetMediaById$Media$mediaListEntry$completedAt.fromJson(
-              (l$completedAt as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Enum$MediaListStatus? status;
-
-  final double? score;
-
-  final String? notes;
-
-  final int? progress;
-
-  final int? progressVolumes;
-
-  final Query$GetMediaById$Media$mediaListEntry$startedAt? startedAt;
-
-  final Query$GetMediaById$Media$mediaListEntry$completedAt? completedAt;
 
   final String $__typename;
 
@@ -5299,18 +5039,6 @@ class Query$GetMediaById$Media$mediaListEntry {
     final l$status = status;
     _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
-    final l$score = score;
-    _resultData['score'] = l$score;
-    final l$notes = notes;
-    _resultData['notes'] = l$notes;
-    final l$progress = progress;
-    _resultData['progress'] = l$progress;
-    final l$progressVolumes = progressVolumes;
-    _resultData['progressVolumes'] = l$progressVolumes;
-    final l$startedAt = startedAt;
-    _resultData['startedAt'] = l$startedAt?.toJson();
-    final l$completedAt = completedAt;
-    _resultData['completedAt'] = l$completedAt?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5319,21 +5047,9 @@ class Query$GetMediaById$Media$mediaListEntry {
   @override
   int get hashCode {
     final l$status = status;
-    final l$score = score;
-    final l$notes = notes;
-    final l$progress = progress;
-    final l$progressVolumes = progressVolumes;
-    final l$startedAt = startedAt;
-    final l$completedAt = completedAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$status,
-      l$score,
-      l$notes,
-      l$progress,
-      l$progressVolumes,
-      l$startedAt,
-      l$completedAt,
       l$$__typename,
     ]);
   }
@@ -5350,36 +5066,6 @@ class Query$GetMediaById$Media$mediaListEntry {
     final l$status = status;
     final lOther$status = other.status;
     if (l$status != lOther$status) {
-      return false;
-    }
-    final l$score = score;
-    final lOther$score = other.score;
-    if (l$score != lOther$score) {
-      return false;
-    }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (l$notes != lOther$notes) {
-      return false;
-    }
-    final l$progress = progress;
-    final lOther$progress = other.progress;
-    if (l$progress != lOther$progress) {
-      return false;
-    }
-    final l$progressVolumes = progressVolumes;
-    final lOther$progressVolumes = other.progressVolumes;
-    if (l$progressVolumes != lOther$progressVolumes) {
-      return false;
-    }
-    final l$startedAt = startedAt;
-    final lOther$startedAt = other.startedAt;
-    if (l$startedAt != lOther$startedAt) {
-      return false;
-    }
-    final l$completedAt = completedAt;
-    final lOther$completedAt = other.completedAt;
-    if (l$completedAt != lOther$completedAt) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5412,18 +5098,8 @@ abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> {
 
   TRes call({
     Enum$MediaListStatus? status,
-    double? score,
-    String? notes,
-    int? progress,
-    int? progressVolumes,
-    Query$GetMediaById$Media$mediaListEntry$startedAt? startedAt,
-    Query$GetMediaById$Media$mediaListEntry$completedAt? completedAt,
     String? $__typename,
   });
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
-      get startedAt;
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
-      get completedAt;
 }
 
 class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
@@ -5441,56 +5117,16 @@ class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
 
   TRes call({
     Object? status = _undefined,
-    Object? score = _undefined,
-    Object? notes = _undefined,
-    Object? progress = _undefined,
-    Object? progressVolumes = _undefined,
-    Object? startedAt = _undefined,
-    Object? completedAt = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaById$Media$mediaListEntry(
         status: status == _undefined
             ? _instance.status
             : (status as Enum$MediaListStatus?),
-        score: score == _undefined ? _instance.score : (score as double?),
-        notes: notes == _undefined ? _instance.notes : (notes as String?),
-        progress:
-            progress == _undefined ? _instance.progress : (progress as int?),
-        progressVolumes: progressVolumes == _undefined
-            ? _instance.progressVolumes
-            : (progressVolumes as int?),
-        startedAt: startedAt == _undefined
-            ? _instance.startedAt
-            : (startedAt as Query$GetMediaById$Media$mediaListEntry$startedAt?),
-        completedAt: completedAt == _undefined
-            ? _instance.completedAt
-            : (completedAt
-                as Query$GetMediaById$Media$mediaListEntry$completedAt?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
-      get startedAt {
-    final local$startedAt = _instance.startedAt;
-    return local$startedAt == null
-        ? CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt.stub(
-            _then(_instance))
-        : CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt(
-            local$startedAt, (e) => call(startedAt: e));
-  }
-
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
-      get completedAt {
-    final local$completedAt = _instance.completedAt;
-    return local$completedAt == null
-        ? CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt.stub(
-            _then(_instance))
-        : CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt(
-            local$completedAt, (e) => call(completedAt: e));
-  }
 }
 
 class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
@@ -5501,357 +5137,6 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
 
   call({
     Enum$MediaListStatus? status,
-    double? score,
-    String? notes,
-    int? progress,
-    int? progressVolumes,
-    Query$GetMediaById$Media$mediaListEntry$startedAt? startedAt,
-    Query$GetMediaById$Media$mediaListEntry$completedAt? completedAt,
-    String? $__typename,
-  }) =>
-      _res;
-
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
-      get startedAt =>
-          CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt.stub(_res);
-
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
-      get completedAt =>
-          CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt.stub(
-              _res);
-}
-
-class Query$GetMediaById$Media$mediaListEntry$startedAt {
-  Query$GetMediaById$Media$mediaListEntry$startedAt({
-    this.year,
-    this.month,
-    this.day,
-    this.$__typename = 'FuzzyDate',
-  });
-
-  factory Query$GetMediaById$Media$mediaListEntry$startedAt.fromJson(
-      Map<String, dynamic> json) {
-    final l$year = json['year'];
-    final l$month = json['month'];
-    final l$day = json['day'];
-    final l$$__typename = json['__typename'];
-    return Query$GetMediaById$Media$mediaListEntry$startedAt(
-      year: (l$year as int?),
-      month: (l$month as int?),
-      day: (l$day as int?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int? year;
-
-  final int? month;
-
-  final int? day;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$year = year;
-    _resultData['year'] = l$year;
-    final l$month = month;
-    _resultData['month'] = l$month;
-    final l$day = day;
-    _resultData['day'] = l$day;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$year = year;
-    final l$month = month;
-    final l$day = day;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$year,
-      l$month,
-      l$day,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetMediaById$Media$mediaListEntry$startedAt) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$year = year;
-    final lOther$year = other.year;
-    if (l$year != lOther$year) {
-      return false;
-    }
-    final l$month = month;
-    final lOther$month = other.month;
-    if (l$month != lOther$month) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetMediaById$Media$mediaListEntry$startedAt
-    on Query$GetMediaById$Media$mediaListEntry$startedAt {
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<
-          Query$GetMediaById$Media$mediaListEntry$startedAt>
-      get copyWith =>
-          CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<
-    TRes> {
-  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt(
-    Query$GetMediaById$Media$mediaListEntry$startedAt instance,
-    TRes Function(Query$GetMediaById$Media$mediaListEntry$startedAt) then,
-  ) = _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$startedAt;
-
-  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$startedAt;
-
-  TRes call({
-    int? year,
-    int? month,
-    int? day,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
-    implements
-        CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes> {
-  _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$startedAt(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetMediaById$Media$mediaListEntry$startedAt _instance;
-
-  final TRes Function(Query$GetMediaById$Media$mediaListEntry$startedAt) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? year = _undefined,
-    Object? month = _undefined,
-    Object? day = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetMediaById$Media$mediaListEntry$startedAt(
-        year: year == _undefined ? _instance.year : (year as int?),
-        month: month == _undefined ? _instance.month : (month as int?),
-        day: day == _undefined ? _instance.day : (day as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes>
-    implements
-        CopyWith$Query$GetMediaById$Media$mediaListEntry$startedAt<TRes> {
-  _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$startedAt(
-      this._res);
-
-  TRes _res;
-
-  call({
-    int? year,
-    int? month,
-    int? day,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetMediaById$Media$mediaListEntry$completedAt {
-  Query$GetMediaById$Media$mediaListEntry$completedAt({
-    this.year,
-    this.month,
-    this.day,
-    this.$__typename = 'FuzzyDate',
-  });
-
-  factory Query$GetMediaById$Media$mediaListEntry$completedAt.fromJson(
-      Map<String, dynamic> json) {
-    final l$year = json['year'];
-    final l$month = json['month'];
-    final l$day = json['day'];
-    final l$$__typename = json['__typename'];
-    return Query$GetMediaById$Media$mediaListEntry$completedAt(
-      year: (l$year as int?),
-      month: (l$month as int?),
-      day: (l$day as int?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int? year;
-
-  final int? month;
-
-  final int? day;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$year = year;
-    _resultData['year'] = l$year;
-    final l$month = month;
-    _resultData['month'] = l$month;
-    final l$day = day;
-    _resultData['day'] = l$day;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$year = year;
-    final l$month = month;
-    final l$day = day;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$year,
-      l$month,
-      l$day,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetMediaById$Media$mediaListEntry$completedAt) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$year = year;
-    final lOther$year = other.year;
-    if (l$year != lOther$year) {
-      return false;
-    }
-    final l$month = month;
-    final lOther$month = other.month;
-    if (l$month != lOther$month) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetMediaById$Media$mediaListEntry$completedAt
-    on Query$GetMediaById$Media$mediaListEntry$completedAt {
-  CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<
-          Query$GetMediaById$Media$mediaListEntry$completedAt>
-      get copyWith =>
-          CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<
-    TRes> {
-  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt(
-    Query$GetMediaById$Media$mediaListEntry$completedAt instance,
-    TRes Function(Query$GetMediaById$Media$mediaListEntry$completedAt) then,
-  ) = _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$completedAt;
-
-  factory CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$completedAt;
-
-  TRes call({
-    int? year,
-    int? month,
-    int? day,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes>
-    implements
-        CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes> {
-  _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry$completedAt(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetMediaById$Media$mediaListEntry$completedAt _instance;
-
-  final TRes Function(Query$GetMediaById$Media$mediaListEntry$completedAt)
-      _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? year = _undefined,
-    Object? month = _undefined,
-    Object? day = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetMediaById$Media$mediaListEntry$completedAt(
-        year: year == _undefined ? _instance.year : (year as int?),
-        month: month == _undefined ? _instance.month : (month as int?),
-        day: day == _undefined ? _instance.day : (day as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$completedAt<
-        TRes>
-    implements
-        CopyWith$Query$GetMediaById$Media$mediaListEntry$completedAt<TRes> {
-  _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry$completedAt(
-      this._res);
-
-  TRes _res;
-
-  call({
-    int? year,
-    int? month,
-    int? day,
     String? $__typename,
   }) =>
       _res;

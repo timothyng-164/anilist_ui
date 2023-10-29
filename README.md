@@ -36,13 +36,15 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 ## TODO
 
 1. check if authentication persists in local storage
-2. Profile page (favorites, stats, user info)
-3. My List page
-4. get new font
-5. replace print statements with logging
-6. ctrl+F for all TODOs
-7. refactoring
-   - refactor nested scaffold: https://stackoverflow.com/a/64618108
+1. move schema.graphql file to /graphql/anilist
+1. Profile page (favorites, stats, user info)
+1. My List page
+1. Increment (+) button for list view
+1. get new font
+1. replace print statements with logging
+1. ctrl+F for all TODOs
+1. refactoring
+   - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
    - remove functions out of build():
      - https://www.reddit.com/r/FlutterDev/comments/ra8ygm/are_there_any_negative_effects_for_declaring/
      - https://www.reddit.com/r/flutterhelp/comments/10dcwl7/is_it_good_practice_to_declare_variables_inside/

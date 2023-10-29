@@ -12,14 +12,10 @@ query GetMediaById($id: Int, $type: MediaType) {
     status
     description(asHtml: false)
     startDate {
-      day
-      month
-      year
+      ...Date
     }
     endDate {
-      day
-      month
-      year
+      ...Date
     }
     season
     seasonYear
@@ -89,23 +85,15 @@ query GetMediaById($id: Int, $type: MediaType) {
     }
     mediaListEntry {
       status
-      score
-      notes
-      progress
-      progressVolumes
-      startedAt {
-        year
-        month
-        day
-      }
-      completedAt {
-        year
-        month
-        day
-      }
     }
     isFavourite
     isLocked
     isFavouriteBlocked
   }
+}
+
+fragment Date on FuzzyDate {
+  year
+  month
+  day
 }

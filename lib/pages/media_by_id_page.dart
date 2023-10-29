@@ -12,8 +12,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../common/widgets/media_card.dart';
+import '../common/widgets/query_result_handler.dart';
 import '../graphql/anilist/query/mediaById.graphql.dart';
 import '../graphql/anilist/schema.graphql.dart';
+import '../routing/routes.dart';
 import '../state/auth_state.dart';
 
 class MediaByIdPage extends HookWidget {
@@ -37,29 +39,24 @@ class MediaByIdPage extends HookWidget {
     var result = query.result;
     var media = result.parsedData?.Media;
 
-    Widget pageBody;
-
-    if (result.isLoading) {
-      pageBody = const Center(child: CircularProgressIndicator());
-    } else if (result.hasException) {
-      print('Unknown exception occurred: ${result.exception}');
-      pageBody = const Center(child: Text("An error has occurred."));
-    } else {
-      pageBody = PageContent(id: id, media: media!);
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(LabelUtil.mediaTypeLabel(mediaType)!),
-            if (isAuthenticated && !result.isLoading)
+            if (isAuthenticated && result.isNotLoading && !result.hasException)
               UserUpdateButtons(media: media)
           ],
         ),
       ),
-      body: SafeArea(child: pageBody),
+      body: SafeArea(
+        child: QueryResultHandler(
+          result: result,
+          refetch: query.refetch,
+          child: PageContent(id: id, media: media),
+        ),
+      ),
     );
   }
 }
@@ -71,7 +68,8 @@ class UserUpdateButtons extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    Query$GetMediaById$Media$mediaListEntry? listEntry = media?.mediaListEntry;
+    if (media == null) return const SizedBox.shrink();
+    var listEntry = media?.mediaListEntry;
 
     return Row(
       children: [
@@ -83,9 +81,22 @@ class UserUpdateButtons extends HookWidget {
           mediaId: media!.id,
         ),
         IconButton(
+          // TODO: refactor button to separate file
           // TODO: route to UpdateMediaList page
-          onPressed: () {},
-          icon: Icon(listEntry == null
+          onPressed: () {
+            switch (media?.type) {
+              case Enum$MediaType.ANIME:
+                AnimeListEditorRoute(media!.id).push(context);
+                break;
+              case Enum$MediaType.MANGA:
+                MangaListEditorRoute(media!.id).push(context);
+                break;
+              default:
+                print(
+                    'Unable to route list editor for ${media?.type} ${media?.id}');
+            }
+          },
+          icon: Icon(listEntry?.status == null
               ? Icons.playlist_add
               : Icons.playlist_add_check),
         ),
@@ -95,13 +106,14 @@ class UserUpdateButtons extends HookWidget {
 }
 
 class PageContent extends StatelessWidget {
-  const PageContent({super.key, required this.id, required this.media});
+  const PageContent({super.key, required this.id, this.media});
 
   final int id;
-  final Query$GetMediaById$Media media;
+  final Query$GetMediaById$Media? media;
 
   @override
   Widget build(BuildContext context) {
+    if (media == null) return const SizedBox.shrink();
     return SingleChildScrollView(
       child: Row(
         children: [
@@ -111,20 +123,20 @@ class PageContent extends StatelessWidget {
             child: LayoutBuilder(builder: (context, constraints) {
               return Column(
                 children: [
-                  TitleSection(media: media, maxWidth: constraints.maxWidth),
+                  TitleSection(media: media!, maxWidth: constraints.maxWidth),
                   const SizedBox(height: 20),
-                  GenreSection(genres: media.genres),
+                  GenreSection(genres: media!.genres),
                   const SizedBox(height: 10),
-                  DescriptionSection(description: media.description),
+                  DescriptionSection(description: media!.description),
                   const SizedBox(height: 10),
-                  InfoSection(media: media),
+                  InfoSection(media: media!),
                   const SizedBox(height: 20),
-                  RelationSection(relations: media.relations),
+                  RelationSection(relations: media!.relations),
                   const SizedBox(height: 20),
-                  TagsSection(mediaTags: media.tags),
+                  TagsSection(mediaTags: media!.tags),
                   const SizedBox(height: 20),
                   RecommendationSection(
-                      recommendations: media.recommendations?.nodes),
+                      recommendations: media!.recommendations?.nodes),
                   const SizedBox(height: 20),
 
                   // TODO:
@@ -432,6 +444,7 @@ class TagsSection extends HookWidget {
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(flex: 8, child: buildTagColumn(leftTags)),
             const Spacer(flex: 1),
