@@ -1045,6 +1045,7 @@ class Query$SearchLandingPage {
     this.season,
     this.nextSeason,
     this.updated,
+    this.newlyAdded,
     this.popular,
     this.top,
     this.$__typename = 'Query',
@@ -1055,6 +1056,7 @@ class Query$SearchLandingPage {
     final l$season = json['season'];
     final l$nextSeason = json['nextSeason'];
     final l$updated = json['updated'];
+    final l$newlyAdded = json['newlyAdded'];
     final l$popular = json['popular'];
     final l$top = json['top'];
     final l$$__typename = json['__typename'];
@@ -1075,6 +1077,10 @@ class Query$SearchLandingPage {
           ? null
           : Query$SearchLandingPage$updated.fromJson(
               (l$updated as Map<String, dynamic>)),
+      newlyAdded: l$newlyAdded == null
+          ? null
+          : Query$SearchLandingPage$newlyAdded.fromJson(
+              (l$newlyAdded as Map<String, dynamic>)),
       popular: l$popular == null
           ? null
           : Query$SearchLandingPage$popular.fromJson(
@@ -1095,6 +1101,8 @@ class Query$SearchLandingPage {
 
   final Query$SearchLandingPage$updated? updated;
 
+  final Query$SearchLandingPage$newlyAdded? newlyAdded;
+
   final Query$SearchLandingPage$popular? popular;
 
   final Query$SearchLandingPage$top? top;
@@ -1111,6 +1119,8 @@ class Query$SearchLandingPage {
     _resultData['nextSeason'] = l$nextSeason?.toJson();
     final l$updated = updated;
     _resultData['updated'] = l$updated?.toJson();
+    final l$newlyAdded = newlyAdded;
+    _resultData['newlyAdded'] = l$newlyAdded?.toJson();
     final l$popular = popular;
     _resultData['popular'] = l$popular?.toJson();
     final l$top = top;
@@ -1126,6 +1136,7 @@ class Query$SearchLandingPage {
     final l$season = season;
     final l$nextSeason = nextSeason;
     final l$updated = updated;
+    final l$newlyAdded = newlyAdded;
     final l$popular = popular;
     final l$top = top;
     final l$$__typename = $__typename;
@@ -1134,6 +1145,7 @@ class Query$SearchLandingPage {
       l$season,
       l$nextSeason,
       l$updated,
+      l$newlyAdded,
       l$popular,
       l$top,
       l$$__typename,
@@ -1167,6 +1179,11 @@ class Query$SearchLandingPage {
     final l$updated = updated;
     final lOther$updated = other.updated;
     if (l$updated != lOther$updated) {
+      return false;
+    }
+    final l$newlyAdded = newlyAdded;
+    final lOther$newlyAdded = other.newlyAdded;
+    if (l$newlyAdded != lOther$newlyAdded) {
       return false;
     }
     final l$popular = popular;
@@ -1210,6 +1227,7 @@ abstract class CopyWith$Query$SearchLandingPage<TRes> {
     Query$SearchLandingPage$season? season,
     Query$SearchLandingPage$nextSeason? nextSeason,
     Query$SearchLandingPage$updated? updated,
+    Query$SearchLandingPage$newlyAdded? newlyAdded,
     Query$SearchLandingPage$popular? popular,
     Query$SearchLandingPage$top? top,
     String? $__typename,
@@ -1218,6 +1236,7 @@ abstract class CopyWith$Query$SearchLandingPage<TRes> {
   CopyWith$Query$SearchLandingPage$season<TRes> get season;
   CopyWith$Query$SearchLandingPage$nextSeason<TRes> get nextSeason;
   CopyWith$Query$SearchLandingPage$updated<TRes> get updated;
+  CopyWith$Query$SearchLandingPage$newlyAdded<TRes> get newlyAdded;
   CopyWith$Query$SearchLandingPage$popular<TRes> get popular;
   CopyWith$Query$SearchLandingPage$top<TRes> get top;
 }
@@ -1240,6 +1259,7 @@ class _CopyWithImpl$Query$SearchLandingPage<TRes>
     Object? season = _undefined,
     Object? nextSeason = _undefined,
     Object? updated = _undefined,
+    Object? newlyAdded = _undefined,
     Object? popular = _undefined,
     Object? top = _undefined,
     Object? $__typename = _undefined,
@@ -1257,6 +1277,9 @@ class _CopyWithImpl$Query$SearchLandingPage<TRes>
         updated: updated == _undefined
             ? _instance.updated
             : (updated as Query$SearchLandingPage$updated?),
+        newlyAdded: newlyAdded == _undefined
+            ? _instance.newlyAdded
+            : (newlyAdded as Query$SearchLandingPage$newlyAdded?),
         popular: popular == _undefined
             ? _instance.popular
             : (popular as Query$SearchLandingPage$popular?),
@@ -1300,6 +1323,14 @@ class _CopyWithImpl$Query$SearchLandingPage<TRes>
             local$updated, (e) => call(updated: e));
   }
 
+  CopyWith$Query$SearchLandingPage$newlyAdded<TRes> get newlyAdded {
+    final local$newlyAdded = _instance.newlyAdded;
+    return local$newlyAdded == null
+        ? CopyWith$Query$SearchLandingPage$newlyAdded.stub(_then(_instance))
+        : CopyWith$Query$SearchLandingPage$newlyAdded(
+            local$newlyAdded, (e) => call(newlyAdded: e));
+  }
+
   CopyWith$Query$SearchLandingPage$popular<TRes> get popular {
     final local$popular = _instance.popular;
     return local$popular == null
@@ -1327,6 +1358,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage<TRes>
     Query$SearchLandingPage$season? season,
     Query$SearchLandingPage$nextSeason? nextSeason,
     Query$SearchLandingPage$updated? updated,
+    Query$SearchLandingPage$newlyAdded? newlyAdded,
     Query$SearchLandingPage$popular? popular,
     Query$SearchLandingPage$top? top,
     String? $__typename,
@@ -1344,6 +1376,9 @@ class _CopyWithStubImpl$Query$SearchLandingPage<TRes>
 
   CopyWith$Query$SearchLandingPage$updated<TRes> get updated =>
       CopyWith$Query$SearchLandingPage$updated.stub(_res);
+
+  CopyWith$Query$SearchLandingPage$newlyAdded<TRes> get newlyAdded =>
+      CopyWith$Query$SearchLandingPage$newlyAdded.stub(_res);
 
   CopyWith$Query$SearchLandingPage$popular<TRes> get popular =>
       CopyWith$Query$SearchLandingPage$popular.stub(_res);
@@ -1611,6 +1646,62 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
               ArgumentNode(
                 name: NameNode(value: 'sort'),
                 value: EnumValueNode(name: NameNode(value: 'UPDATED_AT_DESC')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'type'),
+                value: EnumValueNode(name: NameNode(value: 'ANIME')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'isAdult'),
+                value: BooleanValueNode(value: false),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'media'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'Page'),
+        alias: NameNode(value: 'newlyAdded'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'page'),
+            value: IntValueNode(value: '1'),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'perPage'),
+            value: VariableNode(name: NameNode(value: 'perPage')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'media'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'sort'),
+                value: EnumValueNode(name: NameNode(value: 'ID_DESC')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'type'),
@@ -2549,6 +2640,166 @@ class _CopyWithImpl$Query$SearchLandingPage$updated<TRes>
 class _CopyWithStubImpl$Query$SearchLandingPage$updated<TRes>
     implements CopyWith$Query$SearchLandingPage$updated<TRes> {
   _CopyWithStubImpl$Query$SearchLandingPage$updated(this._res);
+
+  TRes _res;
+
+  call({
+    List<Fragment$media?>? media,
+    String? $__typename,
+  }) =>
+      _res;
+
+  media(_fn) => _res;
+}
+
+class Query$SearchLandingPage$newlyAdded {
+  Query$SearchLandingPage$newlyAdded({
+    this.media,
+    this.$__typename = 'Page',
+  });
+
+  factory Query$SearchLandingPage$newlyAdded.fromJson(
+      Map<String, dynamic> json) {
+    final l$media = json['media'];
+    final l$$__typename = json['__typename'];
+    return Query$SearchLandingPage$newlyAdded(
+      media: (l$media as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Fragment$media?>? media;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$media = media;
+    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$media = media;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$media == null ? null : Object.hashAll(l$media.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$SearchLandingPage$newlyAdded) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != null && lOther$media != null) {
+      if (l$media.length != lOther$media.length) {
+        return false;
+      }
+      for (int i = 0; i < l$media.length; i++) {
+        final l$media$entry = l$media[i];
+        final lOther$media$entry = lOther$media[i];
+        if (l$media$entry != lOther$media$entry) {
+          return false;
+        }
+      }
+    } else if (l$media != lOther$media) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$SearchLandingPage$newlyAdded
+    on Query$SearchLandingPage$newlyAdded {
+  CopyWith$Query$SearchLandingPage$newlyAdded<
+          Query$SearchLandingPage$newlyAdded>
+      get copyWith => CopyWith$Query$SearchLandingPage$newlyAdded(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$SearchLandingPage$newlyAdded<TRes> {
+  factory CopyWith$Query$SearchLandingPage$newlyAdded(
+    Query$SearchLandingPage$newlyAdded instance,
+    TRes Function(Query$SearchLandingPage$newlyAdded) then,
+  ) = _CopyWithImpl$Query$SearchLandingPage$newlyAdded;
+
+  factory CopyWith$Query$SearchLandingPage$newlyAdded.stub(TRes res) =
+      _CopyWithStubImpl$Query$SearchLandingPage$newlyAdded;
+
+  TRes call({
+    List<Fragment$media?>? media,
+    String? $__typename,
+  });
+  TRes media(
+      Iterable<Fragment$media?>? Function(
+              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$SearchLandingPage$newlyAdded<TRes>
+    implements CopyWith$Query$SearchLandingPage$newlyAdded<TRes> {
+  _CopyWithImpl$Query$SearchLandingPage$newlyAdded(
+    this._instance,
+    this._then,
+  );
+
+  final Query$SearchLandingPage$newlyAdded _instance;
+
+  final TRes Function(Query$SearchLandingPage$newlyAdded) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? media = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$SearchLandingPage$newlyAdded(
+        media: media == _undefined
+            ? _instance.media
+            : (media as List<Fragment$media?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes media(
+          Iterable<Fragment$media?>? Function(
+                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+              _fn) =>
+      call(
+          media: _fn(_instance.media?.map((e) => e == null
+              ? null
+              : CopyWith$Fragment$media(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$SearchLandingPage$newlyAdded<TRes>
+    implements CopyWith$Query$SearchLandingPage$newlyAdded<TRes> {
+  _CopyWithStubImpl$Query$SearchLandingPage$newlyAdded(this._res);
 
   TRes _res;
 

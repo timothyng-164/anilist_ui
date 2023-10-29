@@ -69,6 +69,10 @@ class LandingContent extends StatelessWidget {
         mediaList: data.nextSeason?.media ?? [],
       ),
       ScrollingAnimeSection(
+        title: 'Newly Added',
+        mediaList: data.newlyAdded?.media ?? [],
+      ),
+      ScrollingAnimeSection(
         title: 'Recently Updated',
         mediaList: data.updated?.media ?? [],
       ),

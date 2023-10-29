@@ -37,6 +37,11 @@ query SearchLandingPage(
       ...media
     }
   }
+  newlyAdded: Page(page: 1, perPage: $perPage) {
+    media(sort: ID_DESC, type: ANIME, isAdult: false) {
+      ...media
+    }
+  }
   popular: Page(page: 1, perPage: $perPage) {
     media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {
       ...media
