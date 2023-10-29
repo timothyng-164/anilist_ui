@@ -1170,7 +1170,7 @@ const documentNodeQueryGetMediaById = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'status'),
+                name: NameNode(value: 'id'),
                 alias: null,
                 arguments: [],
                 directives: [],
@@ -5014,31 +5014,28 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$recommendations$nodes$mediaReco
 
 class Query$GetMediaById$Media$mediaListEntry {
   Query$GetMediaById$Media$mediaListEntry({
-    this.status,
+    required this.id,
     this.$__typename = 'MediaList',
   });
 
   factory Query$GetMediaById$Media$mediaListEntry.fromJson(
       Map<String, dynamic> json) {
-    final l$status = json['status'];
+    final l$id = json['id'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaById$Media$mediaListEntry(
-      status: l$status == null
-          ? null
-          : fromJson$Enum$MediaListStatus((l$status as String)),
+      id: (l$id as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Enum$MediaListStatus? status;
+  final int id;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$status = status;
-    _resultData['status'] =
-        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5046,10 +5043,10 @@ class Query$GetMediaById$Media$mediaListEntry {
 
   @override
   int get hashCode {
-    final l$status = status;
+    final l$id = id;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$status,
+      l$id,
       l$$__typename,
     ]);
   }
@@ -5063,9 +5060,9 @@ class Query$GetMediaById$Media$mediaListEntry {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (l$status != lOther$status) {
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5097,7 +5094,7 @@ abstract class CopyWith$Query$GetMediaById$Media$mediaListEntry<TRes> {
       _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry;
 
   TRes call({
-    Enum$MediaListStatus? status,
+    int? id,
     String? $__typename,
   });
 }
@@ -5116,13 +5113,11 @@ class _CopyWithImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? status = _undefined,
+    Object? id = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaById$Media$mediaListEntry(
-        status: status == _undefined
-            ? _instance.status
-            : (status as Enum$MediaListStatus?),
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -5136,7 +5131,7 @@ class _CopyWithStubImpl$Query$GetMediaById$Media$mediaListEntry<TRes>
   TRes _res;
 
   call({
-    Enum$MediaListStatus? status,
+    int? id,
     String? $__typename,
   }) =>
       _res;

@@ -15,6 +15,7 @@ query GetMediaListEntry($id: Int, $type: MediaType) {
 }
 
 fragment MediaListEntry on MediaList {
+  id
   status
   score
   notes

@@ -84,7 +84,7 @@ query GetMediaById($id: Int, $type: MediaType) {
       }
     }
     mediaListEntry {
-      status
+      id
     }
     isFavourite
     isLocked

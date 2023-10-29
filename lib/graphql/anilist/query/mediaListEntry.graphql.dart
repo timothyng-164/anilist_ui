@@ -8,6 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
 class Fragment$MediaListEntry {
   Fragment$MediaListEntry({
+    required this.id,
     this.status,
     this.score,
     this.notes,
@@ -19,6 +20,7 @@ class Fragment$MediaListEntry {
   });
 
   factory Fragment$MediaListEntry.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$status = json['status'];
     final l$score = json['score'];
     final l$notes = json['notes'];
@@ -28,6 +30,7 @@ class Fragment$MediaListEntry {
     final l$completedAt = json['completedAt'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaListEntry(
+      id: (l$id as int),
       status: l$status == null
           ? null
           : fromJson$Enum$MediaListStatus((l$status as String)),
@@ -44,6 +47,8 @@ class Fragment$MediaListEntry {
       $__typename: (l$$__typename as String),
     );
   }
+
+  final int id;
 
   final Enum$MediaListStatus? status;
 
@@ -63,6 +68,8 @@ class Fragment$MediaListEntry {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$status = status;
     _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
@@ -85,6 +92,7 @@ class Fragment$MediaListEntry {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$status = status;
     final l$score = score;
     final l$notes = notes;
@@ -94,6 +102,7 @@ class Fragment$MediaListEntry {
     final l$completedAt = completedAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$status,
       l$score,
       l$notes,
@@ -112,6 +121,11 @@ class Fragment$MediaListEntry {
     }
     if (!(other is Fragment$MediaListEntry) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$status = status;
@@ -176,6 +190,7 @@ abstract class CopyWith$Fragment$MediaListEntry<TRes> {
       _CopyWithStubImpl$Fragment$MediaListEntry;
 
   TRes call({
+    int? id,
     Enum$MediaListStatus? status,
     double? score,
     String? notes,
@@ -203,6 +218,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? status = _undefined,
     Object? score = _undefined,
     Object? notes = _undefined,
@@ -213,6 +229,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaListEntry(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         status: status == _undefined
             ? _instance.status
             : (status as Enum$MediaListStatus?),
@@ -257,6 +274,7 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
   TRes _res;
 
   call({
+    int? id,
     Enum$MediaListStatus? status,
     double? score,
     String? notes,
@@ -284,6 +302,13 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
   )),
   directives: [],
   selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
     FieldNode(
       name: NameNode(value: 'status'),
       alias: null,

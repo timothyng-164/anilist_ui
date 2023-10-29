@@ -1,3 +1,4 @@
+import 'package:anilist_ui/graphql/anilist/mutation/deleteMediaListEntry.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/query/mediaListEntry.graphql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../common/util/label_util.dart';
 import '../common/util/scale_size.dart';
+import '../common/util/snackbar_util.dart';
 import '../common/widgets/query_result_handler.dart';
 import '../graphql/anilist/schema.graphql.dart';
 
@@ -70,9 +72,6 @@ class PageContent extends HookWidget {
 
     String? title = queryResult?.title?.userPreferred;
     Fragment$MediaListEntry? listEntry = queryResult?.mediaListEntry;
-    int? maxEpisodes = queryResult?.episodes;
-    int? maxChapters = queryResult?.chapters;
-    int? maxVolumes = queryResult?.volumes;
 
     var status = useState<Enum$MediaListStatus>(
         listEntry?.status ?? Enum$MediaListStatus.PLANNING);
@@ -103,12 +102,20 @@ class PageContent extends HookWidget {
           selector: StatusSelector(status: status, mediaType: mediaType)),
       OptionRow(
           label: mediaType == Enum$MediaType.ANIME ? 'Episodes:' : 'Chapters:',
-          selector: ProgressSelector(controller: progressController),
+          selector: ProgressSelector(
+            controller: progressController,
+            maxValue: mediaType == Enum$MediaType.ANIME
+                ? queryResult?.episodes
+                : queryResult?.chapters,
+          ),
           spaceBetween: 8),
       if (mediaType == Enum$MediaType.MANGA)
         OptionRow(
             label: 'Volumes:',
-            selector: ProgressSelector(controller: progressVolumesController),
+            selector: ProgressSelector(
+              controller: progressVolumesController,
+              maxValue: queryResult?.volumes,
+            ),
             spaceBetween: 8),
       OptionRow(
           label: 'Start Date:',
@@ -122,17 +129,11 @@ class PageContent extends HookWidget {
           spaceBetween: 8),
       const SizedBox(height: 30),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          OutlinedButton(
-            onPressed: () {
-              // TODO: show confiramtion dialog, run delete mutation, then pop twice
-            },
-            child: Text('Remove from List',
-                style: TextStyle(color: colorScheme.error)),
-          ),
-          const SizedBox(width: 20),
+          if (listEntry != null)
+            DeleteEntryButton(
+                entryId: listEntry.id, mediaId: mediaId, mediaType: mediaType),
           ElevatedButton(
               onPressed: () {
                 // TODO: run save mutation, then pop with snackbar
@@ -164,6 +165,123 @@ class PageContent extends HookWidget {
         ],
       ),
     );
+  }
+}
+
+class DeleteEntryButton extends HookWidget {
+  const DeleteEntryButton({
+    super.key,
+    required this.entryId,
+    required this.mediaId,
+    this.mediaType,
+  });
+
+  final int entryId;
+  final int mediaId;
+  final Enum$MediaType? mediaType;
+
+  @override
+  Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
+    final deleteEntry = useMutation$DeleteMediaListEntry(
+      WidgetOptions$Mutation$DeleteMediaListEntry(update: (cache, result) {
+        bool deleteSuccess =
+            result?.parsedData?.DeleteMediaListEntry?.deleted ?? false;
+        if (result?.hasException == true || !deleteSuccess) {
+          print(
+              'Unknown exception deleting media entry $entryId: ${result?.exception}');
+          return;
+        }
+
+        if (!deleteSuccess) {
+          print('Unable to delete media entry $entryId: ${result?.data}');
+          return;
+        }
+        cache.writeFragment(
+            Fragment(
+                document: gql(
+              '''
+              fragment fields on Media {
+                id
+                mediaListEntry
+              }
+              ''',
+            )).asRequest(idFields: {
+              'id': mediaId,
+            }),
+            data: {'mediaListEntry': null});
+      }),
+    );
+    var deleteVars = Variables$Mutation$DeleteMediaListEntry(id: entryId);
+
+    return OutlinedButton(
+      child: Text(
+        'Remove from List',
+        style: TextStyle(color: colorScheme.error),
+      ),
+      onPressed: () async {
+        bool? deleteConfirmed = await _showDialogMenu(context);
+        if (deleteConfirmed != true) return;
+
+        var mutation = deleteEntry.runMutation(variables: deleteVars);
+        final result = await mutation.networkResult;
+
+        bool deleteSuccess =
+            result?.parsedData?.DeleteMediaListEntry?.deleted ?? false;
+        if (!deleteSuccess) {
+          print('Unable to delete media entry $entryId: ${result?.data}');
+        }
+        if (result?.hasException == true) {
+          print(
+              'Unknown exception deleting media entry $entryId: ${result?.exception}');
+        }
+
+        String snackbarText = (!deleteSuccess || result?.hasException == true)
+            ? 'Unable to delete ${LabelUtil.mediaTypeLabel(mediaType)}.'
+            : 'Successfully deleted ${LabelUtil.mediaTypeLabel(mediaType)}.';
+        SnackBar snackbar = SnackbarUtil.commonSnackbar(snackbarText);
+
+        if (context.mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+        }
+      },
+    );
+  }
+
+  Future<bool?> _showDialogMenu(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                      'Are you sure you want to delete this ${LabelUtil.mediaTypeLabel(mediaType)}?'),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        child: const Text('Yes'),
+                      ),
+                    ],
+                  )
+                ]),
+          ));
+        });
   }
 }
 
@@ -281,25 +399,46 @@ class NotesSelector extends StatelessWidget {
 }
 
 class ProgressSelector extends HookWidget {
-  const ProgressSelector({super.key, required this.controller});
+  const ProgressSelector({super.key, required this.controller, this.maxValue});
 
   final TextEditingController controller;
+  final int? maxValue;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 60,
-      child: TextField(
-        controller: controller,
-        keyboardType: TextInputType.number,
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.digitsOnly
-        ],
-        decoration: const InputDecoration(
-          hintText: '0',
-          border: OutlineInputBorder(),
+    final textTheme = Theme.of(context).textTheme;
+
+    useEffect(() {
+      controller.addListener(() {
+        if (controller.text.isEmpty || maxValue == null) return;
+        if (int.parse(controller.text) > maxValue!) {
+          controller.text = maxValue.toString();
+        }
+      });
+    }, [controller]);
+
+    return Row(
+      children: [
+        SizedBox(
+          width: 60,
+          child: TextField(
+            controller: controller,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ],
+            decoration: const InputDecoration(
+              hintText: '0',
+              border: OutlineInputBorder(),
+            ),
+          ),
         ),
-      ),
+        if (maxValue != null)
+          Text(
+            ' / $maxValue',
+            style: textTheme.bodyLarge,
+          ),
+      ],
     );
   }
 }
@@ -320,7 +459,7 @@ class StatusSelector extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return TextButton(
-      onPressed: () => showDialogMenu(context),
+      onPressed: () => _showDialogMenu(context),
       style: TextButton.styleFrom(padding: EdgeInsets.zero),
       child: Text(
         '${LabelUtil.listStatusLabelByMedia(status.value, mediaType)}',
@@ -332,7 +471,7 @@ class StatusSelector extends StatelessWidget {
     );
   }
 
-  Future<dynamic> showDialogMenu(BuildContext context) {
+  Future<dynamic> _showDialogMenu(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {

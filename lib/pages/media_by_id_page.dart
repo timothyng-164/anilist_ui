@@ -96,7 +96,7 @@ class UserUpdateButtons extends HookWidget {
                     'Unable to route list editor for ${media?.type} ${media?.id}');
             }
           },
-          icon: Icon(listEntry?.status == null
+          icon: Icon(listEntry?.id == null
               ? Icons.playlist_add
               : Icons.playlist_add_check),
         ),

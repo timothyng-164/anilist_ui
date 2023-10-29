@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../../graphql/anilist/schema.graphql.dart';
+import '../util/snackbar_util.dart';
 
 class MediaFavouriteButton extends HookWidget {
   const MediaFavouriteButton({
@@ -43,13 +44,11 @@ class MediaFavouriteButton extends HookWidget {
                 '''
                 fragment fields on Media {
                   id
-                  type
                   isFavourite
                 }
                 ''',
               )).asRequest(idFields: {
                 'id': mediaId,
-                'type': toJson$Enum$MediaType(mediaType),
               }),
               data: {'isFavourite': !isFavourite});
         },
@@ -65,16 +64,11 @@ class MediaFavouriteButton extends HookWidget {
       final mutation =
           toggleFavorite.runMutation(variables: toggleFavoriteVars);
       final result = await mutation.networkResult;
-      var snackbar = SnackBar(
-          behavior: SnackBarBehavior.floating,
-          duration: const Duration(milliseconds: 1000),
-          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 70),
-          dismissDirection: DismissDirection.none,
-          content: Text(result?.hasException == true
-              ? 'Unable to update favorite.'
-              : (isFavourite
-                  ? 'Removed from favorites.'
-                  : 'Added to favorites.')));
+      var snackbar = SnackbarUtil.commonSnackbar(
+        result?.hasException == true
+            ? 'Unable to update favorite.'
+            : (isFavourite ? 'Removed from favorites.' : 'Added to favorites.'),
+      );
       if (context.mounted) {
         var messenger = ScaffoldMessenger.of(context);
         messenger.clearSnackBars();
