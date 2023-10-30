@@ -16,7 +16,6 @@ import '../common/widgets/media_card.dart';
 import '../common/widgets/query_result_handler.dart';
 import '../graphql/anilist/query/mediaById.graphql.dart';
 import '../graphql/anilist/schema.graphql.dart';
-import '../routing/routes.dart';
 import '../state/auth_state.dart';
 
 class MediaByIdPage extends HookWidget {

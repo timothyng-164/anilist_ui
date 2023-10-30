@@ -32,14 +32,14 @@ class Fragment$EntryDelete {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$mediaListEntry = mediaListEntry;
-    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -59,7 +59,7 @@ class Fragment$EntryDelete {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$EntryDelete) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$EntryDelete || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -119,6 +119,7 @@ class _CopyWithImpl$Fragment$EntryDelete<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaListEntry = _undefined,
@@ -134,6 +135,7 @@ class _CopyWithImpl$Fragment$EntryDelete<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> get mediaListEntry {
     final local$mediaListEntry = _instance.mediaListEntry;
     return local$mediaListEntry == null
@@ -147,8 +149,9 @@ class _CopyWithStubImpl$Fragment$EntryDelete<TRes>
     implements CopyWith$Fragment$EntryDelete<TRes> {
   _CopyWithStubImpl$Fragment$EntryDelete(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Fragment$EntryDelete$mediaListEntry? mediaListEntry,
@@ -156,6 +159,7 @@ class _CopyWithStubImpl$Fragment$EntryDelete<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> get mediaListEntry =>
       CopyWith$Fragment$EntryDelete$mediaListEntry.stub(_res);
 }
@@ -202,7 +206,7 @@ extension ClientExtension$Fragment$EntryDelete on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
-      this.writeFragment(
+      writeFragment(
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
@@ -217,7 +221,7 @@ extension ClientExtension$Fragment$EntryDelete on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
-    final result = this.readFragment(
+    final result = readFragment(
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
@@ -240,8 +244,8 @@ class Fragment$EntryDelete$mediaListEntry {
   }
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    return _resultData;
+    final resultData = <String, dynamic>{};
+    return resultData;
   }
 
   @override
@@ -254,7 +258,7 @@ class Fragment$EntryDelete$mediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$EntryDelete$mediaListEntry) ||
+    if (other is! Fragment$EntryDelete$mediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -297,6 +301,7 @@ class _CopyWithImpl$Fragment$EntryDelete$mediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call() => _then(Fragment$EntryDelete$mediaListEntry());
 }
 
@@ -304,8 +309,9 @@ class _CopyWithStubImpl$Fragment$EntryDelete$mediaListEntry<TRes>
     implements CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> {
   _CopyWithStubImpl$Fragment$EntryDelete$mediaListEntry(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call() => _res;
 }
 
@@ -352,7 +358,7 @@ class Variables$Mutation$DeleteMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$DeleteMediaListEntry) ||
+    if (other is! Variables$Mutation$DeleteMediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -399,6 +405,7 @@ class _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Mutation$DeleteMediaListEntry._({
         ..._instance._$data,
@@ -410,8 +417,9 @@ class _CopyWithStubImpl$Variables$Mutation$DeleteMediaListEntry<TRes>
     implements CopyWith$Variables$Mutation$DeleteMediaListEntry<TRes> {
   _CopyWithStubImpl$Variables$Mutation$DeleteMediaListEntry(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({int? id}) => _res;
 }
 
@@ -439,12 +447,12 @@ class Mutation$DeleteMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$DeleteMediaListEntry = DeleteMediaListEntry;
-    _resultData['DeleteMediaListEntry'] = l$DeleteMediaListEntry?.toJson();
+    resultData['DeleteMediaListEntry'] = l$DeleteMediaListEntry?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -462,7 +470,7 @@ class Mutation$DeleteMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteMediaListEntry) ||
+    if (other is! Mutation$DeleteMediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -519,6 +527,7 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? DeleteMediaListEntry = _undefined,
     Object? $__typename = _undefined,
@@ -533,6 +542,7 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
       get DeleteMediaListEntry {
     final local$DeleteMediaListEntry = _instance.DeleteMediaListEntry;
@@ -548,14 +558,16 @@ class _CopyWithStubImpl$Mutation$DeleteMediaListEntry<TRes>
     implements CopyWith$Mutation$DeleteMediaListEntry<TRes> {
   _CopyWithStubImpl$Mutation$DeleteMediaListEntry(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$DeleteMediaListEntry$DeleteMediaListEntry? DeleteMediaListEntry,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
       get DeleteMediaListEntry =>
           CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(
@@ -711,11 +723,11 @@ extension ClientExtension$Mutation$DeleteMediaListEntry
   Future<graphql.QueryResult<Mutation$DeleteMediaListEntry>>
       mutate$DeleteMediaListEntry(
               [Options$Mutation$DeleteMediaListEntry? options]) async =>
-          await this.mutate(options ?? Options$Mutation$DeleteMediaListEntry());
+          await mutate(options ?? Options$Mutation$DeleteMediaListEntry());
   graphql.ObservableQuery<Mutation$DeleteMediaListEntry>
       watchMutation$DeleteMediaListEntry(
               [WatchOptions$Mutation$DeleteMediaListEntry? options]) =>
-          this.watchMutation(
+          watchMutation(
               options ?? WatchOptions$Mutation$DeleteMediaListEntry());
 }
 
@@ -858,12 +870,12 @@ class Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$deleted = deleted;
-    _resultData['deleted'] = l$deleted;
+    resultData['deleted'] = l$deleted;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -881,7 +893,7 @@ class Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteMediaListEntry$DeleteMediaListEntry) ||
+    if (other is! Mutation$DeleteMediaListEntry$DeleteMediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -941,6 +953,7 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? deleted = _undefined,
     Object? $__typename = _undefined,
@@ -959,8 +972,9 @@ class _CopyWithStubImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
   _CopyWithStubImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     bool? deleted,
     String? $__typename,

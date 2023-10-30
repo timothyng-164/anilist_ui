@@ -77,6 +77,7 @@ class SearchPage extends HookWidget {
 
     useEffect(() {
       fetchFirstPage();
+      return null;
     }, [searchText.value, mediaType.value]);
 
     void fetchPage() {

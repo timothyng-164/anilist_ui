@@ -21,7 +21,7 @@ class ProfilePage extends StatelessWidget {
                 authState.clearToken();
                 const BrowseRoute().go(context);
               },
-              child: Text('Logout'),
+              child: const Text('Logout'),
             ),
           ],
         ),

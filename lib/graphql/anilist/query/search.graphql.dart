@@ -98,7 +98,7 @@ class Variables$Query$Search {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Search) ||
+    if (other is! Variables$Query$Search ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -193,6 +193,7 @@ class _CopyWithImpl$Variables$Query$Search<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? page = _undefined,
     Object? perPage = _undefined,
@@ -214,8 +215,9 @@ class _CopyWithStubImpl$Variables$Query$Search<TRes>
     implements CopyWith$Variables$Query$Search<TRes> {
   _CopyWithStubImpl$Variables$Query$Search(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? page,
     int? perPage,
@@ -248,12 +250,12 @@ class Query$Search {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$Page = Page;
-    _resultData['Page'] = l$Page?.toJson();
+    resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -271,7 +273,7 @@ class Query$Search {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search) || runtimeType != other.runtimeType) {
+    if (other is! Query$Search || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -322,6 +324,7 @@ class _CopyWithImpl$Query$Search<TRes> implements CopyWith$Query$Search<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -334,6 +337,7 @@ class _CopyWithImpl$Query$Search<TRes> implements CopyWith$Query$Search<TRes> {
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Search$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -346,14 +350,16 @@ class _CopyWithStubImpl$Query$Search<TRes>
     implements CopyWith$Query$Search<TRes> {
   _CopyWithStubImpl$Query$Search(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Search$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Search$Page<TRes> get Page =>
       CopyWith$Query$Search$Page.stub(_res);
 }
@@ -757,18 +763,18 @@ class FetchMoreOptions$Query$Search extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Search on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Search>> query$Search(
           [Options$Query$Search? options]) async =>
-      await this.query(options ?? Options$Query$Search());
+      await query(options ?? Options$Query$Search());
   graphql.ObservableQuery<Query$Search> watchQuery$Search(
           [WatchOptions$Query$Search? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$Search());
+      watchQuery(options ?? WatchOptions$Query$Search());
   void writeQuery$Search({
     required Query$Search data,
     Variables$Query$Search? variables,
     bool broadcast = true,
   }) =>
-      this.writeQuery(
+      writeQuery(
         graphql.Request(
-          operation: graphql.Operation(document: documentNodeQuerySearch),
+          operation: const graphql.Operation(document: documentNodeQuerySearch),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
@@ -778,9 +784,9 @@ extension ClientExtension$Query$Search on graphql.GraphQLClient {
     Variables$Query$Search? variables,
     bool optimistic = true,
   }) {
-    final result = this.readQuery(
+    final result = readQuery(
       graphql.Request(
-        operation: graphql.Operation(document: documentNodeQuerySearch),
+        operation: const graphql.Operation(document: documentNodeQuerySearch),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
@@ -840,14 +846,14 @@ class Query$Search$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -867,7 +873,7 @@ class Query$Search$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search$Page) || runtimeType != other.runtimeType) {
+    if (other is! Query$Search$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -927,7 +933,7 @@ abstract class CopyWith$Query$Search$Page<TRes> {
       Iterable<Query$Search$Page$media?>? Function(
               Iterable<
                   CopyWith$Query$Search$Page$media<Query$Search$Page$media>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Search$Page<TRes>
@@ -943,6 +949,7 @@ class _CopyWithImpl$Query$Search$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? media = _undefined,
@@ -960,6 +967,7 @@ class _CopyWithImpl$Query$Search$Page<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Search$Page$pageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -968,14 +976,15 @@ class _CopyWithImpl$Query$Search$Page<TRes>
             local$pageInfo, (e) => call(pageInfo: e));
   }
 
+  @override
   TRes media(
           Iterable<Query$Search$Page$media?>? Function(
                   Iterable<
                       CopyWith$Query$Search$Page$media<
                           Query$Search$Page$media>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Query$Search$Page$media(
                   e,
@@ -987,8 +996,9 @@ class _CopyWithStubImpl$Query$Search$Page<TRes>
     implements CopyWith$Query$Search$Page<TRes> {
   _CopyWithStubImpl$Query$Search$Page(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Search$Page$pageInfo? pageInfo,
     List<Query$Search$Page$media?>? media,
@@ -996,10 +1006,12 @@ class _CopyWithStubImpl$Query$Search$Page<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Search$Page$pageInfo<TRes> get pageInfo =>
       CopyWith$Query$Search$Page$pageInfo.stub(_res);
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }
 
 class Query$Search$Page$pageInfo {
@@ -1042,20 +1054,20 @@ class Query$Search$Page$pageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$total = total;
-    _resultData['total'] = l$total;
+    resultData['total'] = l$total;
     final l$currentPage = currentPage;
-    _resultData['currentPage'] = l$currentPage;
+    resultData['currentPage'] = l$currentPage;
     final l$lastPage = lastPage;
-    _resultData['lastPage'] = l$lastPage;
+    resultData['lastPage'] = l$lastPage;
     final l$hasNextPage = hasNextPage;
-    _resultData['hasNextPage'] = l$hasNextPage;
+    resultData['hasNextPage'] = l$hasNextPage;
     final l$perPage = perPage;
-    _resultData['perPage'] = l$perPage;
+    resultData['perPage'] = l$perPage;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1081,7 +1093,7 @@ class Query$Search$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search$Page$pageInfo) ||
+    if (other is! Query$Search$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1160,6 +1172,7 @@ class _CopyWithImpl$Query$Search$Page$pageInfo<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? total = _undefined,
     Object? currentPage = _undefined,
@@ -1189,8 +1202,9 @@ class _CopyWithStubImpl$Query$Search$Page$pageInfo<TRes>
     implements CopyWith$Query$Search$Page$pageInfo<TRes> {
   _CopyWithStubImpl$Query$Search$Page$pageInfo(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? total,
     int? currentPage,
@@ -1295,38 +1309,38 @@ class Query$Search$Page$media {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$title = title;
-    _resultData['title'] = l$title?.toJson();
+    resultData['title'] = l$title?.toJson();
     final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$startDate = startDate;
-    _resultData['startDate'] = l$startDate?.toJson();
+    resultData['startDate'] = l$startDate?.toJson();
     final l$seasonYear = seasonYear;
-    _resultData['seasonYear'] = l$seasonYear;
+    resultData['seasonYear'] = l$seasonYear;
     final l$status = status;
-    _resultData['status'] =
+    resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaStatus(l$status);
     final l$format = format;
-    _resultData['format'] =
+    resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$meanScore = meanScore;
-    _resultData['meanScore'] = l$meanScore;
+    resultData['meanScore'] = l$meanScore;
     final l$popularity = popularity;
-    _resultData['popularity'] = l$popularity;
+    resultData['popularity'] = l$popularity;
     final l$coverImage = coverImage;
-    _resultData['coverImage'] = l$coverImage?.toJson();
+    resultData['coverImage'] = l$coverImage?.toJson();
     final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
+    resultData['episodes'] = l$episodes;
     final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
+    resultData['chapters'] = l$chapters;
     final l$volumes = volumes;
-    _resultData['volumes'] = l$volumes;
+    resultData['volumes'] = l$volumes;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1368,7 +1382,7 @@ class Query$Search$Page$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search$Page$media) ||
+    if (other is! Query$Search$Page$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1497,6 +1511,7 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -1549,6 +1564,7 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Search$Page$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -1557,6 +1573,7 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
             local$title, (e) => call(title: e));
   }
 
+  @override
   CopyWith$Query$Search$Page$media$startDate<TRes> get startDate {
     final local$startDate = _instance.startDate;
     return local$startDate == null
@@ -1565,6 +1582,7 @@ class _CopyWithImpl$Query$Search$Page$media<TRes>
             local$startDate, (e) => call(startDate: e));
   }
 
+  @override
   CopyWith$Query$Search$Page$media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
@@ -1578,8 +1596,9 @@ class _CopyWithStubImpl$Query$Search$Page$media<TRes>
     implements CopyWith$Query$Search$Page$media<TRes> {
   _CopyWithStubImpl$Query$Search$Page$media(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Query$Search$Page$media$title? title,
@@ -1598,12 +1617,15 @@ class _CopyWithStubImpl$Query$Search$Page$media<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Search$Page$media$title<TRes> get title =>
       CopyWith$Query$Search$Page$media$title.stub(_res);
 
+  @override
   CopyWith$Query$Search$Page$media$startDate<TRes> get startDate =>
       CopyWith$Query$Search$Page$media$startDate.stub(_res);
 
+  @override
   CopyWith$Query$Search$Page$media$coverImage<TRes> get coverImage =>
       CopyWith$Query$Search$Page$media$coverImage.stub(_res);
 }
@@ -1628,12 +1650,12 @@ class Query$Search$Page$media$title {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
+    resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1651,7 +1673,7 @@ class Query$Search$Page$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search$Page$media$title) ||
+    if (other is! Query$Search$Page$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1706,6 +1728,7 @@ class _CopyWithImpl$Query$Search$Page$media$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -1724,8 +1747,9 @@ class _CopyWithStubImpl$Query$Search$Page$media$title<TRes>
     implements CopyWith$Query$Search$Page$media$title<TRes> {
   _CopyWithStubImpl$Query$Search$Page$media$title(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -1754,12 +1778,12 @@ class Query$Search$Page$media$startDate {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$year = year;
-    _resultData['year'] = l$year;
+    resultData['year'] = l$year;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1777,7 +1801,7 @@ class Query$Search$Page$media$startDate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search$Page$media$startDate) ||
+    if (other is! Query$Search$Page$media$startDate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1832,6 +1856,7 @@ class _CopyWithImpl$Query$Search$Page$media$startDate<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? year = _undefined,
     Object? $__typename = _undefined,
@@ -1848,8 +1873,9 @@ class _CopyWithStubImpl$Query$Search$Page$media$startDate<TRes>
     implements CopyWith$Query$Search$Page$media$startDate<TRes> {
   _CopyWithStubImpl$Query$Search$Page$media$startDate(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? year,
     String? $__typename,
@@ -1878,12 +1904,12 @@ class Query$Search$Page$media$coverImage {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$medium = medium;
-    _resultData['medium'] = l$medium;
+    resultData['medium'] = l$medium;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1901,7 +1927,7 @@ class Query$Search$Page$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Search$Page$media$coverImage) ||
+    if (other is! Query$Search$Page$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1957,6 +1983,7 @@ class _CopyWithImpl$Query$Search$Page$media$coverImage<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? medium = _undefined,
     Object? $__typename = _undefined,
@@ -1973,8 +2000,9 @@ class _CopyWithStubImpl$Query$Search$Page$media$coverImage<TRes>
     implements CopyWith$Query$Search$Page$media$coverImage<TRes> {
   _CopyWithStubImpl$Query$Search$Page$media$coverImage(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? medium,
     String? $__typename,

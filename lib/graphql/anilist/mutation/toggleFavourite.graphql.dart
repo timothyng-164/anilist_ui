@@ -97,7 +97,7 @@ class Variables$Mutation$ToggleFavourite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$ToggleFavourite) ||
+    if (other is! Variables$Mutation$ToggleFavourite ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -194,6 +194,7 @@ class _CopyWithImpl$Variables$Mutation$ToggleFavourite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? animeId = _undefined,
     Object? mangaId = _undefined,
@@ -215,8 +216,9 @@ class _CopyWithStubImpl$Variables$Mutation$ToggleFavourite<TRes>
     implements CopyWith$Variables$Mutation$ToggleFavourite<TRes> {
   _CopyWithStubImpl$Variables$Mutation$ToggleFavourite(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? animeId,
     int? mangaId,
@@ -250,12 +252,12 @@ class Mutation$ToggleFavourite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$ToggleFavourite = ToggleFavourite;
-    _resultData['ToggleFavourite'] = l$ToggleFavourite?.toJson();
+    resultData['ToggleFavourite'] = l$ToggleFavourite?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -273,7 +275,7 @@ class Mutation$ToggleFavourite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite) ||
+    if (other is! Mutation$ToggleFavourite ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -329,6 +331,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? ToggleFavourite = _undefined,
     Object? $__typename = _undefined,
@@ -342,6 +345,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite<TRes> get ToggleFavourite {
     final local$ToggleFavourite = _instance.ToggleFavourite;
     return local$ToggleFavourite == null
@@ -356,14 +360,16 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite<TRes>
     implements CopyWith$Mutation$ToggleFavourite<TRes> {
   _CopyWithStubImpl$Mutation$ToggleFavourite(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite? ToggleFavourite,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite<TRes> get ToggleFavourite =>
       CopyWith$Mutation$ToggleFavourite$ToggleFavourite.stub(_res);
 }
@@ -743,11 +749,11 @@ class WatchOptions$Mutation$ToggleFavourite
 extension ClientExtension$Mutation$ToggleFavourite on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$ToggleFavourite>> mutate$ToggleFavourite(
           [Options$Mutation$ToggleFavourite? options]) async =>
-      await this.mutate(options ?? Options$Mutation$ToggleFavourite());
+      await mutate(options ?? Options$Mutation$ToggleFavourite());
   graphql.ObservableQuery<Mutation$ToggleFavourite>
       watchMutation$ToggleFavourite(
               [WatchOptions$Mutation$ToggleFavourite? options]) =>
-          this.watchMutation(
+          watchMutation(
               options ?? WatchOptions$Mutation$ToggleFavourite());
 }
 
@@ -924,20 +930,20 @@ class Mutation$ToggleFavourite$ToggleFavourite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$anime = anime;
-    _resultData['anime'] = l$anime?.toJson();
+    resultData['anime'] = l$anime?.toJson();
     final l$manga = manga;
-    _resultData['manga'] = l$manga?.toJson();
+    resultData['manga'] = l$manga?.toJson();
     final l$characters = characters;
-    _resultData['characters'] = l$characters?.toJson();
+    resultData['characters'] = l$characters?.toJson();
     final l$staff = staff;
-    _resultData['staff'] = l$staff?.toJson();
+    resultData['staff'] = l$staff?.toJson();
     final l$studios = studios;
-    _resultData['studios'] = l$studios?.toJson();
+    resultData['studios'] = l$studios?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -963,7 +969,7 @@ class Mutation$ToggleFavourite$ToggleFavourite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1049,6 +1055,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? anime = _undefined,
     Object? manga = _undefined,
@@ -1079,6 +1086,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime<TRes> get anime {
     final local$anime = _instance.anime;
     return local$anime == null
@@ -1088,6 +1096,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
             local$anime, (e) => call(anime: e));
   }
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga<TRes> get manga {
     final local$manga = _instance.manga;
     return local$manga == null
@@ -1097,6 +1106,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
             local$manga, (e) => call(manga: e));
   }
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$characters<TRes>
       get characters {
     final local$characters = _instance.characters;
@@ -1107,6 +1117,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
             local$characters, (e) => call(characters: e));
   }
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff<TRes> get staff {
     final local$staff = _instance.staff;
     return local$staff == null
@@ -1116,6 +1127,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
             local$staff, (e) => call(staff: e));
   }
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios<TRes> get studios {
     final local$studios = _instance.studios;
     return local$studios == null
@@ -1130,8 +1142,9 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
     implements CopyWith$Mutation$ToggleFavourite$ToggleFavourite<TRes> {
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite$anime? anime,
     Mutation$ToggleFavourite$ToggleFavourite$manga? manga,
@@ -1142,20 +1155,25 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime<TRes> get anime =>
       CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime.stub(_res);
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga<TRes> get manga =>
       CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga.stub(_res);
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$characters<TRes>
       get characters =>
           CopyWith$Mutation$ToggleFavourite$ToggleFavourite$characters.stub(
               _res);
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff<TRes> get staff =>
       CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff.stub(_res);
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios<TRes> get studios =>
       CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios.stub(_res);
 }
@@ -1184,12 +1202,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$anime {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1207,7 +1225,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$anime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$anime) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$anime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1266,6 +1284,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$anime<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? $__typename = _undefined,
@@ -1280,6 +1299,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$anime<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -1295,14 +1315,16 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$anime<TRes>
     implements CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime<TRes> {
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$anime(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo? pageInfo,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo.stub(
@@ -1330,12 +1352,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$total = total;
-    _resultData['total'] = l$total;
+    resultData['total'] = l$total;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1353,7 +1375,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1415,6 +1437,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo<
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? total = _undefined,
     Object? $__typename = _undefined,
@@ -1434,8 +1457,9 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo<
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$anime$pageInfo(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? total,
     String? $__typename,
@@ -1467,12 +1491,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$manga {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1490,7 +1514,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$manga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$manga) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$manga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1549,6 +1573,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$manga<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? $__typename = _undefined,
@@ -1563,6 +1588,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$manga<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -1578,14 +1604,16 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$manga<TRes>
     implements CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga<TRes> {
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$manga(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo? pageInfo,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo.stub(
@@ -1613,12 +1641,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$total = total;
-    _resultData['total'] = l$total;
+    resultData['total'] = l$total;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1636,7 +1664,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1698,6 +1726,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo<
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? total = _undefined,
     Object? $__typename = _undefined,
@@ -1717,8 +1746,9 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo<
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$manga$pageInfo(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? total,
     String? $__typename,
@@ -1750,12 +1780,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$characters {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1773,7 +1803,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$characters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$characters) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$characters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1836,6 +1866,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$characters<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? $__typename = _undefined,
@@ -1850,6 +1881,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$characters<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -1868,14 +1900,16 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$characters<
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$characters(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo? pageInfo,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo
@@ -1903,12 +1937,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$total = total;
-    _resultData['total'] = l$total;
+    resultData['total'] = l$total;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1926,8 +1960,8 @@ class Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo) ||
+    if (other
+            is! Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1991,6 +2025,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? total = _undefined,
     Object? $__typename = _undefined,
@@ -2011,8 +2046,9 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$characters$page
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$characters$pageInfo(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? total,
     String? $__typename,
@@ -2044,12 +2080,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$staff {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2067,7 +2103,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$staff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$staff) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$staff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2126,6 +2162,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$staff<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? $__typename = _undefined,
@@ -2140,6 +2177,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$staff<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -2155,14 +2193,16 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$staff<TRes>
     implements CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff<TRes> {
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$staff(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo? pageInfo,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo.stub(
@@ -2190,12 +2230,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$total = total;
-    _resultData['total'] = l$total;
+    resultData['total'] = l$total;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2213,7 +2253,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2275,6 +2315,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo<
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? total = _undefined,
     Object? $__typename = _undefined,
@@ -2294,8 +2335,9 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo<
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$staff$pageInfo(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? total,
     String? $__typename,
@@ -2327,12 +2369,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$studios {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2350,7 +2392,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$studios {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$studios) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$studios ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2409,6 +2451,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$studios<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? $__typename = _undefined,
@@ -2423,6 +2466,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$studios<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -2438,14 +2482,16 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$studios<TRes>
     implements CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios<TRes> {
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$studios(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo? pageInfo,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo
@@ -2473,12 +2519,12 @@ class Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$total = total;
-    _resultData['total'] = l$total;
+    resultData['total'] = l$total;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2496,7 +2542,7 @@ class Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo) ||
+    if (other is! Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2560,6 +2606,7 @@ class _CopyWithImpl$Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo<
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? total = _undefined,
     Object? $__typename = _undefined,
@@ -2580,8 +2627,9 @@ class _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$studios$pageInf
   _CopyWithStubImpl$Mutation$ToggleFavourite$ToggleFavourite$studios$pageInfo(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? total,
     String? $__typename,

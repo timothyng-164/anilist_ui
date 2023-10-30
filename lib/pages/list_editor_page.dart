@@ -127,6 +127,7 @@ class PageContent extends HookWidget {
             month: currentDate.month,
             day: currentDate.day);
       }
+      return null;
     }, [status.value]);
 
     var rows = [
@@ -533,6 +534,7 @@ class ProgressSelector extends HookWidget {
           controller.text = maxValue.toString();
         }
       });
+      return null;
     }, [controller]);
 
     return Row(

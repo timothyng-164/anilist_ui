@@ -1,4 +1,3 @@
-import 'package:anilist_ui/routing/routes.dart';
 import 'package:flutter/material.dart';
 
 class MyListPage extends StatelessWidget {
