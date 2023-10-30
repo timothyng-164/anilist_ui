@@ -45,6 +45,7 @@ class SearchPage extends HookWidget {
 
       return Options$Query$Search(
         variables: variables,
+        fetchPolicy: FetchPolicy.networkOnly,
       );
     }
 
@@ -53,7 +54,9 @@ class SearchPage extends HookWidget {
       print('Unknown exception occurred: $error');
     }
 
-    useEffect(() {
+    void fetchFirstPage() {
+      print('calling fetch first page. ${searchEnabled.value}');
+
       if (!searchEnabled.value) return;
 
       isLoading.value = true;
@@ -70,7 +73,10 @@ class SearchPage extends HookWidget {
         hasError.value = false;
         isLoading.value = false;
       }).catchError(handleError);
-      return null;
+    }
+
+    useEffect(() {
+      fetchFirstPage();
     }, [searchText.value, mediaType.value]);
 
     void fetchPage() {
@@ -139,6 +145,7 @@ class SearchPage extends HookWidget {
               searchText: searchText,
               mediaType: mediaType,
               searchEnabled: searchEnabled,
+              refetch: fetchFirstPage,
             ),
             displayContent(),
           ],
@@ -148,31 +155,24 @@ class SearchPage extends HookWidget {
   }
 }
 
-class SearchFilters extends StatelessWidget {
+class SearchFilters extends HookWidget {
   const SearchFilters({
     super.key,
     required this.searchText,
     required this.mediaType,
     required this.searchEnabled,
+    required this.refetch,
   });
 
   final ValueNotifier<Enum$MediaType?> mediaType;
   final ValueNotifier<String?> searchText;
   final ValueNotifier<bool> searchEnabled;
-
-  String placeholderText() {
-    switch (mediaType.value) {
-      case (Enum$MediaType.ANIME):
-        return 'Search Anime';
-      case (Enum$MediaType.MANGA):
-        return 'Search Manga';
-      default:
-        return 'Search Anime and Manga';
-    }
-  }
+  final VoidCallback refetch;
 
   @override
   Widget build(BuildContext context) {
+    var currentText = useState<String>('');
+
     PopupMenuItem<Enum$MediaType?> menuItem(
         Enum$MediaType option, String text) {
       bool isSelected = mediaType.value == option ||
@@ -193,18 +193,28 @@ class SearchFilters extends StatelessWidget {
       );
     }
 
+    void triggerSearch() {
+      searchEnabled.value = true;
+      if (searchText.value == currentText.value) {
+        refetch();
+      } else {
+        searchText.value = currentText.value;
+      }
+    }
+
     return Container(
         padding: const EdgeInsets.all(16.0),
         child: SearchBar(
           shape: const MaterialStatePropertyAll(RoundedRectangleBorder()),
           padding: const MaterialStatePropertyAll(
               EdgeInsets.symmetric(horizontal: 16.0)),
-          onSubmitted: (value) {
-            searchEnabled.value = true;
-            searchText.value = value;
-          },
-          leading: const Icon(Icons.search),
-          hintText: placeholderText(),
+          onChanged: (value) => currentText.value = value,
+          onSubmitted: (value) => triggerSearch(),
+          leading: IconButton(
+            onPressed: triggerSearch,
+            icon: const Icon(Icons.search),
+          ),
+          hintText: _searchPlaceholderText(),
           trailing: [
             Tooltip(
               message: 'Filter Search',
@@ -224,6 +234,17 @@ class SearchFilters extends StatelessWidget {
             )
           ],
         ));
+  }
+
+  String _searchPlaceholderText() {
+    switch (mediaType.value) {
+      case (Enum$MediaType.ANIME):
+        return 'Search Anime';
+      case (Enum$MediaType.MANGA):
+        return 'Search Manga';
+      default:
+        return 'Search Anime and Manga';
+    }
   }
 }
 

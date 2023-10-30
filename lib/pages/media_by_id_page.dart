@@ -11,6 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../common/widgets/list_entry_button.dart';
 import '../common/widgets/media_card.dart';
 import '../common/widgets/query_result_handler.dart';
 import '../graphql/anilist/query/mediaById.graphql.dart';
@@ -74,32 +75,15 @@ class UserUpdateButtons extends HookWidget {
     return Row(
       children: [
         MediaFavouriteButton(
-          isFavourite: media?.isFavourite ?? false,
-          isFavouriteBlocked: media?.isFavouriteBlocked ?? false,
-          isLocked: media?.isLocked ?? false,
-          mediaType: media!.type!,
-          mediaId: media!.id,
-        ),
-        IconButton(
-          // TODO: refactor button to separate file
-          // TODO: route to UpdateMediaList page
-          onPressed: () {
-            switch (media?.type) {
-              case Enum$MediaType.ANIME:
-                AnimeListEditorRoute(media!.id).push(context);
-                break;
-              case Enum$MediaType.MANGA:
-                MangaListEditorRoute(media!.id).push(context);
-                break;
-              default:
-                print(
-                    'Unable to route list editor for ${media?.type} ${media?.id}');
-            }
-          },
-          icon: Icon(listEntry?.id == null
-              ? Icons.playlist_add
-              : Icons.playlist_add_check),
-        ),
+            isFavourite: media?.isFavourite ?? false,
+            isFavouriteBlocked: media?.isFavouriteBlocked ?? false,
+            isLocked: media?.isLocked ?? false,
+            mediaType: media!.type!,
+            mediaId: media!.id),
+        ListEntryButton(
+            mediaId: media!.id,
+            mediaType: media!.type,
+            entryExists: listEntry?.id != null),
       ],
     );
   }

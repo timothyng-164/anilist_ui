@@ -11,6 +11,9 @@ query GetMediaListEntry($id: Int, $type: MediaType) {
     mediaListEntry {
       ...MediaListEntry
     }
+    isFavourite
+    isLocked
+    isFavouriteBlocked
   }
 }
 

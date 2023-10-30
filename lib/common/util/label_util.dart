@@ -63,7 +63,7 @@ class LabelUtil {
         case Enum$MediaListStatus.PLANNING:
           return 'Planning';
         case Enum$MediaListStatus.COMPLETED:
-          return 'Finished';
+          return 'Completed';
         case Enum$MediaListStatus.DROPPED:
           return 'Dropped';
         case Enum$MediaListStatus.PAUSED:
@@ -81,7 +81,7 @@ class LabelUtil {
         case Enum$MediaListStatus.PLANNING:
           return 'Planning';
         case Enum$MediaListStatus.COMPLETED:
-          return 'Finished';
+          return 'Completed';
         case Enum$MediaListStatus.DROPPED:
           return 'Dropped';
         case Enum$MediaListStatus.PAUSED:

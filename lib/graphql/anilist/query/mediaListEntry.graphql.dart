@@ -1066,6 +1066,27 @@ const documentNodeQueryGetMediaListEntry = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'isFavourite'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'isLocked'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'isFavouriteBlocked'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -1254,6 +1275,9 @@ class Query$GetMediaListEntry$Media {
     this.chapters,
     this.volumes,
     this.mediaListEntry,
+    required this.isFavourite,
+    this.isLocked,
+    required this.isFavouriteBlocked,
     this.$__typename = 'Media',
   });
 
@@ -1265,6 +1289,9 @@ class Query$GetMediaListEntry$Media {
     final l$chapters = json['chapters'];
     final l$volumes = json['volumes'];
     final l$mediaListEntry = json['mediaListEntry'];
+    final l$isFavourite = json['isFavourite'];
+    final l$isLocked = json['isLocked'];
+    final l$isFavouriteBlocked = json['isFavouriteBlocked'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaListEntry$Media(
       id: (l$id as int),
@@ -1280,6 +1307,9 @@ class Query$GetMediaListEntry$Media {
           ? null
           : Fragment$MediaListEntry.fromJson(
               (l$mediaListEntry as Map<String, dynamic>)),
+      isFavourite: (l$isFavourite as bool),
+      isLocked: (l$isLocked as bool?),
+      isFavouriteBlocked: (l$isFavouriteBlocked as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1297,6 +1327,12 @@ class Query$GetMediaListEntry$Media {
   final int? volumes;
 
   final Fragment$MediaListEntry? mediaListEntry;
+
+  final bool isFavourite;
+
+  final bool? isLocked;
+
+  final bool isFavouriteBlocked;
 
   final String $__typename;
 
@@ -1316,6 +1352,12 @@ class Query$GetMediaListEntry$Media {
     _resultData['volumes'] = l$volumes;
     final l$mediaListEntry = mediaListEntry;
     _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$isFavourite = isFavourite;
+    _resultData['isFavourite'] = l$isFavourite;
+    final l$isLocked = isLocked;
+    _resultData['isLocked'] = l$isLocked;
+    final l$isFavouriteBlocked = isFavouriteBlocked;
+    _resultData['isFavouriteBlocked'] = l$isFavouriteBlocked;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1330,6 +1372,9 @@ class Query$GetMediaListEntry$Media {
     final l$chapters = chapters;
     final l$volumes = volumes;
     final l$mediaListEntry = mediaListEntry;
+    final l$isFavourite = isFavourite;
+    final l$isLocked = isLocked;
+    final l$isFavouriteBlocked = isFavouriteBlocked;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -1339,6 +1384,9 @@ class Query$GetMediaListEntry$Media {
       l$chapters,
       l$volumes,
       l$mediaListEntry,
+      l$isFavourite,
+      l$isLocked,
+      l$isFavouriteBlocked,
       l$$__typename,
     ]);
   }
@@ -1387,6 +1435,21 @@ class Query$GetMediaListEntry$Media {
     if (l$mediaListEntry != lOther$mediaListEntry) {
       return false;
     }
+    final l$isFavourite = isFavourite;
+    final lOther$isFavourite = other.isFavourite;
+    if (l$isFavourite != lOther$isFavourite) {
+      return false;
+    }
+    final l$isLocked = isLocked;
+    final lOther$isLocked = other.isLocked;
+    if (l$isLocked != lOther$isLocked) {
+      return false;
+    }
+    final l$isFavouriteBlocked = isFavouriteBlocked;
+    final lOther$isFavouriteBlocked = other.isFavouriteBlocked;
+    if (l$isFavouriteBlocked != lOther$isFavouriteBlocked) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1422,6 +1485,9 @@ abstract class CopyWith$Query$GetMediaListEntry$Media<TRes> {
     int? chapters,
     int? volumes,
     Fragment$MediaListEntry? mediaListEntry,
+    bool? isFavourite,
+    bool? isLocked,
+    bool? isFavouriteBlocked,
     String? $__typename,
   });
   CopyWith$Query$GetMediaListEntry$Media$title<TRes> get title;
@@ -1449,6 +1515,9 @@ class _CopyWithImpl$Query$GetMediaListEntry$Media<TRes>
     Object? chapters = _undefined,
     Object? volumes = _undefined,
     Object? mediaListEntry = _undefined,
+    Object? isFavourite = _undefined,
+    Object? isLocked = _undefined,
+    Object? isFavouriteBlocked = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaListEntry$Media(
@@ -1465,6 +1534,15 @@ class _CopyWithImpl$Query$GetMediaListEntry$Media<TRes>
         mediaListEntry: mediaListEntry == _undefined
             ? _instance.mediaListEntry
             : (mediaListEntry as Fragment$MediaListEntry?),
+        isFavourite: isFavourite == _undefined || isFavourite == null
+            ? _instance.isFavourite
+            : (isFavourite as bool),
+        isLocked:
+            isLocked == _undefined ? _instance.isLocked : (isLocked as bool?),
+        isFavouriteBlocked:
+            isFavouriteBlocked == _undefined || isFavouriteBlocked == null
+                ? _instance.isFavouriteBlocked
+                : (isFavouriteBlocked as bool),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1501,6 +1579,9 @@ class _CopyWithStubImpl$Query$GetMediaListEntry$Media<TRes>
     int? chapters,
     int? volumes,
     Fragment$MediaListEntry? mediaListEntry,
+    bool? isFavourite,
+    bool? isLocked,
+    bool? isFavouriteBlocked,
     String? $__typename,
   }) =>
       _res;

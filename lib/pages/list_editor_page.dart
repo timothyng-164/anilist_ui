@@ -1,3 +1,4 @@
+import 'package:anilist_ui/common/widgets/media_favourite_button.dart';
 import 'package:anilist_ui/graphql/anilist/mutation/deleteMediaListEntry.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/mutation/saveMediaListEntry.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/query/mediaListEntry.graphql.dart';
@@ -34,17 +35,29 @@ class ListEditorPage extends HookWidget {
     ));
 
     var result = query.result;
+    var media = result.parsedData?.Media;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit ${LabelUtil.mediaTypeLabel(mediaType)} List'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Edit ${LabelUtil.mediaTypeLabel(mediaType)} List'),
+            MediaFavouriteButton(
+                isFavourite: media?.isFavourite ?? false,
+                isFavouriteBlocked: media?.isFavouriteBlocked ?? false,
+                isLocked: media?.isLocked ?? false,
+                mediaType: mediaType,
+                mediaId: mediaId),
+          ],
+        ),
       ),
       body: SafeArea(
         child: QueryResultHandler(
           result: result,
           refetch: query.refetch,
           child: PageContent(
-            queryResult: result.parsedData?.Media,
+            queryResult: media,
             mediaId: mediaId,
             mediaType: mediaType,
           ),
@@ -90,6 +103,32 @@ class PageContent extends HookWidget {
       text: listEntry?.notes == null ? null : listEntry!.notes.toString(),
     );
 
+    int? maxProgress = mediaType == Enum$MediaType.ANIME
+        ? queryResult?.episodes
+        : queryResult?.chapters;
+    int? maxProgressVolumes = queryResult?.volumes;
+
+    useEffect(() {
+      if (status.value == Enum$MediaListStatus.COMPLETED) {
+        DateTime currentDate = DateTime.now();
+        completeDate.value = Fragment$Date(
+            year: currentDate.year,
+            month: currentDate.month,
+            day: currentDate.day);
+        if (maxProgress != null) progressController.text = '$maxProgress';
+        if (maxProgressVolumes != null) {
+          progressVolumesController.text = '$maxProgressVolumes';
+        }
+      }
+      if (status.value == Enum$MediaListStatus.CURRENT) {
+        DateTime currentDate = DateTime.now();
+        startDate.value = Fragment$Date(
+            year: currentDate.year,
+            month: currentDate.month,
+            day: currentDate.day);
+      }
+    }, [status.value]);
+
     var rows = [
       if (title != null)
         Text(
@@ -105,9 +144,7 @@ class PageContent extends HookWidget {
           label: mediaType == Enum$MediaType.ANIME ? 'Episodes:' : 'Chapters:',
           selector: ProgressSelector(
             controller: progressController,
-            maxValue: mediaType == Enum$MediaType.ANIME
-                ? queryResult?.episodes
-                : queryResult?.chapters,
+            maxValue: maxProgress,
           ),
           spaceBetween: 8),
       if (mediaType == Enum$MediaType.MANGA)
@@ -115,7 +152,7 @@ class PageContent extends HookWidget {
             label: 'Volumes:',
             selector: ProgressSelector(
               controller: progressVolumesController,
-              maxValue: queryResult?.volumes,
+              maxValue: maxProgressVolumes,
             ),
             spaceBetween: 8),
       OptionRow(
