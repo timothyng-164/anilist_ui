@@ -42,7 +42,7 @@ class MediaFavouriteButton extends HookWidget {
               Fragment(
                   document: gql(
                 '''
-                fragment fields on Media {
+                fragment media on Media {
                   id
                   isFavourite
                 }

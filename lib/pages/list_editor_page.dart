@@ -1,4 +1,5 @@
 import 'package:anilist_ui/graphql/anilist/mutation/deleteMediaListEntry.graphql.dart';
+import 'package:anilist_ui/graphql/anilist/mutation/saveMediaListEntry.graphql.dart';
 import 'package:anilist_ui/graphql/anilist/query/mediaListEntry.graphql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -134,12 +135,17 @@ class PageContent extends HookWidget {
           if (listEntry != null)
             DeleteEntryButton(
                 entryId: listEntry.id, mediaId: mediaId, mediaType: mediaType),
-          ElevatedButton(
-              onPressed: () {
-                // TODO: run save mutation, then pop with snackbar
-                print(progressController.text);
-              },
-              child: const Text('Save')),
+          SaveEntryButton(
+            mediaId: mediaId,
+            entryId: listEntry?.id,
+            mediaType: mediaType,
+            status: status,
+            progressController: progressController,
+            progressVolumesController: progressVolumesController,
+            startDate: startDate,
+            completeDate: completeDate,
+            notesController: notesController,
+          ),
         ],
       ),
     ];
@@ -168,17 +174,106 @@ class PageContent extends HookWidget {
   }
 }
 
+class SaveEntryButton extends HookWidget {
+  const SaveEntryButton({
+    super.key,
+    this.entryId,
+    this.mediaId,
+    required this.mediaType,
+    required this.status,
+    required this.progressController,
+    required this.progressVolumesController,
+    required this.startDate,
+    required this.completeDate,
+    required this.notesController,
+  });
+
+  final int? entryId;
+  final int? mediaId;
+  final Enum$MediaType mediaType;
+  final ValueNotifier<Enum$MediaListStatus> status;
+  final TextEditingController progressController;
+  final TextEditingController progressVolumesController;
+  final ValueNotifier<Fragment$Date?> startDate;
+  final ValueNotifier<Fragment$Date?> completeDate;
+  final TextEditingController notesController;
+
+  @override
+  Widget build(BuildContext context) {
+    final saveEntry = useMutation$SaveMediaListEntry(
+      WidgetOptions$Mutation$SaveMediaListEntry(
+        update: (cache, result) {
+          if (result?.hasException == true) return;
+          cache.writeFragment(
+              const Fragment(
+                document: documentNodeFragmentEntrySave,
+              ).asRequest(idFields: {
+                'id': mediaId,
+              }),
+              data: {
+                'mediaListEntry': result?.data?['SaveMediaListEntry'],
+              });
+        },
+      ),
+    );
+
+    return ElevatedButton(
+      child: const Text('Save'),
+      onPressed: () async {
+        var mutationVariables = Variables$Mutation$SaveMediaListEntry(
+          id: entryId,
+          mediaId: mediaId,
+          status: status.value,
+          progress: _buildProgressInput(progressController),
+          progressVolumes: _buildProgressInput(progressVolumesController),
+          notes: notesController.text,
+          startedAt: _buildDateInput(startDate.value),
+          completedAt: _buildDateInput(completeDate.value),
+        );
+
+        final mutation = saveEntry.runMutation(variables: mutationVariables);
+        final result = await mutation.networkResult;
+
+        if (result?.hasException == true) {
+          print(
+              'Unknown exception saving media list enty $entryId for media $mediaId: ${result?.exception}');
+        }
+
+        String snackbarText = (result?.hasException == true)
+            ? 'Unable to save ${toJson$Enum$MediaType(mediaType).toLowerCase()}.'
+            : 'Successfully save ${toJson$Enum$MediaType(mediaType).toLowerCase()}.';
+        SnackBar snackbar = SnackbarUtil.commonSnackbar(snackbarText);
+        if (context.mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+        }
+      },
+    );
+  }
+
+  int _buildProgressInput(TextEditingController controller) {
+    if (controller.text.isEmpty) return 0;
+    return int.parse(controller.text);
+  }
+
+  Input$FuzzyDateInput _buildDateInput(Fragment$Date? date) {
+    if (date == null) return Input$FuzzyDateInput();
+    return Input$FuzzyDateInput(
+        year: date.year, month: date.month, day: date.day);
+  }
+}
+
 class DeleteEntryButton extends HookWidget {
   const DeleteEntryButton({
     super.key,
     required this.entryId,
     required this.mediaId,
-    this.mediaType,
+    required this.mediaType,
   });
 
   final int entryId;
   final int mediaId;
-  final Enum$MediaType? mediaType;
+  final Enum$MediaType mediaType;
 
   @override
   Widget build(BuildContext context) {
@@ -188,32 +283,19 @@ class DeleteEntryButton extends HookWidget {
       WidgetOptions$Mutation$DeleteMediaListEntry(update: (cache, result) {
         bool deleteSuccess =
             result?.parsedData?.DeleteMediaListEntry?.deleted ?? false;
-        if (result?.hasException == true || !deleteSuccess) {
-          print(
-              'Unknown exception deleting media entry $entryId: ${result?.exception}');
-          return;
-        }
+        if (result?.hasException == true || !deleteSuccess) return;
 
-        if (!deleteSuccess) {
-          print('Unable to delete media entry $entryId: ${result?.data}');
-          return;
-        }
         cache.writeFragment(
-            Fragment(
-                document: gql(
-              '''
-              fragment fields on Media {
-                id
-                mediaListEntry
-              }
-              ''',
-            )).asRequest(idFields: {
+            const Fragment(
+              document: documentNodeFragmentEntryDelete,
+            ).asRequest(idFields: {
               'id': mediaId,
             }),
             data: {'mediaListEntry': null});
       }),
     );
-    var deleteVars = Variables$Mutation$DeleteMediaListEntry(id: entryId);
+    var mutationVariables =
+        Variables$Mutation$DeleteMediaListEntry(id: entryId);
 
     return OutlinedButton(
       child: Text(
@@ -224,7 +306,7 @@ class DeleteEntryButton extends HookWidget {
         bool? deleteConfirmed = await _showDialogMenu(context);
         if (deleteConfirmed != true) return;
 
-        var mutation = deleteEntry.runMutation(variables: deleteVars);
+        final mutation = deleteEntry.runMutation(variables: mutationVariables);
         final result = await mutation.networkResult;
 
         bool deleteSuccess =
@@ -238,10 +320,9 @@ class DeleteEntryButton extends HookWidget {
         }
 
         String snackbarText = (!deleteSuccess || result?.hasException == true)
-            ? 'Unable to delete ${LabelUtil.mediaTypeLabel(mediaType)}.'
-            : 'Successfully deleted ${LabelUtil.mediaTypeLabel(mediaType)}.';
+            ? 'Unable to delete ${toJson$Enum$MediaType(mediaType).toLowerCase()}.'
+            : 'Successfully deleted ${toJson$Enum$MediaType(mediaType).toLowerCase()}.';
         SnackBar snackbar = SnackbarUtil.commonSnackbar(snackbarText);
-
         if (context.mounted) {
           Navigator.of(context).pop();
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -311,7 +392,7 @@ class DateSelector extends StatelessWidget {
             textScaleFactor: ScaleSize.scaleFactor(context),
           ),
         ),
-        if (dateNotifier.value != null)
+        if (!_dateHasNull(dateNotifier.value))
           IconButton(
             onPressed: () => dateNotifier.value = null,
             icon: const Icon(Icons.cancel),

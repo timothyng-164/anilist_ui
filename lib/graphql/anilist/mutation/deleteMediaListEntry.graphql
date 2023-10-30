@@ -3,3 +3,9 @@ mutation DeleteMediaListEntry($id: Int) {
     deleted
   }
 }
+
+# This fragment is used to update the cache after the mutation is run.
+fragment EntryDelete on Media {
+  id
+  mediaListEntry
+}

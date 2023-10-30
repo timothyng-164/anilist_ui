@@ -4,6 +4,311 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
+class Fragment$EntryDelete {
+  Fragment$EntryDelete({
+    required this.id,
+    this.mediaListEntry,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$EntryDelete.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$mediaListEntry = json['mediaListEntry'];
+    final l$$__typename = json['__typename'];
+    return Fragment$EntryDelete(
+      id: (l$id as int),
+      mediaListEntry: l$mediaListEntry == null
+          ? null
+          : Fragment$EntryDelete$mediaListEntry.fromJson(
+              (l$mediaListEntry as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$EntryDelete$mediaListEntry? mediaListEntry;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$mediaListEntry = mediaListEntry;
+    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$mediaListEntry = mediaListEntry;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$mediaListEntry,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$EntryDelete) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$mediaListEntry = mediaListEntry;
+    final lOther$mediaListEntry = other.mediaListEntry;
+    if (l$mediaListEntry != lOther$mediaListEntry) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$EntryDelete on Fragment$EntryDelete {
+  CopyWith$Fragment$EntryDelete<Fragment$EntryDelete> get copyWith =>
+      CopyWith$Fragment$EntryDelete(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$EntryDelete<TRes> {
+  factory CopyWith$Fragment$EntryDelete(
+    Fragment$EntryDelete instance,
+    TRes Function(Fragment$EntryDelete) then,
+  ) = _CopyWithImpl$Fragment$EntryDelete;
+
+  factory CopyWith$Fragment$EntryDelete.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$EntryDelete;
+
+  TRes call({
+    int? id,
+    Fragment$EntryDelete$mediaListEntry? mediaListEntry,
+    String? $__typename,
+  });
+  CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> get mediaListEntry;
+}
+
+class _CopyWithImpl$Fragment$EntryDelete<TRes>
+    implements CopyWith$Fragment$EntryDelete<TRes> {
+  _CopyWithImpl$Fragment$EntryDelete(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$EntryDelete _instance;
+
+  final TRes Function(Fragment$EntryDelete) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? mediaListEntry = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$EntryDelete(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        mediaListEntry: mediaListEntry == _undefined
+            ? _instance.mediaListEntry
+            : (mediaListEntry as Fragment$EntryDelete$mediaListEntry?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> get mediaListEntry {
+    final local$mediaListEntry = _instance.mediaListEntry;
+    return local$mediaListEntry == null
+        ? CopyWith$Fragment$EntryDelete$mediaListEntry.stub(_then(_instance))
+        : CopyWith$Fragment$EntryDelete$mediaListEntry(
+            local$mediaListEntry, (e) => call(mediaListEntry: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$EntryDelete<TRes>
+    implements CopyWith$Fragment$EntryDelete<TRes> {
+  _CopyWithStubImpl$Fragment$EntryDelete(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$EntryDelete$mediaListEntry? mediaListEntry,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> get mediaListEntry =>
+      CopyWith$Fragment$EntryDelete$mediaListEntry.stub(_res);
+}
+
+const fragmentDefinitionEntryDelete = FragmentDefinitionNode(
+  name: NameNode(value: 'EntryDelete'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'Media'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'mediaListEntry'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentEntryDelete = DocumentNode(definitions: [
+  fragmentDefinitionEntryDelete,
+]);
+
+extension ClientExtension$Fragment$EntryDelete on graphql.GraphQLClient {
+  void writeFragment$EntryDelete({
+    required Fragment$EntryDelete data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'EntryDelete',
+            document: documentNodeFragmentEntryDelete,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$EntryDelete? readFragment$EntryDelete({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'EntryDelete',
+          document: documentNodeFragmentEntryDelete,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$EntryDelete.fromJson(result);
+  }
+}
+
+class Fragment$EntryDelete$mediaListEntry {
+  Fragment$EntryDelete$mediaListEntry();
+
+  factory Fragment$EntryDelete$mediaListEntry.fromJson(
+      Map<String, dynamic> json) {
+    return Fragment$EntryDelete$mediaListEntry();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hashAll([]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$EntryDelete$mediaListEntry) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$EntryDelete$mediaListEntry
+    on Fragment$EntryDelete$mediaListEntry {
+  CopyWith$Fragment$EntryDelete$mediaListEntry<
+          Fragment$EntryDelete$mediaListEntry>
+      get copyWith => CopyWith$Fragment$EntryDelete$mediaListEntry(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> {
+  factory CopyWith$Fragment$EntryDelete$mediaListEntry(
+    Fragment$EntryDelete$mediaListEntry instance,
+    TRes Function(Fragment$EntryDelete$mediaListEntry) then,
+  ) = _CopyWithImpl$Fragment$EntryDelete$mediaListEntry;
+
+  factory CopyWith$Fragment$EntryDelete$mediaListEntry.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$EntryDelete$mediaListEntry;
+
+  TRes call();
+}
+
+class _CopyWithImpl$Fragment$EntryDelete$mediaListEntry<TRes>
+    implements CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> {
+  _CopyWithImpl$Fragment$EntryDelete$mediaListEntry(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$EntryDelete$mediaListEntry _instance;
+
+  final TRes Function(Fragment$EntryDelete$mediaListEntry) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call() => _then(Fragment$EntryDelete$mediaListEntry());
+}
+
+class _CopyWithStubImpl$Fragment$EntryDelete$mediaListEntry<TRes>
+    implements CopyWith$Fragment$EntryDelete$mediaListEntry<TRes> {
+  _CopyWithStubImpl$Fragment$EntryDelete$mediaListEntry(this._res);
+
+  TRes _res;
+
+  call() => _res;
+}
+
 class Variables$Mutation$DeleteMediaListEntry {
   factory Variables$Mutation$DeleteMediaListEntry({int? id}) =>
       Variables$Mutation$DeleteMediaListEntry._({

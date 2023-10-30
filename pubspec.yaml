@@ -23,6 +23,7 @@ dependencies:
   html: ^0.15.4
   url_launcher: ^6.1.14
   json_annotation: ^4.8.0
+  gql: ^0.14.0
 
 dev_dependencies:
   flutter_test:
