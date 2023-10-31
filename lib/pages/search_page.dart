@@ -26,7 +26,7 @@ class SearchPage extends HookWidget {
     final hasNextpage = useState<bool>(false);
     final mediaList = useState<List<Query$Search$Page$media?>>([]);
 
-    final scrollController = ScrollController();
+    final scrollController = useScrollController();
     final client = useGraphQLClient();
 
     Options$Query$Search queryOptions({required int page}) {
@@ -55,17 +55,13 @@ class SearchPage extends HookWidget {
     }
 
     void fetchFirstPage() {
-      print('calling fetch first page. ${searchEnabled.value}');
-
       if (!searchEnabled.value) return;
-
       isLoading.value = true;
 
       client.query$Search(queryOptions(page: 1)).then((result) {
         if (result.hasException) {
           throw result.exception ?? Exception('Empty exception.');
         }
-        print('fetching first page');
         var data = result.parsedData?.Page;
         mediaList.value = data?.media ?? [];
         currentPage.value = data?.pageInfo?.currentPage ?? 1;
@@ -89,7 +85,6 @@ class SearchPage extends HookWidget {
         if (result.hasException) {
           throw result.exception ?? Exception('Empty exception.');
         }
-        print('finished fetching page ${currentPage.value + 1}');
         var data = result.parsedData?.Page;
         var newMedia = data?.media ?? [];
 

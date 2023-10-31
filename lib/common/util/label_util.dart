@@ -124,6 +124,25 @@ class LabelUtil {
     if (season == null && seasonYear == null) return null;
     return '${mediaSeasonLabel(season) ?? ''} ${seasonYear ?? ''}';
   }
+
+  static String airingTagLabel(int episodeNumber, Duration timeUntilAiring) {
+    String text = 'ep. $episodeNumber ';
+    if (timeUntilAiring.inSeconds < 60) {
+      text += 'on now';
+    }
+    if (timeUntilAiring.inMinutes < 60) {
+      text += 'in ${timeUntilAiring.inMinutes} min';
+      if (timeUntilAiring.inMinutes > 1) text += 's';
+    }
+    if (timeUntilAiring.inHours < 24) {
+      text += 'in ${timeUntilAiring.inHours} hour';
+      if (timeUntilAiring.inHours > 1) text += 's';
+    } else {
+      text += 'in ${timeUntilAiring.inDays} day';
+      if (timeUntilAiring.inDays > 1) text += 's';
+    }
+    return text;
+  }
 }
 
 String _capitalizeAndReplace(String s) {

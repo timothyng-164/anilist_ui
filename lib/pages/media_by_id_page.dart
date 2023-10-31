@@ -103,32 +103,25 @@ class PageContent extends StatelessWidget {
           const Spacer(flex: 1),
           Expanded(
             flex: 15,
-            child: LayoutBuilder(builder: (context, constraints) {
-              return Column(
-                children: [
-                  TitleSection(media: media!, maxWidth: constraints.maxWidth),
-                  const SizedBox(height: 20),
-                  GenreSection(genres: media!.genres),
-                  const SizedBox(height: 10),
-                  DescriptionSection(description: media!.description),
-                  const SizedBox(height: 10),
-                  InfoSection(media: media!),
-                  const SizedBox(height: 20),
-                  RelationSection(relations: media!.relations),
-                  const SizedBox(height: 20),
-                  TagsSection(mediaTags: media!.tags),
-                  const SizedBox(height: 20),
-                  RecommendationSection(
-                      recommendations: media!.recommendations?.nodes),
-                  const SizedBox(height: 20),
-
-                  // TODO:
-                  // move sections to separate files
-                  // favorite/add to list (if user is authenticated)
-                  // Nice-to-haves: characters, staff, reviews, discussions, links, theme songs
-                ],
-              );
-            }),
+            child: Column(
+              children: [
+                TitleSection(media: media!),
+                const SizedBox(height: 20),
+                GenreSection(genres: media!.genres),
+                const SizedBox(height: 10),
+                DescriptionSection(description: media!.description),
+                const SizedBox(height: 10),
+                InfoSection(media: media!),
+                const SizedBox(height: 20),
+                RelationSection(relations: media!.relations),
+                const SizedBox(height: 20),
+                TagsSection(mediaTags: media!.tags),
+                const SizedBox(height: 20),
+                RecommendationSection(
+                    recommendations: media!.recommendations?.nodes),
+                const SizedBox(height: 20),                
+              ],
+            ),
           ),
           const Spacer(flex: 1)
         ],
@@ -137,7 +130,7 @@ class PageContent extends StatelessWidget {
   }
 }
 
-class HorizontalScrollingSection extends StatelessWidget {
+class HorizontalScrollingSection extends HookWidget {
   const HorizontalScrollingSection({
     super.key,
     this.title,
@@ -155,7 +148,7 @@ class HorizontalScrollingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     if (items == null || items!.isEmpty) return const SizedBox.shrink();
     final textTheme = Theme.of(context).textTheme;
-    final ScrollController scrollController = ScrollController();
+    final ScrollController scrollController = useScrollController();
 
     return Scrollbar(
       controller: scrollController,
@@ -609,16 +602,16 @@ class GenreSection extends StatelessWidget {
 }
 
 class TitleSection extends StatelessWidget {
-  const TitleSection({super.key, required this.media, required this.maxWidth});
+  const TitleSection({super.key, required this.media});
 
   final Query$GetMediaById$Media media;
-  final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    double screenWidth = MediaQuery.of(context).size.width;
 
-    var imgWidth = min(maxWidth / 2, 300).toDouble();
+    var imgWidth = min(screenWidth / 2, 300).toDouble();
     var imgHeight = imgWidth * 3 / 2;
 
     return Row(

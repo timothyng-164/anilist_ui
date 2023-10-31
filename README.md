@@ -43,11 +43,12 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 6. ctrl+F for all TODOs
 7. check if authentication persists in local storage
 8. run dart fix
-9. refactoring
-   - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
-   - remove functions out of build():
-     - https://www.reddit.com/r/FlutterDev/comments/ra8ygm/are_there_any_negative_effects_for_declaring/
-     - https://www.reddit.com/r/flutterhelp/comments/10dcwl7/is_it_good_practice_to_declare_variables_inside/
-     - https://www.funwithflutter.dev/flutter-keep-your-build-method-pure/
-   - move controller declarations out of build(), and possibly use hooks:
-     - https://stackoverflow.com/a/69822728
+9. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs
+10. refactoring
+    - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
+    - remove functions out of build():
+      - https://www.reddit.com/r/FlutterDev/comments/ra8ygm/are_there_any_negative_effects_for_declaring/
+      - https://www.reddit.com/r/flutterhelp/comments/10dcwl7/is_it_good_practice_to_declare_variables_inside/
+      - https://www.funwithflutter.dev/flutter-keep-your-build-method-pure/
+    - move controller declarations out of build(), and possibly use hooks:
+      - https://stackoverflow.com/a/69822728

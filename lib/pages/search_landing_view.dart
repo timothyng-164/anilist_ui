@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../common/util/date_util.dart';
+import '../common/util/label_util.dart';
 import '../common/widgets/query_result_handler.dart';
 import '../graphql/anilist/schema.graphql.dart';
 import '../graphql/anilist/query/searchLandingView.graphql.dart';
@@ -105,7 +106,7 @@ class LandingContent extends StatelessWidget {
   }
 }
 
-class ScrollingAnimeSection extends StatelessWidget {
+class ScrollingAnimeSection extends HookWidget {
   const ScrollingAnimeSection(
       {super.key, required this.mediaList, required this.title});
 
@@ -114,43 +115,42 @@ class ScrollingAnimeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController scrollController = ScrollController();
+    ScrollController scrollController = useScrollController();
     TextTheme textTheme = Theme.of(context).textTheme;
 
-    return LayoutBuilder(builder: (_, constraints) {
-      bool isLargeScreen = constraints.maxWidth > 1450;
-      double cardHeight = isLargeScreen ? 300 : 230;
-      double cardWidth = isLargeScreen ? 160 : 120;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 15),
-          Text(title, style: textTheme.titleLarge),
-          const SizedBox(height: 8),
-          SizedBox(
-            height: cardHeight,
-            child: Scrollbar(
+    bool isLargeScreen = MediaQuery.of(context).size.width > 1450;
+    double cardHeight = isLargeScreen ? 300 : 230;
+    double cardWidth = isLargeScreen ? 160 : 120;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 15),
+        Text(title, style: textTheme.titleLarge),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: cardHeight,
+          child: Scrollbar(
+            controller: scrollController,
+            child: ListView.separated(
+              shrinkWrap: true,
               controller: scrollController,
-              child: ListView.separated(
-                shrinkWrap: true,
-                controller: scrollController,
-                scrollDirection: Axis.horizontal,
-                itemCount: mediaList.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 20),
-                itemBuilder: (_, i) => SizedBox(
-                  height: cardHeight,
-                  width: cardWidth,
-                  child: AnimeCard(
-                      media: mediaList[i],
-                      cardWidth: cardWidth,
-                      isLargeScreen: isLargeScreen),
-                ),
+              scrollDirection: Axis.horizontal,
+              itemCount: mediaList.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 20),
+              itemBuilder: (_, i) => SizedBox(
+                height: cardHeight,
+                width: cardWidth,
+                child: AnimeCard(
+                    media: mediaList[i],
+                    cardWidth: cardWidth,
+                    isLargeScreen: isLargeScreen),
               ),
             ),
           ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 }
 
@@ -191,21 +191,8 @@ class AnimeCard extends HookWidget {
         return const SizedBox.shrink();
       }
 
-      String text = 'ep. ${media?.nextAiringEpisode?.episode} ';
-      if (timeUntilAiring.inSeconds < 60) {
-        text += 'on now';
-      }
-      if (timeUntilAiring.inMinutes < 60) {
-        text += 'in ${timeUntilAiring.inMinutes} min';
-        if (timeUntilAiring.inMinutes > 1) text += 's';
-      }
-      if (timeUntilAiring.inHours < 24) {
-        text += 'in ${timeUntilAiring.inHours} hour';
-        if (timeUntilAiring.inHours > 1) text += 's';
-      } else {
-        text += 'in ${timeUntilAiring.inDays} day';
-        if (timeUntilAiring.inDays > 1) text += 's';
-      }
+      String text = LabelUtil.airingTagLabel(
+          media!.nextAiringEpisode!.episode, timeUntilAiring);
 
       TextStyle textStyle =
           isLargeScreen ? textTheme.labelLarge! : textTheme.labelMedium!;
@@ -233,7 +220,7 @@ class AnimeCard extends HookWidget {
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
       onTap: () {
-        if (media?.id == null) return; // TODO: error message in snackbar
+        if (media?.id == null) return;
         AnimeByIDRoute(media!.id).push(context);
       },
       onHover: (isHovering) => hovering.value = isHovering,
