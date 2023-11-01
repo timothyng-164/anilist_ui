@@ -33,14 +33,14 @@ class Fragment$EntrySave {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$mediaListEntry = mediaListEntry;
-    resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -60,7 +60,7 @@ class Fragment$EntrySave {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$EntrySave || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$EntrySave) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -120,7 +120,6 @@ class _CopyWithImpl$Fragment$EntrySave<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaListEntry = _undefined,
@@ -136,7 +135,6 @@ class _CopyWithImpl$Fragment$EntrySave<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$EntrySave$mediaListEntry<TRes> get mediaListEntry {
     final local$mediaListEntry = _instance.mediaListEntry;
     return local$mediaListEntry == null
@@ -150,9 +148,8 @@ class _CopyWithStubImpl$Fragment$EntrySave<TRes>
     implements CopyWith$Fragment$EntrySave<TRes> {
   _CopyWithStubImpl$Fragment$EntrySave(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Fragment$EntrySave$mediaListEntry? mediaListEntry,
@@ -160,7 +157,6 @@ class _CopyWithStubImpl$Fragment$EntrySave<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$EntrySave$mediaListEntry<TRes> get mediaListEntry =>
       CopyWith$Fragment$EntrySave$mediaListEntry.stub(_res);
 }
@@ -343,7 +339,7 @@ extension ClientExtension$Fragment$EntrySave on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
-      writeFragment(
+      this.writeFragment(
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
@@ -358,7 +354,7 @@ extension ClientExtension$Fragment$EntrySave on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
-    final result = readFragment(
+    final result = this.readFragment(
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
@@ -446,31 +442,31 @@ class Fragment$EntrySave$mediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$mediaId = mediaId;
-    resultData['mediaId'] = l$mediaId;
+    _resultData['mediaId'] = l$mediaId;
     final l$status = status;
-    resultData['status'] =
+    _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$progress = progress;
-    resultData['progress'] = l$progress;
+    _resultData['progress'] = l$progress;
     final l$progressVolumes = progressVolumes;
-    resultData['progressVolumes'] = l$progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
     final l$notes = notes;
-    resultData['notes'] = l$notes;
+    _resultData['notes'] = l$notes;
     final l$startedAt = startedAt;
-    resultData['startedAt'] = l$startedAt?.toJson();
+    _resultData['startedAt'] = l$startedAt?.toJson();
     final l$completedAt = completedAt;
-    resultData['completedAt'] = l$completedAt?.toJson();
+    _resultData['completedAt'] = l$completedAt?.toJson();
     final l$updatedAt = updatedAt;
-    resultData['updatedAt'] = l$updatedAt;
+    _resultData['updatedAt'] = l$updatedAt;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -506,7 +502,7 @@ class Fragment$EntrySave$mediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$EntrySave$mediaListEntry ||
+    if (!(other is Fragment$EntrySave$mediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -617,7 +613,6 @@ class _CopyWithImpl$Fragment$EntrySave$mediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaId = _undefined,
@@ -660,7 +655,6 @@ class _CopyWithImpl$Fragment$EntrySave$mediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$EntrySave$mediaListEntry$startedAt<TRes> get startedAt {
     final local$startedAt = _instance.startedAt;
     return local$startedAt == null
@@ -670,7 +664,6 @@ class _CopyWithImpl$Fragment$EntrySave$mediaListEntry<TRes>
             local$startedAt, (e) => call(startedAt: e));
   }
 
-  @override
   CopyWith$Fragment$EntrySave$mediaListEntry$completedAt<TRes> get completedAt {
     final local$completedAt = _instance.completedAt;
     return local$completedAt == null
@@ -685,9 +678,8 @@ class _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry<TRes>
     implements CopyWith$Fragment$EntrySave$mediaListEntry<TRes> {
   _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? mediaId,
@@ -703,11 +695,9 @@ class _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$EntrySave$mediaListEntry$startedAt<TRes> get startedAt =>
       CopyWith$Fragment$EntrySave$mediaListEntry$startedAt.stub(_res);
 
-  @override
   CopyWith$Fragment$EntrySave$mediaListEntry$completedAt<TRes>
       get completedAt =>
           CopyWith$Fragment$EntrySave$mediaListEntry$completedAt.stub(_res);
@@ -744,16 +734,16 @@ class Fragment$EntrySave$mediaListEntry$startedAt {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$year = year;
-    resultData['year'] = l$year;
+    _resultData['year'] = l$year;
     final l$month = month;
-    resultData['month'] = l$month;
+    _resultData['month'] = l$month;
     final l$day = day;
-    resultData['day'] = l$day;
+    _resultData['day'] = l$day;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -775,7 +765,7 @@ class Fragment$EntrySave$mediaListEntry$startedAt {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$EntrySave$mediaListEntry$startedAt ||
+    if (!(other is Fragment$EntrySave$mediaListEntry$startedAt) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -843,7 +833,6 @@ class _CopyWithImpl$Fragment$EntrySave$mediaListEntry$startedAt<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? year = _undefined,
     Object? month = _undefined,
@@ -864,9 +853,8 @@ class _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry$startedAt<TRes>
     implements CopyWith$Fragment$EntrySave$mediaListEntry$startedAt<TRes> {
   _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry$startedAt(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? year,
     int? month,
@@ -907,16 +895,16 @@ class Fragment$EntrySave$mediaListEntry$completedAt {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$year = year;
-    resultData['year'] = l$year;
+    _resultData['year'] = l$year;
     final l$month = month;
-    resultData['month'] = l$month;
+    _resultData['month'] = l$month;
     final l$day = day;
-    resultData['day'] = l$day;
+    _resultData['day'] = l$day;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -938,7 +926,7 @@ class Fragment$EntrySave$mediaListEntry$completedAt {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$EntrySave$mediaListEntry$completedAt ||
+    if (!(other is Fragment$EntrySave$mediaListEntry$completedAt) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1007,7 +995,6 @@ class _CopyWithImpl$Fragment$EntrySave$mediaListEntry$completedAt<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? year = _undefined,
     Object? month = _undefined,
@@ -1028,9 +1015,8 @@ class _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry$completedAt<TRes>
     implements CopyWith$Fragment$EntrySave$mediaListEntry$completedAt<TRes> {
   _CopyWithStubImpl$Fragment$EntrySave$mediaListEntry$completedAt(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? year,
     int? month,
@@ -1181,7 +1167,7 @@ class Variables$Mutation$SaveMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$SaveMediaListEntry ||
+    if (!(other is Variables$Mutation$SaveMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1313,7 +1299,6 @@ class _CopyWithImpl$Variables$Mutation$SaveMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaId = _undefined,
@@ -1344,9 +1329,8 @@ class _CopyWithStubImpl$Variables$Mutation$SaveMediaListEntry<TRes>
     implements CopyWith$Variables$Mutation$SaveMediaListEntry<TRes> {
   _CopyWithStubImpl$Variables$Mutation$SaveMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? mediaId,
@@ -1383,12 +1367,12 @@ class Mutation$SaveMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$SaveMediaListEntry = SaveMediaListEntry;
-    resultData['SaveMediaListEntry'] = l$SaveMediaListEntry?.toJson();
+    _resultData['SaveMediaListEntry'] = l$SaveMediaListEntry?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1406,7 +1390,7 @@ class Mutation$SaveMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveMediaListEntry ||
+    if (!(other is Mutation$SaveMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1463,7 +1447,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? SaveMediaListEntry = _undefined,
     Object? $__typename = _undefined,
@@ -1478,7 +1461,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
       get SaveMediaListEntry {
     final local$SaveMediaListEntry = _instance.SaveMediaListEntry;
@@ -1494,16 +1476,14 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry<TRes>
     implements CopyWith$Mutation$SaveMediaListEntry<TRes> {
   _CopyWithStubImpl$Mutation$SaveMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$SaveMediaListEntry$SaveMediaListEntry? SaveMediaListEntry,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
       get SaveMediaListEntry =>
           CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry.stub(_res);
@@ -1868,11 +1848,11 @@ extension ClientExtension$Mutation$SaveMediaListEntry on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$SaveMediaListEntry>>
       mutate$SaveMediaListEntry(
               [Options$Mutation$SaveMediaListEntry? options]) async =>
-          await mutate(options ?? Options$Mutation$SaveMediaListEntry());
+          await this.mutate(options ?? Options$Mutation$SaveMediaListEntry());
   graphql.ObservableQuery<Mutation$SaveMediaListEntry>
       watchMutation$SaveMediaListEntry(
               [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
-          watchMutation(
+          this.watchMutation(
               options ?? WatchOptions$Mutation$SaveMediaListEntry());
 }
 
@@ -2067,31 +2047,31 @@ class Mutation$SaveMediaListEntry$SaveMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$mediaId = mediaId;
-    resultData['mediaId'] = l$mediaId;
+    _resultData['mediaId'] = l$mediaId;
     final l$status = status;
-    resultData['status'] =
+    _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$progress = progress;
-    resultData['progress'] = l$progress;
+    _resultData['progress'] = l$progress;
     final l$progressVolumes = progressVolumes;
-    resultData['progressVolumes'] = l$progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
     final l$notes = notes;
-    resultData['notes'] = l$notes;
+    _resultData['notes'] = l$notes;
     final l$startedAt = startedAt;
-    resultData['startedAt'] = l$startedAt?.toJson();
+    _resultData['startedAt'] = l$startedAt?.toJson();
     final l$completedAt = completedAt;
-    resultData['completedAt'] = l$completedAt?.toJson();
+    _resultData['completedAt'] = l$completedAt?.toJson();
     final l$updatedAt = updatedAt;
-    resultData['updatedAt'] = l$updatedAt;
+    _resultData['updatedAt'] = l$updatedAt;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2127,7 +2107,7 @@ class Mutation$SaveMediaListEntry$SaveMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveMediaListEntry$SaveMediaListEntry ||
+    if (!(other is Mutation$SaveMediaListEntry$SaveMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2242,7 +2222,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaId = _undefined,
@@ -2287,7 +2266,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt<TRes>
       get startedAt {
     final local$startedAt = _instance.startedAt;
@@ -2298,7 +2276,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
             local$startedAt, (e) => call(startedAt: e));
   }
 
-  @override
   CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt<TRes>
       get completedAt {
     final local$completedAt = _instance.completedAt;
@@ -2314,9 +2291,8 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
     implements CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes> {
   _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? mediaId,
@@ -2332,13 +2308,11 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt<TRes>
       get startedAt =>
           CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt
               .stub(_res);
 
-  @override
   CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt<TRes>
       get completedAt =>
           CopyWith$Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt
@@ -2376,16 +2350,16 @@ class Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$year = year;
-    resultData['year'] = l$year;
+    _resultData['year'] = l$year;
     final l$month = month;
-    resultData['month'] = l$month;
+    _resultData['month'] = l$month;
     final l$day = day;
-    resultData['day'] = l$day;
+    _resultData['day'] = l$day;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2407,7 +2381,7 @@ class Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt ||
+    if (!(other is Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2483,7 +2457,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? year = _undefined,
     Object? month = _undefined,
@@ -2508,9 +2481,8 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt
   _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry$startedAt(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? year,
     int? month,
@@ -2551,16 +2523,16 @@ class Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$year = year;
-    resultData['year'] = l$year;
+    _resultData['year'] = l$year;
     final l$month = month;
-    resultData['month'] = l$month;
+    _resultData['month'] = l$month;
     final l$day = day;
-    resultData['day'] = l$day;
+    _resultData['day'] = l$day;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2582,8 +2554,8 @@ class Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt {
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt ||
+    if (!(other
+            is Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2659,7 +2631,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? year = _undefined,
     Object? month = _undefined,
@@ -2684,9 +2655,8 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry$completed
   _CopyWithStubImpl$Mutation$SaveMediaListEntry$SaveMediaListEntry$completedAt(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? year,
     int? month,

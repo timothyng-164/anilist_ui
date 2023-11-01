@@ -1,5 +1,6 @@
 import '../schema.graphql.dart';
 import 'dart:async';
+import 'mediaById.graphql.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
@@ -66,27 +67,27 @@ class Fragment$MediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$status = status;
-    resultData['status'] =
+    _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$score = score;
-    resultData['score'] = l$score;
+    _resultData['score'] = l$score;
     final l$notes = notes;
-    resultData['notes'] = l$notes;
+    _resultData['notes'] = l$notes;
     final l$progress = progress;
-    resultData['progress'] = l$progress;
+    _resultData['progress'] = l$progress;
     final l$progressVolumes = progressVolumes;
-    resultData['progressVolumes'] = l$progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
     final l$startedAt = startedAt;
-    resultData['startedAt'] = l$startedAt?.toJson();
+    _resultData['startedAt'] = l$startedAt?.toJson();
     final l$completedAt = completedAt;
-    resultData['completedAt'] = l$completedAt?.toJson();
+    _resultData['completedAt'] = l$completedAt?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -118,7 +119,7 @@ class Fragment$MediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$MediaListEntry ||
+    if (!(other is Fragment$MediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -216,7 +217,6 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? status = _undefined,
@@ -251,7 +251,6 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$Date<TRes> get startedAt {
     final local$startedAt = _instance.startedAt;
     return local$startedAt == null
@@ -259,7 +258,6 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
         : CopyWith$Fragment$Date(local$startedAt, (e) => call(startedAt: e));
   }
 
-  @override
   CopyWith$Fragment$Date<TRes> get completedAt {
     final local$completedAt = _instance.completedAt;
     return local$completedAt == null
@@ -273,9 +271,8 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
     implements CopyWith$Fragment$MediaListEntry<TRes> {
   _CopyWithStubImpl$Fragment$MediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$MediaListStatus? status,
@@ -289,11 +286,9 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$Date<TRes> get startedAt =>
       CopyWith$Fragment$Date.stub(_res);
 
-  @override
   CopyWith$Fragment$Date<TRes> get completedAt =>
       CopyWith$Fragment$Date.stub(_res);
 }
@@ -407,7 +402,7 @@ extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
-      writeFragment(
+      this.writeFragment(
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
@@ -422,7 +417,7 @@ extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
-    final result = readFragment(
+    final result = this.readFragment(
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
@@ -466,16 +461,16 @@ class Fragment$Date {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$year = year;
-    resultData['year'] = l$year;
+    _resultData['year'] = l$year;
     final l$month = month;
-    resultData['month'] = l$month;
+    _resultData['month'] = l$month;
     final l$day = day;
-    resultData['day'] = l$day;
+    _resultData['day'] = l$day;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -497,7 +492,7 @@ class Fragment$Date {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$Date || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$Date) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$year = year;
@@ -561,7 +556,6 @@ class _CopyWithImpl$Fragment$Date<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? year = _undefined,
     Object? month = _undefined,
@@ -582,9 +576,8 @@ class _CopyWithStubImpl$Fragment$Date<TRes>
     implements CopyWith$Fragment$Date<TRes> {
   _CopyWithStubImpl$Fragment$Date(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? year,
     int? month,
@@ -643,7 +636,7 @@ extension ClientExtension$Fragment$Date on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
-      writeFragment(
+      this.writeFragment(
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
@@ -658,7 +651,7 @@ extension ClientExtension$Fragment$Date on graphql.GraphQLClient {
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
-    final result = readFragment(
+    final result = this.readFragment(
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
@@ -730,7 +723,7 @@ class Variables$Query$GetMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$GetMediaListEntry ||
+    if (!(other is Variables$Query$GetMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -792,7 +785,6 @@ class _CopyWithImpl$Variables$Query$GetMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -808,9 +800,8 @@ class _CopyWithStubImpl$Variables$Query$GetMediaListEntry<TRes>
     implements CopyWith$Variables$Query$GetMediaListEntry<TRes> {
   _CopyWithStubImpl$Variables$Query$GetMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$MediaType? type,
@@ -841,12 +832,12 @@ class Query$GetMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Media = Media;
-    resultData['Media'] = l$Media?.toJson();
+    _resultData['Media'] = l$Media?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -864,7 +855,7 @@ class Query$GetMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GetMediaListEntry ||
+    if (!(other is Query$GetMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -919,7 +910,6 @@ class _CopyWithImpl$Query$GetMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Media = _undefined,
     Object? $__typename = _undefined,
@@ -933,7 +923,6 @@ class _CopyWithImpl$Query$GetMediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$GetMediaListEntry$Media<TRes> get Media {
     final local$Media = _instance.Media;
     return local$Media == null
@@ -947,16 +936,14 @@ class _CopyWithStubImpl$Query$GetMediaListEntry<TRes>
     implements CopyWith$Query$GetMediaListEntry<TRes> {
   _CopyWithStubImpl$Query$GetMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$GetMediaListEntry$Media? Media,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$GetMediaListEntry$Media<TRes> get Media =>
       CopyWith$Query$GetMediaListEntry$Media.stub(_res);
 }
@@ -1223,19 +1210,19 @@ class FetchMoreOptions$Query$GetMediaListEntry
 extension ClientExtension$Query$GetMediaListEntry on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$GetMediaListEntry>> query$GetMediaListEntry(
           [Options$Query$GetMediaListEntry? options]) async =>
-      await query(options ?? Options$Query$GetMediaListEntry());
+      await this.query(options ?? Options$Query$GetMediaListEntry());
   graphql.ObservableQuery<Query$GetMediaListEntry> watchQuery$GetMediaListEntry(
           [WatchOptions$Query$GetMediaListEntry? options]) =>
-      watchQuery(options ?? WatchOptions$Query$GetMediaListEntry());
+      this.watchQuery(options ?? WatchOptions$Query$GetMediaListEntry());
   void writeQuery$GetMediaListEntry({
     required Query$GetMediaListEntry data,
     Variables$Query$GetMediaListEntry? variables,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
           operation:
-              const graphql.Operation(document: documentNodeQueryGetMediaListEntry),
+              graphql.Operation(document: documentNodeQueryGetMediaListEntry),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
@@ -1245,10 +1232,10 @@ extension ClientExtension$Query$GetMediaListEntry on graphql.GraphQLClient {
     Variables$Query$GetMediaListEntry? variables,
     bool optimistic = true,
   }) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
         operation:
-            const graphql.Operation(document: documentNodeQueryGetMediaListEntry),
+            graphql.Operation(document: documentNodeQueryGetMediaListEntry),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
@@ -1350,30 +1337,30 @@ class Query$GetMediaListEntry$Media {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$title = title;
-    resultData['title'] = l$title?.toJson();
+    _resultData['title'] = l$title?.toJson();
     final l$episodes = episodes;
-    resultData['episodes'] = l$episodes;
+    _resultData['episodes'] = l$episodes;
     final l$chapters = chapters;
-    resultData['chapters'] = l$chapters;
+    _resultData['chapters'] = l$chapters;
     final l$volumes = volumes;
-    resultData['volumes'] = l$volumes;
+    _resultData['volumes'] = l$volumes;
     final l$mediaListEntry = mediaListEntry;
-    resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
     final l$isFavourite = isFavourite;
-    resultData['isFavourite'] = l$isFavourite;
+    _resultData['isFavourite'] = l$isFavourite;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isFavouriteBlocked = isFavouriteBlocked;
-    resultData['isFavouriteBlocked'] = l$isFavouriteBlocked;
+    _resultData['isFavouriteBlocked'] = l$isFavouriteBlocked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1409,7 +1396,7 @@ class Query$GetMediaListEntry$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GetMediaListEntry$Media ||
+    if (!(other is Query$GetMediaListEntry$Media) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1520,7 +1507,6 @@ class _CopyWithImpl$Query$GetMediaListEntry$Media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -1562,7 +1548,6 @@ class _CopyWithImpl$Query$GetMediaListEntry$Media<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$GetMediaListEntry$Media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -1571,7 +1556,6 @@ class _CopyWithImpl$Query$GetMediaListEntry$Media<TRes>
             local$title, (e) => call(title: e));
   }
 
-  @override
   CopyWith$Fragment$MediaListEntry<TRes> get mediaListEntry {
     final local$mediaListEntry = _instance.mediaListEntry;
     return local$mediaListEntry == null
@@ -1585,9 +1569,8 @@ class _CopyWithStubImpl$Query$GetMediaListEntry$Media<TRes>
     implements CopyWith$Query$GetMediaListEntry$Media<TRes> {
   _CopyWithStubImpl$Query$GetMediaListEntry$Media(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$MediaType? type,
@@ -1603,11 +1586,9 @@ class _CopyWithStubImpl$Query$GetMediaListEntry$Media<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$GetMediaListEntry$Media$title<TRes> get title =>
       CopyWith$Query$GetMediaListEntry$Media$title.stub(_res);
 
-  @override
   CopyWith$Fragment$MediaListEntry<TRes> get mediaListEntry =>
       CopyWith$Fragment$MediaListEntry.stub(_res);
 }
@@ -1633,12 +1614,12 @@ class Query$GetMediaListEntry$Media$title {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    resultData['userPreferred'] = l$userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1656,7 +1637,7 @@ class Query$GetMediaListEntry$Media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GetMediaListEntry$Media$title ||
+    if (!(other is Query$GetMediaListEntry$Media$title) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1712,7 +1693,6 @@ class _CopyWithImpl$Query$GetMediaListEntry$Media$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -1731,9 +1711,8 @@ class _CopyWithStubImpl$Query$GetMediaListEntry$Media$title<TRes>
     implements CopyWith$Query$GetMediaListEntry$Media$title<TRes> {
   _CopyWithStubImpl$Query$GetMediaListEntry$Media$title(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userPreferred,
     String? $__typename,

@@ -27,12 +27,12 @@ class Query$GetAuthenticatedUser {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Viewer = Viewer;
-    resultData['Viewer'] = l$Viewer?.toJson();
+    _resultData['Viewer'] = l$Viewer?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -50,7 +50,7 @@ class Query$GetAuthenticatedUser {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GetAuthenticatedUser ||
+    if (!(other is Query$GetAuthenticatedUser) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -106,7 +106,6 @@ class _CopyWithImpl$Query$GetAuthenticatedUser<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Viewer = _undefined,
     Object? $__typename = _undefined,
@@ -120,7 +119,6 @@ class _CopyWithImpl$Query$GetAuthenticatedUser<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$GetAuthenticatedUser$Viewer<TRes> get Viewer {
     final local$Viewer = _instance.Viewer;
     return local$Viewer == null
@@ -134,16 +132,14 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser<TRes>
     implements CopyWith$Query$GetAuthenticatedUser<TRes> {
   _CopyWithStubImpl$Query$GetAuthenticatedUser(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$GetAuthenticatedUser$Viewer? Viewer,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$GetAuthenticatedUser$Viewer<TRes> get Viewer =>
       CopyWith$Query$GetAuthenticatedUser$Viewer.stub(_res);
 }
@@ -292,17 +288,17 @@ extension ClientExtension$Query$GetAuthenticatedUser on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$GetAuthenticatedUser>>
       query$GetAuthenticatedUser(
               [Options$Query$GetAuthenticatedUser? options]) async =>
-          await query(options ?? Options$Query$GetAuthenticatedUser());
+          await this.query(options ?? Options$Query$GetAuthenticatedUser());
   graphql.ObservableQuery<Query$GetAuthenticatedUser>
       watchQuery$GetAuthenticatedUser(
               [WatchOptions$Query$GetAuthenticatedUser? options]) =>
-          watchQuery(options ?? WatchOptions$Query$GetAuthenticatedUser());
+          this.watchQuery(options ?? WatchOptions$Query$GetAuthenticatedUser());
   void writeQuery$GetAuthenticatedUser({
     required Query$GetAuthenticatedUser data,
     bool broadcast = true,
   }) =>
-      writeQuery(
-        const graphql.Request(
+      this.writeQuery(
+        graphql.Request(
             operation: graphql.Operation(
                 document: documentNodeQueryGetAuthenticatedUser)),
         data: data.toJson(),
@@ -310,8 +306,8 @@ extension ClientExtension$Query$GetAuthenticatedUser on graphql.GraphQLClient {
       );
   Query$GetAuthenticatedUser? readQuery$GetAuthenticatedUser(
       {bool optimistic = true}) {
-    final result = readQuery(
-      const graphql.Request(
+    final result = this.readQuery(
+      graphql.Request(
           operation: graphql.Operation(
               document: documentNodeQueryGetAuthenticatedUser)),
       optimistic: optimistic,
@@ -370,14 +366,14 @@ class Query$GetAuthenticatedUser$Viewer {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -397,7 +393,7 @@ class Query$GetAuthenticatedUser$Viewer {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GetAuthenticatedUser$Viewer ||
+    if (!(other is Query$GetAuthenticatedUser$Viewer) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -458,7 +454,6 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$Viewer<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -479,9 +474,8 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser$Viewer<TRes>
     implements CopyWith$Query$GetAuthenticatedUser$Viewer<TRes> {
   _CopyWithStubImpl$Query$GetAuthenticatedUser$Viewer(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? name,
