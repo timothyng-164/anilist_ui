@@ -8,17 +8,21 @@ class ListEntryButton extends StatelessWidget {
     super.key,
     required this.mediaId,
     required this.mediaType,
-    required this.entryExists,
+    this.icon,
+    this.padding,
   });
 
   final int mediaId;
   final Enum$MediaType? mediaType;
-  final bool entryExists;
+  final Icon? icon;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(entryExists ? Icons.playlist_add_check : Icons.playlist_add),
+      icon: icon ?? const Icon(Icons.edit_note_sharp),
+      padding: padding,
+      constraints: const BoxConstraints(),
       onPressed: () {
         switch (mediaType) {
           case Enum$MediaType.ANIME:

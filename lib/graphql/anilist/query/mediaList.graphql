@@ -34,9 +34,14 @@ fragment mediaListEntry on MediaList {
   }
   updatedAt
   createdAt
+  progress
+  progressVolumes
   media {
     id
     type
+    episodes
+    chapters
+    volumes
     title {
       userPreferred
     }

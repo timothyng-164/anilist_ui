@@ -1,3 +1,4 @@
+import 'package:anilist_ui/common/widgets/list_entry_button.dart';
 import 'package:anilist_ui/common/widgets/media_card.dart';
 import 'package:anilist_ui/common/widgets/query_result_handler.dart';
 import 'package:anilist_ui/graphql/anilist/query/mediaList.graphql.dart';
@@ -246,6 +247,12 @@ class MyListPage extends HookWidget {
   }
 }
 
+String _mediaListKey(String name, bool isCustomList) {
+  // The API does not provide an ID for media lists. This key is used as a workaround,
+  // but custom lists with duplicate names will be treated as a single list.
+  return '$name-$isCustomList';
+}
+
 class ListEntries extends HookWidget {
   const ListEntries({
     super.key,
@@ -267,7 +274,7 @@ class ListEntries extends HookWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16, bottom: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             _getListTitle(selectedListKey.value, displayedList.value.length),
             style: textTheme.headlineSmall,
@@ -282,13 +289,7 @@ class ListEntries extends HookWidget {
               itemCount: displayedList.value.length,
               itemBuilder: (context, index) {
                 var listEntry = displayedList.value[index];
-                return MediaCard(
-                  mediaId: listEntry.media?.id ?? -1,
-                  mediaType: mediaType,
-                  imageUrl: listEntry.media?.coverImage?.medium ?? '',
-                  height: 120,
-                  topContent: Text(listEntry.media?.title?.userPreferred ?? ''),
-                );
+                return ListCard(listEntry: listEntry, mediaType: mediaType);
               }),
         ),
       ],
@@ -307,10 +308,84 @@ class ListEntries extends HookWidget {
   }
 }
 
-String _mediaListKey(String name, bool isCustomList) {
-  // The API does not provide an ID for media lists. This key is used as a workaround,
-  // but custom lists with duplicate names will be treated as a single list.
-  return '$name-$isCustomList';
+class ListCard extends HookWidget {
+  const ListCard({super.key, required this.listEntry, required this.mediaType});
+
+  final Fragment$mediaListEntry listEntry;
+  final Enum$MediaType mediaType;
+
+  @override
+  Widget build(BuildContext context) {
+    return MediaCard(
+      mediaId: listEntry.media?.id ?? -1,
+      mediaType: mediaType,
+      imageUrl: listEntry.media?.coverImage?.medium ?? '',
+      height: 130,
+      topContent: _cardTopContent(listEntry),
+      bottomContent: _cardBottomContent(listEntry),
+    );
+  }
+
+  Widget _cardTopContent(Fragment$mediaListEntry listEntry) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 10,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                listEntry.media?.title?.userPreferred ?? '',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              Text(LabelUtil.listStatusLabel(listEntry.status) ?? ''),
+            ],
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: ListEntryButton(
+            mediaId: listEntry.media!.id,
+            mediaType: mediaType,
+            padding: const EdgeInsets.symmetric(vertical: 2),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _cardBottomContent(Fragment$mediaListEntry listEntry) {
+    int? progressTotal = mediaType == Enum$MediaType.ANIME
+        ? listEntry.media?.episodes
+        : listEntry.media?.chapters;
+    String progressType = mediaType == Enum$MediaType.ANIME ? 'ep' : 'ch';
+
+    double progressPercent = 0;
+    if (progressTotal == null && (listEntry.progress ?? 0) > 0) {
+      progressPercent = 100;
+    }
+    if (progressTotal != null && listEntry.progress != null) {
+      progressPercent = listEntry.progress! / progressTotal;
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        if (mediaType == Enum$MediaType.MANGA)
+          Text(
+              '${listEntry.progressVolumes}/${listEntry.media?.volumes ?? '?'}  vol'),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Text(
+              '${listEntry.progress}/${progressTotal ?? '?'}  $progressType'),
+        ),
+        LinearProgressIndicator(value: progressPercent),
+      ],
+    );
+  }
 }
 
 class BottomSheetModal extends HookWidget {

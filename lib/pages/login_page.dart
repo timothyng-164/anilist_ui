@@ -28,7 +28,10 @@ class LoginPage extends HookWidget {
               flex: 5,
               child: Column(children: [
                 Spacer(flex: 8),
-                SizedBox(width: 320, child: PageContent()),
+                SizedBox(
+                  width: 340,
+                  child: PageContent(),
+                ),
                 Spacer(flex: 10),
               ]),
             ),

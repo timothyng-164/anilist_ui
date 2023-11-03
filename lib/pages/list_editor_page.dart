@@ -82,7 +82,6 @@ class PageContent extends HookWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     String? title = queryResult?.title?.userPreferred;
     Fragment$MediaListEntry? listEntry = queryResult?.mediaListEntry;

@@ -82,7 +82,9 @@ class UserUpdateButtons extends HookWidget {
         ListEntryButton(
             mediaId: media!.id,
             mediaType: media!.type,
-            entryExists: listEntry?.id != null),
+            icon: Icon(listEntry?.id != null
+                ? Icons.playlist_add_check
+                : Icons.playlist_add)),
       ],
     );
   }

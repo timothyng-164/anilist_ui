@@ -13,6 +13,8 @@ class Fragment$mediaListEntry {
     this.completedAt,
     this.updatedAt,
     this.createdAt,
+    this.progress,
+    this.progressVolumes,
     this.media,
     this.$__typename = 'MediaList',
   });
@@ -24,6 +26,8 @@ class Fragment$mediaListEntry {
     final l$completedAt = json['completedAt'];
     final l$updatedAt = json['updatedAt'];
     final l$createdAt = json['createdAt'];
+    final l$progress = json['progress'];
+    final l$progressVolumes = json['progressVolumes'];
     final l$media = json['media'];
     final l$$__typename = json['__typename'];
     return Fragment$mediaListEntry(
@@ -39,6 +43,8 @@ class Fragment$mediaListEntry {
           : Fragment$date.fromJson((l$completedAt as Map<String, dynamic>)),
       updatedAt: (l$updatedAt as int?),
       createdAt: (l$createdAt as int?),
+      progress: (l$progress as int?),
+      progressVolumes: (l$progressVolumes as int?),
       media: l$media == null
           ? null
           : Fragment$mediaListEntry$media.fromJson(
@@ -59,6 +65,10 @@ class Fragment$mediaListEntry {
 
   final int? createdAt;
 
+  final int? progress;
+
+  final int? progressVolumes;
+
   final Fragment$mediaListEntry$media? media;
 
   final String $__typename;
@@ -78,6 +88,10 @@ class Fragment$mediaListEntry {
     _resultData['updatedAt'] = l$updatedAt;
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt;
+    final l$progress = progress;
+    _resultData['progress'] = l$progress;
+    final l$progressVolumes = progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
     final l$media = media;
     _resultData['media'] = l$media?.toJson();
     final l$$__typename = $__typename;
@@ -93,6 +107,8 @@ class Fragment$mediaListEntry {
     final l$completedAt = completedAt;
     final l$updatedAt = updatedAt;
     final l$createdAt = createdAt;
+    final l$progress = progress;
+    final l$progressVolumes = progressVolumes;
     final l$media = media;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -102,6 +118,8 @@ class Fragment$mediaListEntry {
       l$completedAt,
       l$updatedAt,
       l$createdAt,
+      l$progress,
+      l$progressVolumes,
       l$media,
       l$$__typename,
     ]);
@@ -146,6 +164,16 @@ class Fragment$mediaListEntry {
     if (l$createdAt != lOther$createdAt) {
       return false;
     }
+    final l$progress = progress;
+    final lOther$progress = other.progress;
+    if (l$progress != lOther$progress) {
+      return false;
+    }
+    final l$progressVolumes = progressVolumes;
+    final lOther$progressVolumes = other.progressVolumes;
+    if (l$progressVolumes != lOther$progressVolumes) {
+      return false;
+    }
     final l$media = media;
     final lOther$media = other.media;
     if (l$media != lOther$media) {
@@ -184,6 +212,8 @@ abstract class CopyWith$Fragment$mediaListEntry<TRes> {
     Fragment$date? completedAt,
     int? updatedAt,
     int? createdAt,
+    int? progress,
+    int? progressVolumes,
     Fragment$mediaListEntry$media? media,
     String? $__typename,
   });
@@ -212,6 +242,8 @@ class _CopyWithImpl$Fragment$mediaListEntry<TRes>
     Object? completedAt = _undefined,
     Object? updatedAt = _undefined,
     Object? createdAt = _undefined,
+    Object? progress = _undefined,
+    Object? progressVolumes = _undefined,
     Object? media = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -230,6 +262,11 @@ class _CopyWithImpl$Fragment$mediaListEntry<TRes>
             updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        progress:
+            progress == _undefined ? _instance.progress : (progress as int?),
+        progressVolumes: progressVolumes == _undefined
+            ? _instance.progressVolumes
+            : (progressVolumes as int?),
         media: media == _undefined
             ? _instance.media
             : (media as Fragment$mediaListEntry$media?),
@@ -275,6 +312,8 @@ class _CopyWithStubImpl$Fragment$mediaListEntry<TRes>
     Fragment$date? completedAt,
     int? updatedAt,
     int? createdAt,
+    int? progress,
+    int? progressVolumes,
     Fragment$mediaListEntry$media? media,
     String? $__typename,
   }) =>
@@ -366,6 +405,20 @@ const fragmentDefinitionmediaListEntry = FragmentDefinitionNode(
       selectionSet: null,
     ),
     FieldNode(
+      name: NameNode(value: 'progress'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'progressVolumes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
       name: NameNode(value: 'media'),
       alias: null,
       arguments: [],
@@ -380,6 +433,27 @@ const fragmentDefinitionmediaListEntry = FragmentDefinitionNode(
         ),
         FieldNode(
           name: NameNode(value: 'type'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'episodes'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'chapters'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'volumes'),
           alias: null,
           arguments: [],
           directives: [],
@@ -491,6 +565,9 @@ class Fragment$mediaListEntry$media {
   Fragment$mediaListEntry$media({
     required this.id,
     this.type,
+    this.episodes,
+    this.chapters,
+    this.volumes,
     this.title,
     this.coverImage,
     this.$__typename = 'Media',
@@ -499,12 +576,18 @@ class Fragment$mediaListEntry$media {
   factory Fragment$mediaListEntry$media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
+    final l$episodes = json['episodes'];
+    final l$chapters = json['chapters'];
+    final l$volumes = json['volumes'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
     final l$$__typename = json['__typename'];
     return Fragment$mediaListEntry$media(
       id: (l$id as int),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
+      episodes: (l$episodes as int?),
+      chapters: (l$chapters as int?),
+      volumes: (l$volumes as int?),
       title: l$title == null
           ? null
           : Fragment$mediaListEntry$media$title.fromJson(
@@ -521,6 +604,12 @@ class Fragment$mediaListEntry$media {
 
   final Enum$MediaType? type;
 
+  final int? episodes;
+
+  final int? chapters;
+
+  final int? volumes;
+
   final Fragment$mediaListEntry$media$title? title;
 
   final Fragment$mediaListEntry$media$coverImage? coverImage;
@@ -533,6 +622,12 @@ class Fragment$mediaListEntry$media {
     _resultData['id'] = l$id;
     final l$type = type;
     _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    final l$episodes = episodes;
+    _resultData['episodes'] = l$episodes;
+    final l$chapters = chapters;
+    _resultData['chapters'] = l$chapters;
+    final l$volumes = volumes;
+    _resultData['volumes'] = l$volumes;
     final l$title = title;
     _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
@@ -546,12 +641,18 @@ class Fragment$mediaListEntry$media {
   int get hashCode {
     final l$id = id;
     final l$type = type;
+    final l$episodes = episodes;
+    final l$chapters = chapters;
+    final l$volumes = volumes;
     final l$title = title;
     final l$coverImage = coverImage;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$type,
+      l$episodes,
+      l$chapters,
+      l$volumes,
       l$title,
       l$coverImage,
       l$$__typename,
@@ -575,6 +676,21 @@ class Fragment$mediaListEntry$media {
     final l$type = type;
     final lOther$type = other.type;
     if (l$type != lOther$type) {
+      return false;
+    }
+    final l$episodes = episodes;
+    final lOther$episodes = other.episodes;
+    if (l$episodes != lOther$episodes) {
+      return false;
+    }
+    final l$chapters = chapters;
+    final lOther$chapters = other.chapters;
+    if (l$chapters != lOther$chapters) {
+      return false;
+    }
+    final l$volumes = volumes;
+    final lOther$volumes = other.volumes;
+    if (l$volumes != lOther$volumes) {
       return false;
     }
     final l$title = title;
@@ -617,6 +733,9 @@ abstract class CopyWith$Fragment$mediaListEntry$media<TRes> {
   TRes call({
     int? id,
     Enum$MediaType? type,
+    int? episodes,
+    int? chapters,
+    int? volumes,
     Fragment$mediaListEntry$media$title? title,
     Fragment$mediaListEntry$media$coverImage? coverImage,
     String? $__typename,
@@ -641,6 +760,9 @@ class _CopyWithImpl$Fragment$mediaListEntry$media<TRes>
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
+    Object? episodes = _undefined,
+    Object? chapters = _undefined,
+    Object? volumes = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
     Object? $__typename = _undefined,
@@ -648,6 +770,11 @@ class _CopyWithImpl$Fragment$mediaListEntry$media<TRes>
       _then(Fragment$mediaListEntry$media(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
+        episodes:
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
+        chapters:
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
+        volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
         title: title == _undefined
             ? _instance.title
             : (title as Fragment$mediaListEntry$media$title?),
@@ -686,6 +813,9 @@ class _CopyWithStubImpl$Fragment$mediaListEntry$media<TRes>
   call({
     int? id,
     Enum$MediaType? type,
+    int? episodes,
+    int? chapters,
+    int? volumes,
     Fragment$mediaListEntry$media$title? title,
     Fragment$mediaListEntry$media$coverImage? coverImage,
     String? $__typename,
