@@ -1,0 +1,53 @@
+query GetMediaList(
+  $userId: Int
+  $type: MediaType
+  $chunk: Int
+  $perChunk: Int
+) {
+  MediaListCollection(
+    userId: $userId
+    type: $type
+    chunk: $chunk
+    perChunk: $perChunk
+  ) {
+    hasNextChunk
+    lists {
+      name
+      status
+      isCustomList
+      isSplitCompletedList
+      entries {
+        ...mediaListEntry
+      }
+    }
+  }
+}
+
+fragment mediaListEntry on MediaList {
+  id
+  status
+  startedAt {
+    ...date
+  }
+  completedAt {
+    ...date
+  }
+  updatedAt
+  createdAt
+  media {
+    id
+    type
+    title {
+      userPreferred
+    }
+    coverImage {
+      medium
+    }
+  }
+}
+
+fragment date on FuzzyDate {
+  year
+  month
+  day
+}

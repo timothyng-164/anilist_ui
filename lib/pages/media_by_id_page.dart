@@ -119,7 +119,7 @@ class PageContent extends StatelessWidget {
                 const SizedBox(height: 20),
                 RecommendationSection(
                     recommendations: media!.recommendations?.nodes),
-                const SizedBox(height: 20),                
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -348,11 +348,9 @@ class TagsSection extends HookWidget {
       return const SizedBox.shrink();
     }
 
-    bool containsSpoilers = mediaTags!.firstWhere(
-            (tag) =>
-                tag?.isGeneralSpoiler == true || tag?.isMediaSpoiler == true,
-            orElse: () => null) !=
-        null;
+    bool containsSpoilers = mediaTags!.any(
+      (tag) => tag?.isGeneralSpoiler == true || tag?.isMediaSpoiler == true,
+    );
     var showSpoilers = useState<bool>(false);
 
     var textTheme = Theme.of(context).textTheme;

@@ -26,12 +26,16 @@ class PageShell extends HookWidget {
               ),
             ),
             BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               items: isAuthenticated
                   ? const [
                       BottomNavigationBarItem(
                           icon: Icon(Icons.search), label: 'Browse'),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.list), label: 'My List'),
+                          icon: Icon(Icons.movie_outlined), label: 'Anime'),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.library_books_outlined),
+                          label: 'Manga'),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.account_circle), label: 'Profile'),
                     ]
@@ -54,8 +58,9 @@ class PageShell extends HookWidget {
 int _getCurrentIndex(BuildContext context, bool isAuthenticated) {
   final String location = GoRouterState.of(context).uri.toString();
   if (isAuthenticated) {
-    if (location.startsWith('/profile')) return 2;
-    if (location.startsWith('/my-list')) return 1;
+    if (location.startsWith('/profile')) return 3;
+    if (location.startsWith('/manga-list')) return 2;
+    if (location.startsWith('/anime-list')) return 1;
     return 0;
   } else {
     if (location.startsWith('/login')) return 1;
@@ -70,9 +75,12 @@ void _onTap(BuildContext context, int index, bool isAuthenticated) {
         const BrowseRoute().go(context);
         break;
       case 1:
-        const MyListRoute().go(context);
+        const AnimeListRoute().go(context);
         break;
       case 2:
+        const MangaListRoute().go(context);
+        break;
+      case 3:
         const ProfileRoute().go(context);
       default:
         throw UnimplementedError("no widget for index $index");

@@ -24,22 +24,36 @@ class QueryResultHandler extends HookWidget {
 
     if (result.hasException) {
       print('Unknown exception occurred during query: ${result.exception}');
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('An error has occurrd.'),
-            const SizedBox(height: 20),
-            if (refetch != null)
-              ElevatedButton(
-                onPressed: refetch,
-                child: const Text('Retry'),
-              ),
-          ],
-        ),
-      );
+      return QueryErrorHandler(refetch: refetch);
     }
 
     return child;
+  }
+}
+
+class QueryErrorHandler extends StatelessWidget {
+  const QueryErrorHandler({
+    super.key,
+    required this.refetch,
+  });
+
+  final VoidCallback? refetch;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('An error has occurred.'),
+          const SizedBox(height: 20),
+          if (refetch != null)
+            ElevatedButton(
+              onPressed: refetch,
+              child: const Text('Retry'),
+            ),
+        ],
+      ),
+    );
   }
 }

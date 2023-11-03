@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../common/widgets/authenticated_page_wrapper.dart';
 import '../graphql/anilist/schema.graphql.dart';
 import '../pages/list_editor_page.dart';
 import '../pages/login_page.dart';
@@ -25,10 +28,15 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
     ),
     TypedGoRoute<LoginRoute>(path: '/login'),
     TypedGoRoute<ProfileRoute>(path: '/profile'),
-    TypedGoRoute<MyListRoute>(
-      path: '/my-list',
+    TypedGoRoute<AnimeListRoute>(
+      path: '/anime-list',
       routes: [
         TypedGoRoute<AnimeListEditorRoute>(path: 'anime/:id/edit'),
+      ],
+    ),
+    TypedGoRoute<MangaListRoute>(
+      path: '/manga-list',
+      routes: [
         TypedGoRoute<MangaListEditorRoute>(path: 'manga/:id/edit'),
       ],
     ),
@@ -78,7 +86,9 @@ class AnimeListEditorRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ListEditorPage(mediaId: id, mediaType: Enum$MediaType.ANIME);
+      AuthenticatedPageWrapper(
+        child: ListEditorPage(mediaId: id, mediaType: Enum$MediaType.ANIME),
+      );
 }
 
 class MangaListEditorRoute extends GoRouteData {
@@ -88,7 +98,9 @@ class MangaListEditorRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ListEditorPage(mediaId: id, mediaType: Enum$MediaType.MANGA);
+      AuthenticatedPageWrapper(
+        child: ListEditorPage(mediaId: id, mediaType: Enum$MediaType.MANGA),
+      );
 }
 
 class LoginRoute extends GoRouteData {
@@ -105,9 +117,18 @@ class ProfileRoute extends GoRouteData {
   Widget build(context, state) => const ProfilePage();
 }
 
-class MyListRoute extends GoRouteData {
-  const MyListRoute();
+class AnimeListRoute extends GoRouteData {
+  const AnimeListRoute();
 
   @override
-  Widget build(context, state) => const MyListPage();
+  Widget build(context, state) => const AuthenticatedPageWrapper(
+      child: MyListPage(mediaType: Enum$MediaType.ANIME));
+}
+
+class MangaListRoute extends GoRouteData {
+  const MangaListRoute();
+
+  @override
+  Widget build(context, state) => const AuthenticatedPageWrapper(
+      child: MyListPage(mediaType: Enum$MediaType.MANGA));
 }

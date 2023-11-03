@@ -8,19 +8,24 @@ String tokenKey = 'anilistToken';
 
 class AuthState extends ChangeNotifier {
   String? anilistToken;
+  Query$GetAuthenticatedUser$Viewer? authenticatedUser;
+  bool isLoading = false;
 
   AuthState() {
-    print("Initializing auth state.");
+    print("Initializing AuthState.");
     const storage = FlutterSecureStorage();
     // async/await can't be used in constructors :(
     storage.read(key: tokenKey).then((token) {
       if (token != null) {
-        _isValidToken(token).then((isValid) {
-          anilistToken = isValid ? token : null;
+        _getAuthenticatedUser(token).then((user) {
+          bool isAuthenticated = user != null;
+          anilistToken = isAuthenticated ? token : null;
+          authenticatedUser = user;
           notifyListeners();
         });
       } else {
         anilistToken = null;
+        authenticatedUser = null;
         notifyListeners();
       }
     });
@@ -29,14 +34,18 @@ class AuthState extends ChangeNotifier {
   bool isAuthenticated() => !(anilistToken == null);
 
   Future<bool> updateToken(String token) async {
-    bool success = await _isValidToken(token);
+    var user = await _getAuthenticatedUser(token);
+    bool success = user != null;
     if (!success) return false;
 
     const storage = FlutterSecureStorage();
     await storage.write(key: tokenKey, value: token);
     anilistToken = token;
-    notifyListeners();
 
+    authenticatedUser = user;
+    print(
+        'Set authenticated user ${authenticatedUser?.name} (${authenticatedUser?.id})');
+    notifyListeners();
     return true;
   }
 
@@ -45,6 +54,7 @@ class AuthState extends ChangeNotifier {
     await storage.delete(key: tokenKey);
 
     anilistToken = null;
+    authenticatedUser = null;
     notifyListeners();
   }
 }
@@ -58,7 +68,8 @@ GraphQLClient buildGraphQLClient(String? token, GraphQLCache? cache) {
   return GraphQLClient(link: link, cache: cache ?? GraphQLCache());
 }
 
-Future<bool> _isValidToken(String token) async {
+Future<Query$GetAuthenticatedUser$Viewer?> _getAuthenticatedUser(
+    String token) async {
   var graphQLClient = buildGraphQLClient(token, null);
   var result = await graphQLClient
       .query$GetAuthenticatedUser(Options$Query$GetAuthenticatedUser(
@@ -67,9 +78,9 @@ Future<bool> _isValidToken(String token) async {
   ));
   if (result.hasException) {
     print('Exception checking user authentication: ${result.exception}');
-    return false;
+    return null;
   }
-  var data = result.parsedData?.Viewer;
-  print('Successfully authenticated user ${data?.name} (${data?.id})');
-  return true;
+  var user = result.parsedData?.Viewer;
+  print('Successfully authenticated user ${user?.name} (${user?.id})');
+  return user;
 }

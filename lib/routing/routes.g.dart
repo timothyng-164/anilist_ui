@@ -37,13 +37,19 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
           factory: $ProfileRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: '/my-list',
-          factory: $MyListRouteExtension._fromState,
+          path: '/anime-list',
+          factory: $AnimeListRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
               path: 'anime/:id/edit',
               factory: $AnimeListEditorRouteExtension._fromState,
             ),
+          ],
+        ),
+        GoRouteData.$route(
+          path: '/manga-list',
+          factory: $MangaListRouteExtension._fromState,
+          routes: [
             GoRouteData.$route(
               path: 'manga/:id/edit',
               factory: $MangaListEditorRouteExtension._fromState,
@@ -147,11 +153,12 @@ extension $ProfileRouteExtension on ProfileRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $MyListRouteExtension on MyListRoute {
-  static MyListRoute _fromState(GoRouterState state) => const MyListRoute();
+extension $AnimeListRouteExtension on AnimeListRoute {
+  static AnimeListRoute _fromState(GoRouterState state) =>
+      const AnimeListRoute();
 
   String get location => GoRouteData.$location(
-        '/my-list',
+        '/anime-list',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -171,7 +178,25 @@ extension $AnimeListEditorRouteExtension on AnimeListEditorRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/my-list/anime/${Uri.encodeComponent(id.toString())}/edit',
+        '/anime-list/anime/${Uri.encodeComponent(id.toString())}/edit',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $MangaListRouteExtension on MangaListRoute {
+  static MangaListRoute _fromState(GoRouterState state) =>
+      const MangaListRoute();
+
+  String get location => GoRouteData.$location(
+        '/manga-list',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -191,7 +216,7 @@ extension $MangaListEditorRouteExtension on MangaListEditorRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/my-list/manga/${Uri.encodeComponent(id.toString())}/edit',
+        '/manga-list/manga/${Uri.encodeComponent(id.toString())}/edit',
       );
 
   void go(BuildContext context) => context.go(location);
