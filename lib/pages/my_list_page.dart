@@ -174,11 +174,14 @@ class MyListPage extends HookWidget {
           ],
         ),
       ),
-      body: ListEntries(
-        mediaType: mediaType,
-        selectedListKey: selectedListKey,
-        displayedList: displayedList,
-        scrollController: scrollController,
+      body: RefreshIndicator(
+        onRefresh: () => Future<void>(() => fetchRawLists()),
+        child: ListEntries(
+          mediaType: mediaType,
+          selectedListKey: selectedListKey,
+          displayedList: displayedList,
+          scrollController: scrollController,
+        ),
       ),
     );
   }
