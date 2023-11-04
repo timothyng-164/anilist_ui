@@ -1,0 +1,80 @@
+query GetUserProfile($perPageFavorites: Int) {
+  Viewer {
+    id
+    name
+    about
+    siteUrl
+    avatar {
+      medium
+    }
+    favourites {
+      anime(perPage: $perPageFavorites) {
+        ...mediaFavorite
+      }
+      manga(perPage: $perPageFavorites) {
+        ...mediaFavorite
+      }
+    }
+    statistics {
+      anime {
+        ...userStats
+      }
+      manga {
+        ...userStats
+      }
+    }
+  }
+}
+
+fragment mediaFavorite on MediaConnection {
+  nodes {
+    id
+    type
+    title {
+      userPreferred
+    }
+    coverImage {
+      medium
+    }
+  }
+}
+
+fragment userStats on UserStatistics {
+  count
+  minutesWatched
+  episodesWatched
+  chaptersRead
+  volumesRead
+  formats {
+    count
+    minutesWatched
+    chaptersRead
+    format
+  }
+  statuses {
+    count
+    minutesWatched
+    chaptersRead
+    status
+  }
+  releaseYears {
+    count
+    minutesWatched
+    chaptersRead
+    releaseYear
+  }
+  genres {
+    count
+    minutesWatched
+    chaptersRead
+    genre
+  }
+  tags {
+    count
+    minutesWatched
+    chaptersRead
+    tag {
+      name
+    }
+  }
+}

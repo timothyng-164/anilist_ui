@@ -114,7 +114,8 @@ class ProfileRoute extends GoRouteData {
   const ProfileRoute();
 
   @override
-  Widget build(context, state) => const ProfilePage();
+  Widget build(context, state) =>
+      const AuthenticatedPageWrapper(child: ProfilePage());
 }
 
 class AnimeListRoute extends GoRouteData {

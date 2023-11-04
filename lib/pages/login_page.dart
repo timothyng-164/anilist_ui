@@ -2,14 +2,14 @@ import 'package:anilist_ui/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../common/util/navigation_util.dart';
 import '../state/auth_state.dart';
 
 // TODO: move client ID to config file
 const String _anilistClientID = '14759';
-Uri _anlistOauthUrl = Uri.parse(
-    'https://anilist.co/api/v2/oauth/authorize?client_id=$_anilistClientID&response_type=token');
+String oauthLink =
+    'https://anilist.co/api/v2/oauth/authorize?client_id=$_anilistClientID&response_type=token';
 
 class LoginPage extends HookWidget {
   const LoginPage({super.key});
@@ -77,7 +77,8 @@ class PageContent extends HookWidget {
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () async {
-            await _launchOauth();
+            bool success = await NavigationUtil.launchExternalUrl(oauthLink);
+            // TODO: handle failure;
             loginSelected.value = true;
           },
           child: const Text('Login'),
@@ -153,16 +154,5 @@ class PageContent extends HookWidget {
     return isCheckingAuth.value
         ? const Center(child: CircularProgressIndicator())
         : promptView;
-  }
-}
-
-Future<void> _launchOauth() async {
-  try {
-    if (!await launchUrl(_anlistOauthUrl)) {
-      throw Exception('Could not launch $_anlistOauthUrl');
-    }
-  } catch (e) {
-    // TODO: display error in snackbar.
-    print('Unknown exception opening oauth url: $e');
   }
 }

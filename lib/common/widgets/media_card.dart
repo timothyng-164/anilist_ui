@@ -2,6 +2,7 @@ import 'package:anilist_ui/routing/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../graphql/anilist/schema.graphql.dart';
+import '../util/navigation_util.dart';
 import 'image_card.dart';
 
 class MediaCard extends StatelessWidget {
@@ -26,19 +27,8 @@ class MediaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void navigateToMedia() {
-      if (mediaType == Enum$MediaType.ANIME) {
-        AnimeByIDRoute(mediaId).push(context);
-      } else if (mediaType == Enum$MediaType.MANGA) {
-        MangaByIDRoute(mediaId).push(context);
-      } else {
-        // TODO: display error in snackbar
-        print("Unable to route media type: $mediaType");
-      }
-    }
-
     return InkWell(
-      onTap: navigateToMedia,
+      onTap: () => NavigationUtil.navigateToMedia(mediaType, mediaId, context),
       child: ImageCard(
         height: height,
         width: width,

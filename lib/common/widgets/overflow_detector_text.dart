@@ -16,11 +16,7 @@ class OverflowDetectorText extends StatelessWidget {
       maxLines: child.maxLines,
       textAlign: child.textAlign ?? TextAlign.start,
       textDirection: child.textDirection ?? TextDirection.ltr,
-      text: child.textSpan ??
-          TextSpan(
-            text: child.data,
-            style: child.style,
-          ),
+      text: child.textSpan ?? TextSpan(text: child.data, style: child.style),
     );
 
     return LayoutBuilder(

@@ -72,6 +72,7 @@ class MyListPage extends HookWidget {
         chunk++;
         hasNextChunk = data?.hasNextChunk ?? false;
       }
+      isLoading.value = false;
       rawLists.value = tempRawLists;
     }
 
@@ -106,8 +107,6 @@ class MyListPage extends HookWidget {
       if (sortOrder.value == SortOrder.DESC) {
         filteredList = filteredList.reversed.toList();
       }
-
-      // TODO: reset scroll position to top. Also, why is drag not working for mobile view?
 
       displayedList.value = filteredList;
       isLoading.value = false;

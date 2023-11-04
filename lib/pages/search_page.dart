@@ -214,7 +214,6 @@ class SearchFilters extends HookWidget {
           trailing: [
             Tooltip(
               message: 'Filter Search',
-              // TODO: use Flutter Dialog for complex search filters
               child: PopupMenuButton<Enum$MediaType?>(
                 icon: const Icon(Icons.filter_list),
                 onSelected: (value) {
@@ -267,8 +266,8 @@ class SearchResults extends HookWidget {
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
           childAspectRatio: 600 / 200,
-          mainAxisSpacing: 6,
-          crossAxisSpacing: 6,
+          mainAxisSpacing: 1,
+          crossAxisSpacing: 1,
         ),
         controller: scrollController,
         itemCount: isLoadingMore.value

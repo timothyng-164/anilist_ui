@@ -562,6 +562,7 @@ class DescriptionSection extends HookWidget {
             parsedDescription,
             overflow: isExpanded.value ? null : TextOverflow.ellipsis,
             maxLines: isExpanded.value ? null : 4,
+            textScaleFactor: ScaleSize.scaleFactor(context),
           ),
         ),
         isOverflowing.value || isExpanded.value

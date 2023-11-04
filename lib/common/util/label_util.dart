@@ -143,6 +143,20 @@ class LabelUtil {
     }
     return text;
   }
+
+  static String durationLabel(Duration duration) {
+    if (duration.inDays >= 1) return 'Days';
+    if (duration.inHours >= 1) return 'Hours';
+    if (duration.inMinutes >= 1) return 'Minutes';
+    return 'Seconds';
+  }
+
+  static int durationValue(Duration duration) {
+    if (duration.inDays >= 1) return duration.inDays;
+    if (duration.inHours >= 1) return duration.inHours;
+    if (duration.inHours >= 1) return duration.inMinutes;
+    return duration.inSeconds;
+  }
 }
 
 String _capitalizeAndReplace(String s) {

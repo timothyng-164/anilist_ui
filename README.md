@@ -45,7 +45,9 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 8. run dart fix
 9. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs
 10. on mutations, update MediaListCollection cache on save and delete
-11. refactoring
+11. check spacing on android emulator
+13. rename fragments to lower camelcase for naming convention
+12. refactoring
     - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
     - remove functions out of build():
       - https://www.reddit.com/r/FlutterDev/comments/ra8ygm/are_there_any_negative_effects_for_declaring/
