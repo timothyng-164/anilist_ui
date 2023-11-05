@@ -54,7 +54,10 @@ class MediaByIdPage extends HookWidget {
         child: QueryResultHandler(
           result: result,
           refetch: query.refetch,
-          child: PageContent(id: id, media: media),
+          child: RefreshIndicator(
+            onRefresh: () => Future<void>(() => query.refetch()),
+            child: PageContent(id: id, media: media),
+          ),
         ),
       ),
     );
@@ -100,6 +103,7 @@ class PageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     if (media == null) return const SizedBox.shrink();
     return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Row(
         children: [
           const Spacer(flex: 1),
