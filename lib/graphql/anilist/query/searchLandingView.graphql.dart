@@ -5,8 +5,8 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Fragment$media {
-  Fragment$media({
+class Fragment$Media {
+  Fragment$Media({
     required this.id,
     this.title,
     this.coverImage,
@@ -14,24 +14,24 @@ class Fragment$media {
     this.$__typename = 'Media',
   });
 
-  factory Fragment$media.fromJson(Map<String, dynamic> json) {
+  factory Fragment$Media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
     final l$nextAiringEpisode = json['nextAiringEpisode'];
     final l$$__typename = json['__typename'];
-    return Fragment$media(
+    return Fragment$Media(
       id: (l$id as int),
       title: l$title == null
           ? null
-          : Fragment$media$title.fromJson((l$title as Map<String, dynamic>)),
+          : Fragment$Media$title.fromJson((l$title as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
-          : Fragment$media$coverImage.fromJson(
+          : Fragment$Media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
       nextAiringEpisode: l$nextAiringEpisode == null
           ? null
-          : Fragment$media$nextAiringEpisode.fromJson(
+          : Fragment$Media$nextAiringEpisode.fromJson(
               (l$nextAiringEpisode as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -39,11 +39,11 @@ class Fragment$media {
 
   final int id;
 
-  final Fragment$media$title? title;
+  final Fragment$Media$title? title;
 
-  final Fragment$media$coverImage? coverImage;
+  final Fragment$Media$coverImage? coverImage;
 
-  final Fragment$media$nextAiringEpisode? nextAiringEpisode;
+  final Fragment$Media$nextAiringEpisode? nextAiringEpisode;
 
   final String $__typename;
 
@@ -83,7 +83,7 @@ class Fragment$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$media) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$Media) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -115,45 +115,45 @@ class Fragment$media {
   }
 }
 
-extension UtilityExtension$Fragment$media on Fragment$media {
-  CopyWith$Fragment$media<Fragment$media> get copyWith =>
-      CopyWith$Fragment$media(
+extension UtilityExtension$Fragment$Media on Fragment$Media {
+  CopyWith$Fragment$Media<Fragment$Media> get copyWith =>
+      CopyWith$Fragment$Media(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$media<TRes> {
-  factory CopyWith$Fragment$media(
-    Fragment$media instance,
-    TRes Function(Fragment$media) then,
-  ) = _CopyWithImpl$Fragment$media;
+abstract class CopyWith$Fragment$Media<TRes> {
+  factory CopyWith$Fragment$Media(
+    Fragment$Media instance,
+    TRes Function(Fragment$Media) then,
+  ) = _CopyWithImpl$Fragment$Media;
 
-  factory CopyWith$Fragment$media.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$media;
+  factory CopyWith$Fragment$Media.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Media;
 
   TRes call({
     int? id,
-    Fragment$media$title? title,
-    Fragment$media$coverImage? coverImage,
-    Fragment$media$nextAiringEpisode? nextAiringEpisode,
+    Fragment$Media$title? title,
+    Fragment$Media$coverImage? coverImage,
+    Fragment$Media$nextAiringEpisode? nextAiringEpisode,
     String? $__typename,
   });
-  CopyWith$Fragment$media$title<TRes> get title;
-  CopyWith$Fragment$media$coverImage<TRes> get coverImage;
-  CopyWith$Fragment$media$nextAiringEpisode<TRes> get nextAiringEpisode;
+  CopyWith$Fragment$Media$title<TRes> get title;
+  CopyWith$Fragment$Media$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$Media$nextAiringEpisode<TRes> get nextAiringEpisode;
 }
 
-class _CopyWithImpl$Fragment$media<TRes>
-    implements CopyWith$Fragment$media<TRes> {
-  _CopyWithImpl$Fragment$media(
+class _CopyWithImpl$Fragment$Media<TRes>
+    implements CopyWith$Fragment$Media<TRes> {
+  _CopyWithImpl$Fragment$Media(
     this._instance,
     this._then,
   );
 
-  final Fragment$media _instance;
+  final Fragment$Media _instance;
 
-  final TRes Function(Fragment$media) _then;
+  final TRes Function(Fragment$Media) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -164,73 +164,73 @@ class _CopyWithImpl$Fragment$media<TRes>
     Object? nextAiringEpisode = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$media(
+      _then(Fragment$Media(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         title: title == _undefined
             ? _instance.title
-            : (title as Fragment$media$title?),
+            : (title as Fragment$Media$title?),
         coverImage: coverImage == _undefined
             ? _instance.coverImage
-            : (coverImage as Fragment$media$coverImage?),
+            : (coverImage as Fragment$Media$coverImage?),
         nextAiringEpisode: nextAiringEpisode == _undefined
             ? _instance.nextAiringEpisode
-            : (nextAiringEpisode as Fragment$media$nextAiringEpisode?),
+            : (nextAiringEpisode as Fragment$Media$nextAiringEpisode?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Fragment$media$title<TRes> get title {
+  CopyWith$Fragment$Media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
-        ? CopyWith$Fragment$media$title.stub(_then(_instance))
-        : CopyWith$Fragment$media$title(local$title, (e) => call(title: e));
+        ? CopyWith$Fragment$Media$title.stub(_then(_instance))
+        : CopyWith$Fragment$Media$title(local$title, (e) => call(title: e));
   }
 
-  CopyWith$Fragment$media$coverImage<TRes> get coverImage {
+  CopyWith$Fragment$Media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
-        ? CopyWith$Fragment$media$coverImage.stub(_then(_instance))
-        : CopyWith$Fragment$media$coverImage(
+        ? CopyWith$Fragment$Media$coverImage.stub(_then(_instance))
+        : CopyWith$Fragment$Media$coverImage(
             local$coverImage, (e) => call(coverImage: e));
   }
 
-  CopyWith$Fragment$media$nextAiringEpisode<TRes> get nextAiringEpisode {
+  CopyWith$Fragment$Media$nextAiringEpisode<TRes> get nextAiringEpisode {
     final local$nextAiringEpisode = _instance.nextAiringEpisode;
     return local$nextAiringEpisode == null
-        ? CopyWith$Fragment$media$nextAiringEpisode.stub(_then(_instance))
-        : CopyWith$Fragment$media$nextAiringEpisode(
+        ? CopyWith$Fragment$Media$nextAiringEpisode.stub(_then(_instance))
+        : CopyWith$Fragment$Media$nextAiringEpisode(
             local$nextAiringEpisode, (e) => call(nextAiringEpisode: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$media<TRes>
-    implements CopyWith$Fragment$media<TRes> {
-  _CopyWithStubImpl$Fragment$media(this._res);
+class _CopyWithStubImpl$Fragment$Media<TRes>
+    implements CopyWith$Fragment$Media<TRes> {
+  _CopyWithStubImpl$Fragment$Media(this._res);
 
   TRes _res;
 
   call({
     int? id,
-    Fragment$media$title? title,
-    Fragment$media$coverImage? coverImage,
-    Fragment$media$nextAiringEpisode? nextAiringEpisode,
+    Fragment$Media$title? title,
+    Fragment$Media$coverImage? coverImage,
+    Fragment$Media$nextAiringEpisode? nextAiringEpisode,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Fragment$media$title<TRes> get title =>
-      CopyWith$Fragment$media$title.stub(_res);
+  CopyWith$Fragment$Media$title<TRes> get title =>
+      CopyWith$Fragment$Media$title.stub(_res);
 
-  CopyWith$Fragment$media$coverImage<TRes> get coverImage =>
-      CopyWith$Fragment$media$coverImage.stub(_res);
+  CopyWith$Fragment$Media$coverImage<TRes> get coverImage =>
+      CopyWith$Fragment$Media$coverImage.stub(_res);
 
-  CopyWith$Fragment$media$nextAiringEpisode<TRes> get nextAiringEpisode =>
-      CopyWith$Fragment$media$nextAiringEpisode.stub(_res);
+  CopyWith$Fragment$Media$nextAiringEpisode<TRes> get nextAiringEpisode =>
+      CopyWith$Fragment$Media$nextAiringEpisode.stub(_res);
 }
 
-const fragmentDefinitionmedia = FragmentDefinitionNode(
-  name: NameNode(value: 'media'),
+const fragmentDefinitionMedia = FragmentDefinitionNode(
+  name: NameNode(value: 'Media'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
     name: NameNode(value: 'Media'),
@@ -341,13 +341,13 @@ const fragmentDefinitionmedia = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentmedia = DocumentNode(definitions: [
-  fragmentDefinitionmedia,
+const documentNodeFragmentMedia = DocumentNode(definitions: [
+  fragmentDefinitionMedia,
 ]);
 
-extension ClientExtension$Fragment$media on graphql.GraphQLClient {
-  void writeFragment$media({
-    required Fragment$media data,
+extension ClientExtension$Fragment$Media on graphql.GraphQLClient {
+  void writeFragment$Media({
+    required Fragment$Media data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -355,14 +355,14 @@ extension ClientExtension$Fragment$media on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'media',
-            document: documentNodeFragmentmedia,
+            fragmentName: 'Media',
+            document: documentNodeFragmentMedia,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$media? readFragment$media({
+  Fragment$Media? readFragment$Media({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -370,26 +370,26 @@ extension ClientExtension$Fragment$media on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'media',
-          document: documentNodeFragmentmedia,
+          fragmentName: 'Media',
+          document: documentNodeFragmentMedia,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$media.fromJson(result);
+    return result == null ? null : Fragment$Media.fromJson(result);
   }
 }
 
-class Fragment$media$title {
-  Fragment$media$title({
+class Fragment$Media$title {
+  Fragment$Media$title({
     this.userPreferred,
     this.$__typename = 'MediaTitle',
   });
 
-  factory Fragment$media$title.fromJson(Map<String, dynamic> json) {
+  factory Fragment$Media$title.fromJson(Map<String, dynamic> json) {
     final l$userPreferred = json['userPreferred'];
     final l$$__typename = json['__typename'];
-    return Fragment$media$title(
+    return Fragment$Media$title(
       userPreferred: (l$userPreferred as String?),
       $__typename: (l$$__typename as String),
     );
@@ -423,7 +423,7 @@ class Fragment$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$media$title) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$Media$title) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$userPreferred = userPreferred;
@@ -440,22 +440,22 @@ class Fragment$media$title {
   }
 }
 
-extension UtilityExtension$Fragment$media$title on Fragment$media$title {
-  CopyWith$Fragment$media$title<Fragment$media$title> get copyWith =>
-      CopyWith$Fragment$media$title(
+extension UtilityExtension$Fragment$Media$title on Fragment$Media$title {
+  CopyWith$Fragment$Media$title<Fragment$Media$title> get copyWith =>
+      CopyWith$Fragment$Media$title(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$media$title<TRes> {
-  factory CopyWith$Fragment$media$title(
-    Fragment$media$title instance,
-    TRes Function(Fragment$media$title) then,
-  ) = _CopyWithImpl$Fragment$media$title;
+abstract class CopyWith$Fragment$Media$title<TRes> {
+  factory CopyWith$Fragment$Media$title(
+    Fragment$Media$title instance,
+    TRes Function(Fragment$Media$title) then,
+  ) = _CopyWithImpl$Fragment$Media$title;
 
-  factory CopyWith$Fragment$media$title.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$media$title;
+  factory CopyWith$Fragment$Media$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Media$title;
 
   TRes call({
     String? userPreferred,
@@ -463,16 +463,16 @@ abstract class CopyWith$Fragment$media$title<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$media$title<TRes>
-    implements CopyWith$Fragment$media$title<TRes> {
-  _CopyWithImpl$Fragment$media$title(
+class _CopyWithImpl$Fragment$Media$title<TRes>
+    implements CopyWith$Fragment$Media$title<TRes> {
+  _CopyWithImpl$Fragment$Media$title(
     this._instance,
     this._then,
   );
 
-  final Fragment$media$title _instance;
+  final Fragment$Media$title _instance;
 
-  final TRes Function(Fragment$media$title) _then;
+  final TRes Function(Fragment$Media$title) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -480,7 +480,7 @@ class _CopyWithImpl$Fragment$media$title<TRes>
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$media$title(
+      _then(Fragment$Media$title(
         userPreferred: userPreferred == _undefined
             ? _instance.userPreferred
             : (userPreferred as String?),
@@ -490,9 +490,9 @@ class _CopyWithImpl$Fragment$media$title<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$media$title<TRes>
-    implements CopyWith$Fragment$media$title<TRes> {
-  _CopyWithStubImpl$Fragment$media$title(this._res);
+class _CopyWithStubImpl$Fragment$Media$title<TRes>
+    implements CopyWith$Fragment$Media$title<TRes> {
+  _CopyWithStubImpl$Fragment$Media$title(this._res);
 
   TRes _res;
 
@@ -503,20 +503,20 @@ class _CopyWithStubImpl$Fragment$media$title<TRes>
       _res;
 }
 
-class Fragment$media$coverImage {
-  Fragment$media$coverImage({
+class Fragment$Media$coverImage {
+  Fragment$Media$coverImage({
     this.large,
     this.medium,
     this.color,
     this.$__typename = 'MediaCoverImage',
   });
 
-  factory Fragment$media$coverImage.fromJson(Map<String, dynamic> json) {
+  factory Fragment$Media$coverImage.fromJson(Map<String, dynamic> json) {
     final l$large = json['large'];
     final l$medium = json['medium'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Fragment$media$coverImage(
+    return Fragment$Media$coverImage(
       large: (l$large as String?),
       medium: (l$medium as String?),
       color: (l$color as String?),
@@ -564,7 +564,7 @@ class Fragment$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$media$coverImage) ||
+    if (!(other is Fragment$Media$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -592,23 +592,23 @@ class Fragment$media$coverImage {
   }
 }
 
-extension UtilityExtension$Fragment$media$coverImage
-    on Fragment$media$coverImage {
-  CopyWith$Fragment$media$coverImage<Fragment$media$coverImage> get copyWith =>
-      CopyWith$Fragment$media$coverImage(
+extension UtilityExtension$Fragment$Media$coverImage
+    on Fragment$Media$coverImage {
+  CopyWith$Fragment$Media$coverImage<Fragment$Media$coverImage> get copyWith =>
+      CopyWith$Fragment$Media$coverImage(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$media$coverImage<TRes> {
-  factory CopyWith$Fragment$media$coverImage(
-    Fragment$media$coverImage instance,
-    TRes Function(Fragment$media$coverImage) then,
-  ) = _CopyWithImpl$Fragment$media$coverImage;
+abstract class CopyWith$Fragment$Media$coverImage<TRes> {
+  factory CopyWith$Fragment$Media$coverImage(
+    Fragment$Media$coverImage instance,
+    TRes Function(Fragment$Media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$Media$coverImage;
 
-  factory CopyWith$Fragment$media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$media$coverImage;
+  factory CopyWith$Fragment$Media$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Media$coverImage;
 
   TRes call({
     String? large,
@@ -618,16 +618,16 @@ abstract class CopyWith$Fragment$media$coverImage<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$media$coverImage<TRes>
-    implements CopyWith$Fragment$media$coverImage<TRes> {
-  _CopyWithImpl$Fragment$media$coverImage(
+class _CopyWithImpl$Fragment$Media$coverImage<TRes>
+    implements CopyWith$Fragment$Media$coverImage<TRes> {
+  _CopyWithImpl$Fragment$Media$coverImage(
     this._instance,
     this._then,
   );
 
-  final Fragment$media$coverImage _instance;
+  final Fragment$Media$coverImage _instance;
 
-  final TRes Function(Fragment$media$coverImage) _then;
+  final TRes Function(Fragment$Media$coverImage) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -637,7 +637,7 @@ class _CopyWithImpl$Fragment$media$coverImage<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$media$coverImage(
+      _then(Fragment$Media$coverImage(
         large: large == _undefined ? _instance.large : (large as String?),
         medium: medium == _undefined ? _instance.medium : (medium as String?),
         color: color == _undefined ? _instance.color : (color as String?),
@@ -647,9 +647,9 @@ class _CopyWithImpl$Fragment$media$coverImage<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$media$coverImage<TRes>
-    implements CopyWith$Fragment$media$coverImage<TRes> {
-  _CopyWithStubImpl$Fragment$media$coverImage(this._res);
+class _CopyWithStubImpl$Fragment$Media$coverImage<TRes>
+    implements CopyWith$Fragment$Media$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$Media$coverImage(this._res);
 
   TRes _res;
 
@@ -662,18 +662,18 @@ class _CopyWithStubImpl$Fragment$media$coverImage<TRes>
       _res;
 }
 
-class Fragment$media$nextAiringEpisode {
-  Fragment$media$nextAiringEpisode({
+class Fragment$Media$nextAiringEpisode {
+  Fragment$Media$nextAiringEpisode({
     required this.episode,
     required this.timeUntilAiring,
     this.$__typename = 'AiringSchedule',
   });
 
-  factory Fragment$media$nextAiringEpisode.fromJson(Map<String, dynamic> json) {
+  factory Fragment$Media$nextAiringEpisode.fromJson(Map<String, dynamic> json) {
     final l$episode = json['episode'];
     final l$timeUntilAiring = json['timeUntilAiring'];
     final l$$__typename = json['__typename'];
-    return Fragment$media$nextAiringEpisode(
+    return Fragment$Media$nextAiringEpisode(
       episode: (l$episode as int),
       timeUntilAiring: (l$timeUntilAiring as int),
       $__typename: (l$$__typename as String),
@@ -714,7 +714,7 @@ class Fragment$media$nextAiringEpisode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$media$nextAiringEpisode) ||
+    if (!(other is Fragment$Media$nextAiringEpisode) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -737,23 +737,23 @@ class Fragment$media$nextAiringEpisode {
   }
 }
 
-extension UtilityExtension$Fragment$media$nextAiringEpisode
-    on Fragment$media$nextAiringEpisode {
-  CopyWith$Fragment$media$nextAiringEpisode<Fragment$media$nextAiringEpisode>
-      get copyWith => CopyWith$Fragment$media$nextAiringEpisode(
+extension UtilityExtension$Fragment$Media$nextAiringEpisode
+    on Fragment$Media$nextAiringEpisode {
+  CopyWith$Fragment$Media$nextAiringEpisode<Fragment$Media$nextAiringEpisode>
+      get copyWith => CopyWith$Fragment$Media$nextAiringEpisode(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$media$nextAiringEpisode<TRes> {
-  factory CopyWith$Fragment$media$nextAiringEpisode(
-    Fragment$media$nextAiringEpisode instance,
-    TRes Function(Fragment$media$nextAiringEpisode) then,
-  ) = _CopyWithImpl$Fragment$media$nextAiringEpisode;
+abstract class CopyWith$Fragment$Media$nextAiringEpisode<TRes> {
+  factory CopyWith$Fragment$Media$nextAiringEpisode(
+    Fragment$Media$nextAiringEpisode instance,
+    TRes Function(Fragment$Media$nextAiringEpisode) then,
+  ) = _CopyWithImpl$Fragment$Media$nextAiringEpisode;
 
-  factory CopyWith$Fragment$media$nextAiringEpisode.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$media$nextAiringEpisode;
+  factory CopyWith$Fragment$Media$nextAiringEpisode.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Media$nextAiringEpisode;
 
   TRes call({
     int? episode,
@@ -762,16 +762,16 @@ abstract class CopyWith$Fragment$media$nextAiringEpisode<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$media$nextAiringEpisode<TRes>
-    implements CopyWith$Fragment$media$nextAiringEpisode<TRes> {
-  _CopyWithImpl$Fragment$media$nextAiringEpisode(
+class _CopyWithImpl$Fragment$Media$nextAiringEpisode<TRes>
+    implements CopyWith$Fragment$Media$nextAiringEpisode<TRes> {
+  _CopyWithImpl$Fragment$Media$nextAiringEpisode(
     this._instance,
     this._then,
   );
 
-  final Fragment$media$nextAiringEpisode _instance;
+  final Fragment$Media$nextAiringEpisode _instance;
 
-  final TRes Function(Fragment$media$nextAiringEpisode) _then;
+  final TRes Function(Fragment$Media$nextAiringEpisode) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -780,7 +780,7 @@ class _CopyWithImpl$Fragment$media$nextAiringEpisode<TRes>
     Object? timeUntilAiring = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$media$nextAiringEpisode(
+      _then(Fragment$Media$nextAiringEpisode(
         episode: episode == _undefined || episode == null
             ? _instance.episode
             : (episode as int),
@@ -794,9 +794,9 @@ class _CopyWithImpl$Fragment$media$nextAiringEpisode<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$media$nextAiringEpisode<TRes>
-    implements CopyWith$Fragment$media$nextAiringEpisode<TRes> {
-  _CopyWithStubImpl$Fragment$media$nextAiringEpisode(this._res);
+class _CopyWithStubImpl$Fragment$Media$nextAiringEpisode<TRes>
+    implements CopyWith$Fragment$Media$nextAiringEpisode<TRes> {
+  _CopyWithStubImpl$Fragment$Media$nextAiringEpisode(this._res);
 
   TRes _res;
 
@@ -1475,7 +1475,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1539,7 +1539,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1603,7 +1603,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1659,7 +1659,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1715,7 +1715,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1771,7 +1771,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1827,7 +1827,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'media'),
+                name: NameNode(value: 'Media'),
                 directives: [],
               ),
               FieldNode(
@@ -1857,7 +1857,7 @@ const documentNodeQuerySearchLandingPage = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionmedia,
+  fragmentDefinitionMedia,
 ]);
 Query$SearchLandingPage _parserFn$Query$SearchLandingPage(
         Map<String, dynamic> data) =>
@@ -2031,13 +2031,13 @@ class Query$SearchLandingPage$trending {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -2113,12 +2113,12 @@ abstract class CopyWith$Query$SearchLandingPage$trending<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$trending;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -2142,20 +2142,20 @@ class _CopyWithImpl$Query$SearchLandingPage$trending<TRes>
       _then(Query$SearchLandingPage$trending(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2168,7 +2168,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$trending<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -2189,13 +2189,13 @@ class Query$SearchLandingPage$season {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -2271,12 +2271,12 @@ abstract class CopyWith$Query$SearchLandingPage$season<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$season;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -2300,20 +2300,20 @@ class _CopyWithImpl$Query$SearchLandingPage$season<TRes>
       _then(Query$SearchLandingPage$season(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2326,7 +2326,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$season<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -2348,13 +2348,13 @@ class Query$SearchLandingPage$nextSeason {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -2431,12 +2431,12 @@ abstract class CopyWith$Query$SearchLandingPage$nextSeason<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$nextSeason;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -2460,20 +2460,20 @@ class _CopyWithImpl$Query$SearchLandingPage$nextSeason<TRes>
       _then(Query$SearchLandingPage$nextSeason(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2486,7 +2486,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$nextSeason<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -2507,13 +2507,13 @@ class Query$SearchLandingPage$updated {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -2589,12 +2589,12 @@ abstract class CopyWith$Query$SearchLandingPage$updated<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$updated;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -2618,20 +2618,20 @@ class _CopyWithImpl$Query$SearchLandingPage$updated<TRes>
       _then(Query$SearchLandingPage$updated(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2644,7 +2644,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$updated<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -2666,13 +2666,13 @@ class Query$SearchLandingPage$newlyAdded {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -2749,12 +2749,12 @@ abstract class CopyWith$Query$SearchLandingPage$newlyAdded<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$newlyAdded;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -2778,20 +2778,20 @@ class _CopyWithImpl$Query$SearchLandingPage$newlyAdded<TRes>
       _then(Query$SearchLandingPage$newlyAdded(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2804,7 +2804,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$newlyAdded<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -2825,13 +2825,13 @@ class Query$SearchLandingPage$popular {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -2907,12 +2907,12 @@ abstract class CopyWith$Query$SearchLandingPage$popular<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$popular;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -2936,20 +2936,20 @@ class _CopyWithImpl$Query$SearchLandingPage$popular<TRes>
       _then(Query$SearchLandingPage$popular(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2962,7 +2962,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$popular<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -2983,13 +2983,13 @@ class Query$SearchLandingPage$top {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$media.fromJson((e as Map<String, dynamic>)))
+              : Fragment$Media.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$media?>? media;
+  final List<Fragment$Media?>? media;
 
   final String $__typename;
 
@@ -3065,12 +3065,12 @@ abstract class CopyWith$Query$SearchLandingPage$top<TRes> {
       _CopyWithStubImpl$Query$SearchLandingPage$top;
 
   TRes call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Fragment$media?>? Function(
-              Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+      Iterable<Fragment$Media?>? Function(
+              Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
           _fn);
 }
 
@@ -3094,20 +3094,20 @@ class _CopyWithImpl$Query$SearchLandingPage$top<TRes>
       _then(Query$SearchLandingPage$top(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Fragment$media?>?),
+            : (media as List<Fragment$Media?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes media(
-          Iterable<Fragment$media?>? Function(
-                  Iterable<CopyWith$Fragment$media<Fragment$media>?>?)
+          Iterable<Fragment$Media?>? Function(
+                  Iterable<CopyWith$Fragment$Media<Fragment$Media>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$media(
+              : CopyWith$Fragment$Media(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -3120,7 +3120,7 @@ class _CopyWithStubImpl$Query$SearchLandingPage$top<TRes>
   TRes _res;
 
   call({
-    List<Fragment$media?>? media,
+    List<Fragment$Media?>? media,
     String? $__typename,
   }) =>
       _res;

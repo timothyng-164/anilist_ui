@@ -39,7 +39,7 @@ class MyListPage extends HookWidget {
     var selectedListKey = useState<String?>(null);
     var sortType = useState<MediaListSort>(MediaListSort.LAST_UPDATED);
     var sortOrder = useState<SortOrder>(SortOrder.DESC);
-    var displayedList = useState<List<Fragment$mediaListEntry>>([]);
+    var displayedList = useState<List<Fragment$MediaListEntry>>([]);
 
     void fetchRawLists() async {
       isLoading.value = true;
@@ -89,7 +89,7 @@ class MyListPage extends HookWidget {
             duration: const Duration(milliseconds: 200), curve: Curves.linear);
       }
 
-      List<Fragment$mediaListEntry?> selectedList = [];
+      List<Fragment$MediaListEntry?> selectedList = [];
       if (selectedListKey.value == null) {
         // combine all entries in status lists
         rawLists.value.values
@@ -100,7 +100,7 @@ class MyListPage extends HookWidget {
         selectedList = rawLists.value[selectedListKey.value]?.entries ?? [];
       }
 
-      List<Fragment$mediaListEntry> filteredList =
+      List<Fragment$MediaListEntry> filteredList =
           selectedList.whereNotNull().toList();
       filteredList
           .sort((a, b) => _compareMediaListEntries(sortType.value, a, b));
@@ -187,7 +187,7 @@ class MyListPage extends HookWidget {
   }
 
   int _compareMediaListEntries(MediaListSort sortType,
-      Fragment$mediaListEntry a, Fragment$mediaListEntry b) {
+      Fragment$MediaListEntry a, Fragment$MediaListEntry b) {
     switch (sortType) {
       case MediaListSort.TITLE:
         String titleA = a.media?.title?.userPreferred?.toLowerCase() ?? '';
@@ -216,7 +216,7 @@ class MyListPage extends HookWidget {
     }
   }
 
-  int _compareDate(Fragment$date? a, Fragment$date? b) {
+  int _compareDate(Fragment$Date? a, Fragment$Date? b) {
     int yearA = a?.year ?? 0, yearB = b?.year ?? 0;
     if (yearA > yearB) return 1;
     if (yearA < yearB) return -1;
@@ -263,7 +263,7 @@ class ListEntries extends HookWidget {
 
   final Enum$MediaType mediaType;
   final ValueNotifier<String?> selectedListKey;
-  final ValueNotifier<List<Fragment$mediaListEntry>> displayedList;
+  final ValueNotifier<List<Fragment$MediaListEntry>> displayedList;
   final ScrollController scrollController;
 
   @override
@@ -310,7 +310,7 @@ class ListEntries extends HookWidget {
 class ListCard extends HookWidget {
   const ListCard({super.key, required this.listEntry, required this.mediaType});
 
-  final Fragment$mediaListEntry listEntry;
+  final Fragment$MediaListEntry listEntry;
   final Enum$MediaType mediaType;
 
   @override
@@ -325,7 +325,7 @@ class ListCard extends HookWidget {
     );
   }
 
-  Widget _cardTopContent(Fragment$mediaListEntry listEntry) {
+  Widget _cardTopContent(Fragment$MediaListEntry listEntry) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,7 +357,7 @@ class ListCard extends HookWidget {
     );
   }
 
-  Widget _cardBottomContent(Fragment$mediaListEntry listEntry) {
+  Widget _cardBottomContent(Fragment$MediaListEntry listEntry) {
     int? progressTotal = mediaType == Enum$MediaType.ANIME
         ? listEntry.media?.episodes
         : listEntry.media?.chapters;

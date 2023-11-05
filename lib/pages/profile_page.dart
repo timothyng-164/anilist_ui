@@ -287,7 +287,7 @@ class FavoritesSection extends StatelessWidget {
       {super.key, required this.title, required this.favorites});
 
   final String title;
-  final List<Fragment$mediaFavorite$nodes?>? favorites;
+  final List<Fragment$MediaFavorite$nodes?>? favorites;
 
   @override
   Widget build(BuildContext context) {

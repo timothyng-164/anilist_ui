@@ -9,24 +9,24 @@ query GetUserProfile($perPageFavorites: Int) {
     }
     favourites {
       anime(perPage: $perPageFavorites) {
-        ...mediaFavorite
+        ...MediaFavorite
       }
       manga(perPage: $perPageFavorites) {
-        ...mediaFavorite
+        ...MediaFavorite
       }
     }
     statistics {
       anime {
-        ...userStats
+        ...UserStats
       }
       manga {
-        ...userStats
+        ...UserStats
       }
     }
   }
 }
 
-fragment mediaFavorite on MediaConnection {
+fragment MediaFavorite on MediaConnection {
   nodes {
     id
     type
@@ -39,7 +39,7 @@ fragment mediaFavorite on MediaConnection {
   }
 }
 
-fragment userStats on UserStatistics {
+fragment UserStats on UserStatistics {
   count
   minutesWatched
   episodesWatched

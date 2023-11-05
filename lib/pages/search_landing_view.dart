@@ -111,7 +111,7 @@ class ScrollingAnimeSection extends HookWidget {
       {super.key, required this.mediaList, required this.title});
 
   final String title;
-  final List<Fragment$media?> mediaList;
+  final List<Fragment$Media?> mediaList;
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class AnimeCard extends HookWidget {
     required this.isLargeScreen,
   });
 
-  final Fragment$media? media;
+  final Fragment$Media? media;
   final double cardWidth;
   final bool isLargeScreen;
 

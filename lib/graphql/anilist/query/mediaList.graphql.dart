@@ -1,12 +1,13 @@
 import '../schema.graphql.dart';
 import 'dart:async';
+import 'mediaById.graphql.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Fragment$mediaListEntry {
-  Fragment$mediaListEntry({
+class Fragment$MediaListEntry {
+  Fragment$MediaListEntry({
     required this.id,
     this.status,
     this.startedAt,
@@ -19,7 +20,7 @@ class Fragment$mediaListEntry {
     this.$__typename = 'MediaList',
   });
 
-  factory Fragment$mediaListEntry.fromJson(Map<String, dynamic> json) {
+  factory Fragment$MediaListEntry.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$status = json['status'];
     final l$startedAt = json['startedAt'];
@@ -30,24 +31,24 @@ class Fragment$mediaListEntry {
     final l$progressVolumes = json['progressVolumes'];
     final l$media = json['media'];
     final l$$__typename = json['__typename'];
-    return Fragment$mediaListEntry(
+    return Fragment$MediaListEntry(
       id: (l$id as int),
       status: l$status == null
           ? null
           : fromJson$Enum$MediaListStatus((l$status as String)),
       startedAt: l$startedAt == null
           ? null
-          : Fragment$date.fromJson((l$startedAt as Map<String, dynamic>)),
+          : Fragment$Date.fromJson((l$startedAt as Map<String, dynamic>)),
       completedAt: l$completedAt == null
           ? null
-          : Fragment$date.fromJson((l$completedAt as Map<String, dynamic>)),
+          : Fragment$Date.fromJson((l$completedAt as Map<String, dynamic>)),
       updatedAt: (l$updatedAt as int?),
       createdAt: (l$createdAt as int?),
       progress: (l$progress as int?),
       progressVolumes: (l$progressVolumes as int?),
       media: l$media == null
           ? null
-          : Fragment$mediaListEntry$media.fromJson(
+          : Fragment$MediaListEntry$media.fromJson(
               (l$media as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -57,9 +58,9 @@ class Fragment$mediaListEntry {
 
   final Enum$MediaListStatus? status;
 
-  final Fragment$date? startedAt;
+  final Fragment$Date? startedAt;
 
-  final Fragment$date? completedAt;
+  final Fragment$Date? completedAt;
 
   final int? updatedAt;
 
@@ -69,7 +70,7 @@ class Fragment$mediaListEntry {
 
   final int? progressVolumes;
 
-  final Fragment$mediaListEntry$media? media;
+  final Fragment$MediaListEntry$media? media;
 
   final String $__typename;
 
@@ -130,7 +131,7 @@ class Fragment$mediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$mediaListEntry) ||
+    if (!(other is Fragment$MediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -188,50 +189,50 @@ class Fragment$mediaListEntry {
   }
 }
 
-extension UtilityExtension$Fragment$mediaListEntry on Fragment$mediaListEntry {
-  CopyWith$Fragment$mediaListEntry<Fragment$mediaListEntry> get copyWith =>
-      CopyWith$Fragment$mediaListEntry(
+extension UtilityExtension$Fragment$MediaListEntry on Fragment$MediaListEntry {
+  CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry> get copyWith =>
+      CopyWith$Fragment$MediaListEntry(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$mediaListEntry<TRes> {
-  factory CopyWith$Fragment$mediaListEntry(
-    Fragment$mediaListEntry instance,
-    TRes Function(Fragment$mediaListEntry) then,
-  ) = _CopyWithImpl$Fragment$mediaListEntry;
+abstract class CopyWith$Fragment$MediaListEntry<TRes> {
+  factory CopyWith$Fragment$MediaListEntry(
+    Fragment$MediaListEntry instance,
+    TRes Function(Fragment$MediaListEntry) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry;
 
-  factory CopyWith$Fragment$mediaListEntry.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$mediaListEntry;
+  factory CopyWith$Fragment$MediaListEntry.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry;
 
   TRes call({
     int? id,
     Enum$MediaListStatus? status,
-    Fragment$date? startedAt,
-    Fragment$date? completedAt,
+    Fragment$Date? startedAt,
+    Fragment$Date? completedAt,
     int? updatedAt,
     int? createdAt,
     int? progress,
     int? progressVolumes,
-    Fragment$mediaListEntry$media? media,
+    Fragment$MediaListEntry$media? media,
     String? $__typename,
   });
-  CopyWith$Fragment$date<TRes> get startedAt;
-  CopyWith$Fragment$date<TRes> get completedAt;
-  CopyWith$Fragment$mediaListEntry$media<TRes> get media;
+  CopyWith$Fragment$Date<TRes> get startedAt;
+  CopyWith$Fragment$Date<TRes> get completedAt;
+  CopyWith$Fragment$MediaListEntry$media<TRes> get media;
 }
 
-class _CopyWithImpl$Fragment$mediaListEntry<TRes>
-    implements CopyWith$Fragment$mediaListEntry<TRes> {
-  _CopyWithImpl$Fragment$mediaListEntry(
+class _CopyWithImpl$Fragment$MediaListEntry<TRes>
+    implements CopyWith$Fragment$MediaListEntry<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry(
     this._instance,
     this._then,
   );
 
-  final Fragment$mediaListEntry _instance;
+  final Fragment$MediaListEntry _instance;
 
-  final TRes Function(Fragment$mediaListEntry) _then;
+  final TRes Function(Fragment$MediaListEntry) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -247,17 +248,17 @@ class _CopyWithImpl$Fragment$mediaListEntry<TRes>
     Object? media = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$mediaListEntry(
+      _then(Fragment$MediaListEntry(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         status: status == _undefined
             ? _instance.status
             : (status as Enum$MediaListStatus?),
         startedAt: startedAt == _undefined
             ? _instance.startedAt
-            : (startedAt as Fragment$date?),
+            : (startedAt as Fragment$Date?),
         completedAt: completedAt == _undefined
             ? _instance.completedAt
-            : (completedAt as Fragment$date?),
+            : (completedAt as Fragment$Date?),
         updatedAt:
             updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
         createdAt:
@@ -269,68 +270,68 @@ class _CopyWithImpl$Fragment$mediaListEntry<TRes>
             : (progressVolumes as int?),
         media: media == _undefined
             ? _instance.media
-            : (media as Fragment$mediaListEntry$media?),
+            : (media as Fragment$MediaListEntry$media?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Fragment$date<TRes> get startedAt {
+  CopyWith$Fragment$Date<TRes> get startedAt {
     final local$startedAt = _instance.startedAt;
     return local$startedAt == null
-        ? CopyWith$Fragment$date.stub(_then(_instance))
-        : CopyWith$Fragment$date(local$startedAt, (e) => call(startedAt: e));
+        ? CopyWith$Fragment$Date.stub(_then(_instance))
+        : CopyWith$Fragment$Date(local$startedAt, (e) => call(startedAt: e));
   }
 
-  CopyWith$Fragment$date<TRes> get completedAt {
+  CopyWith$Fragment$Date<TRes> get completedAt {
     final local$completedAt = _instance.completedAt;
     return local$completedAt == null
-        ? CopyWith$Fragment$date.stub(_then(_instance))
-        : CopyWith$Fragment$date(
+        ? CopyWith$Fragment$Date.stub(_then(_instance))
+        : CopyWith$Fragment$Date(
             local$completedAt, (e) => call(completedAt: e));
   }
 
-  CopyWith$Fragment$mediaListEntry$media<TRes> get media {
+  CopyWith$Fragment$MediaListEntry$media<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
-        ? CopyWith$Fragment$mediaListEntry$media.stub(_then(_instance))
-        : CopyWith$Fragment$mediaListEntry$media(
+        ? CopyWith$Fragment$MediaListEntry$media.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry$media(
             local$media, (e) => call(media: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$mediaListEntry<TRes>
-    implements CopyWith$Fragment$mediaListEntry<TRes> {
-  _CopyWithStubImpl$Fragment$mediaListEntry(this._res);
+class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
+    implements CopyWith$Fragment$MediaListEntry<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry(this._res);
 
   TRes _res;
 
   call({
     int? id,
     Enum$MediaListStatus? status,
-    Fragment$date? startedAt,
-    Fragment$date? completedAt,
+    Fragment$Date? startedAt,
+    Fragment$Date? completedAt,
     int? updatedAt,
     int? createdAt,
     int? progress,
     int? progressVolumes,
-    Fragment$mediaListEntry$media? media,
+    Fragment$MediaListEntry$media? media,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Fragment$date<TRes> get startedAt =>
-      CopyWith$Fragment$date.stub(_res);
+  CopyWith$Fragment$Date<TRes> get startedAt =>
+      CopyWith$Fragment$Date.stub(_res);
 
-  CopyWith$Fragment$date<TRes> get completedAt =>
-      CopyWith$Fragment$date.stub(_res);
+  CopyWith$Fragment$Date<TRes> get completedAt =>
+      CopyWith$Fragment$Date.stub(_res);
 
-  CopyWith$Fragment$mediaListEntry$media<TRes> get media =>
-      CopyWith$Fragment$mediaListEntry$media.stub(_res);
+  CopyWith$Fragment$MediaListEntry$media<TRes> get media =>
+      CopyWith$Fragment$MediaListEntry$media.stub(_res);
 }
 
-const fragmentDefinitionmediaListEntry = FragmentDefinitionNode(
-  name: NameNode(value: 'mediaListEntry'),
+const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaListEntry'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
     name: NameNode(value: 'MediaList'),
@@ -359,7 +360,7 @@ const fragmentDefinitionmediaListEntry = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FragmentSpreadNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           directives: [],
         ),
         FieldNode(
@@ -378,7 +379,7 @@ const fragmentDefinitionmediaListEntry = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FragmentSpreadNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           directives: [],
         ),
         FieldNode(
@@ -521,14 +522,14 @@ const fragmentDefinitionmediaListEntry = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentmediaListEntry = DocumentNode(definitions: [
-  fragmentDefinitionmediaListEntry,
-  fragmentDefinitiondate,
+const documentNodeFragmentMediaListEntry = DocumentNode(definitions: [
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionDate,
 ]);
 
-extension ClientExtension$Fragment$mediaListEntry on graphql.GraphQLClient {
-  void writeFragment$mediaListEntry({
-    required Fragment$mediaListEntry data,
+extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
+  void writeFragment$MediaListEntry({
+    required Fragment$MediaListEntry data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -536,14 +537,14 @@ extension ClientExtension$Fragment$mediaListEntry on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'mediaListEntry',
-            document: documentNodeFragmentmediaListEntry,
+            fragmentName: 'MediaListEntry',
+            document: documentNodeFragmentMediaListEntry,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$mediaListEntry? readFragment$mediaListEntry({
+  Fragment$MediaListEntry? readFragment$MediaListEntry({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -551,18 +552,18 @@ extension ClientExtension$Fragment$mediaListEntry on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'mediaListEntry',
-          document: documentNodeFragmentmediaListEntry,
+          fragmentName: 'MediaListEntry',
+          document: documentNodeFragmentMediaListEntry,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$mediaListEntry.fromJson(result);
+    return result == null ? null : Fragment$MediaListEntry.fromJson(result);
   }
 }
 
-class Fragment$mediaListEntry$media {
-  Fragment$mediaListEntry$media({
+class Fragment$MediaListEntry$media {
+  Fragment$MediaListEntry$media({
     required this.id,
     this.type,
     this.episodes,
@@ -573,7 +574,7 @@ class Fragment$mediaListEntry$media {
     this.$__typename = 'Media',
   });
 
-  factory Fragment$mediaListEntry$media.fromJson(Map<String, dynamic> json) {
+  factory Fragment$MediaListEntry$media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
     final l$episodes = json['episodes'];
@@ -582,7 +583,7 @@ class Fragment$mediaListEntry$media {
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
     final l$$__typename = json['__typename'];
-    return Fragment$mediaListEntry$media(
+    return Fragment$MediaListEntry$media(
       id: (l$id as int),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
       episodes: (l$episodes as int?),
@@ -590,11 +591,11 @@ class Fragment$mediaListEntry$media {
       volumes: (l$volumes as int?),
       title: l$title == null
           ? null
-          : Fragment$mediaListEntry$media$title.fromJson(
+          : Fragment$MediaListEntry$media$title.fromJson(
               (l$title as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
-          : Fragment$mediaListEntry$media$coverImage.fromJson(
+          : Fragment$MediaListEntry$media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -610,9 +611,9 @@ class Fragment$mediaListEntry$media {
 
   final int? volumes;
 
-  final Fragment$mediaListEntry$media$title? title;
+  final Fragment$MediaListEntry$media$title? title;
 
-  final Fragment$mediaListEntry$media$coverImage? coverImage;
+  final Fragment$MediaListEntry$media$coverImage? coverImage;
 
   final String $__typename;
 
@@ -664,7 +665,7 @@ class Fragment$mediaListEntry$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$mediaListEntry$media) ||
+    if (!(other is Fragment$MediaListEntry$media) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -712,23 +713,23 @@ class Fragment$mediaListEntry$media {
   }
 }
 
-extension UtilityExtension$Fragment$mediaListEntry$media
-    on Fragment$mediaListEntry$media {
-  CopyWith$Fragment$mediaListEntry$media<Fragment$mediaListEntry$media>
-      get copyWith => CopyWith$Fragment$mediaListEntry$media(
+extension UtilityExtension$Fragment$MediaListEntry$media
+    on Fragment$MediaListEntry$media {
+  CopyWith$Fragment$MediaListEntry$media<Fragment$MediaListEntry$media>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$mediaListEntry$media<TRes> {
-  factory CopyWith$Fragment$mediaListEntry$media(
-    Fragment$mediaListEntry$media instance,
-    TRes Function(Fragment$mediaListEntry$media) then,
-  ) = _CopyWithImpl$Fragment$mediaListEntry$media;
+abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media(
+    Fragment$MediaListEntry$media instance,
+    TRes Function(Fragment$MediaListEntry$media) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media;
 
-  factory CopyWith$Fragment$mediaListEntry$media.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$mediaListEntry$media;
+  factory CopyWith$Fragment$MediaListEntry$media.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media;
 
   TRes call({
     int? id,
@@ -736,24 +737,24 @@ abstract class CopyWith$Fragment$mediaListEntry$media<TRes> {
     int? episodes,
     int? chapters,
     int? volumes,
-    Fragment$mediaListEntry$media$title? title,
-    Fragment$mediaListEntry$media$coverImage? coverImage,
+    Fragment$MediaListEntry$media$title? title,
+    Fragment$MediaListEntry$media$coverImage? coverImage,
     String? $__typename,
   });
-  CopyWith$Fragment$mediaListEntry$media$title<TRes> get title;
-  CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$MediaListEntry$media$title<TRes> get title;
+  CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage;
 }
 
-class _CopyWithImpl$Fragment$mediaListEntry$media<TRes>
-    implements CopyWith$Fragment$mediaListEntry$media<TRes> {
-  _CopyWithImpl$Fragment$mediaListEntry$media(
+class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media(
     this._instance,
     this._then,
   );
 
-  final Fragment$mediaListEntry$media _instance;
+  final Fragment$MediaListEntry$media _instance;
 
-  final TRes Function(Fragment$mediaListEntry$media) _then;
+  final TRes Function(Fragment$MediaListEntry$media) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -767,7 +768,7 @@ class _CopyWithImpl$Fragment$mediaListEntry$media<TRes>
     Object? coverImage = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$mediaListEntry$media(
+      _then(Fragment$MediaListEntry$media(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
         episodes:
@@ -777,36 +778,36 @@ class _CopyWithImpl$Fragment$mediaListEntry$media<TRes>
         volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
         title: title == _undefined
             ? _instance.title
-            : (title as Fragment$mediaListEntry$media$title?),
+            : (title as Fragment$MediaListEntry$media$title?),
         coverImage: coverImage == _undefined
             ? _instance.coverImage
-            : (coverImage as Fragment$mediaListEntry$media$coverImage?),
+            : (coverImage as Fragment$MediaListEntry$media$coverImage?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Fragment$mediaListEntry$media$title<TRes> get title {
+  CopyWith$Fragment$MediaListEntry$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
-        ? CopyWith$Fragment$mediaListEntry$media$title.stub(_then(_instance))
-        : CopyWith$Fragment$mediaListEntry$media$title(
+        ? CopyWith$Fragment$MediaListEntry$media$title.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry$media$title(
             local$title, (e) => call(title: e));
   }
 
-  CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> get coverImage {
+  CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
-        ? CopyWith$Fragment$mediaListEntry$media$coverImage.stub(
+        ? CopyWith$Fragment$MediaListEntry$media$coverImage.stub(
             _then(_instance))
-        : CopyWith$Fragment$mediaListEntry$media$coverImage(
+        : CopyWith$Fragment$MediaListEntry$media$coverImage(
             local$coverImage, (e) => call(coverImage: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$mediaListEntry$media<TRes>
-    implements CopyWith$Fragment$mediaListEntry$media<TRes> {
-  _CopyWithStubImpl$Fragment$mediaListEntry$media(this._res);
+class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media(this._res);
 
   TRes _res;
 
@@ -816,30 +817,30 @@ class _CopyWithStubImpl$Fragment$mediaListEntry$media<TRes>
     int? episodes,
     int? chapters,
     int? volumes,
-    Fragment$mediaListEntry$media$title? title,
-    Fragment$mediaListEntry$media$coverImage? coverImage,
+    Fragment$MediaListEntry$media$title? title,
+    Fragment$MediaListEntry$media$coverImage? coverImage,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Fragment$mediaListEntry$media$title<TRes> get title =>
-      CopyWith$Fragment$mediaListEntry$media$title.stub(_res);
+  CopyWith$Fragment$MediaListEntry$media$title<TRes> get title =>
+      CopyWith$Fragment$MediaListEntry$media$title.stub(_res);
 
-  CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> get coverImage =>
-      CopyWith$Fragment$mediaListEntry$media$coverImage.stub(_res);
+  CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage =>
+      CopyWith$Fragment$MediaListEntry$media$coverImage.stub(_res);
 }
 
-class Fragment$mediaListEntry$media$title {
-  Fragment$mediaListEntry$media$title({
+class Fragment$MediaListEntry$media$title {
+  Fragment$MediaListEntry$media$title({
     this.userPreferred,
     this.$__typename = 'MediaTitle',
   });
 
-  factory Fragment$mediaListEntry$media$title.fromJson(
+  factory Fragment$MediaListEntry$media$title.fromJson(
       Map<String, dynamic> json) {
     final l$userPreferred = json['userPreferred'];
     final l$$__typename = json['__typename'];
-    return Fragment$mediaListEntry$media$title(
+    return Fragment$MediaListEntry$media$title(
       userPreferred: (l$userPreferred as String?),
       $__typename: (l$$__typename as String),
     );
@@ -873,7 +874,7 @@ class Fragment$mediaListEntry$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$mediaListEntry$media$title) ||
+    if (!(other is Fragment$MediaListEntry$media$title) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -891,24 +892,24 @@ class Fragment$mediaListEntry$media$title {
   }
 }
 
-extension UtilityExtension$Fragment$mediaListEntry$media$title
-    on Fragment$mediaListEntry$media$title {
-  CopyWith$Fragment$mediaListEntry$media$title<
-          Fragment$mediaListEntry$media$title>
-      get copyWith => CopyWith$Fragment$mediaListEntry$media$title(
+extension UtilityExtension$Fragment$MediaListEntry$media$title
+    on Fragment$MediaListEntry$media$title {
+  CopyWith$Fragment$MediaListEntry$media$title<
+          Fragment$MediaListEntry$media$title>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$title(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$mediaListEntry$media$title<TRes> {
-  factory CopyWith$Fragment$mediaListEntry$media$title(
-    Fragment$mediaListEntry$media$title instance,
-    TRes Function(Fragment$mediaListEntry$media$title) then,
-  ) = _CopyWithImpl$Fragment$mediaListEntry$media$title;
+abstract class CopyWith$Fragment$MediaListEntry$media$title<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media$title(
+    Fragment$MediaListEntry$media$title instance,
+    TRes Function(Fragment$MediaListEntry$media$title) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$title;
 
-  factory CopyWith$Fragment$mediaListEntry$media$title.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$mediaListEntry$media$title;
+  factory CopyWith$Fragment$MediaListEntry$media$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$title;
 
   TRes call({
     String? userPreferred,
@@ -916,16 +917,16 @@ abstract class CopyWith$Fragment$mediaListEntry$media$title<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$mediaListEntry$media$title<TRes>
-    implements CopyWith$Fragment$mediaListEntry$media$title<TRes> {
-  _CopyWithImpl$Fragment$mediaListEntry$media$title(
+class _CopyWithImpl$Fragment$MediaListEntry$media$title<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$title<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media$title(
     this._instance,
     this._then,
   );
 
-  final Fragment$mediaListEntry$media$title _instance;
+  final Fragment$MediaListEntry$media$title _instance;
 
-  final TRes Function(Fragment$mediaListEntry$media$title) _then;
+  final TRes Function(Fragment$MediaListEntry$media$title) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -933,7 +934,7 @@ class _CopyWithImpl$Fragment$mediaListEntry$media$title<TRes>
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$mediaListEntry$media$title(
+      _then(Fragment$MediaListEntry$media$title(
         userPreferred: userPreferred == _undefined
             ? _instance.userPreferred
             : (userPreferred as String?),
@@ -943,9 +944,9 @@ class _CopyWithImpl$Fragment$mediaListEntry$media$title<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$mediaListEntry$media$title<TRes>
-    implements CopyWith$Fragment$mediaListEntry$media$title<TRes> {
-  _CopyWithStubImpl$Fragment$mediaListEntry$media$title(this._res);
+class _CopyWithStubImpl$Fragment$MediaListEntry$media$title<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$title<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media$title(this._res);
 
   TRes _res;
 
@@ -956,17 +957,17 @@ class _CopyWithStubImpl$Fragment$mediaListEntry$media$title<TRes>
       _res;
 }
 
-class Fragment$mediaListEntry$media$coverImage {
-  Fragment$mediaListEntry$media$coverImage({
+class Fragment$MediaListEntry$media$coverImage {
+  Fragment$MediaListEntry$media$coverImage({
     this.medium,
     this.$__typename = 'MediaCoverImage',
   });
 
-  factory Fragment$mediaListEntry$media$coverImage.fromJson(
+  factory Fragment$MediaListEntry$media$coverImage.fromJson(
       Map<String, dynamic> json) {
     final l$medium = json['medium'];
     final l$$__typename = json['__typename'];
-    return Fragment$mediaListEntry$media$coverImage(
+    return Fragment$MediaListEntry$media$coverImage(
       medium: (l$medium as String?),
       $__typename: (l$$__typename as String),
     );
@@ -1000,7 +1001,7 @@ class Fragment$mediaListEntry$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$mediaListEntry$media$coverImage) ||
+    if (!(other is Fragment$MediaListEntry$media$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1018,24 +1019,24 @@ class Fragment$mediaListEntry$media$coverImage {
   }
 }
 
-extension UtilityExtension$Fragment$mediaListEntry$media$coverImage
-    on Fragment$mediaListEntry$media$coverImage {
-  CopyWith$Fragment$mediaListEntry$media$coverImage<
-          Fragment$mediaListEntry$media$coverImage>
-      get copyWith => CopyWith$Fragment$mediaListEntry$media$coverImage(
+extension UtilityExtension$Fragment$MediaListEntry$media$coverImage
+    on Fragment$MediaListEntry$media$coverImage {
+  CopyWith$Fragment$MediaListEntry$media$coverImage<
+          Fragment$MediaListEntry$media$coverImage>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$coverImage(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> {
-  factory CopyWith$Fragment$mediaListEntry$media$coverImage(
-    Fragment$mediaListEntry$media$coverImage instance,
-    TRes Function(Fragment$mediaListEntry$media$coverImage) then,
-  ) = _CopyWithImpl$Fragment$mediaListEntry$media$coverImage;
+abstract class CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media$coverImage(
+    Fragment$MediaListEntry$media$coverImage instance,
+    TRes Function(Fragment$MediaListEntry$media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$coverImage;
 
-  factory CopyWith$Fragment$mediaListEntry$media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$mediaListEntry$media$coverImage;
+  factory CopyWith$Fragment$MediaListEntry$media$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage;
 
   TRes call({
     String? medium,
@@ -1043,16 +1044,16 @@ abstract class CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$mediaListEntry$media$coverImage<TRes>
-    implements CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> {
-  _CopyWithImpl$Fragment$mediaListEntry$media$coverImage(
+class _CopyWithImpl$Fragment$MediaListEntry$media$coverImage<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media$coverImage(
     this._instance,
     this._then,
   );
 
-  final Fragment$mediaListEntry$media$coverImage _instance;
+  final Fragment$MediaListEntry$media$coverImage _instance;
 
-  final TRes Function(Fragment$mediaListEntry$media$coverImage) _then;
+  final TRes Function(Fragment$MediaListEntry$media$coverImage) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1060,7 +1061,7 @@ class _CopyWithImpl$Fragment$mediaListEntry$media$coverImage<TRes>
     Object? medium = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$mediaListEntry$media$coverImage(
+      _then(Fragment$MediaListEntry$media$coverImage(
         medium: medium == _undefined ? _instance.medium : (medium as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -1068,9 +1069,9 @@ class _CopyWithImpl$Fragment$mediaListEntry$media$coverImage<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$mediaListEntry$media$coverImage<TRes>
-    implements CopyWith$Fragment$mediaListEntry$media$coverImage<TRes> {
-  _CopyWithStubImpl$Fragment$mediaListEntry$media$coverImage(this._res);
+class _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage(this._res);
 
   TRes _res;
 
@@ -1081,20 +1082,20 @@ class _CopyWithStubImpl$Fragment$mediaListEntry$media$coverImage<TRes>
       _res;
 }
 
-class Fragment$date {
-  Fragment$date({
+class Fragment$Date {
+  Fragment$Date({
     this.year,
     this.month,
     this.day,
     this.$__typename = 'FuzzyDate',
   });
 
-  factory Fragment$date.fromJson(Map<String, dynamic> json) {
+  factory Fragment$Date.fromJson(Map<String, dynamic> json) {
     final l$year = json['year'];
     final l$month = json['month'];
     final l$day = json['day'];
     final l$$__typename = json['__typename'];
-    return Fragment$date(
+    return Fragment$Date(
       year: (l$year as int?),
       month: (l$month as int?),
       day: (l$day as int?),
@@ -1142,7 +1143,7 @@ class Fragment$date {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$date) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$Date) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$year = year;
@@ -1169,21 +1170,21 @@ class Fragment$date {
   }
 }
 
-extension UtilityExtension$Fragment$date on Fragment$date {
-  CopyWith$Fragment$date<Fragment$date> get copyWith => CopyWith$Fragment$date(
+extension UtilityExtension$Fragment$Date on Fragment$Date {
+  CopyWith$Fragment$Date<Fragment$Date> get copyWith => CopyWith$Fragment$Date(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$date<TRes> {
-  factory CopyWith$Fragment$date(
-    Fragment$date instance,
-    TRes Function(Fragment$date) then,
-  ) = _CopyWithImpl$Fragment$date;
+abstract class CopyWith$Fragment$Date<TRes> {
+  factory CopyWith$Fragment$Date(
+    Fragment$Date instance,
+    TRes Function(Fragment$Date) then,
+  ) = _CopyWithImpl$Fragment$Date;
 
-  factory CopyWith$Fragment$date.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$date;
+  factory CopyWith$Fragment$Date.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Date;
 
   TRes call({
     int? year,
@@ -1193,16 +1194,16 @@ abstract class CopyWith$Fragment$date<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$date<TRes>
-    implements CopyWith$Fragment$date<TRes> {
-  _CopyWithImpl$Fragment$date(
+class _CopyWithImpl$Fragment$Date<TRes>
+    implements CopyWith$Fragment$Date<TRes> {
+  _CopyWithImpl$Fragment$Date(
     this._instance,
     this._then,
   );
 
-  final Fragment$date _instance;
+  final Fragment$Date _instance;
 
-  final TRes Function(Fragment$date) _then;
+  final TRes Function(Fragment$Date) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1212,7 +1213,7 @@ class _CopyWithImpl$Fragment$date<TRes>
     Object? day = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$date(
+      _then(Fragment$Date(
         year: year == _undefined ? _instance.year : (year as int?),
         month: month == _undefined ? _instance.month : (month as int?),
         day: day == _undefined ? _instance.day : (day as int?),
@@ -1222,9 +1223,9 @@ class _CopyWithImpl$Fragment$date<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$date<TRes>
-    implements CopyWith$Fragment$date<TRes> {
-  _CopyWithStubImpl$Fragment$date(this._res);
+class _CopyWithStubImpl$Fragment$Date<TRes>
+    implements CopyWith$Fragment$Date<TRes> {
+  _CopyWithStubImpl$Fragment$Date(this._res);
 
   TRes _res;
 
@@ -1237,8 +1238,8 @@ class _CopyWithStubImpl$Fragment$date<TRes>
       _res;
 }
 
-const fragmentDefinitiondate = FragmentDefinitionNode(
-  name: NameNode(value: 'date'),
+const fragmentDefinitionDate = FragmentDefinitionNode(
+  name: NameNode(value: 'Date'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
     name: NameNode(value: 'FuzzyDate'),
@@ -1276,13 +1277,13 @@ const fragmentDefinitiondate = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentdate = DocumentNode(definitions: [
-  fragmentDefinitiondate,
+const documentNodeFragmentDate = DocumentNode(definitions: [
+  fragmentDefinitionDate,
 ]);
 
-extension ClientExtension$Fragment$date on graphql.GraphQLClient {
-  void writeFragment$date({
-    required Fragment$date data,
+extension ClientExtension$Fragment$Date on graphql.GraphQLClient {
+  void writeFragment$Date({
+    required Fragment$Date data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -1290,14 +1291,14 @@ extension ClientExtension$Fragment$date on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'date',
-            document: documentNodeFragmentdate,
+            fragmentName: 'Date',
+            document: documentNodeFragmentDate,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$date? readFragment$date({
+  Fragment$Date? readFragment$Date({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -1305,13 +1306,13 @@ extension ClientExtension$Fragment$date on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'date',
-          document: documentNodeFragmentdate,
+          fragmentName: 'Date',
+          document: documentNodeFragmentDate,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$date.fromJson(result);
+    return result == null ? null : Fragment$Date.fromJson(result);
   }
 }
 
@@ -1766,7 +1767,7 @@ const documentNodeQueryGetMediaList = DocumentNode(definitions: [
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
                   FragmentSpreadNode(
-                    name: NameNode(value: 'mediaListEntry'),
+                    name: NameNode(value: 'MediaListEntry'),
                     directives: [],
                   ),
                   FieldNode(
@@ -1805,8 +1806,8 @@ const documentNodeQueryGetMediaList = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionmediaListEntry,
-  fragmentDefinitiondate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionDate,
 ]);
 Query$GetMediaList _parserFn$Query$GetMediaList(Map<String, dynamic> data) =>
     Query$GetMediaList.fromJson(data);
@@ -2172,7 +2173,7 @@ class Query$GetMediaList$MediaListCollection$lists {
       entries: (l$entries as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$mediaListEntry.fromJson((e as Map<String, dynamic>)))
+              : Fragment$MediaListEntry.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -2186,7 +2187,7 @@ class Query$GetMediaList$MediaListCollection$lists {
 
   final bool? isSplitCompletedList;
 
-  final List<Fragment$mediaListEntry?>? entries;
+  final List<Fragment$MediaListEntry?>? entries;
 
   final String $__typename;
 
@@ -2304,13 +2305,13 @@ abstract class CopyWith$Query$GetMediaList$MediaListCollection$lists<TRes> {
     Enum$MediaListStatus? status,
     bool? isCustomList,
     bool? isSplitCompletedList,
-    List<Fragment$mediaListEntry?>? entries,
+    List<Fragment$MediaListEntry?>? entries,
     String? $__typename,
   });
   TRes entries(
-      Iterable<Fragment$mediaListEntry?>? Function(
+      Iterable<Fragment$MediaListEntry?>? Function(
               Iterable<
-                  CopyWith$Fragment$mediaListEntry<Fragment$mediaListEntry>?>?)
+                  CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry>?>?)
           _fn);
 }
 
@@ -2348,22 +2349,22 @@ class _CopyWithImpl$Query$GetMediaList$MediaListCollection$lists<TRes>
             : (isSplitCompletedList as bool?),
         entries: entries == _undefined
             ? _instance.entries
-            : (entries as List<Fragment$mediaListEntry?>?),
+            : (entries as List<Fragment$MediaListEntry?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   TRes entries(
-          Iterable<Fragment$mediaListEntry?>? Function(
+          Iterable<Fragment$MediaListEntry?>? Function(
                   Iterable<
-                      CopyWith$Fragment$mediaListEntry<
-                          Fragment$mediaListEntry>?>?)
+                      CopyWith$Fragment$MediaListEntry<
+                          Fragment$MediaListEntry>?>?)
               _fn) =>
       call(
           entries: _fn(_instance.entries?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$mediaListEntry(
+              : CopyWith$Fragment$MediaListEntry(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2380,7 +2381,7 @@ class _CopyWithStubImpl$Query$GetMediaList$MediaListCollection$lists<TRes>
     Enum$MediaListStatus? status,
     bool? isCustomList,
     bool? isSplitCompletedList,
-    List<Fragment$mediaListEntry?>? entries,
+    List<Fragment$MediaListEntry?>? entries,
     String? $__typename,
   }) =>
       _res;

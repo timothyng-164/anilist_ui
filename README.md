@@ -35,18 +35,16 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 
 ## TODO
 
-1. My List page (create common widget for card pages, copy from search page)
 2. Increment (+) button for list view
-3. Profile page (favorites, stats, user info)
-4. get new font
-5. replace print statements with logging
-6. ctrl+F for all TODOs
-7. check if authentication persists in local storage
-8. run dart fix
-9. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs
-10. on mutations, update MediaListCollection cache on save and delete
-11. check spacing on android emulator
-13. rename fragments to lower camelcase for naming convention
+3. get new font
+4. replace print statements with logging
+5. ctrl+F for all TODOs
+6. check if authentication persists in local storage
+7. run dart fix
+8. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs
+9. on mutations, update MediaListCollection cache on save and delete
+10. check spacing on android emulator
+11. rename fragments to lower camelcase for naming convention
 12. refactoring
     - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
     - remove functions out of build():

@@ -7,7 +7,7 @@ query SearchLandingPage(
 ) {
   trending: Page(page: 1, perPage: $perPage) {
     media(sort: TRENDING_DESC, type: ANIME, isAdult: false) {
-      ...media
+      ...Media
     }
   }
   season: Page(page: 1, perPage: $perPage) {
@@ -18,7 +18,7 @@ query SearchLandingPage(
       type: ANIME
       isAdult: false
     ) {
-      ...media
+      ...Media
     }
   }
   nextSeason: Page(page: 1, perPage: $perPage) {
@@ -29,32 +29,32 @@ query SearchLandingPage(
       type: ANIME
       isAdult: false
     ) {
-      ...media
+      ...Media
     }
   }
   updated: Page(page: 1, perPage: $perPage) {
     media(sort: UPDATED_AT_DESC, type: ANIME, isAdult: false) {
-      ...media
+      ...Media
     }
   }
   newlyAdded: Page(page: 1, perPage: $perPage) {
     media(sort: ID_DESC, type: ANIME, isAdult: false) {
-      ...media
+      ...Media
     }
   }
   popular: Page(page: 1, perPage: $perPage) {
     media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {
-      ...media
+      ...Media
     }
   }
   top: Page(page: 1, perPage: $perPage) {
     media(sort: SCORE_DESC, type: ANIME, isAdult: false) {
-      ...media
+      ...Media
     }
   }
 }
 
-fragment media on Media {
+fragment Media on Media {
   id
   title {
     userPreferred

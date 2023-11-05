@@ -17,20 +17,20 @@ query GetMediaList(
       isCustomList
       isSplitCompletedList
       entries {
-        ...mediaListEntry
+        ...MediaListEntry
       }
     }
   }
 }
 
-fragment mediaListEntry on MediaList {
+fragment MediaListEntry on MediaList {
   id
   status
   startedAt {
-    ...date
+    ...Date
   }
   completedAt {
-    ...date
+    ...Date
   }
   updatedAt
   createdAt
@@ -51,7 +51,7 @@ fragment mediaListEntry on MediaList {
   }
 }
 
-fragment date on FuzzyDate {
+fragment Date on FuzzyDate {
   year
   month
   day

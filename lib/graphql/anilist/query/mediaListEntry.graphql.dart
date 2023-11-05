@@ -1,6 +1,7 @@
 import '../schema.graphql.dart';
 import 'dart:async';
 import 'mediaById.graphql.dart';
+import 'mediaList.graphql.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
