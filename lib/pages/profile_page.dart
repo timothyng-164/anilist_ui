@@ -3,6 +3,7 @@ import 'package:anilist_ui/graphql/anilist/query/userProfile.graphql.dart';
 import 'package:anilist_ui/routing/routes.dart';
 import 'package:anilist_ui/state/auth_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -11,6 +12,7 @@ import 'package:collection/collection.dart';
 
 import '../common/util/label_util.dart';
 import '../common/util/navigation_util.dart';
+import '../common/widgets/text_span_link.dart';
 import '../graphql/anilist/schema.graphql.dart';
 
 class ProfilePage extends HookWidget {
@@ -163,6 +165,29 @@ class StatsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    var colorScheme = Theme.of(context).colorScheme;
+
+    var tooltip = Tooltip(
+      triggerMode: TooltipTriggerMode.tap,
+      richMessage: TextSpan(
+        text:
+            'User statistics are automatically refreshed every 48 hours, but you can force an update in ',
+        children: [
+          TextSpanUtil.textLink(
+            text: 'user settings.',
+            url: 'https://anilist.co/settings/lists',
+            context: context,
+            style: TextStyle(
+                color: colorScheme.onPrimary,
+                decoration: TextDecoration.underline),
+          ),
+        ],
+      ),
+      child: const Padding(
+        padding: EdgeInsets.all(4),
+        child: Icon(Icons.info_outline_rounded, size: 14),
+      ),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,13 +195,7 @@ class StatsSection extends StatelessWidget {
         Row(
           children: [
             Text(title, style: textTheme.titleMedium),
-            const Tooltip(
-                triggerMode: TooltipTriggerMode.tap,
-                message: 'User statistics are refreshed every 48 hours.',
-                child: Padding(
-                  padding: EdgeInsets.all(4),
-                  child: Icon(Icons.info_outline_rounded, size: 14),
-                )),
+            tooltip,
           ],
         ),
         const SizedBox(height: 20),

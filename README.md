@@ -44,7 +44,6 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 8. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs
 9. on mutations, update MediaListCollection cache on save and delete
 10. check spacing on android emulator
-11. rename fragments to lower camelcase for naming convention
 12. refactoring
     - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
     - remove functions out of build():
