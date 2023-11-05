@@ -3,7 +3,6 @@ import 'package:anilist_ui/graphql/anilist/query/userProfile.graphql.dart';
 import 'package:anilist_ui/routing/routes.dart';
 import 'package:anilist_ui/state/auth_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

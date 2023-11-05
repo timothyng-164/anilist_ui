@@ -1,17 +1,15 @@
 import 'package:anilist_ui/common/widgets/text_span_link.dart';
 import 'package:anilist_ui/routing/routes.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 
 import '../common/util/navigation_util.dart';
+import '../config/environment.dart';
 import '../state/auth_state.dart';
 
-// TODO: move client ID to config file
-const String _anilistClientID = '14759';
-String oauthLink =
-    'https://anilist.co/api/v2/oauth/authorize?client_id=$_anilistClientID&response_type=token';
+String _oauthLink =
+    'https://anilist.co/api/v2/oauth/authorize?client_id=${Environment.anilistClientID}&response_type=token';
 
 class LoginPage extends HookWidget {
   const LoginPage({super.key});
@@ -81,8 +79,8 @@ class PageContent extends HookWidget {
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () async {
-            bool success = await NavigationUtil.launchExternalUrl(oauthLink);
-            // TODO: handle failure;
+            bool success = await NavigationUtil.launchExternalUrl(_oauthLink);
+            // TODO: handle url launch failure
             loginSelected.value = true;
           },
           child: const Text('Login'),
