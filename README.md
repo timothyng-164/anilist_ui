@@ -44,20 +44,11 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 
 ## TODO
 
-1. on mutations, update MediaListCollection cache on save and delete
+1. get new font (font blurry? only on web?)
 2. check if authentication persists in local storage
-3. refactoring
-
-   - refactor nested scaffold and safe area: https://stackoverflow.com/a/64618108
-   - remove functions out of build():
-     - https://www.reddit.com/r/FlutterDev/comments/ra8ygm/are_there_any_negative_effects_for_declaring/
-     - https://www.reddit.com/r/flutterhelp/comments/10dcwl7/is_it_good_practice_to_declare_variables_inside/
-     - https://www.funwithflutter.dev/flutter-keep-your-build-method-pure/
-
-4. ctrl+F for all TODOs
-5. run dart fix
-6. replace print statements with logging
-7. get new font (font blurry? only on web?)
-8. check spacing on android emulator
-9. update README
-10. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs, Increment (+) button for list view
+3. ctrl+F for all TODOs
+4. run dart fix
+5. replace print statements with logging
+6. check spacing on android emulator
+7. update README
+8. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs, Increment (+) button for list view

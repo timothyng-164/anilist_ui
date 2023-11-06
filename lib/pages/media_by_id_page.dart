@@ -45,19 +45,19 @@ class MediaByIdPage extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(LabelUtil.mediaTypeLabel(mediaType)!),
-            if (isAuthenticated && result.isNotLoading && !result.hasException)
+            if (isAuthenticated &&
+                result.isNotLoading &&
+                !result.hasException)
               UserUpdateButtons(media: media)
           ],
         ),
       ),
-      body: SafeArea(
-        child: QueryResultHandler(
-          result: result,
-          refetch: query.refetch,
-          child: RefreshIndicator(
-            onRefresh: () => Future<void>(() => query.refetch()),
-            child: PageContent(id: id, media: media),
-          ),
+      body: QueryResultHandler(
+        result: result,
+        refetch: query.refetch,
+        child: RefreshIndicator(
+          onRefresh: () => Future<void>(() => query.refetch()),
+          child: PageContent(id: id, media: media),
         ),
       ),
     );

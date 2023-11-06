@@ -7,7 +7,7 @@ import '../../routing/routes.dart';
 import '../../state/auth_state.dart';
 
 /// A page wrapper that redirects the user to the login page if they're not
-/// authenticated. This should be used for pages that require the user to be 
+/// authenticated. This should be used for pages that require the user to be
 /// logged in.
 ///
 /// This is needed for web app because the user can manually enter a url route
@@ -28,8 +28,10 @@ class AuthenticatedPageWrapper extends StatelessWidget {
     });
 
     if (!authState.isAuthenticated()) {
-      return const Center(
-        child: CircularProgressIndicator(),
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     }
     return child;

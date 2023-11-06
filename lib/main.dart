@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import 'state/auth_state.dart';
 
 void main() async {
-  // HiveStore is needed for GraphQL client: https://pub.dev/packages/graphql_flutter#usage
+  // HiveStore is needed for GraphQL client.
+  // https://pub.dev/packages/graphql_flutter#usage
   await initHiveForFlutter();
 
   runApp(const AppRoot());

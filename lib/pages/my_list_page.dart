@@ -136,33 +136,11 @@ class MyListPage extends HookWidget {
       );
     }
 
-    if (hasError.value) {
-      return QueryErrorHandler(refetch: fetchRawLists);
-    }
-
-    if (isLoading.value) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (rawLists.value.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                'Your list is empty, browse to add ${toJson$Enum$MediaType(mediaType).toLowerCase()}.'),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => const BrowseRoute().go(context),
-              child: const Text('Browse'),
-            ),
-          ],
-        ),
-      );
-    }
-
-    return Scaffold(
-      appBar: AppBar(
+    PreferredSizeWidget? displayAppbar() {
+      if (hasError.value || isLoading.value || rawLists.value.isEmpty) {
+        return null;
+      }
+      return AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -173,8 +151,36 @@ class MyListPage extends HookWidget {
             )
           ],
         ),
-      ),
-      body: RefreshIndicator(
+      );
+    }
+
+    Widget displayContent() {
+      if (hasError.value) {
+        return QueryErrorHandler(refetch: fetchRawLists);
+      }
+
+      if (isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      if (rawLists.value.isEmpty) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                  'Your list is empty, browse to add ${toJson$Enum$MediaType(mediaType).toLowerCase()}.'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => const BrowseRoute().go(context),
+                child: const Text('Browse'),
+              ),
+            ],
+          ),
+        );
+      }
+
+      return RefreshIndicator(
         onRefresh: () => Future<void>(() => fetchRawLists()),
         child: ListEntries(
           mediaType: mediaType,
@@ -182,7 +188,12 @@ class MyListPage extends HookWidget {
           displayedList: displayedList,
           scrollController: scrollController,
         ),
-      ),
+      );
+    }
+
+    return Scaffold(
+      appBar: displayAppbar(),
+      body: displayContent(),
     );
   }
 
