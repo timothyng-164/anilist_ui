@@ -47,3 +47,5 @@ app.*.map.json
 .env
 .env.*
 /lib/config/environment.g.dart
+
+todo.md

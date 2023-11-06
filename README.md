@@ -41,18 +41,3 @@ The [go_router_builder](https://pub.dev/documentation/go_router/latest/topics/Ty
 
 To generate route code, the `part` directive for the generated file needs to be added first.
 Example: https://github.com/flutter/packages/tree/main/packages/go_router_builder#source-code
-
-## TODO
-
-1. get new font (font blurry? only on web?)
-2. check if authentication persists in local storage
-3. replace print statements with logging
-4. check spacing on android emulator
-5. run dart fix
-6. update README
-7. try to inclued web version on porfolio website
-
-TODOS for private file:
-
-1. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs, Increment (+) button for list view
-2. check user settings for isAdult preference, then apply to search
