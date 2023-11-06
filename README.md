@@ -46,9 +46,13 @@ Example: https://github.com/flutter/packages/tree/main/packages/go_router_builde
 
 1. get new font (font blurry? only on web?)
 2. check if authentication persists in local storage
-3. ctrl+F for all TODOs
-4. run dart fix
-5. replace print statements with logging
-6. check spacing on android emulator
-7. update README
-8. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs, Increment (+) button for list view
+3. replace print statements with logging
+4. check spacing on android emulator
+5. run dart fix
+6. update README
+7. try to inclued web version on porfolio website
+
+TODOS for private file:
+
+1. Nice-to-haves: mediaByIdPage: characters, staff, reviews, discussions, links, theme songs, Increment (+) button for list view
+2. check user settings for isAdult preference, then apply to search

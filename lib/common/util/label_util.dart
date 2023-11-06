@@ -43,7 +43,6 @@ class LabelUtil {
     return _capitalizeAndReplace(toJson$Enum$MediaListStatus(e));
   }
 
-  // TODO: refactor this ugly function
   static String? listStatusLabelByMedia(
     Enum$MediaListStatus? listStatus,
     Enum$MediaType? mediaType,

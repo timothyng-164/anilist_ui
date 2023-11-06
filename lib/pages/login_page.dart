@@ -79,8 +79,7 @@ class PageContent extends HookWidget {
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () async {
-            bool success = await NavigationUtil.launchExternalUrl(_oauthLink);
-            // TODO: handle url launch failure
+            await NavigationUtil.launchExternalUrl(_oauthLink);
             loginSelected.value = true;
           },
           child: const Text('Login'),

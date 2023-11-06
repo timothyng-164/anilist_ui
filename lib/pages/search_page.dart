@@ -40,7 +40,7 @@ class SearchPage extends HookWidget {
                 mediaType.value == null)
             ? null
             : mediaType.value,
-        isAdult: false, // TODO: use user setting
+        isAdult: false,
       );
 
       return Options$Query$Search(

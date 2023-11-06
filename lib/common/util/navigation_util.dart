@@ -15,10 +15,8 @@ class NavigationUtil {
       AnimeByIDRoute(mediaId).push(context);
     } else if (mediaType == Enum$MediaType.MANGA) {
       MangaByIDRoute(mediaId).push(context);
-    } else {
-      // TODO: display error in snackbar
-      print("Unable to route media type: $mediaType");
     }
+    print("Unable to route media type: $mediaType");
   }
 
   static Future<bool> launchExternalUrl(String link) async {
