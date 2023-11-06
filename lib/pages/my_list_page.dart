@@ -348,7 +348,7 @@ class ListCard extends HookWidget {
             children: [
               Text(
                 listEntry.media?.title?.userPreferred ?? '',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.w600),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),

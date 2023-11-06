@@ -46,20 +46,12 @@ class AnilistApp extends StatelessWidget {
 }
 
 ThemeData _buildTheme(context) {
-  final textTheme = Theme.of(context).textTheme;
-
   var baseTheme = ThemeData(
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
     useMaterial3: true,
   );
 
   return baseTheme.copyWith(
-    textTheme: GoogleFonts.manropeTextTheme(baseTheme.textTheme).copyWith(
-      // default style for Text widget
-      bodyMedium: GoogleFonts.manrope(
-        textStyle: textTheme.labelLarge,
-        fontWeight: FontWeight.w600,
-      ),
-    ),
+    textTheme: GoogleFonts.interTextTheme(baseTheme.textTheme),
   );
 }

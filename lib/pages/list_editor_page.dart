@@ -133,7 +133,7 @@ class PageContent extends HookWidget {
       if (title != null)
         Text(
           title,
-          style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
+          style: textTheme.titleLarge,
           textScaleFactor: ScaleSize.scaleFactor(context),
         ),
       const SizedBox(height: 20),

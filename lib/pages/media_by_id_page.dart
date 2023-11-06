@@ -45,9 +45,7 @@ class MediaByIdPage extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(LabelUtil.mediaTypeLabel(mediaType)!),
-            if (isAuthenticated &&
-                result.isNotLoading &&
-                !result.hasException)
+            if (isAuthenticated && result.isNotLoading && !result.hasException)
               UserUpdateButtons(media: media)
           ],
         ),
@@ -616,7 +614,7 @@ class TitleSection extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    var imgWidth = min(screenWidth / 2, 300).toDouble();
+    var imgWidth = min(screenWidth / 2.5, 300).toDouble();
     var imgHeight = imgWidth * 3 / 2;
 
     return Row(
