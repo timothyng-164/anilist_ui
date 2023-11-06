@@ -23,7 +23,8 @@ class QueryResultHandler extends HookWidget {
     }
 
     if (result.hasException) {
-      print('Unknown exception occurred during query: ${result.exception}');
+      debugPrint(
+          'Unknown exception occurred during query: ${result.exception}');
       return QueryErrorHandler(refetch: refetch);
     }
 

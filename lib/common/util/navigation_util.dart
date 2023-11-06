@@ -8,7 +8,7 @@ class NavigationUtil {
   static void navigateToMedia(
       Enum$MediaType? mediaType, int? mediaId, BuildContext context) {
     if (mediaId == null) {
-      print('Cannot route media page with ID $mediaId');
+      debugPrint('Cannot route media page with ID $mediaId');
       return;
     }
     if (mediaType == Enum$MediaType.ANIME) {
@@ -16,7 +16,7 @@ class NavigationUtil {
     } else if (mediaType == Enum$MediaType.MANGA) {
       MangaByIDRoute(mediaId).push(context);
     }
-    print("Unable to route media type: $mediaType");
+    debugPrint("Unable to route media type: $mediaType");
   }
 
   static Future<bool> launchExternalUrl(String link) async {
@@ -27,7 +27,7 @@ class NavigationUtil {
       }
       return true;
     } catch (e) {
-      print('Unknown exception launching external url: $e');
+      debugPrint('Unknown exception launching external url: $e');
       return false;
     }
   }

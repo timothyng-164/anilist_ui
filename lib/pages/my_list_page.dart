@@ -62,7 +62,7 @@ class MyListPage extends HookWidget {
           ),
         );
         if (result.hasException) {
-          print('Unknown exception occurred: ${result.exception}');
+          debugPrint('Unknown exception occurred: ${result.exception}');
           hasError.value = true;
           break;
         }

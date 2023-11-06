@@ -32,7 +32,7 @@ class ListEntryButton extends StatelessWidget {
             MangaListEditorRoute(mediaId).push(context);
             break;
           default:
-            print('Unable to route list editor for $mediaType} $mediaId');
+            debugPrint('Unable to route list editor for $mediaType} $mediaId');
         }
       },
     );

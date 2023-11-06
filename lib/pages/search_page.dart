@@ -51,7 +51,7 @@ class SearchPage extends HookWidget {
 
     void handleError(dynamic error) {
       hasError.value = true;
-      print('Unknown exception occurred: $error');
+      debugPrint('Unknown exception occurred: $error');
     }
 
     void fetchFirstPage() {

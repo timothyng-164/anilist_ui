@@ -272,7 +272,7 @@ class SaveEntryButton extends HookWidget {
         final result = await mutation.networkResult;
 
         if (result?.hasException == true) {
-          print(
+          debugPrint(
               'Unknown exception saving media list enty $entryId for media $mediaId: ${result?.exception}');
         }
 
@@ -349,10 +349,10 @@ class DeleteEntryButton extends HookWidget {
         bool deleteSuccess =
             result?.parsedData?.DeleteMediaListEntry?.deleted ?? false;
         if (!deleteSuccess) {
-          print('Unable to delete media entry $entryId: ${result?.data}');
+          debugPrint('Unable to delete media entry $entryId: ${result?.data}');
         }
         if (result?.hasException == true) {
-          print(
+          debugPrint(
               'Unknown exception deleting media entry $entryId: ${result?.exception}');
         }
 

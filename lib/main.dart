@@ -2,6 +2,7 @@ import 'package:anilist_ui/routing/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 
 import 'state/auth_state.dart';

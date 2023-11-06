@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class PrintUtil {
-  static void prettyPrint(Object? object) {
-    print(prettyJson(object));
+  static void prettydebugPrint(Object? object) {
+    debugPrint(prettyJson(object));
   }
 
   static String prettyJson(Object? object) {

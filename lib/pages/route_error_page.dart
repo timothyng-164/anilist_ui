@@ -12,7 +12,7 @@ class RouteErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    print(goException);
+    debugPrint(goException?.toString());
 
     void redirectToHome() {
       if (context.mounted) context.go(homeRoute);

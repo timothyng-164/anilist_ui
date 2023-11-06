@@ -12,7 +12,7 @@ class AuthState extends ChangeNotifier {
   bool isLoading = false;
 
   AuthState() {
-    print("Initializing AuthState.");
+    debugPrint("Initializing AuthState.");
     const storage = FlutterSecureStorage();
     // async/await can't be used in constructors :(
     storage.read(key: tokenKey).then((token) {
@@ -43,7 +43,7 @@ class AuthState extends ChangeNotifier {
     anilistToken = token;
 
     authenticatedUser = user;
-    print(
+    debugPrint(
         'Set authenticated user ${authenticatedUser?.name} (${authenticatedUser?.id})');
     notifyListeners();
     return true;
@@ -77,10 +77,10 @@ Future<Query$GetAuthenticatedUser$Viewer?> _getAuthenticatedUser(
     errorPolicy: ErrorPolicy.ignore,
   ));
   if (result.hasException) {
-    print('Exception checking user authentication: ${result.exception}');
+    debugPrint('Exception checking user authentication: ${result.exception}');
     return null;
   }
   var user = result.parsedData?.Viewer;
-  print('Successfully authenticated user ${user?.name} (${user?.id})');
+  debugPrint('Successfully authenticated user ${user?.name} (${user?.id})');
   return user;
 }
