@@ -1,10 +1,8 @@
-import 'dart:developer';
 
 import 'package:anilist_ui/graphql/anilist/mutation/toggleFavourite.graphql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:logging/logging.dart';
 
 import '../../graphql/anilist/schema.graphql.dart';
 import '../util/snackbar_util.dart';
