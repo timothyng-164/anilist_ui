@@ -6,6 +6,8 @@ An anime/manga tracker built using Flutter. [Anilist](https://anilist.gitbook.io
 
 This project uses [envied](https://pub.dev/packages/envied) to setup environment variables. The anilist client ID can be configured in the '.env' file.
 
+If any sensitive info is added to the environment variables, they need to be added to .gitignore.
+
 ## Code Generation
 
 This project utlizes a few flutter libraries to generate code.
