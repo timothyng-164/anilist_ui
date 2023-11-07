@@ -1,4 +1,4 @@
-# anilist_ui
+# Anilist App
 
 An anime/manga tracker built using Flutter. [Anilist](https://anilist.gitbook.io/anilist-apiv2-docs/) is used as the backend.
 
