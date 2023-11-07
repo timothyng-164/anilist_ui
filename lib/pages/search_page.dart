@@ -318,7 +318,7 @@ class ResultCard extends StatelessWidget {
       List<Widget> rowChildren = [];
       if (media.meanScore != null) {
         rowChildren.addAll([
-          const Icon(Icons.star_rate_rounded, size: 21),
+          const Icon(Icons.star_rounded, size: 21),
           Text('${media.meanScore}'),
           const SizedBox(width: 15),
         ]);
