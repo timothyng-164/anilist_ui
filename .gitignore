@@ -43,9 +43,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Env
-.env
-.env.*
-/lib/config/environment.g.dart
+# These environment variables currently do not have any sensitive info.
+# .env
+# .env.*
+# /lib/config/environment.g.dart
 
 todo.md

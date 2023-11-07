@@ -1,17 +1,10 @@
 # anilist_ui
 
-An anime/manga tracker built using Flutter.
-
-[Anilist](https://anilist.gitbook.io/anilist-apiv2-docs/) is used as the backend.
+An anime/manga tracker built using Flutter. [Anilist](https://anilist.gitbook.io/anilist-apiv2-docs/) is used as the backend.
 
 ## Configuration
 
-This project uses [envied](https://pub.dev/packages/envied) to setup environment variables.
-
-To set up the project:
-
-1. rename the file `.env-example` to `.env` and update the values.
-2. run the code generator.
+This project uses [envied](https://pub.dev/packages/envied) to setup environment variables. The anilist client ID can be configured in the '.env' file.
 
 ## Code Generation
 
