@@ -278,7 +278,7 @@ class SaveEntryButton extends HookWidget {
 
         String snackbarText = (result?.hasException == true)
             ? 'Unable to save ${toJson$Enum$MediaType(mediaType).toLowerCase()}.'
-            : 'Successfully save ${toJson$Enum$MediaType(mediaType).toLowerCase()}.';
+            : 'Successfully saved ${toJson$Enum$MediaType(mediaType).toLowerCase()}.';
         SnackBar snackbar = SnackbarUtil.commonSnackbar(snackbarText);
         if (context.mounted) {
           Navigator.of(context).pop();
