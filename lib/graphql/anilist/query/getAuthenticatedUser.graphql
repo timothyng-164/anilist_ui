@@ -1,6 +1,0 @@
-query GetAuthenticatedUser {
-  Viewer {
-    id
-    name
-  }
-}
